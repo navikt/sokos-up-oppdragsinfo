@@ -1,0 +1,37 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: sokos-mikrofrontend-template
+  namespace: okonomi
+  labels:
+    team: okonomi
+  annotations:
+    config.linkerd.io/proxy-memory-limit: "512Mi"
+    config.linkerd.io/proxy-memory-request: "128Mi"
+spec:
+  env:
+  - name: CORS_ALLOWED_ORIGIN
+    value: "https://okonomiportalen.intern.dev.nav.no"
+  image: {{ image }}
+  port: 8080
+  liveness:
+    path: /sokos-mikrofrontend-template/internal/isAlive
+    initialDelay: 10
+  readiness:
+    path: /sokos-mikrofrontend-template/internal/isReady
+    initialDelay: 10
+  prometheus:
+    enabled: true
+    path: /sokos-mikrofrontend-template/internal/metrics
+  replicas:
+    min: 2
+    max: 4
+  ingresses:
+    - "https://okonomiportalen.intern.dev.nav.no/sokos-mikrofrontend-template"
+  resources:
+    limits:
+      cpu: "3"
+      memory: 768Mi
+    requests:
+      cpu: "50m"
+      memory: 256Mi

@@ -1,0 +1,30 @@
+@import "tailwindcss/base";
+@import "@navikt/ds-css";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--a-bg-default);
+}
+
+.page-wrapper {
+  height: auto;
+  min-height: 100%;
+  margin: 5px;
+}
+
+.page-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+main {
+  width: 100%;
+}

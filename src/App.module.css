@@ -1,0 +1,9 @@
+.app {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+main {
+  max-width: none !important;
+}
