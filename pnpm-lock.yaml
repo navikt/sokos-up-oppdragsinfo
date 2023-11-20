@@ -35,8 +35,8 @@ devDependencies:
     specifier: ^4.0.58
     version: 4.0.58
   '@navikt/aksel-stylelint':
-    specifier: ^5.10.1
-    version: 5.10.1
+    specifier: ^5.10.4
+    version: 5.10.4
   '@rollup/plugin-terser':
     specifier: ^0.4.4
     version: 0.4.4
@@ -784,8 +784,8 @@ packages:
     resolution: {integrity: sha512-VOwshZoNAOCrmfWyfTkKHwKdUpF9a77zOAuonM3zkrluo66NRwa1p9rqas6ZrAZjGUjtxQ7dXg+reLdqsxfUWw==}
     dev: false
 
-  /@navikt/aksel-stylelint@5.10.1:
-    resolution: {integrity: sha512-ynUNfoiVk+m2KmOfinm+2aGNHC5UVbZiyvhVsFBzipOKa5aWATUTytJLLqQPNbAYwez6XRHMm/8S6Jv9fmILoQ==}
+  /@navikt/aksel-stylelint@5.10.4:
+    resolution: {integrity: sha512-8MtS0l+7L4/1RzEsSDOeulr/1VfF0uQD+joxVNJJl6urhpvFYTEPDqycZRVsS530xim7oV875xzq86bQMVIxyw==}
     dev: true
 
   /@navikt/ds-css@5.10.1:
