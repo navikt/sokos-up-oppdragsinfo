@@ -41,7 +41,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => ({
   build: {
     lib: {
       entry: resolve(__dirname, "src/App.tsx"),
-      name: "sokos-mikrofrontend-template",
+      name: "sokos-up-oppdragsinfo",
       formats: ["es"],
       fileName: () => `bundle.js`,
     },

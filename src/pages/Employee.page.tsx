@@ -17,7 +17,7 @@ const ResultatSide = () => {
     <>
       <Panel border className={styles.panel}>
         <Heading spacing level="2" size="large">
-          sokos-mikrofrontend-template
+          sokos-up-oppdragsinfo
         </Heading>
         <BodyLong>Dette er en template for å bygge undersider i Økonomiportalen</BodyLong>
       </Panel>

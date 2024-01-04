@@ -1,7 +1,7 @@
 apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
-  name: sokos-mikrofrontend-template
+  name: sokos-up-oppdragsinfo
   namespace: okonomi
   labels:
     team: okonomi
@@ -15,19 +15,19 @@ spec:
   image: {{ image }}
   port: 8080
   liveness:
-    path: /sokos-mikrofrontend-template/internal/isAlive
+    path: /sokos-up-oppdragsinfo/internal/isAlive
     initialDelay: 10
   readiness:
-    path: /sokos-mikrofrontend-template/internal/isReady
+    path: /sokos-up-oppdragsinfo/internal/isReady
     initialDelay: 10
   prometheus:
     enabled: true
-    path: /sokos-mikrofrontend-template/internal/metrics
+    path: /sokos-up-oppdragsinfo/internal/metrics
   replicas:
     min: 2
     max: 4
   ingresses:
-    - "https://okonomiportalen.intern.dev.nav.no/sokos-mikrofrontend-template"
+    - "https://okonomiportalen.intern.dev.nav.no/sokos-up-oppdragsinfo"
   resources:
     limits:
       cpu: "3"
