@@ -13,13 +13,16 @@
   },
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.3.5",
+    "@hookform/resolvers": "^3.3.4",
     "@navikt/aksel-icons": "^5.12.2",
     "@navikt/ds-css": "^5.12.2",
     "@navikt/ds-react": "^5.12.2",
     "axios": "^1.6.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "swr": "^2.2.4"
+    "react-hook-form": "^7.49.2",
+    "swr": "^2.2.4",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@eik/rollup-plugin": "^4.0.60",
