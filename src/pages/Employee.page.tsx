@@ -1,48 +1,52 @@
-import { BodyLong, Heading, Loader, Panel, Table } from "@navikt/ds-react";
-import styles from "./Employee.module.css";
-import RestService from "../services/rest-service";
+import { Button, GuidePanel, HGrid, HStack, TextField } from "@navikt/ds-react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { BareGjelderIDSchema } from "./Valideringsregler";
+import { useState } from "react";
 
-const ResultatSide = () => {
-  const { data, isLoading } = RestService.useFetchEmployees();
-
-  if (isLoading) {
-    return (
-      <div className={styles.loader}>
-        <Loader size="3xlarge" title="Henter data..." />
-      </div>
-    );
-  }
-
-  return (
-    <>
-      <Panel border className={styles.panel}>
-        <Heading spacing level="2" size="large">
-          sokos-up-oppdragsinfo
-        </Heading>
-        <BodyLong>Dette er en template for å bygge undersider i Økonomiportalen</BodyLong>
-      </Panel>
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell scope="col">Id</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Yrke</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {data?.map(({ id, navn, yrke }, i) => {
-            return (
-              <Table.Row key={i + id}>
-                <Table.HeaderCell scope="row">{id}</Table.HeaderCell>
-                <Table.DataCell>{navn}</Table.DataCell>
-                <Table.DataCell>{yrke}</Table.DataCell>
-              </Table.Row>
-            );
-          })}
-        </Table.Body>
-      </Table>
-    </>
-  );
+type BareGjelderID = {
+  gjelderID?: string;
 };
 
-export default ResultatSide;
+const EmployeePage = () => {
+  const [bareGjelderID, setBareGjelderID] = useState<BareGjelderID>({});
+
+  const {
+    register,
+    getValues,
+    handleSubmit,
+    trigger,
+    formState: { errors },
+  } = useForm<BareGjelderID>({
+    resolver: zodResolver(BareGjelderIDSchema),
+  });
+
+  const onSubmit: SubmitHandler<BareGjelderID> = (data) => {
+    setBareGjelderID(data);
+  };
+
+  return (
+    <HGrid gap="10" columns={"minmax(10rem, 30rem) minmax(16rem, 1fr)"}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <TextField id="gjelderID" {...register("gjelderID")} label="Gjelder-ID" error={errors.gjelderID?.message} />
+      </form>
+      <GuidePanel>
+        <p>
+          Gjelder-ID er{" "}
+          {errors.gjelderID
+            ? "det noe feil med"
+            : bareGjelderID.gjelderID?.replace(/\s/, "") === ""
+              ? "ikke satt"
+              : getValues().gjelderID}
+        </p>
+      </GuidePanel>
+      <HStack>
+        <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
+          Søk
+        </Button>
+      </HStack>
+    </HGrid>
+  );
+};
+export default EmployeePage;
