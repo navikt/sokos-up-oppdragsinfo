@@ -1,4 +1,4 @@
-import { Button, GuidePanel, HGrid, HStack, TextField } from "@navikt/ds-react";
+import { Button, GuidePanel, Heading, HGrid, HStack, TextField, VStack } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
@@ -23,30 +23,47 @@ const EmployeePage = () => {
   });
 
   const onSubmit: SubmitHandler<BareGjelderID> = (data) => {
-    setBareGjelderID(data);
+    setBareGjelderID({ gjelderID: data.gjelderID?.replaceAll(/[\s.]/g, "") });
   };
 
+  const gID = errors.gjelderID ? "det noe feil med" : getValues().gjelderID ?? "ikke skrevet noe ennå";
+
+  function Divider() {
+    return <hr className="border-border-subtle" />;
+  }
+
   return (
-    <HGrid gap="10" columns={"minmax(10rem, 30rem) minmax(16rem, 1fr)"}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <TextField id="gjelderID" {...register("gjelderID")} label="Gjelder-ID" error={errors.gjelderID?.message} />
-      </form>
-      <GuidePanel>
-        <p>
-          Gjelder-ID er{" "}
-          {errors.gjelderID
-            ? "det noe feil med"
-            : bareGjelderID.gjelderID?.replace(/\s/, "") === ""
-              ? "ikke satt"
-              : getValues().gjelderID}
-        </p>
-      </GuidePanel>
-      <HStack>
-        <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
-          Søk
-        </Button>
-      </HStack>
-    </HGrid>
+    <>
+      <HGrid gap="10" columns={"minmax(10rem, 30rem) minmax(16rem, 1fr)"}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Heading spacing size="large">
+            Søk i Oppdrag
+          </Heading>
+          <VStack gap="8">
+            <HStack>
+              <TextField
+                {...register("gjelderID")}
+                size="small"
+                id="gjelderID"
+                label="Gjelder-ID"
+                error={errors.gjelderID?.message}
+              />
+            </HStack>
+            <Divider />
+            <HStack>
+              <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
+                Søk
+              </Button>
+            </HStack>
+          </VStack>
+        </form>
+
+        <GuidePanel className="max-w-2xl">
+          <p>Gjelder-ID er {gID}</p>
+          <p>Submitted Gjelder-ID er "{bareGjelderID.gjelderID}"</p>
+        </GuidePanel>
+      </HGrid>
+    </>
   );
 };
 export default EmployeePage;
