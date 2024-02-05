@@ -1,0 +1,1 @@
+# Funksjonell Oversikt over Oppdragsinformasjonskjermbildet i Utbetalingsportalen
