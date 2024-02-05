@@ -3,12 +3,14 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { BareGjelderIDSchema } from "./Valideringsregler";
+import MoneyBagSvg from "../images/money_bag.svg";
 import { useState } from "react";
 
 type BareGjelderID = {
   gjelderID?: string;
 };
 
+const Divider = () => <hr className="border-border-subtle" />;
 const EmployeePage = () => {
   const [bareGjelderID, setBareGjelderID] = useState<BareGjelderID>({});
 
@@ -27,10 +29,6 @@ const EmployeePage = () => {
   };
 
   const gID = errors.gjelderID ? "det noe feil med" : getValues().gjelderID ?? "ikke skrevet noe ennå";
-
-  function Divider() {
-    return <hr className="border-border-subtle" />;
-  }
 
   return (
     <>
@@ -58,7 +56,7 @@ const EmployeePage = () => {
           </VStack>
         </form>
 
-        <GuidePanel className="max-w-2xl">
+        <GuidePanel className="max-w-2xl" illustration={<img src={MoneyBagSvg} alt={"Pengepose"} />}>
           <p>Gjelder-ID er {gID}</p>
           <p>Submitted Gjelder-ID er "{bareGjelderID.gjelderID}"</p>
         </GuidePanel>

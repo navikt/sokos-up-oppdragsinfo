@@ -1,5 +1,15 @@
 # Dokumentasjon(gammel løsning)
 
+## Ifølge word-dokumentet
+
+Det ligger et word-dokument på sikkert filområde.
+
+```
+X:\Fagområder\Systemforvaltning\Systemområde Økonomi\OB04 Oppdragssystemet\08_Systemdokumentasjon\11_Java\09_Oppdragsinfo").
+```
+
+Slik beskrives skjermbildet i det dokumentet:
+
 ```mermaid
 flowchart LR
     Søk
@@ -8,7 +18,7 @@ flowchart LR
     Oppdragsdetalj
     Enhetshistorikk
     Statushistorikk
-    Oppdragslinjedetaljer
+    Oppdragslinje
     Valuta
     Skyldner
     Enhet
@@ -28,32 +38,92 @@ flowchart LR
     Oppdragsdetalj --> Søk
     Oppdragsdetalj -.- Enhetshistorikk
     Oppdragsdetalj -.- Statushistorikk
-    Oppdragsdetalj <---> Oppdragslinjedetaljer
-    Oppdragslinjedetaljer -.- Valuta
-    Oppdragslinjedetaljer -.- Skyldner
-    Oppdragslinjedetaljer -.- Enhet
-    Kid -.- Oppdragslinjedetaljer
-    Kravhaver -.- Oppdragslinjedetaljer
-    Maksdato -.- Oppdragslinjedetaljer
-    Øvrig -.- Oppdragslinjedetaljer
-    Grad -.- Oppdragslinjedetaljer
-    Oppdragslinjedetaljer -.- Tekst
+    Oppdragsdetalj <---> Oppdragslinje
+    Oppdragslinje -.- Valuta
+    Oppdragslinje -.- Skyldner
+    Oppdragslinje -.- Enhet
+    Kid -.- Oppdragslinje
+    Kravhaver -.- Oppdragslinje
+    Maksdato -.- Oppdragslinje
+    Øvrig -.- Oppdragslinje
+    Grad -.- Oppdragslinje
+    Oppdragslinje -.- Tekst
     Øvrig ~~~ Kravhaver
     Maksdato ~~~ Kravhaver
     Grad ~~~ Kravhaver
 ```
 
-Stiplede linjer vil si at det er en popup
+Oppdragsinfo var en ubrukt funksjon som skulle vise noe fra en tabell som alltid har vært tom.
+
+Gammelt bilde som ikke enkelt kan redigeres:
+
+![Gammel oversikt](gammel_oversikt.png)
+
+## Faktisk utprøving av skjermbildet
+
+```mermaid
+flowchart LR
+    Søk
+    Validering{Validering}
+    Treffliste
+    Oppdragsdetalj(Oppdrag)
+    Enhetshistorikk
+    Statushistorikk
+    Oppdragslinje
+    Valuta
+    Skyldner
+    Enhet
+    Grad
+    Tekst
+    Kid
+    Kravhaver
+    Maksdato
+    Øvrig["Øvrige felter"]
+
+    Søk --> Validering
+    Validering -- Feil input --> Søk
+    Validering --> Treffliste
+    Treffliste -- Velger 1 --> Oppdragsdetalj
+    Oppdragsdetalj --> Treffliste
+    Oppdragsdetalj --> Søk
+    Oppdragsdetalj -.- Enhetshistorikk
+    Oppdragsdetalj -.- Statushistorikk
+    Oppdragsdetalj <---> Oppdragslinje
+    Oppdragslinje -.- Valuta
+    Oppdragslinje -.- Skyldner
+    Oppdragslinje -.- Enhet
+    Kid -.- Oppdragslinje
+    Kravhaver -.- Oppdragslinje
+    Maksdato -.- Oppdragslinje
+    Øvrig -.- Oppdragslinje
+    Grad -.- Oppdragslinje
+    Oppdragslinje -.- Tekst
+    Øvrig ~~~ Kravhaver
+    Øvrig ~~~ Maksdato
+    Maksdato ~~~ Kravhaver
+    Grad ~~~ Maksdato
+    Kravhaver ~~~ Kid
+```
+
+Stiplede linjer vil si at det er en popup.
+
+Hvis det bare var 1 treff i søket vises en knapp i Oppdrag som det står "Oppdragsdetaljer" på, og man får
+NullPointerException om man klikker på den.
+
+## Nytt Oppdragsinformasjonskjermbilde
+
+```mermaid
+flowchart
+    Søk("Søkeside med Treffliste")
+
+    Søk -- Velg 1 --> Oppdrag
+```
 
 ## Lister
 
 Vi bruker [Aksels tabell](https://aksel.nav.no/komponenter/core/table#tabledemo-sortable),
 innebygde sortable som erstatning for sorteringslenker,
 og med innebygget pagination som erstatning for Forrige- og Neste-knapper.
-Bare dette gjør den nye løsningen svært mye enklere enn den gamle.
-
-NB! Det er også innebygget paginering i backend, slik ast vi slipper å hente ut mer data enn vi faktisk trenger for å
-vise det saksbehandler kan se på skjermen.
 
 ## Popup
 
@@ -62,7 +132,8 @@ Vi kan bruke [Popover](https://aksel.nav.no/komponenter/core/popover) eller [Mod
 
 ## Navigering
 
-I den gamle løsningen er det helt separate sider for visning av oppdrag og -linje, med knapper for å navigere mellom dem.
+I den gamle løsningen er det separate sider for visning av søk, treffliste, oppdrag og oppdragslinje,
+med knapper for å navigere mellom dem.
 
 ## Komponenter i Oppdragsinfo
 

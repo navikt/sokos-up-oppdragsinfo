@@ -1,0 +1,7 @@
+.hStack {
+  @apply pb-4 pt-4;
+}
+
+.hStackDato {
+  @apply pb-1 pt-4;
+}
