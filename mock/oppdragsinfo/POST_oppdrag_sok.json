@@ -1,0 +1,45 @@
+[
+  {
+    "_gjelderId": "Det er brukt et helsyntetisk fnr fra testnorge",
+    "gjelderId": "06518006337",
+    "gjelderNavn": "cøgyg wåkacæbo omygåhPDL-TEST",
+    "oppdragsListe": [
+      {
+        "fagsystemId": "15003899",
+        "oppdragsId": 1,
+        "navnFagGruppe": "Inntektsytelser",
+        "navnFagOmraade": "Uføretrygd",
+        "kjorIdag": "N",
+        "typeBilag": "",
+        "kodeStatus": "AKTI"
+      },
+      {
+        "fagsystemId": "UFORENG-31075738849",
+        "oppdragsId": 2,
+        "navnFagGruppe": "Inntektsytelser",
+        "navnFagOmraade": "Uføretrygdede engangsutbetaling",
+        "kjorIdag": "N",
+        "typeBilag": "",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "15003899",
+        "oppdragsId": 3,
+        "navnFagGruppe": "Pensjoner",
+        "navnFagOmraade": "Uførepensjon",
+        "kjorIdag": "N",
+        "typeBilag": "",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "TU000946427010304",
+        "oppdragsId": 4,
+        "navnFagGruppe": "Tidsbegrenset uførestønad",
+        "navnFagOmraade": "Tidsbegrenset uførestønad",
+        "kjorIdag": "N",
+        "typeBilag": "STD",
+        "kodeStatus": "PASS"
+      }
+    ]
+  }
+]
