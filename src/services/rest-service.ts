@@ -1,9 +1,9 @@
 import axios from "axios";
 import useSWR from "swr";
 import { ApiError, HttpStatusCodeError } from "../types/errors";
-import { Employee } from "../models/Employee";
+import { Faggruppe, OppdragSearchResults } from "../models/OppdragsinfoData";
 
-const BASE_API_URL = "/mikrofrontend-api/api";
+const BASE_API_URL = "/oppdragsinfo/api";
 
 const api = axios.create({
   baseURL: BASE_API_URL,
@@ -13,7 +13,9 @@ const api = axios.create({
   validateStatus: (status) => status < 400,
 });
 
-const axiosFetcher = (url: string) => api.get(url).then((res) => res.data);
+const axiosFetcher = <T>(url: string) => api.get<T>(url).then((res) => res.data);
+const axiosPostFetcher = <T>(url: string, body: { gjelderId: string; faggruppe?: string }) =>
+  api.post<T>(url, { body }).then((res) => res.data);
 
 const swrConfig = {
   fetcher: axiosFetcher,
@@ -37,13 +39,21 @@ api.interceptors.response.use(
   },
 );
 
-const useFetchEmployees = () => {
-  const { data, isLoading } = useSWR<Employee[]>("/employee", swrConfig);
-  return { data, isLoading };
+const useFetchFaggrupper = () => {
+  const { data: faggrupper, isLoading } = useSWR<Faggruppe[]>("/faggrupper", swrConfig);
+  return { faggrupper, isLoading };
 };
 
+const useFetchOppdragSearchResults = (gjelderId: string, faggruppe: string) =>
+  axiosPostFetcher<OppdragSearchResults>("/oppdrag", { gjelderId, faggruppe });
+
+const useFetchOppdrag = (gjelderId: string, id: number) =>
+  axiosPostFetcher<OppdragSearchResults>(`/${id}`, { gjelderId });
+
 const RestService = {
-  useFetchEmployees,
+  useFetchFaggrupper,
+  useFetchOppdragSearchResults,
+  useFetchOppdrag,
 };
 
 export default RestService;

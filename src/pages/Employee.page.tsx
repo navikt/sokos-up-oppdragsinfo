@@ -1,17 +1,19 @@
-import { Button, GuidePanel, Heading, HGrid, HStack, TextField, VStack } from "@navikt/ds-react";
+import { Button, GuidePanel, Select, TextField } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { BareGjelderIDSchema } from "./Valideringsregler";
 import MoneyBagSvg from "../images/money_bag.svg";
 import { useState } from "react";
+import RestService from "../services/rest-service";
+import { capitalized, isEmpty } from "../util/commonUtils";
 
 type BareGjelderID = {
   gjelderID?: string;
 };
 
-const Divider = () => <hr className="border-border-subtle" />;
 const EmployeePage = () => {
+  const { faggrupper, isLoading } = RestService.useFetchFaggrupper();
   const [bareGjelderID, setBareGjelderID] = useState<BareGjelderID>({});
 
   const {
@@ -32,35 +34,31 @@ const EmployeePage = () => {
 
   return (
     <>
-      <HGrid gap="10" columns={"minmax(10rem, 30rem) minmax(16rem, 1fr)"}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Heading spacing size="large">
-            Søk i Oppdrag
-          </Heading>
-          <VStack gap="8">
-            <HStack>
-              <TextField
-                {...register("gjelderID")}
-                size="small"
-                id="gjelderID"
-                label="Gjelder-ID"
-                error={errors.gjelderID?.message}
-              />
-            </HStack>
-            <Divider />
-            <HStack>
-              <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
-                Søk
-              </Button>
-            </HStack>
-          </VStack>
-        </form>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>Søk i Oppdrag</h1>
+        <TextField
+          {...register("gjelderID")}
+          size="small"
+          id="gjelderID"
+          label="Gjelder"
+          error={errors.gjelderID?.message}
+        />
 
-        <GuidePanel className="max-w-2xl" illustration={<img src={MoneyBagSvg} alt={"Pengepose"} />}>
-          <p>Gjelder-ID er {gID}</p>
-          <p>Submitted Gjelder-ID er "{bareGjelderID.gjelderID}"</p>
-        </GuidePanel>
-      </HGrid>
+        <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
+          Søk
+        </Button>
+      </form>
+      <Select label={"Velg faggruppe"}>
+        <option value="">Alle faggrupper</option>
+        {!!faggrupper &&
+          !isEmpty(faggrupper) &&
+          faggrupper.map((f) => <option value={f.type}>{capitalized(f.navn)}</option>)}
+      </Select>
+      <GuidePanel className="max-w-2xl" illustration={<img src={MoneyBagSvg} alt={"Pengepose"} />}>
+        <p>Gjelder-ID er {gID}</p>
+        <p>Submitted Gjelder-ID er "{bareGjelderID.gjelderID}"</p>
+        <p>isLoading er {isLoading ? "yup" : "nope"}</p>
+      </GuidePanel>
     </>
   );
 };
