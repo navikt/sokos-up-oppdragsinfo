@@ -1,4 +1,4 @@
-import { Button, GuidePanel, Select, TextField } from "@navikt/ds-react";
+import { Button, GuidePanel, TextField, UNSAFE_Combobox } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
@@ -6,13 +6,12 @@ import { BareGjelderIDSchema } from "./Valideringsregler";
 import MoneyBagSvg from "../images/money_bag.svg";
 import { useState } from "react";
 import RestService from "../services/rest-service";
-import { capitalized, isEmpty } from "../util/commonUtils";
 
 type BareGjelderID = {
   gjelderID?: string;
 };
 
-const EmployeePage = () => {
+const OppdragsinfoPage = () => {
   const { faggrupper, isLoading } = RestService.useFetchFaggrupper();
   const [bareGjelderID, setBareGjelderID] = useState<BareGjelderID>({});
 
@@ -48,12 +47,10 @@ const EmployeePage = () => {
           Søk
         </Button>
       </form>
-      <Select label={"Velg faggruppe"}>
-        <option value="">Alle faggrupper</option>
-        {!!faggrupper &&
-          !isEmpty(faggrupper) &&
-          faggrupper.map((f) => <option value={f.type}>{capitalized(f.navn)}</option>)}
-      </Select>
+
+      {faggrupper && (
+        <UNSAFE_Combobox label={"Velg faggruppe"} options={faggrupper.map((f) => f.navn + "(" + f.type + ")")} />
+      )}
       <GuidePanel className="max-w-2xl" illustration={<img src={MoneyBagSvg} alt={"Pengepose"} />}>
         <p>Gjelder-ID er {gID}</p>
         <p>Submitted Gjelder-ID er "{bareGjelderID.gjelderID}"</p>
@@ -62,4 +59,4 @@ const EmployeePage = () => {
     </>
   );
 };
-export default EmployeePage;
+export default OppdragsinfoPage;
