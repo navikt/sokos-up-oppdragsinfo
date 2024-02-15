@@ -1,7 +1,7 @@
 import axios from "axios";
 import useSWR from "swr";
 import { ApiError, HttpStatusCodeError } from "../types/errors";
-import { Faggruppe, OppdragSearchResults } from "../models/OppdragsinfoData";
+import { Faggruppe, Oppdrag, Treffliste } from "../models/OppdragsinfoData";
 
 const BASE_API_URL = "/oppdragsinfo/api";
 
@@ -13,9 +13,8 @@ const api = axios.create({
   validateStatus: (status) => status < 400,
 });
 
-const axiosFetcher = <T>(url: string) => api.get<T>(url).then((res) => res.data);
-const axiosPostFetcher = <T>(url: string, body: { gjelderId: string; faggruppe?: string }) =>
-  api.post<T>(url, { body }).then((res) => res.data);
+const axiosFetcher = <T>(url: string, body?: { gjelderId?: string; faggruppe?: string } | undefined) =>
+  (body ? api.post<T>(url, body) : api.get<T>(url)).then((res) => res.data);
 
 const swrConfig = {
   fetcher: axiosFetcher,
@@ -44,15 +43,14 @@ const useFetchFaggrupper = () => {
   return { faggrupper, isLoading };
 };
 
-const useFetchOppdragSearchResults = (gjelderId: string, faggruppe: string) =>
-  axiosPostFetcher<OppdragSearchResults>("/oppdrag", { gjelderId, faggruppe });
+const useFetchTrefflisteResults = (gjelderId: string, faggruppe: string) =>
+  axiosFetcher<Treffliste>("/oppdrag", { gjelderId, faggruppe });
 
-const useFetchOppdrag = (gjelderId: string, id: number) =>
-  axiosPostFetcher<OppdragSearchResults>(`/${id}`, { gjelderId });
+const useFetchOppdrag = (gjelderId: string, id: number) => axiosFetcher<Oppdrag>(`/${id}`, { gjelderId });
 
 const RestService = {
   useFetchFaggrupper,
-  useFetchOppdragSearchResults,
+  useFetchTrefflisteResults,
   useFetchOppdrag,
 };
 

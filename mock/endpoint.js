@@ -1,5 +1,5 @@
 import faggrupper from './oppdragsinfo/GET_faggrupper.json';
-import oppdragSok from './oppdragsinfo/POST_oppdrag_search.json';
+import oppdragSok from './oppdragsinfo/POST_treffliste.json';
 import oppdrag from './oppdragsinfo/POST_oppdrag.json';
 import enhetshistorikk from './oppdragsinfo/popups/GET_enhetshistorikk.json';
 import omposteringer from './oppdragsinfo/popups/POST_omposteringer.json';

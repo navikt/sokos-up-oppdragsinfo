@@ -19,7 +19,7 @@ export const OppdragSchema = z.object({
 
 export type Oppdrag = z.infer<typeof OppdragSchema>;
 
-export const OppdragSearchResultsSchema = z.array(
+export const TrefflisteSchema = z.array(
   z.object({
     gjelderId: z.string(),
     gjelderNavn: z.string(),
@@ -27,7 +27,7 @@ export const OppdragSearchResultsSchema = z.array(
   }),
 );
 
-export type OppdragSearchResults = z.infer<typeof OppdragSearchResultsSchema>;
+export type Treffliste = z.infer<typeof TrefflisteSchema>;
 
 export const OppdragslinjeSchema = z.object({
   linjeId: z.string(),
