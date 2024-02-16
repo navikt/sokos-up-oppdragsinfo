@@ -11,6 +11,6 @@ const lengderegel: ZodEffects<ZodString, string, string> = z
     "Må enten gjelde organisasjon(9 sifre) eller en person (Fødselsnummer 11 siffer)",
   );
 
-export const BareGjelderIDSchema = z.object({
+export const TrefflisteSearchParametersSchema = z.object({
   gjelderID: ikkeblank.pipe(baretallregel).pipe(lengderegel),
 });

@@ -2,43 +2,41 @@ import { Button, GuidePanel, TextField } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { BareGjelderIDSchema } from "./Valideringsregler";
+import { TrefflisteSearchParametersSchema } from "./Valideringsregler";
 import MoneyBagSvg from "../images/money_bag.svg";
 import { useState } from "react";
 import RestService from "../services/rest-service";
-import { Combobox } from "../util/commonUtils";
+import { Combobox, isEmpty } from "../util/commonUtils";
 
-type BareGjelderID = {
+type TrefflisteParameters = {
   gjelderID?: string;
   faggruppe?: string;
 };
 
 const OppdragsinfoPage = () => {
-  const { faggrupper, isLoading } = RestService.useFetchFaggrupper();
-  const [bareGjelderID, setBareGjelderID] = useState<BareGjelderID>({});
-
+  const { faggrupper, faggrupperIsLoading } = RestService.useFetchFaggrupper();
+  const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
+  const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
+    trefflisteParameters?.gjelderID,
+    trefflisteParameters?.faggruppe,
+  );
   const {
     register,
     getValues,
     handleSubmit,
     trigger,
     formState: { errors },
-  } = useForm<BareGjelderID>({
-    resolver: zodResolver(BareGjelderIDSchema),
+  } = useForm<TrefflisteParameters>({
+    resolver: zodResolver(TrefflisteSearchParametersSchema),
   });
 
-  const onSubmit: SubmitHandler<BareGjelderID> = (data) => {
-    setBareGjelderID({ ...bareGjelderID, gjelderID: data.gjelderID?.replaceAll(/[\s.]/g, "") });
+  const onSubmit: SubmitHandler<TrefflisteParameters> = (data) => {
+    setTrefflisteParameters({ ...trefflisteParameters, gjelderID: data.gjelderID?.replaceAll(/[\s.]/g, "") });
   };
 
-  const handleChooseFaggruppe = (faggruppe: string, isSelected: boolean, isCustomOption: boolean) => {
-    console.log("Chose faggruppe:" + faggruppe);
-    console.log("isSelected: " + isSelected ? "checked" : "unchecked");
-    console.log("isCustomOption: " + isCustomOption ? "custom" : "not custom");
-    setBareGjelderID({ ...bareGjelderID, faggruppe });
+  const handleChooseFaggruppe = (faggruppe: string, isSelected: boolean) => {
+    setTrefflisteParameters({ ...trefflisteParameters, faggruppe: isSelected ? faggruppe : undefined });
   };
-
-  const tempdebug_gID = errors.gjelderID ? "det noe feil med" : getValues().gjelderID ?? "ikke skrevet noe ennå";
 
   return (
     <>
@@ -69,10 +67,12 @@ const OppdragsinfoPage = () => {
       </form>
 
       <GuidePanel className="max-w-2xl" illustration={<img src={MoneyBagSvg} alt={"Pengepose"} />}>
-        <p>Gjelder-ID er {tempdebug_gID}</p>
-        <p>Submitted Gjelder-ID er "{bareGjelderID.gjelderID}"</p>
-        <p>Faggruppe valgt er {bareGjelderID.faggruppe}</p>
-        <p>isLoading er {isLoading ? "yup" : "nope"}</p>
+        <p>faggrupperIsLoading er {faggrupperIsLoading ? "yup" : "nope"}</p>
+        <p>Gjelder ID er {errors.gjelderID ? "det noe feil med" : getValues().gjelderID ?? "ikke skrevet noe ennå"}</p>
+        <p>Faggruppe i trefflisteparameters er {trefflisteParameters.faggruppe}</p>
+        <p>Gjelder ID i trefflisteparameters er "{trefflisteParameters.gjelderID}"</p>
+        <p>trefflisteIsLoading er {trefflisteIsLoading ? "yup" : "nope"}</p>
+        <p>treffliste er {treffliste && !isEmpty(treffliste) ? JSON.stringify(treffliste) : "tom"}</p>
       </GuidePanel>
     </>
   );

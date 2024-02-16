@@ -2,6 +2,7 @@ import axios from "axios";
 import useSWR from "swr";
 import { ApiError, HttpStatusCodeError } from "../types/errors";
 import { Faggruppe, Oppdrag, Treffliste } from "../models/OppdragsinfoData";
+import { useEffect, useState } from "react";
 
 const BASE_API_URL = "/oppdragsinfo/api";
 
@@ -39,18 +40,27 @@ api.interceptors.response.use(
 );
 
 const useFetchFaggrupper = () => {
-  const { data: faggrupper, isLoading } = useSWR<Faggruppe[]>("/faggrupper", swrConfig);
-  return { faggrupper, isLoading };
+  const { data: faggrupper, isLoading: faggrupperIsLoading } = useSWR<Faggruppe[]>("/faggrupper", swrConfig);
+  return { faggrupper, faggrupperIsLoading };
 };
 
-const useFetchTrefflisteResults = (gjelderId: string, faggruppe: string) =>
-  axiosFetcher<Treffliste>("/oppdrag", { gjelderId, faggruppe });
+const useFetchTreffliste = (gjelderId: string | undefined, faggruppe: string | undefined) => {
+  const [shouldFetch, setShouldFetch] = useState<boolean>(!!gjelderId);
+  useEffect(() => {
+    setShouldFetch(!!gjelderId);
+  }, [gjelderId]);
+  const { data, error, isLoading } = useSWR<Treffliste>(shouldFetch ? "/oppdrag" : null, {
+    ...swrConfig,
+    fetcher: (url) => axiosFetcher<Treffliste>(url, { gjelderId, faggruppe: faggruppe }),
+  });
+  return { treffliste: data, trefflisteError: error, trefflisteIsLoading: isLoading };
+};
 
 const useFetchOppdrag = (gjelderId: string, id: number) => axiosFetcher<Oppdrag>(`/${id}`, { gjelderId });
 
 const RestService = {
   useFetchFaggrupper,
-  useFetchTrefflisteResults,
+  useFetchTreffliste,
   useFetchOppdrag,
 };
 
