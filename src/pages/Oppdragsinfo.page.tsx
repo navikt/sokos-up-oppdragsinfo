@@ -7,6 +7,7 @@ import MoneyBagSvg from "../images/money_bag.svg";
 import { useState } from "react";
 import RestService from "../services/rest-service";
 import { Combobox, isEmpty } from "../util/commonUtils";
+import TrefflisteVisning from "../components/TrefflisteVisning";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -30,7 +31,7 @@ const OppdragsinfoPage = () => {
     resolver: zodResolver(TrefflisteSearchParametersSchema),
   });
 
-  const onSubmit: SubmitHandler<TrefflisteParameters> = (data) => {
+  const handleChangeGjelderId: SubmitHandler<TrefflisteParameters> = (data) => {
     setTrefflisteParameters({ ...trefflisteParameters, gjelderID: data.gjelderID?.replaceAll(/[\s.]/g, "") });
   };
 
@@ -40,16 +41,10 @@ const OppdragsinfoPage = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleChangeGjelderId)}>
         <h1>Søk i Oppdrag</h1>
 
-        <TextField
-          {...register("gjelderID")}
-          size="small"
-          id="gjelderID"
-          label="Gjelder"
-          error={errors.gjelderID?.message}
-        />
+        <TextField {...register("gjelderID")} id="gjelderID" label="Gjelder" error={errors.gjelderID?.message} />
 
         {faggrupper && (
           <Combobox
@@ -68,12 +63,23 @@ const OppdragsinfoPage = () => {
 
       <GuidePanel className="max-w-2xl" illustration={<img src={MoneyBagSvg} alt={"Pengepose"} />}>
         <p>faggrupperIsLoading er {faggrupperIsLoading ? "yup" : "nope"}</p>
-        <p>Gjelder ID er {errors.gjelderID ? "det noe feil med" : getValues().gjelderID ?? "ikke skrevet noe ennå"}</p>
+        <p>
+          Gjelder ID
+          {errors.gjelderID ? " er det noe feil med" : getValues().gjelderID ?? "- ißkke skrevet noe ennå"}
+        </p>
         <p>Faggruppe i trefflisteparameters er {trefflisteParameters.faggruppe}</p>
         <p>Gjelder ID i trefflisteparameters er "{trefflisteParameters.gjelderID}"</p>
         <p>trefflisteIsLoading er {trefflisteIsLoading ? "yup" : "nope"}</p>
-        <p>treffliste er {treffliste && !isEmpty(treffliste) ? JSON.stringify(treffliste) : "tom"}</p>
       </GuidePanel>
+
+      {treffliste && !isEmpty(treffliste) ? (
+        <TrefflisteVisning
+          key={btoa("" + trefflisteParameters.gjelderID + trefflisteParameters.faggruppe)}
+          treffliste={treffliste}
+        />
+      ) : (
+        "tom treffliste"
+      )}
     </>
   );
 };

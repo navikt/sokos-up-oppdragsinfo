@@ -8,7 +8,7 @@ const lengderegel: ZodEffects<ZodString, string, string> = z
   .string()
   .refine(
     (s) => [9, 11].includes(s.replace(/[\s.]/g, "").length),
-    "Må enten gjelde organisasjon(9 sifre) eller en person (Fødselsnummer 11 siffer)",
+    "Må enten gjelde en organisasjon(orgnummer 9 siffer) eller en person (fødselsnummer 11 siffer)",
   );
 
 export const TrefflisteSearchParametersSchema = z.object({
