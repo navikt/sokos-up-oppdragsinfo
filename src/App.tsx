@@ -1,6 +1,15 @@
 import "./App.module.css";
-import OppdragsinfoPage from "./pages/Oppdragsinfo.page";
-import { useEffect } from "react";
+import SokAndTrefflistePage from "./pages/SokAndTreffliste.page";
+import { useEffect, useState } from "react";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  LoaderFunctionArgs,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import OppdragsdetaljerPage from "./pages/Oppdragsdetaljer.page";
+import RestService from "./services/rest-service";
 import { initGrafanaFaro } from "./util/grafanaFaro";
 
 const App = () => {
@@ -8,7 +17,26 @@ const App = () => {
     initGrafanaFaro();
   }, []);
 
-  return <OppdragsinfoPage />;
+  const [gjelderId, setGjelderId] = useState<string>("default");
+
+  return (
+    <RouterProvider
+      router={createBrowserRouter(
+        createRoutesFromElements(
+          <>
+            <Route path="/" element={<SokAndTrefflistePage setGjelderId={setGjelderId} />} />
+            <Route
+              path="/:oppdragsid"
+              element={<OppdragsdetaljerPage />}
+              loader={async ({ params }: LoaderFunctionArgs) =>
+                RestService.useFetchOppdrag(gjelderId, params.oppdragsid ?? "")
+              }
+            />
+          </>,
+        ),
+      )}
+    />
+  );
 };
 
 export default App;

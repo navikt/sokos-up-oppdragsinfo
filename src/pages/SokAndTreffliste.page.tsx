@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { TrefflisteSearchParametersSchema } from "./Valideringsregler";
 import MoneyBagSvg from "../images/money_bag.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RestService from "../services/rest-service";
 import { Combobox, isEmpty } from "../util/commonUtils";
 import TrefflisteVisning from "../components/TrefflisteVisning";
@@ -14,13 +14,21 @@ type TrefflisteParameters = {
   faggruppe?: string;
 };
 
-const OppdragsinfoPage = () => {
+const SokAndTrefflistePage = ({ setGjelderId }: { setGjelderId: (gjelderId: string) => void }) => {
   const { faggrupper, faggrupperIsLoading } = RestService.useFetchFaggrupper();
   const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
   const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
     trefflisteParameters?.gjelderID,
     trefflisteParameters?.faggruppe,
   );
+
+  useEffect(() => {
+    console.log("useEffect treffliste");
+    const gjelderId = treffliste ? [...treffliste].reduce((t, n) => n.gjelderId, "") : "";
+    console.log(`setter gjelderId ${gjelderId}`);
+    setGjelderId(gjelderId);
+  }, [treffliste]);
+
   const {
     register,
     getValues,
@@ -32,7 +40,9 @@ const OppdragsinfoPage = () => {
   });
 
   const handleChangeGjelderId: SubmitHandler<TrefflisteParameters> = (data) => {
-    setTrefflisteParameters({ ...trefflisteParameters, gjelderID: data.gjelderID?.replaceAll(/[\s.]/g, "") });
+    const gjelderID = data.gjelderID?.replaceAll(/[\s.]/g, "") ?? "";
+    setTrefflisteParameters({ ...trefflisteParameters, gjelderID: gjelderID });
+    setGjelderId(gjelderID);
   };
 
   const handleChooseFaggruppe = (faggruppe: string, isSelected: boolean) => {
@@ -65,7 +75,7 @@ const OppdragsinfoPage = () => {
         <p>faggrupperIsLoading er {faggrupperIsLoading ? "yup" : "nope"}</p>
         <p>
           Gjelder ID
-          {errors.gjelderID ? " er det noe feil med" : getValues().gjelderID ?? "- ißkke skrevet noe ennå"}
+          {errors.gjelderID ? " er det noe feil med" : getValues().gjelderID ?? "- ikke skrevet noe ennå"}
         </p>
         <p>Faggruppe i trefflisteparameters er {trefflisteParameters.faggruppe}</p>
         <p>Gjelder ID i trefflisteparameters er "{trefflisteParameters.gjelderID}"</p>
@@ -83,4 +93,4 @@ const OppdragsinfoPage = () => {
     </>
   );
 };
-export default OppdragsinfoPage;
+export default SokAndTrefflistePage;

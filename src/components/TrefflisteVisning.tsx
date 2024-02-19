@@ -1,6 +1,7 @@
 import { Treffliste } from "../models/OppdragsinfoData";
-import { Link, Table } from "@navikt/ds-react";
+import { Table } from "@navikt/ds-react";
 import styles from "./TrefflisteVisning.module.css";
+import { Link } from "react-router-dom";
 
 const TrefflisteVisning = ({ treffliste }: { treffliste: Treffliste }) => {
   return (
@@ -40,7 +41,7 @@ const TrefflisteVisning = ({ treffliste }: { treffliste: Treffliste }) => {
               {treff.oppdragsListe.map((oppdrag) => (
                 <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                   <Table.DataCell>
-                    <Link>{oppdrag.oppdragsId}</Link>
+                    <Link to={`/${oppdrag.oppdragsId}`}>{oppdrag.oppdragsId}</Link>
                   </Table.DataCell>
                   <Table.DataCell>{oppdrag.kjorIdag}</Table.DataCell>
                   <Table.DataCell>{oppdrag.fagsystemId}</Table.DataCell>

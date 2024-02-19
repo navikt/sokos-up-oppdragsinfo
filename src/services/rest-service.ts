@@ -56,7 +56,7 @@ const useFetchTreffliste = (gjelderId: string | undefined, faggruppe: string | u
   return { treffliste: data, trefflisteError: error, trefflisteIsLoading: isLoading };
 };
 
-const useFetchOppdrag = (gjelderId: string, id: number) => axiosFetcher<Oppdrag>(`/${id}`, { gjelderId });
+const useFetchOppdrag = (gjelderId: string, id: string) => axiosFetcher<Oppdrag>(`/${id}`, { gjelderId });
 
 const RestService = {
   useFetchFaggrupper,
