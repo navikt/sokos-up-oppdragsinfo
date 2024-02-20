@@ -17,7 +17,7 @@ const App = () => {
     initGrafanaFaro();
   }, []);
 
-  const [gjelderId, setGjelderId] = useState<string>("default");
+  const [gjelderId, setGjelderId] = useState<string>("");
 
   return (
     <RouterProvider

@@ -45,9 +45,9 @@ const useFetchFaggrupper = () => {
 };
 
 const useFetchTreffliste = (gjelderId: string | undefined, faggruppe: string | undefined) => {
-  const [shouldFetch, setShouldFetch] = useState<boolean>(!!gjelderId);
+  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   useEffect(() => {
-    setShouldFetch(!!gjelderId);
+    setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));
   }, [gjelderId]);
   const { data, error, isLoading } = useSWR<Treffliste>(shouldFetch ? "/oppdrag" : null, {
     ...swrConfig,
