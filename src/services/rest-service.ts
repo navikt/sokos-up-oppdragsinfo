@@ -4,7 +4,7 @@ import { ApiError, HttpStatusCodeError } from "../types/errors";
 import { Faggruppe, Oppdrag, Treffliste } from "../models/OppdragsinfoData";
 import { useEffect, useState } from "react";
 
-const BASE_API_URL = "/oppdragsinfo/api";
+const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 
 const api = axios.create({
   baseURL: BASE_API_URL,

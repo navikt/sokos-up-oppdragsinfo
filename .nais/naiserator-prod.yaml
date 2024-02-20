@@ -11,7 +11,7 @@ metadata:
 spec:
   env:
   - name: CORS_ALLOWED_ORIGIN
-    value: "https://okonomiportalen.intern.dev.nav.no"
+    value: "https://utbetalingsportalen.intern.dev.nav.no"
   image: {{ image }}
   port: 8080
   liveness:
@@ -27,7 +27,7 @@ spec:
     min: 2
     max: 4
   ingresses:
-    - "https://okonomiportalen.intern.dev.nav.no/sokos-up-oppdragsinfo"
+    - "https://utbetalingsportalen.intern.dev.nav.no/sokos-up-oppdragsinfo"
   resources:
     limits:
       cpu: "3"
