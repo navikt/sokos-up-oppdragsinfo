@@ -83,11 +83,7 @@ const SokAndTrefflistePage = () => {
       </GuidePanel>
 
       {!!treffliste && !isEmpty(treffliste) ? (
-        <TrefflisteVisning
-          key={btoa("" + trefflisteParameters.gjelderID + trefflisteParameters.faggruppe)}
-          treffliste={treffliste}
-          handleSetId={(id: string) => setOppdragsid(id)}
-        />
+        <TrefflisteVisning treffliste={treffliste} handleSetId={(id: string) => setOppdragsid(id)} />
       ) : (
         "tom treffliste"
       )}

@@ -11,8 +11,8 @@ const TrefflisteVisning = ({
 }) => {
   return (
     <>
-      {...treffliste.map((treff) => (
-        <div key={"ThereCanBeOnlyOne"} className={styles.treffliste}>
+      {...treffliste.map((treff, index) => (
+        <div key={btoa(treff.gjelderId + index)} className={styles.treffliste}>
           <p>{"Gjelder navn: " + treff.gjelderNavn}</p>
           <p>{"Gjelder id: " + btoa(treff.gjelderId)}</p>
 
