@@ -1,13 +1,18 @@
 import { Treffliste } from "../models/OppdragsinfoData";
-import { Table } from "@navikt/ds-react";
+import { Button, Table } from "@navikt/ds-react";
 import styles from "./TrefflisteVisning.module.css";
-import { Link } from "react-router-dom";
 
-const TrefflisteVisning = ({ treffliste }: { treffliste: Treffliste }) => {
+const TrefflisteVisning = ({
+  treffliste,
+  handleSetId,
+}: {
+  treffliste: Treffliste;
+  handleSetId: (id: string) => void;
+}) => {
   return (
     <>
       {...treffliste.map((treff) => (
-        <div className={styles.treffliste}>
+        <div key={"ThereCanBeOnlyOne"} className={styles.treffliste}>
           <p>{"Gjelder navn: " + treff.gjelderNavn}</p>
           <p>{"Gjelder id: " + btoa(treff.gjelderId)}</p>
 
@@ -41,8 +46,7 @@ const TrefflisteVisning = ({ treffliste }: { treffliste: Treffliste }) => {
               {treff.oppdragsListe.map((oppdrag) => (
                 <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                   <Table.DataCell>
-                    {/*<Link to={`/${oppdrag.oppdragsId}`}>{oppdrag.oppdragsId}</Link>*/}
-                    lol
+                    <Button onClick={() => handleSetId("" + oppdrag.oppdragsId)}>{oppdrag.oppdragsId}</Button>
                   </Table.DataCell>
                   <Table.DataCell>{oppdrag.kjorIdag}</Table.DataCell>
                   <Table.DataCell>{oppdrag.fagsystemId}</Table.DataCell>

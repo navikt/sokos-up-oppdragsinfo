@@ -8,13 +8,14 @@ import { useEffect, useState } from "react";
 import { Combobox, isEmpty } from "../util/commonUtils";
 import TrefflisteVisning from "../components/TrefflisteVisning";
 import RestService from "../services/rest-service";
+import OppdragsdetaljerPage from "./Oppdragsdetaljer.page";
 
 type TrefflisteParameters = {
   gjelderID?: string;
   faggruppe?: string;
 };
 
-const SokAndTrefflistePage = ({ setGjelderId }: { setGjelderId: (gjelderId: string) => void }) => {
+const SokAndTrefflistePage = () => {
   const { faggrupper, faggrupperIsLoading } = RestService.useFetchFaggrupper();
   const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
   const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
@@ -22,12 +23,12 @@ const SokAndTrefflistePage = ({ setGjelderId }: { setGjelderId: (gjelderId: stri
     trefflisteParameters?.faggruppe,
   );
 
+  const [oppdragsid, setOppdragsid] = useState<string>();
+  const { oppdrag } = RestService.useFetchOppdrag(trefflisteParameters?.gjelderID, oppdragsid);
+
   useEffect(() => {
-    console.log("useEffect treffliste");
-    const gjelderId = treffliste ? [...treffliste].reduce((t, n) => n.gjelderId, "") : "";
-    console.log(`setter gjelderId ${gjelderId}`);
-    setGjelderId(gjelderId);
-  }, [treffliste]);
+    setOppdragsid(undefined);
+  }, [trefflisteParameters, treffliste]);
 
   const {
     register,
@@ -42,7 +43,6 @@ const SokAndTrefflistePage = ({ setGjelderId }: { setGjelderId: (gjelderId: stri
   const handleChangeGjelderId: SubmitHandler<TrefflisteParameters> = (data) => {
     const gjelderID = data.gjelderID?.replaceAll(/[\s.]/g, "") ?? "";
     setTrefflisteParameters({ ...trefflisteParameters, gjelderID: gjelderID });
-    setGjelderId(gjelderID);
   };
 
   const handleChooseFaggruppe = (faggruppe: string, isSelected: boolean) => {
@@ -82,14 +82,17 @@ const SokAndTrefflistePage = ({ setGjelderId }: { setGjelderId: (gjelderId: stri
         <p>trefflisteIsLoading er {trefflisteIsLoading ? "yup" : "nope"}</p>
       </GuidePanel>
 
-      {treffliste && !isEmpty(treffliste) ? (
+      {!!treffliste && !isEmpty(treffliste) ? (
         <TrefflisteVisning
           key={btoa("" + trefflisteParameters.gjelderID + trefflisteParameters.faggruppe)}
           treffliste={treffliste}
+          handleSetId={(id: string) => setOppdragsid(id)}
         />
       ) : (
         "tom treffliste"
       )}
+
+      {!!oppdrag && <OppdragsdetaljerPage oppdrag={oppdrag} />}
     </>
   );
 };

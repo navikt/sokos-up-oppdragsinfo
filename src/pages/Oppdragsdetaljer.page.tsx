@@ -1,16 +1,12 @@
-import { Link, useLoaderData } from "react-router-dom";
 import { Oppdragsdetaljer } from "../models/OppdragsinfoData";
 import styles from "../components/TrefflisteVisning.module.css";
 import { Table } from "@navikt/ds-react";
 
-const OppdragsdetaljerPage = () => {
-  const oppdrag = useLoaderData() as Oppdragsdetaljer;
-
+const OppdragsdetaljerPage = ({ oppdrag }: { oppdrag: Oppdragsdetaljer }) => {
   return (
     <div className={styles.treffliste}>
       <p>{"Enhet: " + oppdrag.enhet.enhet}</p>
       <p>{"Behandlende: " + oppdrag.behandlendeEnhet.enhet}</p>
-      <Link to={"/"}>Back</Link>
       <Table zebraStripes key={"k"}>
         <Table.Header>
           <Table.Row>

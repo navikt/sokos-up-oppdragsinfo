@@ -1,8 +1,9 @@
 import axios from "axios";
 import useSWR from "swr";
 import { ApiError, HttpStatusCodeError } from "../types/errors";
-import { Faggruppe, Oppdrag, Treffliste } from "../models/OppdragsinfoData";
+import { Faggruppe, Oppdragsdetaljer, Treffliste } from "../models/OppdragsinfoData";
 import { useEffect, useState } from "react";
+import { isString } from "../util/commonUtils";
 
 const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 
@@ -59,12 +60,25 @@ const useFetchTreffliste = (gjelderId?: string, faggruppe?: string) => {
   return { treffliste: data, trefflisteError: error, trefflisteIsLoading: isLoading };
 };
 
-const fetchOppdrag = (gjelderId: string | undefined, id: string) => axiosPostFetcher<Oppdrag>(`/${id}`, { gjelderId });
+const useFetchOppdrag = (gjelderId?: string, id?: string) => {
+  const [oppdragsId, setOppdragsId] = useState<string>();
+  useEffect(() => {
+    setOppdragsId(id);
+  }, [id]);
+  const { data: oppdrag, isLoading: oppdragIsLoading } = useSWR<Oppdragsdetaljer>(
+    isString(oppdragsId) ? `/${oppdragsId}` : null,
+    {
+      ...swrConfig,
+      fetcher: (url) => axiosPostFetcher<Oppdragsdetaljer>(url, { gjelderId }),
+    },
+  );
+  return { oppdrag, oppdragIsLoading };
+};
 
 const RestService = {
   useFetchFaggrupper,
   useFetchTreffliste,
-  fetchOppdrag,
+  useFetchOppdrag,
 };
 
 export default RestService;
