@@ -7,7 +7,6 @@ import MoneyBagSvg from "../images/money_bag.svg";
 import { useEffect, useState } from "react";
 import { Combobox, isEmpty } from "../util/commonUtils";
 import TrefflisteVisning from "../components/TrefflisteVisning";
-import { Treffliste } from "../models/OppdragsinfoData";
 import RestService from "../services/rest-service";
 
 type TrefflisteParameters = {
@@ -18,28 +17,10 @@ type TrefflisteParameters = {
 const SokAndTrefflistePage = ({ setGjelderId }: { setGjelderId: (gjelderId: string) => void }) => {
   const { faggrupper, faggrupperIsLoading } = RestService.useFetchFaggrupper();
   const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
-  // const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
-  //   trefflisteParameters?.gjelderID,
-  //   trefflisteParameters?.faggruppe,
-  // );
-  const treffliste: Treffliste = [
-    {
-      gjelderId: "12345612345",
-      gjelderNavn: "nope Nope",
-      oppdragsListe: [
-        {
-          fagsystemId: "15003899",
-          oppdragsId: 1,
-          navnFagGruppe: "Inntektsytelser",
-          navnFagOmraade: "Uføretrygd",
-          kjorIdag: "N",
-          kodeStatus: "AKTI",
-          typeBilag: "",
-        },
-      ],
-    },
-  ];
-  const trefflisteIsLoading = false;
+  const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
+    trefflisteParameters?.gjelderID,
+    trefflisteParameters?.faggruppe,
+  );
 
   useEffect(() => {
     console.log("useEffect treffliste");
