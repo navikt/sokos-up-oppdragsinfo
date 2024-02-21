@@ -5,3 +5,8 @@ export const isEmpty = (array: Array<unknown> | undefined | null) => !array || !
 export const capitalized = (s: string) => s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
 
 export const Combobox = UNSAFE_Combobox;
+
+export const getTime = () => {
+  const dato = new Date();
+  return `${dato.toLocaleDateString()} ${dato.toLocaleTimeString()},${dato.getMilliseconds()}`;
+};

@@ -14,11 +14,14 @@ const api = axios.create({
   validateStatus: (status) => status < 400,
 });
 
-const axiosFetcher = <T>(url: string, body?: { gjelderId?: string; faggruppe?: string } | undefined) =>
-  (body ? api.post<T>(url, body) : api.get<T>(url)).then((res) => res.data);
+const axiosGetFetcher = <T>(url: string) => api.get<T>(url).then((res) => res.data);
+
+// Brukes av omposteringer, oppdrag og treffliste for å kunne sende med fnr i requestbody
+const axiosPostFetcher = <T>(url: string, body: { gjelderId?: string; faggruppe?: string } | undefined) =>
+  api.post<T>(url, body).then((res) => res.data);
 
 const swrConfig = {
-  fetcher: axiosFetcher,
+  fetcher: axiosGetFetcher,
   suspense: true,
   revalidateOnFocus: false,
   refreshInterval: 120000,
@@ -44,24 +47,24 @@ const useFetchFaggrupper = () => {
   return { faggrupper, faggrupperIsLoading };
 };
 
-const useFetchTreffliste = (gjelderId: string | undefined, faggruppe: string | undefined) => {
+const useFetchTreffliste = (gjelderId?: string, faggruppe?: string) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   useEffect(() => {
     setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));
   }, [gjelderId]);
   const { data, error, isLoading } = useSWR<Treffliste>(shouldFetch ? "/oppdrag" : null, {
     ...swrConfig,
-    fetcher: (url) => axiosFetcher<Treffliste>(url, { gjelderId, faggruppe: faggruppe }),
+    fetcher: (url) => axiosPostFetcher<Treffliste>(url, { gjelderId, faggruppe: faggruppe }),
   });
   return { treffliste: data, trefflisteError: error, trefflisteIsLoading: isLoading };
 };
 
-const useFetchOppdrag = (gjelderId: string, id: string) => axiosFetcher<Oppdrag>(`/${id}`, { gjelderId });
+const fetchOppdrag = (gjelderId: string | undefined, id: string) => axiosPostFetcher<Oppdrag>(`/${id}`, { gjelderId });
 
 const RestService = {
   useFetchFaggrupper,
   useFetchTreffliste,
-  useFetchOppdrag,
+  fetchOppdrag,
 };
 
 export default RestService;
