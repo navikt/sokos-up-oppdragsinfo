@@ -7,7 +7,8 @@ import MoneyBagSvg from "../images/money_bag.svg";
 import { useEffect, useState } from "react";
 import { Combobox, isEmpty } from "../util/commonUtils";
 import TrefflisteVisning from "../components/TrefflisteVisning";
-import { Faggruppe, Treffliste } from "../models/OppdragsinfoData";
+import { Treffliste } from "../models/OppdragsinfoData";
+import RestService from "../services/rest-service";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -15,9 +16,7 @@ type TrefflisteParameters = {
 };
 
 const SokAndTrefflistePage = ({ setGjelderId }: { setGjelderId: (gjelderId: string) => void }) => {
-  // const { faggrupper, faggrupperIsLoading } = RestService.useFetchFaggrupper();
-  const faggrupper: Faggruppe[] = [];
-  const faggrupperIsLoading = false;
+  const { faggrupper, faggrupperIsLoading } = RestService.useFetchFaggrupper();
   const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
   // const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
   //   trefflisteParameters?.gjelderID,
