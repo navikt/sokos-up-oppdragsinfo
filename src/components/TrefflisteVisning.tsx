@@ -41,7 +41,8 @@ const TrefflisteVisning = ({ treffliste }: { treffliste: Treffliste }) => {
               {treff.oppdragsListe.map((oppdrag) => (
                 <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                   <Table.DataCell>
-                    <Link to={`/${oppdrag.oppdragsId}`}>{oppdrag.oppdragsId}</Link>
+                    {/*<Link to={`/${oppdrag.oppdragsId}`}>{oppdrag.oppdragsId}</Link>*/}
+                    lol
                   </Table.DataCell>
                   <Table.DataCell>{oppdrag.kjorIdag}</Table.DataCell>
                   <Table.DataCell>{oppdrag.fagsystemId}</Table.DataCell>
