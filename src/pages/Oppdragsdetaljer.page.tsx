@@ -1,4 +1,4 @@
-import { Table } from "@navikt/ds-react";
+import { Loader, Table } from "@navikt/ds-react";
 import RestService from "../services/rest-service";
 import EnhetshistorikkVisning from "../components/EnhetshistorikkVisning";
 import StatushistorikkVisning from "../components/StatushistorikkVisning";
@@ -6,12 +6,13 @@ import OmposteringerVisning from "../components/OmposteringerVisning";
 import styles from "./SokAndTreffliste.module.css";
 
 const OppdragsdetaljerPage = ({ gjelderId, id }: { gjelderId: string | undefined; id: string }) => {
-  const { oppdrag } = RestService.useFetchOppdrag(gjelderId, id);
+  const { oppdrag, oppdragIsLoading } = RestService.useFetchOppdrag(gjelderId, id);
 
   return (
     <>
-      {!oppdrag && <div>No oppdrag :-(</div>}
-      {oppdrag && (
+      {oppdragIsLoading && <Loader size="3xlarge" title="Straks hold an" />}
+      {!oppdrag && <div>Fant ikke oppdrag</div>}
+      {!oppdragIsLoading && oppdrag && (
         <div className={styles.treffliste}>
           <EnhetshistorikkVisning id={id} />
           {gjelderId && <OmposteringerVisning gjelderId={gjelderId} id={id} />}
