@@ -15,7 +15,7 @@ const OppdragsdetaljerPage = ({ gjelderId, id }: { gjelderId: string | undefined
         {gjelderId && <OmposteringerVisning gjelderId={gjelderId} id={id} />}
         <StatushistorikkVisning id={id} />
         <p>{"Enhet : " + oppdrag.enhet.enhet}</p>
-        <p>{"Behandlende: " + oppdrag.behandlendeEnhet.enhet}</p>
+        {oppdrag.behandlendeEnhet && <p>{"Behandlende: " + oppdrag.behandlendeEnhet?.enhet}</p>}
         <Table zebraStripes key={"k"}>
           <Table.Header>
             <Table.Row>
