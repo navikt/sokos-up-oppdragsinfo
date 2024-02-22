@@ -23,7 +23,7 @@ export default [
   {method: "POST", /*....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id", /*...................*/ response: () => oppdrag},
   {method: "GET", /*.....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id/enhetshistorikk", /*...*/ response: () => enhetshistorikk},
   {method: "POST", /*....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id/omposteringer", /*.....*/ response: () => omposteringer},
-  {method: "GET", /*.....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id/statusshistorikk", /*..*/ response: () => statushistorikk},
+  {method: "GET", /*.....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id/statushistorikk", /*..*/ response: () => statushistorikk},
   {method: "GET", /*.....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestant", /**/ response: () => attestant},
   {method: "GET", /*.....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/detaljer", /*.*/ response: () => detaljer},
   {method: "GET", /*.....*/ url: "/nav-oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/enhet", /*....*/ response: () => enhet},

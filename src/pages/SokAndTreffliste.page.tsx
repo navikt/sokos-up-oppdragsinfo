@@ -24,7 +24,6 @@ const SokAndTrefflistePage = () => {
   );
 
   const [oppdragsid, setOppdragsid] = useState<string>();
-  const { oppdrag } = RestService.useFetchOppdrag(trefflisteParameters?.gjelderID, oppdragsid);
 
   useEffect(() => {
     setOppdragsid(undefined);
@@ -88,7 +87,9 @@ const SokAndTrefflistePage = () => {
         "tom treffliste"
       )}
 
-      {!!oppdrag && <OppdragsdetaljerPage oppdrag={oppdrag} />}
+      {!!trefflisteParameters?.gjelderID && !!oppdragsid && (
+        <OppdragsdetaljerPage gjelderId={trefflisteParameters.gjelderID} id={oppdragsid} />
+      )}
     </>
   );
 };
