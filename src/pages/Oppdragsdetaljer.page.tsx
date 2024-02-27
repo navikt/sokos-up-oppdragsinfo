@@ -19,7 +19,7 @@ const OppdragsdetaljerPage = ({ gjelderId, id }: { gjelderId: string | undefined
           <StatushistorikkVisning id={id} />
           {oppdrag?.enhet && <p>{"Enhet : " + oppdrag?.enhet?.enhet}</p>}
           {oppdrag?.behandlendeEnhet && <p>{"Behandlende: " + oppdrag?.behandlendeEnhet?.enhet}</p>}
-          <Table zebraStripes key={"k"}>
+          <Table zebraStripes>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell key={"linjeid"} scope="col">

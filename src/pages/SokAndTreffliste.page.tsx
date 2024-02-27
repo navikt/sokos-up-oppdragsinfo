@@ -48,6 +48,8 @@ const SokAndTrefflistePage = () => {
     setTrefflisteParameters({ ...trefflisteParameters, faggruppe: isSelected ? faggruppe : undefined });
   };
 
+  const sortedFaggrupper = faggrupper ? [...faggrupper.map((f) => f.type)].sort() : [];
+
   return (
     <>
       <form onSubmit={handleSubmit(handleChangeGjelderId)}>
@@ -61,7 +63,7 @@ const SokAndTrefflistePage = () => {
             clearButton={true}
             clearButtonLabel={"Foo"}
             onToggleSelected={handleChooseFaggruppe}
-            options={faggrupper.map((f) => f.navn + "(" + f.type + ")")}
+            options={sortedFaggrupper}
           />
         )}
 
