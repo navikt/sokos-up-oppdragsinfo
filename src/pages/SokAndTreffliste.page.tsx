@@ -9,6 +9,7 @@ import { Combobox, isEmpty } from "../util/commonUtils";
 import TrefflisteVisning from "../components/TrefflisteVisning";
 import RestService from "../services/rest-service";
 import OppdragsdetaljerPage from "./Oppdragsdetaljer.page";
+import OppdragslinjedetaljerPage from "./OppdragslinjedetaljerPage";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -24,9 +25,11 @@ const SokAndTrefflistePage = () => {
   );
 
   const [oppdragsid, setOppdragsid] = useState<string>();
+  const [linjeid, setLinjeid] = useState<string>();
 
   useEffect(() => {
     setOppdragsid(undefined);
+    setLinjeid(undefined);
   }, [trefflisteParameters, treffliste]);
 
   const {
@@ -84,13 +87,21 @@ const SokAndTrefflistePage = () => {
       </GuidePanel>
 
       {!!treffliste && !isEmpty(treffliste) ? (
-        <TrefflisteVisning treffliste={treffliste} handleSetId={(id: string) => setOppdragsid(id)} />
+        <TrefflisteVisning treffliste={treffliste} handleSetId={setOppdragsid} />
       ) : (
         "tom treffliste"
       )}
 
       {!!trefflisteParameters?.gjelderID && !!oppdragsid && (
-        <OppdragsdetaljerPage gjelderId={trefflisteParameters.gjelderID} id={oppdragsid} />
+        <OppdragsdetaljerPage
+          gjelderId={trefflisteParameters.gjelderID}
+          id={oppdragsid}
+          handleSetLinjeId={setLinjeid}
+        />
+      )}
+
+      {!!trefflisteParameters?.gjelderID && !!oppdragsid && !!linjeid && (
+        <OppdragslinjedetaljerPage oppdragsid={oppdragsid} linjeid={linjeid} />
       )}
     </>
   );

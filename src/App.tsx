@@ -4,9 +4,9 @@ import { useEffect } from "react";
 import { initGrafanaFaro } from "./util/grafanaFaro";
 
 const App = () => {
-  useEffect(() => {
-    initGrafanaFaro();
-  }, []);
+  // useEffect(() => {
+  //   initGrafanaFaro();
+  // }, []);
   return <SokAndTrefflistePage />;
 };
 

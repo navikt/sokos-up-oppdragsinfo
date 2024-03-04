@@ -8,6 +8,11 @@ import { Faggruppe } from "../models/Faggruppe";
 import { Oppdragsdetaljer } from "../models/Oppdragsdetaljer";
 import { Enhetshistorikk } from "../models/Enhetshistorikk";
 import { Omposteringer } from "../models/Ompostering";
+import { Oppdragslinjedetaljer } from "../models/Oppdragslinjedetaljer";
+import { Attestanter } from "../models/Attestant";
+import { Kravhavere } from "../models/Kravhaver";
+import { Ovrige } from "../models/Ovrig";
+import { Statuser } from "../models/Status";
 
 const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 
@@ -100,8 +105,6 @@ const useFetch = <T>(shouldFetch: boolean, url: string) => {
     ...swrConfig,
     fetcher: (url) => axiosGetFetcher<T>(url),
   });
-  console.log();
-
   return [data, isLoading];
 };
 
@@ -112,6 +115,20 @@ const useFetchOmposteringer = (gjelderId: string, id: string, shouldFetch: boole
 const useFetchStatushistorikk = (id: string, shouldFetch: boolean) =>
   useFetch<Enhetshistorikk>(shouldFetch, `/${id}/statushistorikk`);
 
+const useFetchOppdragslinje = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Oppdragslinjedetaljer>(shouldFetch, `/${oppdragsid}/${linjeid}/detaljer`);
+const useFetchAttestant = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Attestanter>(shouldFetch, `/${oppdragsid}/${linjeid}/attestant`);
+
+const useFetchKravhaver = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Kravhavere>(shouldFetch, `/${oppdragsid}/${linjeid}/kravhaver`);
+
+const useFetchOvrig = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Ovrige>(shouldFetch, `/${oppdragsid}/${linjeid}/ovrig`);
+
+const useFetchStatus = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Statuser>(shouldFetch, `/${oppdragsid}/${linjeid}/status`);
+
 const RestService = {
   useFetchFaggrupper,
   useFetchTreffliste,
@@ -119,6 +136,11 @@ const RestService = {
   useFetchEnhetshistorikk,
   useFetchStatushistorikk,
   useFetchOmposteringer,
+  useFetchOppdragslinje,
+  useFetchAttestant,
+  useFetchKravhaver,
+  useFetchOvrig,
+  useFetchStatus,
 };
 
 export default RestService;

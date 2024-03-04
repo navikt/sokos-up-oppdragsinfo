@@ -1,11 +1,19 @@
-import { Loader, Table } from "@navikt/ds-react";
+import { Button, Loader, Table } from "@navikt/ds-react";
 import RestService from "../services/rest-service";
 import EnhetshistorikkVisning from "../components/EnhetshistorikkVisning";
 import StatushistorikkVisning from "../components/StatushistorikkVisning";
 import OmposteringerVisning from "../components/OmposteringerVisning";
 import styles from "./SokAndTreffliste.module.css";
 
-const OppdragsdetaljerPage = ({ gjelderId, id }: { gjelderId: string | undefined; id: string }) => {
+const OppdragsdetaljerPage = ({
+  gjelderId,
+  id,
+  handleSetLinjeId,
+}: {
+  gjelderId: string | undefined;
+  id: string;
+  handleSetLinjeId: (linjeid: string) => void;
+}) => {
   const { oppdrag, oppdragIsLoading } = RestService.useFetchOppdrag(gjelderId, id);
 
   return (
@@ -48,7 +56,9 @@ const OppdragsdetaljerPage = ({ gjelderId, id }: { gjelderId: string | undefined
             <Table.Body>
               {oppdrag?.oppdragsLinjer.map((linje) => (
                 <Table.Row key={btoa("" + linje.linjeId)}>
-                  <Table.DataCell>{linje.linjeId}</Table.DataCell>
+                  <Table.DataCell>
+                    <Button onClick={() => handleSetLinjeId("" + linje.linjeId)}>{linje.linjeId}</Button>
+                  </Table.DataCell>
                   <Table.DataCell>{linje.kodeKlasse}</Table.DataCell>
                   <Table.DataCell>{linje.datoVedtakFom}</Table.DataCell>
                   <Table.DataCell>{linje.sats}</Table.DataCell>
