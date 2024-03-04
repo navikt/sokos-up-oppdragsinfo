@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths-ignore:
-      - "Dokumentasjon/**"
+      - "dokumentasjon/**"
       - "**.md"
       - "LICENCE"
       - "CODEOWNERS"
@@ -18,11 +18,12 @@ on:
 env:
   TZ: Europe/Oslo
 
+permissions:
+  contents: "read"
+  id-token: "write"
+
 jobs:
   build:
-    permissions:
-      contents: "read"
-      id-token: "write"
     name: Build/test & push image
     runs-on: ubuntu-latest
     steps:
