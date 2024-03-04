@@ -3,33 +3,34 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
     paths-ignore:
-      - 'Dokumentasjon/**'
-      - '**.md'
-      - 'LICENCE'
-      - 'CODEOWNERS'
-      - '.gitignore'
-      - '.github/workflows/build-pr.yaml'
-      - '.github/workflows/manual-deploy-dev.yaml'
-      - '.github/workflows/security.yaml'
-      - '.github/dependabot.yaml'
+      - "dokumentasjon/**"
+      - "**.md"
+      - "LICENCE"
+      - "CODEOWNERS"
+      - ".gitignore"
+      - ".github/workflows/build-pr.yaml"
+      - ".github/workflows/manual-deploy-dev.yaml"
+      - ".github/workflows/security.yaml"
+      - ".github/dependabot.yaml"
 
 env:
   TZ: Europe/Oslo
 
+permissions:
+  contents: "read"
+  id-token: "write"
+
 jobs:
   build:
-    permissions:
-      contents: "read"
-      id-token: "write"
     name: Build/test & push image
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: "18"
       - uses: pnpm/action-setup@v2
         id: pnpm-install
         with:
