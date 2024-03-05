@@ -1,9 +1,8 @@
-import { Button, GuidePanel, TextField } from "@navikt/ds-react";
+import { Button, TextField } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { TrefflisteSearchParametersSchema } from "./Valideringsregler";
-import MoneyBagSvg from "../images/money_bag.svg";
 import { useEffect, useState } from "react";
 import { Combobox, isEmpty } from "../util/commonUtils";
 import TrefflisteVisning from "../components/TrefflisteVisning";
@@ -17,9 +16,9 @@ type TrefflisteParameters = {
 };
 
 const SokAndTrefflistePage = () => {
-  const { faggrupper, faggrupperIsLoading } = RestService.useFetchFaggrupper();
+  const { faggrupper } = RestService.useFetchFaggrupper();
   const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
-  const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
+  const { treffliste } = RestService.useFetchTreffliste(
     trefflisteParameters?.gjelderID,
     trefflisteParameters?.faggruppe,
   );
@@ -34,7 +33,6 @@ const SokAndTrefflistePage = () => {
 
   const {
     register,
-    getValues,
     handleSubmit,
     trigger,
     formState: { errors },
@@ -74,17 +72,6 @@ const SokAndTrefflistePage = () => {
           Søk
         </Button>
       </form>
-
-      <GuidePanel className="max-w-2xl" illustration={<img src={MoneyBagSvg} alt={"Pengepose"} />}>
-        <p>faggrupperIsLoading er {faggrupperIsLoading ? "yup" : "nope"}</p>
-        <p>
-          Gjelder ID
-          {errors.gjelderID ? " er det noe feil med" : getValues().gjelderID ?? "- ikke skrevet noe ennå"}
-        </p>
-        <p>Faggruppe i trefflisteparameters er {trefflisteParameters.faggruppe}</p>
-        <p>Gjelder ID i trefflisteparameters er "{trefflisteParameters.gjelderID}"</p>
-        <p>trefflisteIsLoading er {trefflisteIsLoading ? "yup" : "nope"}</p>
-      </GuidePanel>
 
       {!!treffliste && !isEmpty(treffliste) ? (
         <TrefflisteVisning treffliste={treffliste} handleSetId={setOppdragsid} />

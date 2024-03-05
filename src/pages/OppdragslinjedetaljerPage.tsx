@@ -7,9 +7,13 @@ import AttestantVisning from "../components/AttestantVisning";
 import KravhaverVisning from "../components/KravhaverVisning";
 import OvrigVisning from "../components/OvrigVisning";
 import StatuserVisning from "../components/StatuserVisning";
+import KidlisteVisning from "../components/KidlisteVisning";
+import ValutaerVisning from "../components/ValutaerVisning";
 
 const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [linjedetaljer, linjedetaljerIsLoading] = RestService.useFetchOppdragslinje(oppdragsid, linjeid, true);
+
+  const skalViSe = isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading;
 
   return (
     <>
@@ -17,7 +21,13 @@ const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string
       <KravhaverVisning oppdragsid={oppdragsid} linjeid={linjeid} />
       <OvrigVisning oppdragsid={oppdragsid} linjeid={linjeid} />
       <StatuserVisning oppdragsid={oppdragsid} linjeid={linjeid} />
-      {isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading && (
+      <ValutaerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+      <KidlisteVisning
+        enabled={skalViSe && linjedetaljer.reduce((a, b) => a || b.harKidliste, false)}
+        oppdragsid={oppdragsid}
+        linjeid={linjeid}
+      />
+      {skalViSe && (
         <div>
           <Table zebraStripes>
             <Table.Header>

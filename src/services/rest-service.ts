@@ -13,6 +13,8 @@ import { Attestanter } from "../models/Attestant";
 import { Kravhavere } from "../models/Kravhaver";
 import { Ovrige } from "../models/Ovrig";
 import { Statuser } from "../models/Status";
+import { Kidliste } from "../models/Kid";
+import { Valutaer } from "../models/Valuta";
 
 const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 
@@ -128,6 +130,11 @@ const useFetchOvrig = (oppdragsid: string, linjeid: string, shouldFetch: boolean
 
 const useFetchStatus = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<Statuser>(shouldFetch, `/${oppdragsid}/${linjeid}/status`);
+const useFetchValuta = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Valutaer>(shouldFetch, `/${oppdragsid}/${linjeid}/valuta`);
+
+const useFetchKidliste = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Kidliste>(shouldFetch, `/${oppdragsid}/${linjeid}/kidliste`);
 
 const RestService = {
   useFetchFaggrupper,
@@ -141,6 +148,8 @@ const RestService = {
   useFetchKravhaver,
   useFetchOvrig,
   useFetchStatus,
+  useFetchValuta,
+  useFetchKidliste,
 };
 
 export default RestService;
