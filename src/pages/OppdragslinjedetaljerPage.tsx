@@ -9,6 +9,7 @@ import OvrigVisning from "../components/OvrigVisning";
 import StatuserVisning from "../components/StatuserVisning";
 import KidlisteVisning from "../components/KidlisteVisning";
 import ValutaerVisning from "../components/ValutaerVisning";
+import TeksterVisning from "../components/TeksterVisning";
 
 const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [linjedetaljer, linjedetaljerIsLoading] = RestService.useFetchOppdragslinje(oppdragsid, linjeid, true);
@@ -22,6 +23,7 @@ const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string
       <OvrigVisning oppdragsid={oppdragsid} linjeid={linjeid} />
       <StatuserVisning oppdragsid={oppdragsid} linjeid={linjeid} />
       <ValutaerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+      <TeksterVisning oppdragsid={oppdragsid} linjeid={linjeid} />
       <KidlisteVisning
         enabled={skalViSe && linjedetaljer.reduce((a, b) => a || b.harKidliste, false)}
         oppdragsid={oppdragsid}
