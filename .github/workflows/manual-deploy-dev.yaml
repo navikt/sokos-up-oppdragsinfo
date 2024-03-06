@@ -6,7 +6,7 @@ env:
   TZ: Europe/Oslo
 
 permissions:
-  contents: "read"
+  contents: "write"
   id-token: "write"
 
 jobs:
