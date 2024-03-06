@@ -19,6 +19,7 @@ import { Tekster } from "../models/Tekst";
 import { SkyldnersList } from "../models/Skyldner";
 import { Linjeenheter } from "../models/Linjeenhet";
 import { Grader } from "../models/Grad";
+import { Maksdatoer } from "../models/Maksdato";
 
 const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 

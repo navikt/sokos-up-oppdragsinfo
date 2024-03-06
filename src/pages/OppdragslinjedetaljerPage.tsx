@@ -32,7 +32,7 @@ const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string
       <KidlisteVisning enabled={!!linjedetalj?.harKidliste} oppdragsid={oppdragsid} linjeid={linjeid} />
       <SkyldnersListVisning enabled={!!linjedetalj?.harSkyldnere} oppdragsid={oppdragsid} linjeid={linjeid} />
       <MaksdatoerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
-      <LinjeenheterVisning enabled={!!linjedetalj?.harSkyldnere} oppdragsid={oppdragsid} linjeid={linjeid} />
+      <LinjeenheterVisning enabled={!!linjedetalj?.harEnheter} oppdragsid={oppdragsid} linjeid={linjeid} />
       <GraderVisning enabled={!!linjedetalj?.harGrader} oppdragsid={oppdragsid} linjeid={linjeid} />
       {isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading && (
         <div>
