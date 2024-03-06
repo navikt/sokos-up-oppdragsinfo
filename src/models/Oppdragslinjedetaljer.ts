@@ -5,8 +5,8 @@ export const OppdragslinjedetaljSchema = z.object({
   harValutaer: z.boolean(),
   harSkyldnere: z.boolean(),
   harKravhavere: z.boolean(),
-  harEnheter: z.boolean() /**/,
-  harGrader: z.boolean() /**/,
+  harEnheter: z.boolean(),
+  harGrader: z.boolean(),
   harTekster: z.boolean(),
   harKidliste: z.boolean(),
 });

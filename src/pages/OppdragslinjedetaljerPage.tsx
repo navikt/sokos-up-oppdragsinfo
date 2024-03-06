@@ -11,6 +11,9 @@ import KidlisteVisning from "../components/KidlisteVisning";
 import ValutaerVisning from "../components/ValutaerVisning";
 import TeksterVisning from "../components/TeksterVisning";
 import SkyldnersListVisning from "../components/SkyldnerslistVisning";
+import MaksdatoerVisning from "../components/MaksdatoerVisning";
+import LinjeenheterVisning from "../components/LinjeenheterVisning";
+import GraderVisning from "../components/GraderVisning";
 
 const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [linjedetaljer, linjedetaljerIsLoading] = RestService.useFetchOppdragslinje(oppdragsid, linjeid, true);
@@ -28,6 +31,9 @@ const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string
       <TeksterVisning enabled={!!linjedetalj?.harTekster} oppdragsid={oppdragsid} linjeid={linjeid} />
       <KidlisteVisning enabled={!!linjedetalj?.harKidliste} oppdragsid={oppdragsid} linjeid={linjeid} />
       <SkyldnersListVisning enabled={!!linjedetalj?.harSkyldnere} oppdragsid={oppdragsid} linjeid={linjeid} />
+      <MaksdatoerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+      <LinjeenheterVisning enabled={!!linjedetalj?.harSkyldnere} oppdragsid={oppdragsid} linjeid={linjeid} />
+      <GraderVisning enabled={!!linjedetalj?.harGrader} oppdragsid={oppdragsid} linjeid={linjeid} />
       {isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading && (
         <div>
           <Table zebraStripes>

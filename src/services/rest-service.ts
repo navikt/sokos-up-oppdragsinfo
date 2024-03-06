@@ -17,6 +17,8 @@ import { Kidliste } from "../models/Kid";
 import { Valutaer } from "../models/Valuta";
 import { Tekster } from "../models/Tekst";
 import { SkyldnersList } from "../models/Skyldner";
+import { Linjeenheter } from "../models/Linjeenhet";
+import { Grader } from "../models/Grad";
 
 const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 
@@ -144,6 +146,15 @@ const useFetchTekster = (oppdragsid: string, linjeid: string, shouldFetch: boole
 const useFetchSkyldnersList = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<SkyldnersList>(shouldFetch, `/${oppdragsid}/${linjeid}/skyldner`);
 
+const useFetchMaksdato = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Maksdatoer>(shouldFetch, `/${oppdragsid}/${linjeid}/maksdato`);
+
+const useFetchLinjeenheter = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Linjeenheter>(shouldFetch, `/${oppdragsid}/${linjeid}/enhet`);
+
+const useFetchGrad = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<Grader>(shouldFetch, `/${oppdragsid}/${linjeid}/grad`);
+
 const RestService = {
   useFetchFaggrupper,
   useFetchTreffliste,
@@ -160,6 +171,9 @@ const RestService = {
   useFetchTekster,
   useFetchValuta,
   useFetchSkyldnersList,
+  useFetchMaksdato,
+  useFetchLinjeenheter,
+  useFetchGrad,
 };
 
 export default RestService;
