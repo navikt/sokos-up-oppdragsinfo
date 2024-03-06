@@ -18,7 +18,7 @@ type TrefflisteParameters = {
 const SokAndTrefflistePage = () => {
   const { faggrupper } = RestService.useFetchFaggrupper();
   const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
-  const { treffliste } = RestService.useFetchTreffliste(
+  const { treffliste, mutate } = RestService.useFetchTreffliste(
     trefflisteParameters?.gjelderID,
     trefflisteParameters?.faggruppe,
   );
@@ -27,8 +27,10 @@ const SokAndTrefflistePage = () => {
   const [linjeid, setLinjeid] = useState<string>();
 
   useEffect(() => {
+    console.log("enten trefflisteParameters, treffliste er endret");
     setOppdragsid(undefined);
     setLinjeid(undefined);
+    mutate(treffliste);
   }, [trefflisteParameters, treffliste]);
 
   const {

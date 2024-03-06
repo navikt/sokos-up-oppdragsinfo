@@ -69,11 +69,11 @@ const useFetchTreffliste = (gjelderId?: string, faggruppe?: string) => {
   useEffect(() => {
     setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));
   }, [gjelderId]);
-  const { data, error, isLoading } = useSWR<Treffliste>(shouldFetch ? "/oppdrag" : null, {
+  const { data, error, isLoading, mutate } = useSWR<Treffliste>(shouldFetch ? "/oppdrag" : null, {
     ...swrConfig,
     fetcher: (url) => axiosPostFetcher<Treffliste>(url, { gjelderId, fagGruppeKode: faggruppe }),
   });
-  return { treffliste: data, trefflisteError: error, trefflisteIsLoading: isLoading };
+  return { treffliste: data, trefflisteError: error, trefflisteIsLoading: isLoading, mutate };
 };
 
 const useFetchOppdrag = (gjelderId?: string, id?: string) => {
@@ -124,6 +124,7 @@ const useFetchStatushistorikk = (id: string, shouldFetch: boolean) =>
 
 const useFetchOppdragslinje = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<Oppdragslinjedetaljer>(shouldFetch, `/${oppdragsid}/${linjeid}/detaljer`);
+
 const useFetchAttestant = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<Attestanter>(shouldFetch, `/${oppdragsid}/${linjeid}/attestant`);
 
@@ -135,6 +136,7 @@ const useFetchOvrig = (oppdragsid: string, linjeid: string, shouldFetch: boolean
 
 const useFetchStatus = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<Statuser>(shouldFetch, `/${oppdragsid}/${linjeid}/status`);
+
 const useFetchValuta = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<Valutaer>(shouldFetch, `/${oppdragsid}/${linjeid}/valuta`);
 
