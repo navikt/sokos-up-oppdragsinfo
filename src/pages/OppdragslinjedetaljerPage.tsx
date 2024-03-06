@@ -48,8 +48,11 @@ const OppdragslinjedetaljerPage = ({
                 <Table.HeaderCell key={"linjeid"} scope="col">
                   Linje-ID
                 </Table.HeaderCell>
-                <Table.HeaderCell key={"kodeklasse"} scope="col">
-                  Kodeklasse
+                <Table.HeaderCell key={"DelytelseId"} scope="col">
+                  DelytelseId
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"sats"} scope="col">
+                  Sats
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"datovedtakfom"} scope="col">
                   Dato Vedtak FOM
@@ -57,32 +60,17 @@ const OppdragslinjedetaljerPage = ({
                 <Table.HeaderCell key={"datovedtaktom"} scope="col">
                   Dato Vedtak TOM
                 </Table.HeaderCell>
-                <Table.HeaderCell key={"sats"} scope="col">
-                  Sats
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"typesats"} scope="col">
-                  Type sats
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"DatoFOM"} scope="col">
-                  Dato Fom
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"linjeIdKorr"} scope="col">
-                  LinjeIdKorr
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"DelytelseId"} scope="col">
-                  DelytelseId
-                </Table.HeaderCell>
                 <Table.HeaderCell key={"UtbetalesTilId"} scope="col">
                   Utbetales til
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"refunderesOrgnr"} scope="col">
                   refunderesOrgnr
                 </Table.HeaderCell>
-                <Table.HeaderCell key={"brukerId"} scope="col">
-                  brukerId
-                </Table.HeaderCell>
                 <Table.HeaderCell key={"tidspktReg"} scope="col">
                   tidspktReg
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"brukerId"} scope="col">
+                  brukerId
                 </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
@@ -92,18 +80,14 @@ const OppdragslinjedetaljerPage = ({
                 .map((linje) => (
                   <Table.Row key={btoa("" + linje.linjeId)}>
                     <Table.DataCell>{linje.linjeId}</Table.DataCell>
-                    <Table.DataCell>{linje.kodeKlasse}</Table.DataCell>
+                    <Table.DataCell>{linje.delytelseId}</Table.DataCell>
+                    <Table.DataCell>{linje.sats}</Table.DataCell>
                     <Table.DataCell>{linje.datoVedtakFom}</Table.DataCell>
                     <Table.DataCell>{linje.datoVedtakTom}</Table.DataCell>
-                    <Table.DataCell>{linje.sats}</Table.DataCell>
-                    <Table.DataCell>{linje.typeSats}</Table.DataCell>
-                    <Table.DataCell>{linje.datoFom}</Table.DataCell>
-                    <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
-                    <Table.DataCell>{linje.delytelseId}</Table.DataCell>
                     <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
                     <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
-                    <Table.DataCell>{linje.brukerId}</Table.DataCell>
                     <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
+                    <Table.DataCell>{linje.brukerId}</Table.DataCell>
                   </Table.Row>
                 ))}
             </Table.Body>

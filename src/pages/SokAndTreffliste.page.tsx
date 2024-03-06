@@ -26,7 +26,6 @@ const SokAndTrefflistePage = () => {
 
   const [oppdragsid, setOppdragsid] = useState<string>();
   const [linjeid, setLinjeid] = useState<string>();
-
   const [linjer, setLinjer] = useState<Oppdragslinje[]>([]);
 
   useEffect(() => {

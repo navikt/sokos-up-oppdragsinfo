@@ -66,18 +66,6 @@ const OppdragsdetaljerPage = ({
                 <Table.HeaderCell key={"Attestert"} scope="col">
                   Attestert
                 </Table.HeaderCell>
-                <Table.HeaderCell key={"DelytelseId"} scope="col">
-                  DelytelseId
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"UtbetalesTilId"} scope="col">
-                  Utbetales til
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"refunderesOrgnr"} scope="col">
-                  refunderesOrgnr
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"brukerId"} scope="col">
-                  brukerId
-                </Table.HeaderCell>
                 <Table.HeaderCell key={"tidspktReg"} scope="col">
                   tidspktReg
                 </Table.HeaderCell>
@@ -103,10 +91,6 @@ const OppdragsdetaljerPage = ({
                   <Table.DataCell>
                     <AttestantVisning tekst={linje.attestert} oppdragsid={id} linjeid={linje.linjeId} />
                   </Table.DataCell>
-                  <Table.DataCell>{linje.delytelseId}</Table.DataCell>
-                  <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
-                  <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
-                  <Table.DataCell>{linje.brukerId}</Table.DataCell>
                   <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
                   <Table.DataCell>
                     <Button onClick={() => handleSetLinjeId("" + linje.linjeId, oppdrag.oppdragsLinjer)}>
