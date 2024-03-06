@@ -16,6 +16,7 @@ import { Statuser } from "../models/Status";
 import { Kidliste } from "../models/Kid";
 import { Valutaer } from "../models/Valuta";
 import { Tekster } from "../models/Tekst";
+import { SkyldnersList } from "../models/Skyldner";
 
 const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 
@@ -140,6 +141,9 @@ const useFetchKidliste = (oppdragsid: string, linjeid: string, shouldFetch: bool
 const useFetchTekster = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<Tekster>(shouldFetch, `/${oppdragsid}/${linjeid}/tekst`);
 
+const useFetchSkyldnersList = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
+  useFetch<SkyldnersList>(shouldFetch, `/${oppdragsid}/${linjeid}/skyldner`);
+
 const RestService = {
   useFetchFaggrupper,
   useFetchTreffliste,
@@ -155,6 +159,7 @@ const RestService = {
   useFetchStatus,
   useFetchTekster,
   useFetchValuta,
+  useFetchSkyldnersList,
 };
 
 export default RestService;

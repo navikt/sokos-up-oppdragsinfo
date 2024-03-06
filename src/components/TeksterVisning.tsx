@@ -5,19 +5,27 @@ import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../util/commonUtils";
 import { Tekst } from "../models/Tekst";
 
-const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
+const TeksterVisning = ({
+  oppdragsid,
+  linjeid,
+  enabled,
+}: {
+  oppdragsid: string;
+  linjeid: string;
+  enabled: boolean;
+}) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [data] = RestService.useFetchTekster(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
 
+  const fetchShowModal = () => {
+    setShouldFetch(true);
+    ref.current?.showModal();
+  };
+
   return (
     <div>
-      <Button
-        onClick={() => {
-          setShouldFetch(true);
-          ref.current?.showModal();
-        }}
-      >
+      <Button disabled={!enabled} onClick={fetchShowModal}>
         Tekst
       </Button>
 
@@ -38,7 +46,7 @@ const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: 
               {data &&
                 isArray(data) &&
                 !isEmpty(data) &&
-                data?.map((tekst: Tekst) => (
+                data.map((tekst: Tekst) => (
                   <Table.Row key={btoa(tekst.linjeId)}>
                     <Table.DataCell>{tekst.linjeId}</Table.DataCell>
                     <Table.DataCell>{tekst.tekst}</Table.DataCell>

@@ -2,7 +2,15 @@ import { useRef, useState } from "react";
 import RestService from "../services/rest-service";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 
-const KravhaverVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
+const KravhaverVisning = ({
+  oppdragsid,
+  linjeid,
+  enabled,
+}: {
+  oppdragsid: string;
+  linjeid: string;
+  enabled: boolean;
+}) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [data] = RestService.useFetchKravhaver(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
@@ -10,6 +18,7 @@ const KravhaverVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid
   return (
     <div>
       <Button
+        disabled={!enabled}
         onClick={() => {
           setShouldFetch(true);
           ref.current?.showModal();

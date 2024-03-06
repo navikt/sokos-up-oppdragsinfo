@@ -10,26 +10,25 @@ import StatuserVisning from "../components/StatuserVisning";
 import KidlisteVisning from "../components/KidlisteVisning";
 import ValutaerVisning from "../components/ValutaerVisning";
 import TeksterVisning from "../components/TeksterVisning";
+import SkyldnersListVisning from "../components/SkyldnerslistVisning";
 
 const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [linjedetaljer, linjedetaljerIsLoading] = RestService.useFetchOppdragslinje(oppdragsid, linjeid, true);
 
-  const skalViSe = isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading;
+  const linjedetalj =
+    isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading ? linjedetaljer[0] : undefined;
 
   return (
     <>
       <AttestantVisning oppdragsid={oppdragsid} linjeid={linjeid} />
-      <KravhaverVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+      <KravhaverVisning enabled={!!linjedetalj?.harKravhavere} oppdragsid={oppdragsid} linjeid={linjeid} />
       <OvrigVisning oppdragsid={oppdragsid} linjeid={linjeid} />
       <StatuserVisning oppdragsid={oppdragsid} linjeid={linjeid} />
-      <ValutaerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
-      <TeksterVisning oppdragsid={oppdragsid} linjeid={linjeid} />
-      <KidlisteVisning
-        enabled={skalViSe && linjedetaljer.reduce((a, b) => a || b.harKidliste, false)}
-        oppdragsid={oppdragsid}
-        linjeid={linjeid}
-      />
-      {skalViSe && (
+      <ValutaerVisning enabled={!!linjedetalj?.harValutaer} oppdragsid={oppdragsid} linjeid={linjeid} />
+      <TeksterVisning enabled={!!linjedetalj?.harTekster} oppdragsid={oppdragsid} linjeid={linjeid} />
+      <KidlisteVisning enabled={!!linjedetalj?.harKidliste} oppdragsid={oppdragsid} linjeid={linjeid} />
+      <SkyldnersListVisning enabled={!!linjedetalj?.harSkyldnere} oppdragsid={oppdragsid} linjeid={linjeid} />
+      {isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading && (
         <div>
           <Table zebraStripes>
             <Table.Header>

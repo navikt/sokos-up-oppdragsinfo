@@ -1,16 +1,16 @@
 import { z } from "zod";
 
 export const OppdragslinjedetaljSchema = z.object({
-  korrigerteLinjeIder: z.array(z.string()),
+  korrigerteLinjeIder: z.array(z.string()).min(1),
   harValutaer: z.boolean(),
   harSkyldnere: z.boolean(),
   harKravhavere: z.boolean(),
-  harEnheter: z.boolean(),
-  harGrader: z.boolean(),
+  harEnheter: z.boolean() /**/,
+  harGrader: z.boolean() /**/,
   harTekster: z.boolean(),
   harKidliste: z.boolean(),
 });
-export const OppdragslinjedetaljerSchema = z.array(OppdragslinjedetaljSchema);
+export const OppdragslinjedetaljerSchema = z.array(OppdragslinjedetaljSchema).max(1);
 
 export type Oppdragslinjedetalj = z.infer<typeof OppdragslinjedetaljSchema>;
 

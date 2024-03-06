@@ -3,9 +3,9 @@ import RestService from "../services/rest-service";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../util/commonUtils";
-import { Valuta } from "../models/Valuta";
+import { Skyldner } from "../models/Skyldner";
 
-const ValutaerVisning = ({
+const SkyldnersListVisning = ({
   oppdragsid,
   linjeid,
   enabled,
@@ -15,7 +15,7 @@ const ValutaerVisning = ({
   enabled: boolean;
 }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data] = RestService.useFetchValuta(oppdragsid, linjeid, shouldFetch);
+  const [data] = RestService.useFetchSkyldnersList(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -27,10 +27,10 @@ const ValutaerVisning = ({
           ref.current?.showModal();
         }}
       >
-        Valuta
+        Skyldnere
       </Button>
 
-      <Modal ref={ref} header={{ heading: "Valuta" }}>
+      <Modal ref={ref} header={{ heading: "Skyldnere" }}>
         <Modal.Body>
           <Table zebraStripes>
             <Table.Header>
@@ -38,20 +38,11 @@ const ValutaerVisning = ({
                 <Table.HeaderCell key={"linjeId"} scope="col">
                   linjeId
                 </Table.HeaderCell>
-                <Table.HeaderCell key={"type"} scope="col">
-                  type
+                <Table.HeaderCell key={"skyldnerId"} scope="col">
+                  skyldnerId
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"datoFom"} scope="col">
                   datoFom
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"nokkelId"} scope="col">
-                  nokkelId
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"valuta"} scope="col">
-                  valuta
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"feilreg"} scope="col">
-                  feilreg
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"tidspktReg"} scope="col">
                   tidspktReg
@@ -65,16 +56,13 @@ const ValutaerVisning = ({
               {data &&
                 isArray(data) &&
                 !isEmpty(data) &&
-                data?.map((valuta: Valuta) => (
-                  <Table.Row key={btoa(valuta.linjeId + valuta.nokkelId)}>
-                    <Table.DataCell>{valuta.linjeId}</Table.DataCell>
-                    <Table.DataCell>{valuta.type}</Table.DataCell>
-                    <Table.DataCell>{valuta.datoFom}</Table.DataCell>
-                    <Table.DataCell>{valuta.nokkelId}</Table.DataCell>
-                    <Table.DataCell>{valuta.valuta}</Table.DataCell>
-                    <Table.DataCell>{valuta.feilreg}</Table.DataCell>
-                    <Table.DataCell>{valuta.tidspktReg}</Table.DataCell>
-                    <Table.DataCell>{valuta.brukerid}</Table.DataCell>
+                data?.map((skyldner: Skyldner) => (
+                  <Table.Row key={btoa(skyldner.linjeId)}>
+                    <Table.DataCell>{skyldner.linjeId}</Table.DataCell>
+                    <Table.DataCell>{skyldner.skyldnerId}</Table.DataCell>
+                    <Table.DataCell>{skyldner.datoFom}</Table.DataCell>
+                    <Table.DataCell>{skyldner.tidspktReg}</Table.DataCell>
+                    <Table.DataCell>{skyldner.brukerid}</Table.DataCell>
                   </Table.Row>
                 ))}
             </Table.Body>
@@ -90,4 +78,4 @@ const ValutaerVisning = ({
   );
 };
 
-export default ValutaerVisning;
+export default SkyldnersListVisning;
