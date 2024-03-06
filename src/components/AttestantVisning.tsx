@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import RestService from "../services/rest-service";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 
-const AttestantVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
+const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [data] = RestService.useFetchAttestant(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
@@ -15,7 +15,7 @@ const AttestantVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid
           ref.current?.showModal();
         }}
       >
-        Attestant
+        {tekst}
       </Button>
 
       <Modal ref={ref} header={{ heading: "Attestant" }}>

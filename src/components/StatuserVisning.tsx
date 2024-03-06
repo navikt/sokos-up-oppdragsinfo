@@ -5,7 +5,7 @@ import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../util/commonUtils";
 import { Status } from "../models/Status";
 
-const StatuserVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
+const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [data] = RestService.useFetchStatus(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
@@ -18,7 +18,7 @@ const StatuserVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid:
           ref.current?.showModal();
         }}
       >
-        Status
+        {tekst}
       </Button>
 
       <Modal ref={ref} header={{ heading: "Status" }}>

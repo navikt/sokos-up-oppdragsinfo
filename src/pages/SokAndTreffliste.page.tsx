@@ -9,6 +9,7 @@ import TrefflisteVisning from "../components/TrefflisteVisning";
 import RestService from "../services/rest-service";
 import OppdragsdetaljerPage from "./Oppdragsdetaljer.page";
 import OppdragslinjedetaljerPage from "./OppdragslinjedetaljerPage";
+import { Oppdragslinje } from "../models/Oppdragslinje";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -26,8 +27,9 @@ const SokAndTrefflistePage = () => {
   const [oppdragsid, setOppdragsid] = useState<string>();
   const [linjeid, setLinjeid] = useState<string>();
 
+  const [linjer, setLinjer] = useState<Oppdragslinje[]>([]);
+
   useEffect(() => {
-    console.log("enten trefflisteParameters, treffliste er endret");
     setOppdragsid(undefined);
     setLinjeid(undefined);
     mutate(treffliste);
@@ -47,11 +49,19 @@ const SokAndTrefflistePage = () => {
     setTrefflisteParameters({ ...trefflisteParameters, gjelderID: gjelderID });
   };
 
-  const handleChooseFaggruppe = (faggruppe: string, isSelected: boolean) => {
-    setTrefflisteParameters({ ...trefflisteParameters, faggruppe: isSelected ? faggruppe : undefined });
+  const handleChooseFaggruppe = (faggruppenavn: string, isSelected: boolean) => {
+    setTrefflisteParameters({
+      ...trefflisteParameters,
+      faggruppe: isSelected && faggruppenavn !== "" ? faggruppenavn?.split("(")[1].split(")")[0] : undefined,
+    });
   };
 
-  const sortedFaggrupper = faggrupper ? [...faggrupper.map((f) => f.type)].sort() : [];
+  const sortedFaggrupper = faggrupper ? [...faggrupper.map((f) => `${f.navn}(${f.type})`)].sort() : [];
+
+  const handleSetLinjeId = (linjeid: string, linjer: Oppdragslinje[]) => {
+    setLinjeid(linjeid);
+    setLinjer(linjer);
+  };
 
   return (
     <>
@@ -63,10 +73,8 @@ const SokAndTrefflistePage = () => {
         {faggrupper && (
           <Combobox
             label={"Velg faggruppe"}
-            clearButton={true}
-            clearButtonLabel={"Foo"}
             onToggleSelected={handleChooseFaggruppe}
-            options={sortedFaggrupper}
+            options={["", ...sortedFaggrupper]}
           />
         )}
 
@@ -85,12 +93,12 @@ const SokAndTrefflistePage = () => {
         <OppdragsdetaljerPage
           gjelderId={trefflisteParameters.gjelderID}
           id={oppdragsid}
-          handleSetLinjeId={setLinjeid}
+          handleSetLinjeId={handleSetLinjeId}
         />
       )}
 
       {!!trefflisteParameters?.gjelderID && !!oppdragsid && !!linjeid && (
-        <OppdragslinjedetaljerPage oppdragsid={oppdragsid} linjeid={linjeid} />
+        <OppdragslinjedetaljerPage oppdragsid={oppdragsid} linjeid={linjeid} linjer={linjer} />
       )}
     </>
   );

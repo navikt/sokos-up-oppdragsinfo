@@ -4,6 +4,10 @@ import EnhetshistorikkVisning from "../components/EnhetshistorikkVisning";
 import StatushistorikkVisning from "../components/StatushistorikkVisning";
 import OmposteringerVisning from "../components/OmposteringerVisning";
 import styles from "./SokAndTreffliste.module.css";
+import AttestantVisning from "../components/AttestantVisning";
+import StatuserVisning from "../components/StatuserVisning";
+import commonstyles from "../util/common-styles.module.css";
+import { Oppdragslinje } from "../models/Oppdragslinje";
 
 const OppdragsdetaljerPage = ({
   gjelderId,
@@ -12,7 +16,7 @@ const OppdragsdetaljerPage = ({
 }: {
   gjelderId: string | undefined;
   id: string;
-  handleSetLinjeId: (linjeid: string) => void;
+  handleSetLinjeId: (linjeid: string, linjer: Oppdragslinje[]) => void;
 }) => {
   const { oppdrag, oppdragIsLoading } = RestService.useFetchOppdrag(gjelderId, id);
 
@@ -22,9 +26,11 @@ const OppdragsdetaljerPage = ({
       {!oppdrag && <div>Fant ikke oppdrag</div>}
       {!oppdragIsLoading && oppdrag && (
         <div className={styles.treffliste}>
-          <EnhetshistorikkVisning id={id} />
-          {gjelderId && <OmposteringerVisning gjelderId={gjelderId} id={id} />}
-          <StatushistorikkVisning id={id} />
+          <div className={commonstyles.knapperad}>
+            <EnhetshistorikkVisning id={id} />
+            {gjelderId && <OmposteringerVisning gjelderId={gjelderId} id={id} />}
+            <StatushistorikkVisning id={id} />
+          </div>
           {oppdrag?.enhet && <p>{"Enhet : " + oppdrag?.enhet?.enhet}</p>}
           {oppdrag?.behandlendeEnhet && <p>{"Behandlende: " + oppdrag?.behandlendeEnhet?.enhet}</p>}
           <Table zebraStripes>
@@ -39,6 +45,9 @@ const OppdragsdetaljerPage = ({
                 <Table.HeaderCell key={"datovedtakfom"} scope="col">
                   Dato Vedtak FOM
                 </Table.HeaderCell>
+                <Table.HeaderCell key={"datovedtaktom"} scope="col">
+                  Dato Vedtak TOM
+                </Table.HeaderCell>
                 <Table.HeaderCell key={"sats"} scope="col">
                   Sats
                 </Table.HeaderCell>
@@ -51,20 +60,59 @@ const OppdragsdetaljerPage = ({
                 <Table.HeaderCell key={"DatoFOM"} scope="col">
                   Dato Fom
                 </Table.HeaderCell>
+                <Table.HeaderCell key={"linjeIdKorr"} scope="col">
+                  LinjeIdKorr
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"Attestert"} scope="col">
+                  Attestert
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"DelytelseId"} scope="col">
+                  DelytelseId
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"UtbetalesTilId"} scope="col">
+                  Utbetales til
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"refunderesOrgnr"} scope="col">
+                  refunderesOrgnr
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"brukerId"} scope="col">
+                  brukerId
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"tidspktReg"} scope="col">
+                  tidspktReg
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"detaljer"} scope="col">
+                  Detaljer
+                </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
               {oppdrag?.oppdragsLinjer.map((linje) => (
                 <Table.Row key={btoa("" + linje.linjeId)}>
-                  <Table.DataCell>
-                    <Button onClick={() => handleSetLinjeId("" + linje.linjeId)}>{linje.linjeId}</Button>
-                  </Table.DataCell>
+                  <Table.DataCell>{linje.linjeId}</Table.DataCell>
                   <Table.DataCell>{linje.kodeKlasse}</Table.DataCell>
                   <Table.DataCell>{linje.datoVedtakFom}</Table.DataCell>
+                  <Table.DataCell>{linje.datoVedtakTom}</Table.DataCell>
                   <Table.DataCell>{linje.sats}</Table.DataCell>
                   <Table.DataCell>{linje.typeSats}</Table.DataCell>
-                  <Table.DataCell>{linje.kodeStatus}</Table.DataCell>
+                  <Table.DataCell>
+                    <StatuserVisning tekst={linje.kodeStatus} oppdragsid={id} linjeid={linje.linjeId} />
+                  </Table.DataCell>
                   <Table.DataCell>{linje.datoFom}</Table.DataCell>
+                  <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
+                  <Table.DataCell>
+                    <AttestantVisning tekst={linje.attestert} oppdragsid={id} linjeid={linje.linjeId} />
+                  </Table.DataCell>
+                  <Table.DataCell>{linje.delytelseId}</Table.DataCell>
+                  <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
+                  <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
+                  <Table.DataCell>{linje.brukerId}</Table.DataCell>
+                  <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
+                  <Table.DataCell>
+                    <Button onClick={() => handleSetLinjeId("" + linje.linjeId, oppdrag.oppdragsLinjer)}>
+                      Detaljer
+                    </Button>
+                  </Table.DataCell>
                 </Table.Row>
               ))}
             </Table.Body>
