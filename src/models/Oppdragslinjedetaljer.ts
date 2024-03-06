@@ -9,6 +9,7 @@ export const OppdragslinjedetaljSchema = z.object({
   harGrader: z.boolean(),
   harTekster: z.boolean(),
   harKidliste: z.boolean(),
+  harMaksdatoer: z.boolean(),
 });
 export const OppdragslinjedetaljerSchema = z.array(OppdragslinjedetaljSchema).max(1);
 

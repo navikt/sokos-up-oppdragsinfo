@@ -5,7 +5,15 @@ import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../util/commonUtils";
 import { Maksdato } from "../models/Maksdato";
 
-const MaksdatoerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
+const MaksdatoerVisning = ({
+  oppdragsid,
+  linjeid,
+  enabled,
+}: {
+  oppdragsid: string;
+  linjeid: string;
+  enabled: boolean;
+}) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [data] = RestService.useFetchMaksdato(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
@@ -13,6 +21,7 @@ const MaksdatoerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjei
   return (
     <div>
       <Button
+        disabled={!enabled}
         onClick={() => {
           setShouldFetch(true);
           ref.current?.showModal();

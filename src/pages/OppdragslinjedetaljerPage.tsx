@@ -31,7 +31,7 @@ const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string
       <TeksterVisning enabled={!!linjedetalj?.harTekster} oppdragsid={oppdragsid} linjeid={linjeid} />
       <KidlisteVisning enabled={!!linjedetalj?.harKidliste} oppdragsid={oppdragsid} linjeid={linjeid} />
       <SkyldnersListVisning enabled={!!linjedetalj?.harSkyldnere} oppdragsid={oppdragsid} linjeid={linjeid} />
-      <MaksdatoerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+      <MaksdatoerVisning enabled={!!linjedetalj?.harMaksdatoer} oppdragsid={oppdragsid} linjeid={linjeid} />
       <LinjeenheterVisning enabled={!!linjedetalj?.harEnheter} oppdragsid={oppdragsid} linjeid={linjeid} />
       <GraderVisning enabled={!!linjedetalj?.harGrader} oppdragsid={oppdragsid} linjeid={linjeid} />
       {isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading && (
@@ -63,6 +63,9 @@ const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string
                 <Table.HeaderCell key={"harValutaer"} scope="col">
                   harValutaer
                 </Table.HeaderCell>
+                <Table.HeaderCell key={"harMaksdatoer"} scope="col">
+                  harMaksdatoer
+                </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -79,6 +82,7 @@ const OppdragslinjedetaljerPage = ({ oppdragsid, linjeid }: { oppdragsid: string
                     <Table.DataCell>{detalj.harKravhavere ? "✅" : "❌"}</Table.DataCell>
                     <Table.DataCell>{detalj.harSkyldnere ? "✅" : "❌"}</Table.DataCell>
                     <Table.DataCell>{detalj.harValutaer ? "✅" : "❌"}</Table.DataCell>
+                    <Table.DataCell>{detalj.harMaksdatoer ? "✅" : "❌"}</Table.DataCell>
                   </Table.Row>
                 ))}
             </Table.Body>
