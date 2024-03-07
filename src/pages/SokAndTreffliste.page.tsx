@@ -62,6 +62,10 @@ const SokAndTrefflistePage = () => {
     setLinjer(linjer);
   };
 
+  const showOppdrag = !!trefflisteParameters?.gjelderID && !!oppdragsid;
+  const showDetaljer = !!linjeid && showOppdrag;
+  const showTreffliste = !!treffliste && !isEmpty(treffliste) && !showOppdrag;
+
   return (
     <>
       <form onSubmit={handleSubmit(handleChangeGjelderId)}>
@@ -82,23 +86,27 @@ const SokAndTrefflistePage = () => {
         </Button>
       </form>
 
-      {!!treffliste && !isEmpty(treffliste) ? (
-        <TrefflisteVisning treffliste={treffliste} handleSetId={setOppdragsid} />
-      ) : (
-        "tom treffliste"
+      {showTreffliste && <TrefflisteVisning treffliste={treffliste} handleSetId={setOppdragsid} />}
+
+      {showOppdrag && (
+        <>
+          <Button
+            onClick={() => {
+              setOppdragsid(undefined);
+              setLinjeid(undefined);
+            }}
+          >
+            Tilbake til Trefflisten
+          </Button>
+          <OppdragsdetaljerPage
+            gjelderId={trefflisteParameters.gjelderID}
+            id={oppdragsid}
+            handleSetLinjeId={handleSetLinjeId}
+          />
+        </>
       )}
 
-      {!!trefflisteParameters?.gjelderID && !!oppdragsid && (
-        <OppdragsdetaljerPage
-          gjelderId={trefflisteParameters.gjelderID}
-          id={oppdragsid}
-          handleSetLinjeId={handleSetLinjeId}
-        />
-      )}
-
-      {!!trefflisteParameters?.gjelderID && !!oppdragsid && !!linjeid && (
-        <OppdragslinjedetaljerPage oppdragsid={oppdragsid} linjeid={linjeid} linjer={linjer} />
-      )}
+      {showDetaljer && <OppdragslinjedetaljerPage oppdragsid={oppdragsid} linjeid={linjeid} linjer={linjer} />}
     </>
   );
 };

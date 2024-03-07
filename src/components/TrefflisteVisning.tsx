@@ -15,7 +15,7 @@ const TrefflisteVisning = ({
         ...treffliste.map((treff: Treff, index: number) => (
           <div key={btoa(treff.gjelderId + index)} className={styles.treffliste}>
             <p>{"Gjelder navn: " + treff.gjelderNavn}</p>
-            <p>{"Gjelder id: " + btoa(treff.gjelderId)}</p>
+            <p>{"Gjelder id: " + treff.gjelderId}</p>
 
             <Table zebraStripes key={btoa(treff.gjelderNavn + treff.gjelderId)}>
               <Table.Header>
