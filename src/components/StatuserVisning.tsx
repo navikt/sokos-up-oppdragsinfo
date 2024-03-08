@@ -13,6 +13,7 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
   return (
     <div>
       <Button
+        variant={"tertiary"}
         onClick={() => {
           setShouldFetch(true);
           ref.current?.showModal();

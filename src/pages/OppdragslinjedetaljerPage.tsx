@@ -12,19 +12,22 @@ import MaksdatoerVisning from "../components/MaksdatoerVisning";
 import LinjeenheterVisning from "../components/LinjeenheterVisning";
 import GraderVisning from "../components/GraderVisning";
 import commonStyles from "../util/common-styles.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Oppdragslinje } from "../models/Oppdragslinje";
+import { Oppdrag } from "../models/Oppdrag";
 
-const OppdragslinjedetaljerPage = ({
-  oppdragsid,
-  linjeid,
-  linjer,
-}: {
-  oppdragsid: string;
+type OppdragslinjedetaljerPageProps = {
+  oppdrag: Oppdrag;
   linjeid: string;
   linjer: Oppdragslinje[];
-}) => {
+};
+
+const OppdragslinjedetaljerPage = ({ oppdrag, linjeid, linjer }: OppdragslinjedetaljerPageProps) => {
+  const ref = useRef<HTMLDivElement>(null);
   const [deferredLinjeId, setDeferredLinjeId] = useState<string>();
+
+  const oppdragsid = "" + oppdrag.oppdragsId;
+
   const [linjedetaljer, linjedetaljerIsLoading] = RestService.useFetchOppdragslinje(
     oppdragsid,
     deferredLinjeId ?? "",
@@ -35,13 +38,17 @@ const OppdragslinjedetaljerPage = ({
     setDeferredLinjeId(linjeid);
   }, [linjeid]);
 
+  useEffect(() => {
+    ref && window.scrollTo(0, ref?.current?.offsetTop ?? 0);
+  }, [linjedetaljer]);
+
   const linjedetalj =
     isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading ? linjedetaljer[0] : undefined;
 
   return (
     <>
       {isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading && (
-        <div>
+        <div ref={ref}>
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>

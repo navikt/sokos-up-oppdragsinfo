@@ -10,6 +10,8 @@ import RestService from "../services/rest-service";
 import OppdragsdetaljerPage from "./Oppdragsdetaljer.page";
 import OppdragslinjedetaljerPage from "./OppdragslinjedetaljerPage";
 import { Oppdragslinje } from "../models/Oppdragslinje";
+import styles from "./SokAndTreffliste.module.css";
+import { Oppdrag } from "../models/Oppdrag";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -24,12 +26,12 @@ const SokAndTrefflistePage = () => {
     trefflisteParameters?.faggruppe,
   );
 
-  const [oppdragsid, setOppdragsid] = useState<string>();
+  const [valgtOppdrag, setValgtOppdrag] = useState<Oppdrag>();
   const [linjeid, setLinjeid] = useState<string>();
   const [linjer, setLinjer] = useState<Oppdragslinje[]>([]);
 
   useEffect(() => {
-    setOppdragsid(undefined);
+    setValgtOppdrag(undefined);
     setLinjeid(undefined);
     mutate(treffliste);
   }, [trefflisteParameters, treffliste]);
@@ -49,10 +51,10 @@ const SokAndTrefflistePage = () => {
   };
 
   const handleChooseFaggruppe = (faggruppenavn: string, isSelected: boolean) => {
-    setTrefflisteParameters({
-      ...trefflisteParameters,
+    setTrefflisteParameters((prevParameters) => ({
+      ...prevParameters,
       faggruppe: isSelected && faggruppenavn !== "" ? faggruppenavn?.split("(")[1].split(")")[0] : undefined,
-    });
+    }));
   };
 
   const sortedFaggrupper = faggrupper ? [...faggrupper.map((f) => `${f.navn}(${f.type})`)].sort() : [];
@@ -62,52 +64,49 @@ const SokAndTrefflistePage = () => {
     setLinjer(linjer);
   };
 
-  const showOppdrag = !!trefflisteParameters?.gjelderID && !!oppdragsid;
+  const showOppdrag = !!trefflisteParameters?.gjelderID && !!valgtOppdrag;
   const showDetaljer = !!linjeid && showOppdrag;
   const showTreffliste = !!treffliste && !isEmpty(treffliste) && !showOppdrag;
+  const handleBackButtonClicked = () => {
+    setValgtOppdrag(undefined);
+    setLinjeid(undefined);
+  };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(handleChangeGjelderId)}>
-        <h1>Søk i Oppdrag</h1>
+    <div className={styles.sokandtreffliste}>
+      {!showOppdrag && (
+        <form onSubmit={handleSubmit(handleChangeGjelderId)}>
+          <h1>Søk i Oppdrag</h1>
 
-        <TextField {...register("gjelderID")} id="gjelderID" label="Gjelder" error={errors.gjelderID?.message} />
+          <TextField {...register("gjelderID")} id="gjelderID" label="Gjelder" error={errors.gjelderID?.message} />
 
-        {faggrupper && (
-          <Combobox
-            label={"Velg faggruppe"}
-            onToggleSelected={handleChooseFaggruppe}
-            options={["", ...sortedFaggrupper]}
-          />
-        )}
+          {faggrupper && (
+            <Combobox
+              label={"Velg faggruppe"}
+              onToggleSelected={handleChooseFaggruppe}
+              options={["", ...sortedFaggrupper]}
+            />
+          )}
 
-        <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
-          Søk
-        </Button>
-      </form>
-
-      {showTreffliste && <TrefflisteVisning treffliste={treffliste} handleSetId={setOppdragsid} />}
-
-      {showOppdrag && (
-        <>
-          <Button
-            onClick={() => {
-              setOppdragsid(undefined);
-              setLinjeid(undefined);
-            }}
-          >
-            Tilbake til Trefflisten
+          <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
+            Søk
           </Button>
-          <OppdragsdetaljerPage
-            gjelderId={trefflisteParameters.gjelderID}
-            id={oppdragsid}
-            handleSetLinjeId={handleSetLinjeId}
-          />
-        </>
+        </form>
       )}
 
-      {showDetaljer && <OppdragslinjedetaljerPage oppdragsid={oppdragsid} linjeid={linjeid} linjer={linjer} />}
-    </>
+      {showTreffliste && <TrefflisteVisning treffliste={treffliste} handleVelgOppdrag={setValgtOppdrag} />}
+
+      {showOppdrag && (
+        <OppdragsdetaljerPage
+          gjelderId={trefflisteParameters.gjelderID}
+          oppdrag={valgtOppdrag}
+          handleSetLinjeId={handleSetLinjeId}
+          handleBackButtonClicked={handleBackButtonClicked}
+        />
+      )}
+
+      {showDetaljer && <OppdragslinjedetaljerPage oppdrag={valgtOppdrag} linjeid={linjeid} linjer={linjer} />}
+    </div>
   );
 };
 export default SokAndTrefflistePage;

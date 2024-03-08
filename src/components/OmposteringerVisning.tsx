@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { BodyLong, Button, Modal } from "@navikt/ds-react";
 import RestService from "../services/rest-service";
 
-const OmposteringerVisning = ({ gjelderId, id }: { gjelderId: string; id: string }) => {
+const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; id: string; enabled: boolean }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   const [data] = RestService.useFetchOmposteringer(gjelderId, id, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
@@ -10,6 +10,7 @@ const OmposteringerVisning = ({ gjelderId, id }: { gjelderId: string; id: string
   return (
     <div>
       <Button
+        disabled={!enabled}
         onClick={() => {
           setShouldFetch(true);
           ref.current?.showModal();

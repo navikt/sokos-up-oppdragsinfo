@@ -10,6 +10,7 @@ const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; 
   return (
     <div>
       <Button
+        variant={"tertiary"}
         onClick={() => {
           setShouldFetch(true);
           ref.current?.showModal();

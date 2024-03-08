@@ -5,3 +5,11 @@
 .panel {
   @apply text-center;
 }
+
+.sokandtreffliste {
+  @apply space-y-2;
+}
+
+.sokandtreffliste__oppdrag {
+  @apply py-1;
+}

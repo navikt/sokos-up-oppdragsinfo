@@ -3,36 +3,74 @@ import RestService from "../services/rest-service";
 import EnhetshistorikkVisning from "../components/EnhetshistorikkVisning";
 import StatushistorikkVisning from "../components/StatushistorikkVisning";
 import OmposteringerVisning from "../components/OmposteringerVisning";
-import styles from "./SokAndTreffliste.module.css";
+import styles from "./Oppdragsdetaljer.module.css";
 import AttestantVisning from "../components/AttestantVisning";
 import StatuserVisning from "../components/StatuserVisning";
 import commonstyles from "../util/common-styles.module.css";
 import { Oppdragslinje } from "../models/Oppdragslinje";
+import { Oppdragsdetaljer } from "../models/Oppdragsdetaljer";
+import { Oppdrag } from "../models/Oppdrag";
+import LabelText from "../components/LabelText";
+import { ChevronLeftIcon } from "@navikt/aksel-icons";
+
+type OppdragsdetaljerPageProps = {
+  gjelderId: string | undefined;
+  oppdrag: Oppdrag;
+  handleSetLinjeId: (linjeid: string, linjer: Oppdragslinje[]) => void;
+  handleBackButtonClicked: () => void;
+};
 
 const OppdragsdetaljerPage = ({
   gjelderId,
-  id,
+  oppdrag,
   handleSetLinjeId,
-}: {
-  gjelderId: string | undefined;
-  id: string;
-  handleSetLinjeId: (linjeid: string, linjer: Oppdragslinje[]) => void;
-}) => {
-  const { oppdrag, oppdragIsLoading } = RestService.useFetchOppdrag(gjelderId, id);
+  handleBackButtonClicked,
+}: OppdragsdetaljerPageProps) => {
+  const oppdragsid = "" + oppdrag.oppdragsId;
+  const {
+    oppdrag: oppdragsdetaljer,
+    oppdragIsLoading,
+  }: {
+    oppdrag: Oppdragsdetaljer | undefined;
+    oppdragIsLoading: boolean;
+  } = RestService.useFetchOppdrag(gjelderId, oppdragsid);
 
   return (
     <>
       {oppdragIsLoading && <Loader size="3xlarge" title="Straks hold an" />}
-      {!oppdrag && <div>Fant ikke oppdrag</div>}
-      {!oppdragIsLoading && oppdrag && (
-        <div className={styles.treffliste}>
-          <div className={commonstyles.knapperad}>
-            <EnhetshistorikkVisning id={id} />
-            {gjelderId && <OmposteringerVisning gjelderId={gjelderId} id={id} />}
-            <StatushistorikkVisning id={id} />
+      {!oppdragIsLoading && !oppdragsdetaljer && <div>Fant ikke oppdrag</div>}
+      {!oppdragIsLoading && oppdragsdetaljer && (
+        <div>
+          <div className={commonstyles.knapperad__right}>
+            <Button icon={<ChevronLeftIcon />} onClick={handleBackButtonClicked}>
+              Treffliste
+            </Button>
+            <EnhetshistorikkVisning id={oppdragsid} />
+            {gjelderId && (
+              <OmposteringerVisning enabled={oppdragsdetaljer.harOmposteringer} gjelderId={gjelderId} id={oppdragsid} />
+            )}
+            <StatushistorikkVisning id={oppdragsid} />
           </div>
-          {oppdrag?.enhet && <p>{"Enhet : " + oppdrag?.enhet?.enhet}</p>}
-          {oppdrag?.behandlendeEnhet && <p>{"Behandlende: " + oppdrag?.behandlendeEnhet?.enhet}</p>}
+          <div className={styles.oppdragsdetaljer__toppinfo}>
+            {gjelderId && oppdrag && (
+              <div className={styles.oppdragsdetaljer__columns}>
+                <LabelText label={"Gjelder ID"} text={gjelderId} />
+                <LabelText label={"Status"} text={oppdrag.kodeStatus} />
+                <LabelText label={"Fagområde"} text={oppdrag.navnFagOmraade} />
+                <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />
+                <LabelText label={"Beregnes nå"} text={oppdrag.kjorIdag} />
+                <LabelText label={"Oppdrags ID"} text={oppdrag.oppdragsId} />
+              </div>
+            )}
+            {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
+              <div className={styles.oppdragsdetaljer__enhet}>
+                <LabelText label={"Enhetstype"} text={oppdragsdetaljer.behandlendeEnhet.type} />
+                <LabelText label={"Dato fom"} text={oppdragsdetaljer.behandlendeEnhet.datoFom} />
+                <LabelText label={"Enhetsnr"} text={oppdragsdetaljer.behandlendeEnhet.enhet} />
+              </div>
+            )}
+          </div>
+
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
@@ -75,7 +113,7 @@ const OppdragsdetaljerPage = ({
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {oppdrag?.oppdragsLinjer.map((linje) => (
+              {oppdragsdetaljer?.oppdragsLinjer.map((linje: Oppdragslinje) => (
                 <Table.Row key={btoa("" + linje.linjeId)}>
                   <Table.DataCell>{linje.linjeId}</Table.DataCell>
                   <Table.DataCell>{linje.kodeKlasse}</Table.DataCell>
@@ -84,17 +122,17 @@ const OppdragsdetaljerPage = ({
                   <Table.DataCell>{linje.sats}</Table.DataCell>
                   <Table.DataCell>{linje.typeSats}</Table.DataCell>
                   <Table.DataCell>
-                    <StatuserVisning tekst={linje.kodeStatus} oppdragsid={id} linjeid={linje.linjeId} />
+                    <StatuserVisning tekst={linje.kodeStatus} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
                   </Table.DataCell>
                   <Table.DataCell>{linje.datoFom}</Table.DataCell>
                   <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
                   <Table.DataCell>
-                    <AttestantVisning tekst={linje.attestert} oppdragsid={id} linjeid={linje.linjeId} />
+                    <AttestantVisning tekst={linje.attestert} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
                   </Table.DataCell>
                   <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
                   <Table.DataCell>
-                    <Button onClick={() => handleSetLinjeId("" + linje.linjeId, oppdrag.oppdragsLinjer)}>
-                      Detaljer
+                    <Button onClick={() => handleSetLinjeId("" + linje.linjeId, oppdragsdetaljer.oppdragsLinjer)}>
+                      Detaljer...
                     </Button>
                   </Table.DataCell>
                 </Table.Row>

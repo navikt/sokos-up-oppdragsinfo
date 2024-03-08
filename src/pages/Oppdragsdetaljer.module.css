@@ -1,0 +1,11 @@
+.oppdragsdetaljer__toppinfo {
+  @apply space-y-5;
+}
+
+.oppdragsdetaljer__columns {
+  @apply grid grid-cols-2 grid-flow-row w-2/3;
+}
+
+.oppdragsdetaljer__enhet {
+  @apply columns-3;
+}

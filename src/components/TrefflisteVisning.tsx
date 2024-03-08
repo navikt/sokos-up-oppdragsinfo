@@ -1,21 +1,23 @@
 import { Button, Table } from "@navikt/ds-react";
 import styles from "./TrefflisteVisning.module.css";
 import { Treff, Treffliste } from "../models/Treffliste";
+import { Oppdrag } from "../models/Oppdrag";
+import LabelText from "./LabelText";
 
 const TrefflisteVisning = ({
   treffliste,
-  handleSetId,
+  handleVelgOppdrag,
 }: {
   treffliste: Treffliste;
-  handleSetId: (id: string) => void;
+  handleVelgOppdrag: (oppdrag: Oppdrag) => void;
 }) => {
   return (
     <>
       {[
         ...treffliste.map((treff: Treff, index: number) => (
           <div key={btoa(treff.gjelderId + index)} className={styles.treffliste}>
-            <p>{"Gjelder navn: " + treff.gjelderNavn}</p>
-            <p>{"Gjelder id: " + treff.gjelderId}</p>
+            <LabelText label={"Gjelder navn"} text={treff.gjelderNavn} />
+            <LabelText label={"Gjelder id"} text={treff.gjelderId} />
 
             <Table zebraStripes key={btoa(treff.gjelderNavn + treff.gjelderId)}>
               <Table.Header>
@@ -47,7 +49,9 @@ const TrefflisteVisning = ({
                 {treff.oppdragsListe.map((oppdrag) => (
                   <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                     <Table.DataCell>
-                      <Button onClick={() => handleSetId("" + oppdrag.oppdragsId)}>{oppdrag.oppdragsId}</Button>
+                      <Button variant={"tertiary"} onClick={() => handleVelgOppdrag(oppdrag)}>
+                        {oppdrag.oppdragsId}
+                      </Button>
                     </Table.DataCell>
                     <Table.DataCell>{oppdrag.kjorIdag}</Table.DataCell>
                     <Table.DataCell>{oppdrag.fagsystemId}</Table.DataCell>
