@@ -8,7 +8,6 @@ import AttestantVisning from "../components/oppdragsdetaljer/AttestantVisning";
 import StatuserVisning from "../components/oppdragsdetaljer/StatuserVisning";
 import commonstyles from "../util/common-styles.module.css";
 import { Oppdragslinje } from "../models/Oppdragslinje";
-import { Oppdragsdetaljer } from "../models/Oppdragsdetaljer";
 import { Oppdrag } from "../models/Oppdrag";
 import LabelText from "../components/util/LabelText";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
@@ -27,19 +26,16 @@ const OppdragsdetaljerPage = ({
   handleBackButtonClicked,
 }: OppdragsdetaljerPageProps) => {
   const oppdragsid = "" + oppdrag.oppdragsId;
-  const {
-    oppdrag: oppdragsdetaljer,
-    oppdragIsLoading,
-  }: {
-    oppdrag: Oppdragsdetaljer | undefined;
-    oppdragIsLoading: boolean;
-  } = RestService.useFetchOppdrag(gjelderId, oppdragsid);
+  const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(gjelderId, oppdragsid);
 
   return (
     <>
-      {oppdragIsLoading && <Loader size="3xlarge" title="Straks hold an" />}
-      {!oppdragIsLoading && !oppdragsdetaljer && <div>Fant ikke oppdrag</div>}
-      {!oppdragIsLoading && oppdragsdetaljer && (
+      {!oppdragsdetaljer && (
+        <div className={commonstyles.contentloader}>
+          <Loader size="3xlarge" title="Laster oppdragsdetaljer..." />
+        </div>
+      )}
+      {oppdragsdetaljer && (
         <div>
           <div className={commonstyles.knapperad__right}>
             <Button icon={<ChevronLeftIcon />} onClick={handleBackButtonClicked}>

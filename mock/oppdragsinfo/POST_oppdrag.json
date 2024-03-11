@@ -9,7 +9,7 @@
     "datoFom": "2021-02-13",
     "enhet": "4819"
   },
-  "harOmposteringer": true,
+  "harOmposteringer": false,
   "oppdragsLinjer": [
     {
       "linjeId": 1,

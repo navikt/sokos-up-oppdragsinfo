@@ -25,7 +25,7 @@ const LinjeenheterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linj
           isArray(data) &&
           !isEmpty(data) &&
           data?.map((linjeenhet: Linjeenhet) => (
-            <Table.Row key={btoa(linjeenhet.linjeId)}>
+            <Table.Row key={btoa(JSON.stringify(linjeenhet))}>
               <Table.DataCell>{linjeenhet.linjeId}</Table.DataCell>
               <Table.DataCell>{linjeenhet.typeEnhet}</Table.DataCell>
               <Table.DataCell>{linjeenhet.enhet}</Table.DataCell>

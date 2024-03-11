@@ -22,7 +22,7 @@ const MaksdatoerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjei
           isArray(data) &&
           !isEmpty(data) &&
           data?.map((maksdato: Maksdato) => (
-            <Table.Row key={btoa(maksdato.linjeId + maksdato.maksdato)}>
+            <Table.Row key={btoa(JSON.stringify(maksdato))}>
               <Table.DataCell>{maksdato.linjeId}</Table.DataCell>
               <Table.DataCell>{maksdato.maksdato}</Table.DataCell>
               <Table.DataCell>{maksdato.datoFom}</Table.DataCell>

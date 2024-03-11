@@ -1,4 +1,4 @@
-import { Button, TextField } from "@navikt/ds-react";
+import { Button, Loader, TextField } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
@@ -78,28 +78,37 @@ const SokAndTrefflistePage = () => {
 
   return (
     <div className={styles.sokandtreffliste}>
-      {!showOppdrag && (
-        <form onSubmit={handleSubmit(handleChangeGjelderId)}>
-          <h1>Søk i Oppdrag</h1>
+      {!faggrupper ? (
+        <Loader>Laster inn faggrupper...</Loader>
+      ) : (
+        <>
+          {!showOppdrag && (
+            <form onSubmit={handleSubmit(handleChangeGjelderId)}>
+              <h1>Søk i Oppdrag</h1>
 
-          <TextField {...register("gjelderID")} id="gjelderID" label="Gjelder" error={errors.gjelderID?.message} />
+              <TextField {...register("gjelderID")} id="gjelderID" label="Gjelder" error={errors.gjelderID?.message} />
 
-          {faggrupper && (
-            <Combobox
-              label={"Velg faggruppe"}
-              onToggleSelected={handleChooseFaggruppe}
-              options={["", ...sortedFaggrupper]}
-            />
+              {faggrupper && (
+                <Combobox
+                  label={"Velg faggruppe"}
+                  onToggleSelected={handleChooseFaggruppe}
+                  options={["", ...sortedFaggrupper]}
+                />
+              )}
+
+              <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
+                Søk
+              </Button>
+            </form>
           )}
-
-          <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
-            Søk
-          </Button>
-        </form>
+        </>
       )}
 
-      {showTreffliste && <TrefflisteVisning treffliste={treffliste} handleVelgOppdrag={setValgtOppdrag} />}
-
+      {!!trefflisteParameters?.gjelderID && !treffliste ? (
+        <Loader>Treffliste is loading...</Loader>
+      ) : (
+        <>{showTreffliste && <TrefflisteVisning treffliste={treffliste} handleVelgOppdrag={setValgtOppdrag} />}</>
+      )}
       {showOppdrag && !showDetaljer && (
         <OppdragsdetaljerPage
           gjelderId={trefflisteParameters.gjelderID}

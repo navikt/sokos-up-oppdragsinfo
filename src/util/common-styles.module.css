@@ -12,3 +12,10 @@
 .row {
   @apply flex flex-row space-x-1;
 }
+
+.contentloader {
+  width: 100%;
+  text-align: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}

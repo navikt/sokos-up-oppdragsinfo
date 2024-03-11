@@ -1,13 +1,13 @@
 [
   {
     "korrigerteLinjeIder": [1, 2, 3],
-    "harValutaer": true,
-    "harSkyldnere": true,
-    "harKravhavere": true,
-    "harEnheter": true,
-    "harGrader": true,
-    "harTekster": true,
-    "harKidliste": true,
+    "harValutaer": false,
+    "harSkyldnere": false,
+    "harKravhavere": false,
+    "harEnheter": false,
+    "harGrader": false,
+    "harTekster": false,
+    "harKidliste": false,
     "harMaksdatoer": true
   }
 ]

@@ -17,6 +17,7 @@ import { Oppdrag } from "../models/Oppdrag";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import commonstyles from "../util/common-styles.module.css";
 import LinjedetaljAccordion from "../components/util/LinjedetaljAccordion";
+import ContentLoader from "../components/util/ContentLoader";
 
 type OppdragslinjedetaljerPageProps = {
   oppdrag: Oppdrag;
@@ -38,11 +39,7 @@ const OppdragslinjedetaljerPage = ({
 
   const oppdragsid = "" + oppdrag.oppdragsId;
 
-  const [linjedetaljer, linjedetaljerIsLoading] = RestService.useFetchOppdragslinje(
-    oppdragsid,
-    deferredLinjeId ?? "",
-    !!deferredLinjeId,
-  );
+  const [linjedetaljer] = RestService.useFetchOppdragslinje(oppdragsid, deferredLinjeId ?? "", !!deferredLinjeId);
 
   useEffect(() => {
     setDeferredLinjeId(linjeid);
@@ -52,8 +49,7 @@ const OppdragslinjedetaljerPage = ({
     ref && window.scrollTo(0, ref?.current?.offsetTop ?? 0);
   }, [linjedetaljer]);
 
-  const linjedetalj =
-    isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading ? linjedetaljer[0] : undefined;
+  const linjedetalj = isArray(linjedetaljer) && !isEmpty(linjedetaljer) ? linjedetaljer[0] : undefined;
 
   return (
     <>
@@ -61,7 +57,9 @@ const OppdragslinjedetaljerPage = ({
         <Button icon={<ChevronLeftIcon />} onClick={handleBackButtonClicked} children={"Treffliste"} />
         <Button icon={<ChevronLeftIcon />} onClick={handleBackToDetaljer} children={"Oppdragsdetaljer"} />
       </div>
-      {isArray(linjedetaljer) && !isEmpty(linjedetaljer) && !linjedetaljerIsLoading && (
+      {!isArray(linjedetaljer) || isEmpty(linjedetaljer) ? (
+        <ContentLoader />
+      ) : (
         <div ref={ref}>
           <Table zebraStripes>
             <Table.Header>

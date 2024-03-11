@@ -1,9 +1,10 @@
 import { useRef, useState } from "react";
-import { BodyLong, Button, Modal, Table } from "@navikt/ds-react";
+import { Button, Modal, Table } from "@navikt/ds-react";
 import RestService from "../../services/rest-service";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Ompostering } from "../../models/Ompostering";
+import ContentLoader from "../util/ContentLoader";
 
 const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; id: string; enabled: boolean }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
@@ -24,7 +25,9 @@ const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; i
 
       <Modal ref={ref} header={{ heading: "Omposteringer" }} width={"2000px"}>
         <Modal.Body>
-          <BodyLong>
+          {!data ? (
+            <ContentLoader />
+          ) : (
             <Table zebraStripes>
               <Table.Header>
                 <Table.Row>
@@ -60,7 +63,7 @@ const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; i
                   ))}
               </Table.Body>
             </Table>
-          </BodyLong>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button type="button" onClick={() => ref.current?.close()}>

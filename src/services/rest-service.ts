@@ -61,8 +61,8 @@ api.interceptors.response.use(
 );
 
 const useFetchFaggrupper = () => {
-  const { data: faggrupper, isLoading: faggrupperIsLoading } = useSWR<Faggruppe[]>("/faggrupper", swrConfig);
-  return { faggrupper, faggrupperIsLoading };
+  const { data: faggrupper } = useSWR<Faggruppe[]>("/faggrupper", swrConfig);
+  return { faggrupper };
 };
 
 const useFetchTreffliste = (gjelderId?: string, faggruppe?: string) => {
@@ -70,11 +70,11 @@ const useFetchTreffliste = (gjelderId?: string, faggruppe?: string) => {
   useEffect(() => {
     setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));
   }, [gjelderId]);
-  const { data, error, isLoading, mutate } = useSWR<Treffliste>(shouldFetch ? "/oppdrag" : null, {
+  const { data, error, mutate } = useSWR<Treffliste>(shouldFetch ? "/oppdrag" : null, {
     ...swrConfig,
     fetcher: (url) => axiosPostFetcher<Treffliste>(url, { gjelderId, fagGruppeKode: faggruppe }),
   });
-  return { treffliste: data, trefflisteError: error, trefflisteIsLoading: isLoading, mutate };
+  return { treffliste: data, trefflisteError: error, mutate };
 };
 
 const useFetchOppdrag = (gjelderId?: string, id?: string) => {
@@ -82,14 +82,11 @@ const useFetchOppdrag = (gjelderId?: string, id?: string) => {
   useEffect(() => {
     setOppdragsId(id);
   }, [id]);
-  const { data: oppdrag, isLoading: oppdragIsLoading } = useSWR<Oppdragsdetaljer>(
-    isString(oppdragsId) ? `/${oppdragsId}` : null,
-    {
-      ...swrConfig,
-      fetcher: (url) => axiosPostFetcher<Oppdragsdetaljer>(url, { gjelderId }),
-    },
-  );
-  return { oppdrag, oppdragIsLoading };
+  const { data: oppdrag } = useSWR<Oppdragsdetaljer>(isString(oppdragsId) ? `/${oppdragsId}` : null, {
+    ...swrConfig,
+    fetcher: (url) => axiosPostFetcher<Oppdragsdetaljer>(url, { gjelderId }),
+  });
+  return { oppdrag };
 };
 
 const usePostFetch = <T>(shouldFetch: boolean, url: string, gjelderId: string) => {
@@ -97,11 +94,11 @@ const usePostFetch = <T>(shouldFetch: boolean, url: string, gjelderId: string) =
   useEffect(() => {
     setShould(shouldFetch);
   }, [shouldFetch]);
-  const { data, isLoading } = useSWR<T>(should ? url : null, {
+  const { data } = useSWR<T>(should ? url : null, {
     ...swrConfig,
     fetcher: (url) => axiosPostFetcher<T>(url, { gjelderId }),
   });
-  return [data, isLoading];
+  return [data];
 };
 
 const useFetch = <T>(shouldFetch: boolean, url: string) => {
@@ -109,11 +106,11 @@ const useFetch = <T>(shouldFetch: boolean, url: string) => {
   useEffect(() => {
     setShould(shouldFetch);
   }, [shouldFetch]);
-  const { data, isLoading } = useSWR<T>(should ? url : null, {
+  const { data } = useSWR<T>(should ? url : null, {
     ...swrConfig,
     fetcher: (url) => axiosGetFetcher<T>(url),
   });
-  return [data, isLoading];
+  return [data];
 };
 
 const useFetchEnhetshistorikk = (id: string, shouldFetch: boolean) =>
