@@ -1,10 +1,10 @@
 [
   {
     "korrigerteLinjeIder": [1, 2, 3],
-    "harValutaer": false,
-    "harSkyldnere": false,
-    "harKravhavere": false,
-    "harEnheter": false,
+    "harValutaer": true,
+    "harSkyldnere": true,
+    "harKravhavere": true,
+    "harEnheter": true,
     "harGrader": true,
     "harTekster": true,
     "harKidliste": true,

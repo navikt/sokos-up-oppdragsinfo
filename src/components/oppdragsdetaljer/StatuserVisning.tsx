@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
-import RestService from "../services/rest-service";
+import RestService from "../../services/rest-service";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../util/commonUtils";
-import { Status } from "../models/Status";
+import { isEmpty } from "../../util/commonUtils";
+import { Status } from "../../models/Status";
 
 const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);

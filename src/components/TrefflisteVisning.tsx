@@ -2,7 +2,7 @@ import { Button, Table } from "@navikt/ds-react";
 import styles from "./TrefflisteVisning.module.css";
 import { Treff, Treffliste } from "../models/Treffliste";
 import { Oppdrag } from "../models/Oppdrag";
-import LabelText from "./LabelText";
+import LabelText from "./util/LabelText";
 
 const TrefflisteVisning = ({
   treffliste,

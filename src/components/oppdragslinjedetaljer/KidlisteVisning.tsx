@@ -1,8 +1,8 @@
-import RestService from "../services/rest-service";
+import RestService from "../../services/rest-service";
 import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../util/commonUtils";
-import { Kid } from "../models/Kid";
+import { isEmpty } from "../../util/commonUtils";
+import { Kid } from "../../models/Kid";
 
 const KidlisteVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [data] = RestService.useFetchKidliste(oppdragsid, linjeid, true);

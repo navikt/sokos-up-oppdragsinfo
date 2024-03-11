@@ -1,16 +1,16 @@
 import { Button, Loader, Table } from "@navikt/ds-react";
 import RestService from "../services/rest-service";
-import EnhetshistorikkVisning from "../components/EnhetshistorikkVisning";
-import StatushistorikkVisning from "../components/StatushistorikkVisning";
-import OmposteringerVisning from "../components/OmposteringerVisning";
+import EnhetshistorikkVisning from "../components/oppdragsdetaljer/EnhetshistorikkVisning";
+import StatushistorikkVisning from "../components/oppdragsdetaljer/StatushistorikkVisning";
+import OmposteringerVisning from "../components/oppdragsdetaljer/OmposteringerVisning";
 import styles from "./Oppdragsdetaljer.module.css";
-import AttestantVisning from "../components/AttestantVisning";
-import StatuserVisning from "../components/StatuserVisning";
+import AttestantVisning from "../components/oppdragsdetaljer/AttestantVisning";
+import StatuserVisning from "../components/oppdragsdetaljer/StatuserVisning";
 import commonstyles from "../util/common-styles.module.css";
 import { Oppdragslinje } from "../models/Oppdragslinje";
 import { Oppdragsdetaljer } from "../models/Oppdragsdetaljer";
 import { Oppdrag } from "../models/Oppdrag";
-import LabelText from "../components/LabelText";
+import LabelText from "../components/util/LabelText";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
 
 type OppdragsdetaljerPageProps = {

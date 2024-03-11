@@ -1,8 +1,8 @@
-import RestService from "../services/rest-service";
+import RestService from "../../services/rest-service";
 import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../util/commonUtils";
-import { Tekst } from "../models/Tekst";
+import { isEmpty } from "../../util/commonUtils";
+import { Tekst } from "../../models/Tekst";
 
 const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [data] = RestService.useFetchTekster(oppdragsid, linjeid, true);

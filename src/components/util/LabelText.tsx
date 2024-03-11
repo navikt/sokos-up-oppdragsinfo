@@ -1,4 +1,4 @@
-import commonstyles from "../util/common-styles.module.css";
+import commonstyles from "../../util/common-styles.module.css";
 
 const LabelText = ({ label, text }: { label: string; text: string | number }) => (
   <div className={commonstyles.row}>

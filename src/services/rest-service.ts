@@ -20,6 +20,7 @@ import { SkyldnersList } from "../models/Skyldner";
 import { Linjeenheter } from "../models/Linjeenhet";
 import { Grader } from "../models/Grad";
 import { Maksdatoer } from "../models/Maksdato";
+import { Statushistorikk } from "../models/StatushistorikkStatus";
 
 const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
 
@@ -120,7 +121,7 @@ const useFetchEnhetshistorikk = (id: string, shouldFetch: boolean) =>
 const useFetchOmposteringer = (gjelderId: string, id: string, shouldFetch: boolean) =>
   usePostFetch<Omposteringer>(shouldFetch, `/${id}/omposteringer`, gjelderId);
 const useFetchStatushistorikk = (id: string, shouldFetch: boolean) =>
-  useFetch<Enhetshistorikk>(shouldFetch, `/${id}/statushistorikk`);
+  useFetch<Statushistorikk>(shouldFetch, `/${id}/statushistorikk`);
 
 const useFetchOppdragslinje = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
   useFetch<Oppdragslinjedetaljer>(shouldFetch, `/${oppdragsid}/${linjeid}/detaljer`);
