@@ -12,6 +12,7 @@ import OppdragslinjedetaljerPage from "./OppdragslinjedetaljerPage";
 import { Oppdragslinje } from "../models/Oppdragslinje";
 import styles from "./SokAndTreffliste.module.css";
 import { Oppdrag } from "../models/Oppdrag";
+import ContentLoader from "../components/util/ContentLoader";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -86,16 +87,22 @@ const SokAndTrefflistePage = () => {
             <form onSubmit={handleSubmit(handleChangeGjelderId)}>
               <h1>Søk i Oppdrag</h1>
 
-              <TextField {...register("gjelderID")} id="gjelderID" label="Gjelder" error={errors.gjelderID?.message} />
-
-              {faggrupper && (
-                <Combobox
-                  label={"Velg faggruppe"}
-                  onToggleSelected={handleChooseFaggruppe}
-                  options={["", ...sortedFaggrupper]}
+              <div className={styles.sok}>
+                <TextField
+                  {...register("gjelderID")}
+                  id="gjelderID"
+                  label="Gjelder"
+                  error={errors.gjelderID?.message}
                 />
-              )}
 
+                {faggrupper && (
+                  <Combobox
+                    label={"Velg faggruppe"}
+                    onToggleSelected={handleChooseFaggruppe}
+                    options={["", ...sortedFaggrupper]}
+                  />
+                )}
+              </div>
               <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
                 Søk
               </Button>
@@ -104,10 +111,14 @@ const SokAndTrefflistePage = () => {
         </>
       )}
 
-      {!!trefflisteParameters?.gjelderID && !treffliste ? (
-        <Loader>Treffliste is loading...</Loader>
-      ) : (
-        <>{showTreffliste && <TrefflisteVisning treffliste={treffliste} handleVelgOppdrag={setValgtOppdrag} />}</>
+      {showTreffliste && (
+        <>
+          {!treffliste ? (
+            <ContentLoader />
+          ) : (
+            <TrefflisteVisning treffliste={treffliste ? treffliste : []} handleVelgOppdrag={setValgtOppdrag} />
+          )}
+        </>
       )}
       {showOppdrag && !showDetaljer && (
         <OppdragsdetaljerPage

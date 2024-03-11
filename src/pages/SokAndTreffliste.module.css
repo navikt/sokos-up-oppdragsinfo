@@ -6,6 +6,10 @@
   @apply text-center;
 }
 
+.sok {
+  @apply w-1/3 pb-6;
+}
+
 .sokandtreffliste {
   @apply space-y-2;
 }

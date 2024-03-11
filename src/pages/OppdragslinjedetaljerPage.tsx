@@ -11,7 +11,7 @@ import SkyldnersListVisning from "../components/oppdragslinjedetaljer/Skyldnersl
 import MaksdatoerVisning from "../components/oppdragslinjedetaljer/MaksdatoerVisning";
 import LinjeenheterVisning from "../components/oppdragslinjedetaljer/LinjeenheterVisning";
 import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Oppdragslinje } from "../models/Oppdragslinje";
 import { Oppdrag } from "../models/Oppdrag";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
@@ -34,7 +34,6 @@ const OppdragslinjedetaljerPage = ({
   handleBackButtonClicked,
   handleBackToDetaljer,
 }: OppdragslinjedetaljerPageProps) => {
-  const ref = useRef<HTMLDivElement>(null);
   const [deferredLinjeId, setDeferredLinjeId] = useState<string>();
 
   const oppdragsid = "" + oppdrag.oppdragsId;
@@ -44,10 +43,6 @@ const OppdragslinjedetaljerPage = ({
   useEffect(() => {
     setDeferredLinjeId(linjeid);
   }, [linjeid]);
-
-  useEffect(() => {
-    ref && window.scrollTo(0, ref?.current?.offsetTop ?? 0);
-  }, [linjedetaljer]);
 
   const linjedetalj = isArray(linjedetaljer) && !isEmpty(linjedetaljer) ? linjedetaljer[0] : undefined;
 
@@ -60,7 +55,7 @@ const OppdragslinjedetaljerPage = ({
       {!isArray(linjedetaljer) || isEmpty(linjedetaljer) ? (
         <ContentLoader />
       ) : (
-        <div ref={ref}>
+        <>
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
@@ -93,7 +88,6 @@ const OppdragslinjedetaljerPage = ({
                 ))}
             </Table.Body>
           </Table>
-
           <Accordion>
             <LinjedetaljAccordion title={"Enheter"} enabled={!!linjedetalj?.harEnheter}>
               <LinjeenheterVisning oppdragsid={oppdragsid} linjeid={linjeid} />
@@ -124,7 +118,7 @@ const OppdragslinjedetaljerPage = ({
               <OvrigVisning oppdragsid={oppdragsid} linjeid={linjeid} />
             </LinjedetaljAccordion>
           </Accordion>
-        </div>
+        </>
       )}
     </>
   );
