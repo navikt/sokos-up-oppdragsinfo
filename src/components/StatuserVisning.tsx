@@ -27,18 +27,10 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell key={"status"} scope="col">
-                  status
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"datoFom"} scope="col">
-                  datoFom
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"tidspktReg"} scope="col">
-                  tidspktReg
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"brukerid"} scope="col">
-                  brukerid
-                </Table.HeaderCell>
+                <Table.HeaderCell key={"status"} scope="col" children={"Status"} />
+                <Table.HeaderCell key={"datoFom"} scope="col" children={"Dato Fom"} />
+                <Table.HeaderCell key={"tidspktReg"} scope="col" children={"Tidspkt Reg"} />
+                <Table.HeaderCell key={"brukerid"} scope="col" children={"Bruker-ID"} />
               </Table.Row>
             </Table.Header>
             <Table.Body>

@@ -22,27 +22,13 @@ const TrefflisteVisning = ({
             <Table zebraStripes key={btoa(treff.gjelderNavn + treff.gjelderId)}>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell key={"id"} scope="col">
-                    Oppdrags-Id
-                  </Table.HeaderCell>
-                  <Table.HeaderCell key={"Kjør"} scope="col">
-                    Kjør idag?
-                  </Table.HeaderCell>
-                  <Table.HeaderCell key={"Fagsystem"} scope="col">
-                    Fagsystem
-                  </Table.HeaderCell>
-                  <Table.HeaderCell key={"Status"} scope="col">
-                    Status
-                  </Table.HeaderCell>
-                  <Table.HeaderCell key={"Faggruppe"} scope="col">
-                    Faggruppe
-                  </Table.HeaderCell>
-                  <Table.HeaderCell key={"Fagområde"} scope="col">
-                    Fagområde
-                  </Table.HeaderCell>
-                  <Table.HeaderCell key={"Type"} scope="col">
-                    Type bilag
-                  </Table.HeaderCell>
+                  <Table.HeaderCell key={"id"} scope="col" children={"Oppdrags-ID"} />
+                  <Table.HeaderCell key={"Kjør idag?"} scope="col" children={"Kjør idag?"} />
+                  <Table.HeaderCell key={"Fagsystem"} scope="col" children={"Fagsystem"} />
+                  <Table.HeaderCell key={"Status"} scope="col" children={"Status"} />
+                  <Table.HeaderCell key={"Faggruppe"} scope="col" children={"Faggruppe"} />
+                  <Table.HeaderCell key={"Fagområde"} scope="col" children={"Fagområde"} />
+                  <Table.HeaderCell key={"Type bilag"} scope="col" children={"Type bilag"} />
                 </Table.Row>
               </Table.Header>
               <Table.Body>

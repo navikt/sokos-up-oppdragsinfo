@@ -67,8 +67,12 @@ const SokAndTrefflistePage = () => {
   const showOppdrag = !!trefflisteParameters?.gjelderID && !!valgtOppdrag;
   const showDetaljer = !!linjeid && showOppdrag;
   const showTreffliste = !!treffliste && !isEmpty(treffliste) && !showOppdrag;
-  const handleBackButtonClicked = () => {
+  const handleBackToTreffliste = () => {
     setValgtOppdrag(undefined);
+    setLinjeid(undefined);
+  };
+
+  const handleBackToDetaljer = () => {
     setLinjeid(undefined);
   };
 
@@ -96,16 +100,24 @@ const SokAndTrefflistePage = () => {
 
       {showTreffliste && <TrefflisteVisning treffliste={treffliste} handleVelgOppdrag={setValgtOppdrag} />}
 
-      {showOppdrag && (
+      {showOppdrag && !showDetaljer && (
         <OppdragsdetaljerPage
           gjelderId={trefflisteParameters.gjelderID}
           oppdrag={valgtOppdrag}
           handleSetLinjeId={handleSetLinjeId}
-          handleBackButtonClicked={handleBackButtonClicked}
+          handleBackButtonClicked={handleBackToTreffliste}
         />
       )}
 
-      {showDetaljer && <OppdragslinjedetaljerPage oppdrag={valgtOppdrag} linjeid={linjeid} linjer={linjer} />}
+      {showDetaljer && (
+        <OppdragslinjedetaljerPage
+          handleBackButtonClicked={handleBackToTreffliste}
+          handleBackToDetaljer={handleBackToDetaljer}
+          oppdrag={valgtOppdrag}
+          linjeid={linjeid}
+          linjer={linjer}
+        />
+      )}
     </div>
   );
 };

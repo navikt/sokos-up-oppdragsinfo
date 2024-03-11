@@ -74,42 +74,18 @@ const OppdragsdetaljerPage = ({
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell key={"linjeid"} scope="col">
-                  Linje-ID
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"kodeklasse"} scope="col">
-                  Kodeklasse
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"datovedtakfom"} scope="col">
-                  Dato Vedtak FOM
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"datovedtaktom"} scope="col">
-                  Dato Vedtak TOM
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"sats"} scope="col">
-                  Sats
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"typesats"} scope="col">
-                  Type sats
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"status"} scope="col">
-                  Status
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"DatoFOM"} scope="col">
-                  Dato Fom
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"linjeIdKorr"} scope="col">
-                  LinjeIdKorr
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"Attestert"} scope="col">
-                  Attestert
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"tidspktReg"} scope="col">
-                  tidspktReg
-                </Table.HeaderCell>
-                <Table.HeaderCell key={"detaljer"} scope="col">
-                  Detaljer
-                </Table.HeaderCell>
+                <Table.HeaderCell key={"linjeid"} scope="col" children={"Linje-ID"} />
+                <Table.HeaderCell key={"Kodeklasse"} scope="col" children={"Kodeklasse"} />
+                <Table.HeaderCell key={"Dato Vedtak FOM"} scope="col" children={"Dato Vedtak FOM"} />
+                <Table.HeaderCell key={"Dato Vedtak TOM"} scope="col" children={"Dato Vedtak TOM"} />
+                <Table.HeaderCell key={"Sats"} scope="col" children={"Sats"} />
+                <Table.HeaderCell key={"Type sats"} scope="col" children={"Type sats"} />
+                <Table.HeaderCell key={"Status"} scope="col" children={"Status"} />
+                <Table.HeaderCell key={"Dato Fom"} scope="col" children={"Dato Fom"} />
+                <Table.HeaderCell key={"LinjeIdKorr"} scope="col" children={"LinjeIdKorr"} />
+                <Table.HeaderCell key={"Attestert"} scope="col" children={"Attestert"} />
+                <Table.HeaderCell key={"tidspktReg"} scope="col" children={"tidspktReg"} />
+                <Table.HeaderCell key={"Detaljer"} scope="col" children={"Detaljer"} />
               </Table.Row>
             </Table.Header>
             <Table.Body>
