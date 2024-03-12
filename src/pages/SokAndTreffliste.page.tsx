@@ -31,11 +31,16 @@ const SokAndTrefflistePage = () => {
   const [linjeid, setLinjeid] = useState<string>();
   const [linjer, setLinjer] = useState<Oppdragslinje[]>([]);
 
-  useEffect(() => {
+  const backToTreffliste = () => {
     setValgtOppdrag(undefined);
     setLinjeid(undefined);
-    mutate(treffliste);
-  }, [trefflisteParameters, treffliste]);
+  };
+
+  useEffect(backToTreffliste, [treffliste]);
+
+  useEffect(() => {
+    mutate([]);
+  }, [trefflisteParameters]);
 
   const {
     register,
@@ -68,10 +73,6 @@ const SokAndTrefflistePage = () => {
   const showOppdrag = !!trefflisteParameters?.gjelderID && !!valgtOppdrag;
   const showDetaljer = !!linjeid && showOppdrag;
   const showTreffliste = !!treffliste && !isEmpty(treffliste) && !showOppdrag;
-  const handleBackToTreffliste = () => {
-    setValgtOppdrag(undefined);
-    setLinjeid(undefined);
-  };
 
   const handleBackToDetaljer = () => {
     setLinjeid(undefined);
@@ -111,27 +112,23 @@ const SokAndTrefflistePage = () => {
         </>
       )}
 
+      {!showTreffliste && trefflisteParameters?.gjelderID && !showDetaljer && !showOppdrag && <ContentLoader />}
       {showTreffliste && (
-        <>
-          {!treffliste ? (
-            <ContentLoader />
-          ) : (
-            <TrefflisteVisning treffliste={treffliste ? treffliste : []} handleVelgOppdrag={setValgtOppdrag} />
-          )}
-        </>
+        <TrefflisteVisning treffliste={treffliste ? treffliste : []} handleVelgOppdrag={setValgtOppdrag} />
       )}
+
       {showOppdrag && !showDetaljer && (
         <OppdragsdetaljerPage
           gjelderId={trefflisteParameters.gjelderID}
           oppdrag={valgtOppdrag}
           handleSetLinjeId={handleSetLinjeId}
-          handleBackButtonClicked={handleBackToTreffliste}
+          handleBackButtonClicked={backToTreffliste}
         />
       )}
 
       {showDetaljer && (
         <OppdragslinjedetaljerPage
-          handleBackButtonClicked={handleBackToTreffliste}
+          handleBackButtonClicked={backToTreffliste}
           handleBackToDetaljer={handleBackToDetaljer}
           oppdrag={valgtOppdrag}
           linjeid={linjeid}
