@@ -1,7 +1,7 @@
-import { Button, Loader, TextField } from "@navikt/ds-react";
+import { Button, HelpText, Loader, TextField } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { TrefflisteSearchParametersSchema } from "./Valideringsregler";
 import { useEffect, useState } from "react";
 import { Combobox, isEmpty } from "../util/commonUtils";
@@ -35,7 +35,6 @@ const SokAndTrefflistePage = () => {
     setValgtOppdrag(undefined);
     setLinjeid(undefined);
   };
-
   useEffect(backToTreffliste, [treffliste]);
 
   useEffect(() => {
@@ -85,33 +84,58 @@ const SokAndTrefflistePage = () => {
       ) : (
         <>
           {!showOppdrag && (
-            <form onSubmit={handleSubmit(handleChangeGjelderId)}>
-              <h1>Søk i Oppdrag</h1>
-
-              <div className={styles.sok}>
-                <TextField
-                  {...register("gjelderID")}
-                  id="gjelderID"
-                  label="Gjelder"
-                  error={errors.gjelderID?.message}
-                />
-
-                {faggrupper && (
-                  <Combobox
-                    label={"Velg faggruppe"}
-                    onToggleSelected={handleChooseFaggruppe}
-                    options={["", ...sortedFaggrupper]}
-                  />
-                )}
+            <div className={styles.sok}>
+              <div className={styles.sokandtreffliste__help}>
+                <HelpText title="a11y-title" placement="left" strategy="fixed">
+                  <p>
+                    <i>Minimum ett av kriteriene må være utfylt:</i>
+                  </p>
+                  <p>- Gjelder id</p>
+                  <p>- Gjelder id må være numerisk (11 / 9 )</p>
+                </HelpText>
               </div>
-              <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
-                Søk
-              </Button>
-            </form>
+              <form onSubmit={handleSubmit(handleChangeGjelderId)}>
+                <h1>Søk</h1>
+
+                <div className={styles.sok_inputfields}>
+                  <TextField
+                    {...register("gjelderID")}
+                    id="gjelderID"
+                    label="Gjelder"
+                    error={errors.gjelderID?.message}
+                  />
+
+                  {faggrupper && (
+                    <Combobox
+                      label={"Faggruppe"}
+                      onToggleSelected={handleChooseFaggruppe}
+                      options={["", ...sortedFaggrupper]}
+                    />
+                  )}
+                </div>
+                <div className={styles.sokandtreffliste__knapperad}>
+                  <div className={styles.sokandtreffliste__buttonwrapper}>
+                    <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
+                      Søk
+                    </Button>
+                  </div>
+                  <div>
+                    <Button
+                      size="small"
+                      variant="tertiary"
+                      iconPosition="right"
+                      icon={<EraserIcon title="Nullstill søk" fontSize="1.5rem" />}
+                      onClick={() => trigger()}
+                    >
+                      Nullstill søk
+                    </Button>
+                  </div>
+                </div>
+              </form>
+            </div>
           )}
         </>
       )}
-
       {!showTreffliste && trefflisteParameters?.gjelderID && !showDetaljer && !showOppdrag && <ContentLoader />}
       {showTreffliste && (
         <TrefflisteVisning treffliste={treffliste ? treffliste : []} handleVelgOppdrag={setValgtOppdrag} />

@@ -26,7 +26,7 @@ const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; 
       <Modal ref={ref} header={{ heading: "Attestant" }}>
         <Modal.Body>
           {!data ? (
-            <ContentLoader />
+            <ContentLoader width="215.6px" />
           ) : (
             <Table zebraStripes>
               <Table.Header>

@@ -1,8 +1,9 @@
-import { Button, Table } from "@navikt/ds-react";
+import { Alert, Button, Table } from "@navikt/ds-react";
 import styles from "./TrefflisteVisning.module.css";
 import { Treff, Treffliste } from "../models/Treffliste";
 import { Oppdrag } from "../models/Oppdrag";
 import LabelText from "./util/LabelText";
+import { isEmpty } from "../util/commonUtils";
 
 const TrefflisteVisning = ({
   treffliste,
@@ -10,11 +11,12 @@ const TrefflisteVisning = ({
 }: {
   treffliste: Treffliste;
   handleVelgOppdrag: (oppdrag: Oppdrag) => void;
-}) => {
-  return (
-    <>
-      {[
-        ...treffliste.map((treff: Treff, index: number) => (
+}) => (
+  <>
+    {...treffliste.map((treff: Treff, index: number) => (
+      <>
+        {isEmpty(treff.oppdragsListe) && <Alert variant="info">Null treff. Denne IDen har ingen oppdrag</Alert>}
+        {!isEmpty(treff.oppdragsListe) && (
           <div key={btoa(treff.gjelderId + index)} className={styles.treffliste}>
             <LabelText label={"Gjelder navn"} text={treff.gjelderNavn} />
             <LabelText label={"Gjelder id"} text={treff.gjelderId} />
@@ -50,10 +52,10 @@ const TrefflisteVisning = ({
               </Table.Body>
             </Table>
           </div>
-        )),
-      ]}
-    </>
-  );
-};
+        )}
+      </>
+    ))}
+  </>
+);
 
 export default TrefflisteVisning;

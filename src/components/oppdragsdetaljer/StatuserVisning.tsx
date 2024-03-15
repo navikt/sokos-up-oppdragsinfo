@@ -26,7 +26,7 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
       <Modal ref={ref} header={{ heading: "Status" }}>
         <Modal.Body>
           {!data ? (
-            <ContentLoader />
+            <ContentLoader width="477px" />
           ) : (
             <Table zebraStripes>
               <Table.Header>

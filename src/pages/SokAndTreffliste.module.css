@@ -7,7 +7,11 @@
 }
 
 .sok {
-  @apply w-1/3 pb-6;
+  @apply bg-[--a-surface-alt-1-subtle] p-5 pt-2;
+}
+
+.sok_inputfields {
+  @apply w-1/3 pb-6 space-y-5;
 }
 
 .sokandtreffliste {
@@ -16,4 +20,16 @@
 
 .sokandtreffliste__oppdrag {
   @apply py-1;
+}
+
+.sokandtreffliste__knapperad {
+  @apply flex flex-row-reverse;
+}
+
+.sokandtreffliste__buttonwrapper {
+  @apply pl-7;
+}
+
+.sokandtreffliste__help {
+  @apply absolute right-5 top-5;
 }
