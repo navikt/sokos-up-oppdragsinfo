@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { TrefflisteSearchParametersSchema } from "./Valideringsregler";
 import { useEffect, useState } from "react";
-import { Combobox, isEmpty, storeId } from "../util/commonUtils";
+import { Combobox, isEmpty, retrieveId, storeId } from "../util/commonUtils";
 import TrefflisteVisning from "../components/TrefflisteVisning";
 import RestService from "../services/rest-service";
 import styles from "./SokAndTreffliste.module.css";
@@ -20,7 +20,7 @@ type TrefflisteParameters = {
 
 const SokAndTrefflistePage = () => {
   const faggrupper = useLoaderData() as Faggruppe[];
-  const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({});
+  const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({ gjelderID: retrieveId() });
   const { treffliste, mutate } = RestService.useFetchTreffliste(
     trefflisteParameters?.gjelderID,
     trefflisteParameters?.faggruppe,
@@ -77,7 +77,13 @@ const SokAndTrefflistePage = () => {
             <h1>Søk</h1>
 
             <div className={styles.sok_inputfields}>
-              <TextField {...register("gjelderID")} id="gjelderID" label="Gjelder" error={errors.gjelderID?.message} />
+              <TextField
+                {...register("gjelderID")}
+                defaultValue={trefflisteParameters.gjelderID}
+                id="gjelderID"
+                label="Gjelder"
+                error={errors.gjelderID?.message}
+              />
 
               {faggrupper && (
                 <Combobox
