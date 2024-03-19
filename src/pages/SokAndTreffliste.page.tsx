@@ -11,6 +11,7 @@ import styles from "./SokAndTreffliste.module.css";
 import ContentLoader from "../components/util/ContentLoader";
 import { useLoaderData } from "react-router-dom";
 import { Faggruppe } from "../models/Faggruppe";
+import { isArray } from "@grafana/faro-web-sdk";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -25,7 +26,9 @@ const SokAndTrefflistePage = () => {
     trefflisteParameters?.faggruppe,
   );
 
-  useEffect(() => storeId(treffliste?.reduce((a) => a).gjelderId ?? ""), [treffliste]);
+  useEffect(() => {
+    if (isArray(treffliste) && !isEmpty(treffliste)) storeId(treffliste.reduce((a) => a).gjelderId);
+  }, [treffliste]);
   useEffect(() => {
     mutate([]);
   }, [trefflisteParameters]);
@@ -60,7 +63,7 @@ const SokAndTrefflistePage = () => {
       {!faggrupper ? (
         <Loader>Laster inn faggrupper...</Loader>
       ) : (
-        <div className={styles.sok}>
+        <div className={styles.sokandtreffliste__sok}>
           <div className={styles.sokandtreffliste__help}>
             <HelpText title="a11y-title" placement="left" strategy="fixed">
               <p>

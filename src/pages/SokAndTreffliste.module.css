@@ -6,8 +6,8 @@
   @apply text-center;
 }
 
-.sok {
-  @apply bg-[--a-surface-alt-1-subtle] p-5 pt-2;
+.sokandtreffliste__sok {
+  @apply relative bg-[--a-surface-alt-1-subtle] p-5 pt-2;
 }
 
 .sok_inputfields {

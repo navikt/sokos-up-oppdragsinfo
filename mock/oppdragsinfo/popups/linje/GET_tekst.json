@@ -1,38 +1,6 @@
 [
   {
     "linjeId": 2101,
-    "tekst": "Captain: What happen?"
-  },
-  {
-    "linjeId": 2102,
-    "tekst": "Mechanic: Somebody set up us the bomb."
-  },
-  {
-    "linjeId": 2103,
-    "tekst": "Operator: We get signal."
-  },
-  {
-    "linjeId": 2104,
-    "tekst": "Operator: Main screen turn on."
-  },
-  {
-    "linjeId": 2105,
-    "tekst": "Captain: What !"
-  },
-  {
-    "linjeId": 2106,
-    "tekst": "Captain: It's you !!"
-  },
-  {
-    "linjeId": 2107,
-    "tekst": "Cats: How are you gentlemen !!"
-  },
-  {
-    "linjeId": 2108,
-    "tekst": "Cats: All your base are belong to us."
-  },
-  {
-    "linjeId": 2109,
-    "tekst": "Cats: You are on the way to destruction."
+    "tekst": "Somebody set up us the bomb."
   }
 ]

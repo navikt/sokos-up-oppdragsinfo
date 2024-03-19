@@ -11,7 +11,8 @@ import { Oppdragslinje } from "../models/Oppdragslinje";
 import LabelText from "../components/util/LabelText";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { retrieveId } from "../util/commonUtils";
+import { isEmpty, retrieveId } from "../util/commonUtils";
+import { isArray } from "@grafana/faro-web-sdk";
 
 type OppdragsdetaljerParams = {
   oppdragsID: string;
@@ -22,10 +23,13 @@ const OppdragsdetaljerPage = () => {
   const { treffliste } = RestService.useFetchTreffliste(gjelderId);
   const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
 
-  const oppdrag = treffliste
-    ?.reduce((a) => a)
-    .oppdragsListe.filter((o) => o.oppdragsId + "" === oppdragsID)
-    .reduce((a) => a);
+  const oppdrag =
+    isArray(treffliste) && !isEmpty(treffliste) && !isEmpty(treffliste[0].oppdragsListe)
+      ? treffliste
+          .reduce((a) => a)
+          .oppdragsListe.filter((o) => o.oppdragsId + "" === oppdragsID)
+          .reduce((a) => a)
+      : null;
 
   return (
     <>
