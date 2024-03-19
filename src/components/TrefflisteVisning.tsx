@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 
 const TrefflisteVisning = ({ treffliste }: { treffliste: Treffliste }) => (
   <>
+    {(isEmpty(treffliste) || isEmpty(treffliste[0].oppdragsListe)) && (
+      <Alert variant="info">Null treff. Denne IDen har ingen oppdrag</Alert>
+    )}
     {...treffliste.map((treff: Treff, index: number) => (
       <>
-        {isEmpty(treff.oppdragsListe) && <Alert variant="info">Null treff. Denne IDen har ingen oppdrag</Alert>}
         {!isEmpty(treff.oppdragsListe) && (
           <div key={btoa(treff.gjelderId + index)} className={styles.treffliste}>
             <LabelText label={"Gjelder navn"} text={treff.gjelderNavn} />

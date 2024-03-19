@@ -25,7 +25,7 @@ const OppdragslinjedetaljerPage = () => {
   const { oppdragsID = "", linjeID = "" } = useParams<OppdragslinjedetaljerParams>();
   const gjelderId = retrieveId();
   const { oppdrag } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
-  const [linjedetaljer] = RestService.useFetchOppdragslinje(oppdragsID, linjeID ?? "", !!linjeID);
+  const [linjedetaljer, isLoading] = RestService.useFetchOppdragslinje(oppdragsID, linjeID ?? "", !!linjeID);
   const linjedetalj = isArray(linjedetaljer) && !isEmpty(linjedetaljer) ? linjedetaljer[0] : undefined;
 
   return (
@@ -43,7 +43,7 @@ const OppdragslinjedetaljerPage = () => {
           </div>
         </Link>
       </div>
-      {!isArray(linjedetaljer) || isEmpty(linjedetaljer) ? (
+      {isLoading ? (
         <ContentLoader />
       ) : (
         <>

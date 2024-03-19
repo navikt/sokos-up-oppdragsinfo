@@ -21,7 +21,7 @@ const OppdragsdetaljerPage = () => {
   const { oppdragsID = "" } = useParams<OppdragsdetaljerParams>();
   const gjelderId = retrieveId();
   const { treffliste } = RestService.useFetchTreffliste(gjelderId);
-  const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
+  const { oppdrag: oppdragsdetaljer, isLoading } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
 
   const oppdrag =
     isArray(treffliste) && !isEmpty(treffliste) && !isEmpty(treffliste[0].oppdragsListe)
@@ -34,12 +34,12 @@ const OppdragsdetaljerPage = () => {
   return (
     <>
       {gjelderId === "" && <Navigate to={"/"} />}
-      {!oppdragsdetaljer && (
+      {isLoading && (
         <div className={commonstyles.contentloader}>
           <Loader size="3xlarge" title="Laster oppdragsdetaljer..." />
         </div>
       )}
-      {oppdragsdetaljer && (
+      {!isLoading && oppdragsdetaljer && (
         <div>
           <div className={commonstyles.knapperad__right}>
             <Link to={"/"}>

@@ -21,14 +21,17 @@ type TrefflisteParameters = {
 const SokAndTrefflistePage = () => {
   const faggrupper = useLoaderData() as Faggruppe[];
   const [trefflisteParameters, setTrefflisteParameters] = useState<TrefflisteParameters>({ gjelderID: retrieveId() });
-  const { treffliste, mutate } = RestService.useFetchTreffliste(
+  const { treffliste, mutate, trefflisteIsLoading } = RestService.useFetchTreffliste(
     trefflisteParameters?.gjelderID,
     trefflisteParameters?.faggruppe,
   );
 
+  const isLoading = !!trefflisteParameters.gjelderID && trefflisteIsLoading;
+
   useEffect(() => {
     if (isArray(treffliste) && !isEmpty(treffliste)) storeId(treffliste.reduce((a) => a).gjelderId);
   }, [treffliste]);
+
   useEffect(() => {
     mutate([]);
   }, [trefflisteParameters]);
@@ -55,8 +58,6 @@ const SokAndTrefflistePage = () => {
   };
 
   const sortedFaggrupper = faggrupper ? [...faggrupper.map((f) => `${f.navn}(${f.type})`)].sort() : [];
-
-  const showTreffliste = !!treffliste && !isEmpty(treffliste);
 
   return (
     <div className={styles.sokandtreffliste}>
@@ -114,8 +115,10 @@ const SokAndTrefflistePage = () => {
           </form>
         </div>
       )}
-      {!showTreffliste && trefflisteParameters?.gjelderID && <ContentLoader />}
-      {showTreffliste && <TrefflisteVisning treffliste={treffliste ? treffliste : []} />}
+      {isLoading && <ContentLoader />}
+      {!isLoading && !!trefflisteParameters?.gjelderID && (
+        <TrefflisteVisning treffliste={treffliste ? treffliste : []} />
+      )}
     </div>
   );
 };
