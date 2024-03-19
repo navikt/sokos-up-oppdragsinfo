@@ -1,6 +1,6 @@
 import RestService from "../services/rest-service";
-import { Accordion, Button, Table } from "@navikt/ds-react";
-import { isEmpty } from "../util/commonUtils";
+import { Accordion, Table } from "@navikt/ds-react";
+import { isEmpty, retrieveId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
 import KravhaverVisning from "../components/oppdragslinjedetaljer/KravhaverVisning";
 import OvrigVisning from "../components/oppdragslinjedetaljer/OvrigVisning";
@@ -11,46 +11,37 @@ import SkyldnersListVisning from "../components/oppdragslinjedetaljer/Skyldnersl
 import MaksdatoerVisning from "../components/oppdragslinjedetaljer/MaksdatoerVisning";
 import LinjeenheterVisning from "../components/oppdragslinjedetaljer/LinjeenheterVisning";
 import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
-import { useEffect, useState } from "react";
-import { Oppdragslinje } from "../models/Oppdragslinje";
-import { Oppdrag } from "../models/Oppdrag";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import commonstyles from "../util/common-styles.module.css";
 import LinjedetaljAccordion from "../components/util/LinjedetaljAccordion";
 import ContentLoader from "../components/util/ContentLoader";
+import { Link, Navigate, useParams } from "react-router-dom";
 
-type OppdragslinjedetaljerPageProps = {
-  oppdrag: Oppdrag;
-  linjeid: string;
-  linjer: Oppdragslinje[];
-  handleBackButtonClicked: () => void;
-  handleBackToDetaljer: () => void;
+type OppdragslinjedetaljerParams = {
+  oppdragsID: string;
+  linjeID: string;
 };
-
-const OppdragslinjedetaljerPage = ({
-  oppdrag,
-  linjeid,
-  linjer,
-  handleBackButtonClicked,
-  handleBackToDetaljer,
-}: OppdragslinjedetaljerPageProps) => {
-  const [deferredLinjeId, setDeferredLinjeId] = useState<string>();
-
-  const oppdragsid = "" + oppdrag.oppdragsId;
-
-  const [linjedetaljer] = RestService.useFetchOppdragslinje(oppdragsid, deferredLinjeId ?? "", !!deferredLinjeId);
-
-  useEffect(() => {
-    setDeferredLinjeId(linjeid);
-  }, [linjeid]);
-
+const OppdragslinjedetaljerPage = () => {
+  const { oppdragsID = "", linjeID = "" } = useParams<OppdragslinjedetaljerParams>();
+  const gjelderId = retrieveId();
+  const { oppdrag } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
+  const [linjedetaljer] = RestService.useFetchOppdragslinje(oppdragsID, linjeID ?? "", !!linjeID);
   const linjedetalj = isArray(linjedetaljer) && !isEmpty(linjedetaljer) ? linjedetaljer[0] : undefined;
 
   return (
     <>
+      {gjelderId === "" && <Navigate to={"/"} />}
       <div className={commonstyles.knapperad__right}>
-        <Button icon={<ChevronLeftIcon />} onClick={handleBackButtonClicked} children={"Treffliste"} />
-        <Button icon={<ChevronLeftIcon />} onClick={handleBackToDetaljer} children={"Oppdragsdetaljer"} />
+        <Link to={"/"}>
+          <div className={commonstyles.singlerow}>
+            <ChevronLeftIcon /> Treffliste{" "}
+          </div>
+        </Link>
+        <Link to={`/${oppdragsID}`}>
+          <div className={commonstyles.singlerow}>
+            <ChevronLeftIcon /> Oppdragsdetaljer{" "}
+          </div>
+        </Link>
       </div>
       {!isArray(linjedetaljer) || isEmpty(linjedetaljer) ? (
         <ContentLoader />
@@ -71,7 +62,7 @@ const OppdragslinjedetaljerPage = ({
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {linjer
+              {(oppdrag?.oppdragsLinjer ?? [])
                 .filter((linje) => linjedetalj?.korrigerteLinjeIder.includes(linje.linjeId))
                 .map((linje) => (
                   <Table.Row key={btoa("" + linje.linjeId)}>
@@ -90,32 +81,31 @@ const OppdragslinjedetaljerPage = ({
           </Table>
           <Accordion>
             <LinjedetaljAccordion title={"Enheter"} enabled={!!linjedetalj?.harEnheter}>
-              <LinjeenheterVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <LinjeenheterVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Grader"} enabled={!!linjedetalj?.harGrader}>
-              <GraderVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <GraderVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Kravhavere"} enabled={!!linjedetalj?.harKravhavere}>
-              <KravhaverVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <KravhaverVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Valutaer"} enabled={!!linjedetalj?.harValutaer}>
-              <ValutaerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <ValutaerVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Tekster"} enabled={!!linjedetalj?.harTekster}>
-              <TeksterVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <TeksterVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Kidliste"} enabled={!!linjedetalj?.harKidliste}>
-              <KidlisteVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <KidlisteVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Skyldnere"} enabled={!!linjedetalj?.harSkyldnere}>
-              <SkyldnersListVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <SkyldnersListVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Maksdato"} enabled={!!linjedetalj?.harMaksdatoer}>
-              <MaksdatoerVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <MaksdatoerVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
-
             <LinjedetaljAccordion title={"Øvrig"} enabled>
-              <OvrigVisning oppdragsid={oppdragsid} linjeid={linjeid} />
+              <OvrigVisning oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
           </Accordion>
         </>

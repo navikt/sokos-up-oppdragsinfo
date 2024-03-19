@@ -60,11 +60,10 @@ api.interceptors.response.use(
   },
 );
 
-const useFetchFaggrupper = () => {
-  const { data: faggrupper } = useSWR<Faggruppe[]>("/faggrupper", swrConfig);
-  return { faggrupper };
+const fetchFaggrupper = async () => {
+  const response = await api.get<Faggruppe[]>("/faggrupper");
+  return response.data;
 };
-
 const useFetchTreffliste = (gjelderId?: string, faggruppe?: string) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   useEffect(() => {
@@ -157,7 +156,7 @@ const useFetchGrad = (oppdragsid: string, linjeid: string, shouldFetch: boolean)
   useFetch<Grader>(shouldFetch, `/${oppdragsid}/${linjeid}/grad`);
 
 const RestService = {
-  useFetchFaggrupper,
+  fetchFaggrupper,
   useFetchTreffliste,
   useFetchOppdrag,
   useFetchEnhetshistorikk,

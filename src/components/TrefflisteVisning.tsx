@@ -1,17 +1,11 @@
-import { Alert, Button, Table } from "@navikt/ds-react";
+import { Alert, Table } from "@navikt/ds-react";
 import styles from "./TrefflisteVisning.module.css";
 import { Treff, Treffliste } from "../models/Treffliste";
-import { Oppdrag } from "../models/Oppdrag";
 import LabelText from "./util/LabelText";
 import { isEmpty } from "../util/commonUtils";
+import { Link } from "react-router-dom";
 
-const TrefflisteVisning = ({
-  treffliste,
-  handleVelgOppdrag,
-}: {
-  treffliste: Treffliste;
-  handleVelgOppdrag: (oppdrag: Oppdrag) => void;
-}) => (
+const TrefflisteVisning = ({ treffliste }: { treffliste: Treffliste }) => (
   <>
     {...treffliste.map((treff: Treff, index: number) => (
       <>
@@ -37,9 +31,10 @@ const TrefflisteVisning = ({
                 {treff.oppdragsListe.map((oppdrag) => (
                   <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                     <Table.DataCell>
-                      <Button variant={"tertiary"} onClick={() => handleVelgOppdrag(oppdrag)}>
+                      <Link to={`/${oppdrag.oppdragsId}`}>
                         {oppdrag.oppdragsId}
-                      </Button>
+                        {/*Sende valgt oppdrag til oppdragsdetaljer?*/}
+                      </Link>
                     </Table.DataCell>
                     <Table.DataCell>{oppdrag.kjorIdag}</Table.DataCell>
                     <Table.DataCell>{oppdrag.fagsystemId}</Table.DataCell>

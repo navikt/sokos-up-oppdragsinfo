@@ -12,3 +12,10 @@ export const getTime = () => {
   const dato = new Date();
   return `${dato.toLocaleDateString()} ${dato.toLocaleTimeString()},${dato.getMilliseconds()}`;
 };
+
+export const storeId = (id?: string) => sessionStorage.setItem("oppdragsinfo_gId", btoa(id ?? ""));
+export const retrieveId = () => {
+  const storedCoded = sessionStorage.getItem("oppdragsinfo_gId");
+  if (storedCoded === null) return "";
+  else return atob(storedCoded);
+};

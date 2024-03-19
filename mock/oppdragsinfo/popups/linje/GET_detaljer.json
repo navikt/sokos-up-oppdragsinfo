@@ -3,10 +3,10 @@
     "korrigerteLinjeIder": [1, 2, 3],
     "harValutaer": false,
     "harSkyldnere": false,
-    "harKravhavere": false,
+    "harKravhavere": true,
     "harEnheter": false,
     "harGrader": false,
-    "harTekster": false,
+    "harTekster": true,
     "harKidliste": false,
     "harMaksdatoer": true
   }

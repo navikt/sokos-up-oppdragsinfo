@@ -1,4 +1,4 @@
-import { Button, Loader, Table } from "@navikt/ds-react";
+import { Loader, Table } from "@navikt/ds-react";
 import RestService from "../services/rest-service";
 import EnhetshistorikkVisning from "../components/oppdragsdetaljer/EnhetshistorikkVisning";
 import StatushistorikkVisning from "../components/oppdragsdetaljer/StatushistorikkVisning";
@@ -8,28 +8,28 @@ import AttestantVisning from "../components/oppdragsdetaljer/AttestantVisning";
 import StatuserVisning from "../components/oppdragsdetaljer/StatuserVisning";
 import commonstyles from "../util/common-styles.module.css";
 import { Oppdragslinje } from "../models/Oppdragslinje";
-import { Oppdrag } from "../models/Oppdrag";
 import LabelText from "../components/util/LabelText";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { retrieveId } from "../util/commonUtils";
 
-type OppdragsdetaljerPageProps = {
-  gjelderId: string | undefined;
-  oppdrag: Oppdrag;
-  handleSetLinjeId: (linjeid: string, linjer: Oppdragslinje[]) => void;
-  handleBackButtonClicked: () => void;
+type OppdragsdetaljerParams = {
+  oppdragsID: string;
 };
+const OppdragsdetaljerPage = () => {
+  const { oppdragsID = "" } = useParams<OppdragsdetaljerParams>();
+  const gjelderId = retrieveId();
+  const { treffliste } = RestService.useFetchTreffliste(gjelderId);
+  const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
 
-const OppdragsdetaljerPage = ({
-  gjelderId,
-  oppdrag,
-  handleSetLinjeId,
-  handleBackButtonClicked,
-}: OppdragsdetaljerPageProps) => {
-  const oppdragsid = "" + oppdrag.oppdragsId;
-  const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(gjelderId, oppdragsid);
+  const oppdrag = treffliste
+    ?.reduce((a) => a)
+    .oppdragsListe.filter((o) => o.oppdragsId + "" === oppdragsID)
+    .reduce((a) => a);
 
   return (
     <>
+      {gjelderId === "" && <Navigate to={"/"} />}
       {!oppdragsdetaljer && (
         <div className={commonstyles.contentloader}>
           <Loader size="3xlarge" title="Laster oppdragsdetaljer..." />
@@ -38,14 +38,16 @@ const OppdragsdetaljerPage = ({
       {oppdragsdetaljer && (
         <div>
           <div className={commonstyles.knapperad__right}>
-            <Button icon={<ChevronLeftIcon />} onClick={handleBackButtonClicked}>
-              Treffliste
-            </Button>
-            <EnhetshistorikkVisning id={oppdragsid} />
+            <Link to={"/"}>
+              <div className={commonstyles.singlerow}>
+                <ChevronLeftIcon /> Treffliste
+              </div>
+            </Link>
+            <EnhetshistorikkVisning id={oppdragsID} />
             {gjelderId && (
-              <OmposteringerVisning enabled={oppdragsdetaljer.harOmposteringer} gjelderId={gjelderId} id={oppdragsid} />
+              <OmposteringerVisning enabled={oppdragsdetaljer.harOmposteringer} gjelderId={gjelderId} id={oppdragsID} />
             )}
-            <StatushistorikkVisning id={oppdragsid} />
+            <StatushistorikkVisning id={oppdragsID} />
           </div>
           <div className={styles.oppdragsdetaljer__toppinfo}>
             {gjelderId && oppdrag && (
@@ -94,18 +96,16 @@ const OppdragsdetaljerPage = ({
                   <Table.DataCell>{linje.sats}</Table.DataCell>
                   <Table.DataCell>{linje.typeSats}</Table.DataCell>
                   <Table.DataCell>
-                    <StatuserVisning tekst={linje.kodeStatus} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
+                    <StatuserVisning tekst={linje.kodeStatus} oppdragsid={oppdragsID} linjeid={linje.linjeId} />
                   </Table.DataCell>
                   <Table.DataCell>{linje.datoFom}</Table.DataCell>
                   <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
                   <Table.DataCell>
-                    <AttestantVisning tekst={linje.attestert} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
+                    <AttestantVisning tekst={linje.attestert} oppdragsid={oppdragsID} linjeid={linje.linjeId} />
                   </Table.DataCell>
                   <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
                   <Table.DataCell>
-                    <Button onClick={() => handleSetLinjeId("" + linje.linjeId, oppdragsdetaljer.oppdragsLinjer)}>
-                      Detaljer...
-                    </Button>
+                    <Link to={`/${oppdragsID}/${linje.linjeId}`}>Detaljer...</Link>
                   </Table.DataCell>
                 </Table.Row>
               ))}
