@@ -15,7 +15,8 @@ import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import commonstyles from "../util/common-styles.module.css";
 import LinjedetaljAccordion from "../components/util/LinjedetaljAccordion";
 import ContentLoader from "../components/util/ContentLoader";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { BASENAME } from "../util/constants";
 
 type OppdragslinjedetaljerParams = {
   oppdragsID: string;
@@ -25,12 +26,13 @@ const OppdragslinjedetaljerPage = () => {
   const { oppdragsID = "", linjeID = "" } = useParams<OppdragslinjedetaljerParams>();
   const gjelderId = retrieveId();
   const { oppdrag } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
-  const [linjedetaljer, isLoading] = RestService.useFetchOppdragslinje(oppdragsID, linjeID ?? "", !!linjeID);
+  const [linjedetaljer, isLoading] = RestService.useFetchOppdragslinje(oppdragsID, linjeID ?? "");
   const linjedetalj = isArray(linjedetaljer) && !isEmpty(linjedetaljer) ? linjedetaljer[0] : undefined;
+
+  if (!gjelderId) window.location.replace(BASENAME);
 
   return (
     <>
-      {gjelderId === "" && <Navigate to="../.." relative="path" />}
       <div className={commonstyles.knapperad__right}>
         <Link to={"/"}>
           <div className={commonstyles.singlerow}>

@@ -10,9 +10,10 @@ import commonstyles from "../util/common-styles.module.css";
 import { Oppdragslinje } from "../models/Oppdragslinje";
 import LabelText from "../components/util/LabelText";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { isEmpty, retrieveId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
+import { BASENAME } from "../util/constants";
 
 type OppdragsdetaljerParams = {
   oppdragsID: string;
@@ -31,9 +32,10 @@ const OppdragsdetaljerPage = () => {
           .reduce((a) => a)
       : null;
 
+  if (!gjelderId) window.location.replace(BASENAME);
+
   return (
     <>
-      {gjelderId === "" && <Navigate to=".." relative="path" />}
       {isLoading && (
         <div className={commonstyles.contentloader}>
           <Loader size="3xlarge" title="Laster oppdragsdetaljer..." />

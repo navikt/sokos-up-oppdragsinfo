@@ -12,6 +12,7 @@ import ContentLoader from "../components/util/ContentLoader";
 import { useLoaderData } from "react-router-dom";
 import { Faggruppe } from "../models/Faggruppe";
 import { isArray } from "@grafana/faro-web-sdk";
+import { BASENAME } from "../util/constants";
 
 type TrefflisteParameters = {
   gjelderID?: string;
@@ -36,6 +37,12 @@ const SokAndTrefflistePage = () => {
     mutate([]);
   }, [trefflisteParameters]);
 
+  const nullstill = () => {
+    storeId("");
+    mutate(undefined, { revalidate: false });
+    window.location.replace(BASENAME);
+  };
+
   const {
     register,
     handleSubmit,
@@ -57,7 +64,9 @@ const SokAndTrefflistePage = () => {
     }));
   };
 
-  const sortedFaggrupper = faggrupper ? [...faggrupper.map((f) => `${f.navn}(${f.type})`)].sort() : [];
+  const sortedFaggrupper = faggrupper
+    ? [...faggrupper.map((f) => `${f.navn}(${f.type})`)].sort((a, b) => a.localeCompare(b))
+    : [];
 
   return (
     <div className={styles.sokandtreffliste}>
@@ -106,7 +115,7 @@ const SokAndTrefflistePage = () => {
                   variant="tertiary"
                   iconPosition="right"
                   icon={<EraserIcon title="Nullstill søk" fontSize="1.5rem" />}
-                  onClick={() => trigger()}
+                  onClick={nullstill}
                 >
                   Nullstill søk
                 </Button>
@@ -116,9 +125,7 @@ const SokAndTrefflistePage = () => {
         </div>
       )}
       {isLoading && <ContentLoader />}
-      {!isLoading && !!trefflisteParameters?.gjelderID && (
-        <TrefflisteVisning treffliste={treffliste ? treffliste : []} />
-      )}
+      {!isLoading && !!trefflisteParameters?.gjelderID && <TrefflisteVisning treffliste={treffliste ?? []} />}
     </div>
   );
 };

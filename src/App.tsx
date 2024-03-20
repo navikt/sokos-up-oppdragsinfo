@@ -4,13 +4,15 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import OppdragsdetaljerPage from "./pages/Oppdragsdetaljer.page";
 import OppdragslinjedetaljerPage from "./pages/OppdragslinjedetaljerPage";
 import RestService from "./services/rest-service";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import ContentLoader from "./components/util/ContentLoader";
+import { BASENAME } from "./util/constants";
+import { initGrafanaFaro } from "./util/grafanaFaro";
 
 const App = () => {
-  // useEffect(() => {
-  //   initGrafanaFaro();
-  // }, []);
+  useEffect(() => {
+    initGrafanaFaro();
+  }, []);
   return (
     <Suspense fallback={<ContentLoader />}>
       <RouterProvider
@@ -22,7 +24,7 @@ const App = () => {
               <Route path={"/:oppdragsID/:linjeID"} element={<OppdragslinjedetaljerPage />} />
             </>,
           ),
-          { basename: "/oppdragsinfo" },
+          { basename: BASENAME },
         )}
       />
     </Suspense>
