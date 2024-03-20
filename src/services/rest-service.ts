@@ -96,12 +96,8 @@ const useFetchOppdrag = (gjelderId?: string, id?: string) => {
   return { oppdrag, isLoading: (!error && !oppdrag) || isValidating };
 };
 
-const usePostFetch = <T>(shouldFetch: boolean, url: string, gjelderId: string) => {
-  const [should, setShould] = useState<boolean>(false);
-  useEffect(() => {
-    setShould(shouldFetch);
-  }, [shouldFetch]);
-  const { data, error, isValidating } = useSWR<T>(should ? url : null, {
+const usePostFetch = <T>(url: string, gjelderId: string) => {
+  const { data, error, isValidating } = useSWR<T>(url, {
     ...swrConfig,
     fetcher: (url) => axiosPostFetcher<T>(url, { gjelderId }),
   });
@@ -109,12 +105,8 @@ const usePostFetch = <T>(shouldFetch: boolean, url: string, gjelderId: string) =
   return [data, isLoading];
 };
 
-const useFetch = <T>(shouldFetch: boolean, url: string) => {
-  const [should, setShould] = useState<boolean>(false);
-  useEffect(() => {
-    setShould(shouldFetch);
-  }, [shouldFetch]);
-  const { data, error, isValidating } = useSWR<T>(should ? url : null, {
+const useFetch = <T>(url: string) => {
+  const { data, error, isValidating } = useSWR<T>(url, {
     ...swrConfig,
     fetcher: (url) => axiosGetFetcher<T>(url),
   });
@@ -122,48 +114,41 @@ const useFetch = <T>(shouldFetch: boolean, url: string) => {
   return [data, isLoading];
 };
 
-const useFetchEnhetshistorikk = (id: string, shouldFetch: boolean) =>
-  useFetch<Enhetshistorikk>(shouldFetch, `/${id}/enhetshistorikk`);
-const useFetchOmposteringer = (gjelderId: string, id: string, shouldFetch: boolean) =>
-  usePostFetch<Omposteringer>(shouldFetch, `/${id}/omposteringer`, gjelderId);
-const useFetchStatushistorikk = (id: string, shouldFetch: boolean) =>
-  useFetch<Statushistorikk>(shouldFetch, `/${id}/statushistorikk`);
+const useFetchEnhetshistorikk = (id: string) => useFetch<Enhetshistorikk>(`/${id}/enhetshistorikk`);
+const useFetchOmposteringer = (gjelderId: string, id: string) =>
+  usePostFetch<Omposteringer>(`/${id}/omposteringer`, gjelderId);
+const useFetchStatushistorikk = (id: string) => useFetch<Statushistorikk>(`/${id}/statushistorikk`);
 
-const useFetchOppdragslinje = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Oppdragslinjedetaljer>(shouldFetch, `/${oppdragsid}/${linjeid}/detaljer`);
+const useFetchOppdragslinje = (oppdragsid: string, linjeid: string) =>
+  useFetch<Oppdragslinjedetaljer>(`/${oppdragsid}/${linjeid}/detaljer`);
 
-const useFetchAttestant = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Attestanter>(shouldFetch, `/${oppdragsid}/${linjeid}/attestant`);
+const useFetchAttestant = (oppdragsid: string, linjeid: string) =>
+  useFetch<Attestanter>(`/${oppdragsid}/${linjeid}/attestant`);
 
-const useFetchKravhaver = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Kravhavere>(shouldFetch, `/${oppdragsid}/${linjeid}/kravhaver`);
+const useFetchKravhaver = (oppdragsid: string, linjeid: string) =>
+  useFetch<Kravhavere>(`/${oppdragsid}/${linjeid}/kravhaver`);
 
-const useFetchOvrig = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Ovrige>(shouldFetch, `/${oppdragsid}/${linjeid}/ovrig`);
+const useFetchOvrig = (oppdragsid: string, linjeid: string) => useFetch<Ovrige>(`/${oppdragsid}/${linjeid}/ovrig`);
 
-const useFetchStatus = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Statuser>(shouldFetch, `/${oppdragsid}/${linjeid}/status`);
+const useFetchStatus = (oppdragsid: string, linjeid: string) => useFetch<Statuser>(`/${oppdragsid}/${linjeid}/status`);
 
-const useFetchValuta = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Valutaer>(shouldFetch, `/${oppdragsid}/${linjeid}/valuta`);
+const useFetchValuta = (oppdragsid: string, linjeid: string) => useFetch<Valutaer>(`/${oppdragsid}/${linjeid}/valuta`);
 
-const useFetchKidliste = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Kidliste>(shouldFetch, `/${oppdragsid}/${linjeid}/kidliste`);
+const useFetchKidliste = (oppdragsid: string, linjeid: string) =>
+  useFetch<Kidliste>(`/${oppdragsid}/${linjeid}/kidliste`);
 
-const useFetchTekster = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Tekster>(shouldFetch, `/${oppdragsid}/${linjeid}/tekst`);
+const useFetchTekster = (oppdragsid: string, linjeid: string) => useFetch<Tekster>(`/${oppdragsid}/${linjeid}/tekst`);
 
-const useFetchSkyldnersList = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<SkyldnersList>(shouldFetch, `/${oppdragsid}/${linjeid}/skyldner`);
+const useFetchSkyldnersList = (oppdragsid: string, linjeid: string) =>
+  useFetch<SkyldnersList>(`/${oppdragsid}/${linjeid}/skyldner`);
 
-const useFetchMaksdato = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Maksdatoer>(shouldFetch, `/${oppdragsid}/${linjeid}/maksdato`);
+const useFetchMaksdato = (oppdragsid: string, linjeid: string) =>
+  useFetch<Maksdatoer>(`/${oppdragsid}/${linjeid}/maksdato`);
 
-const useFetchLinjeenheter = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Linjeenheter>(shouldFetch, `/${oppdragsid}/${linjeid}/enhet`);
+const useFetchLinjeenheter = (oppdragsid: string, linjeid: string) =>
+  useFetch<Linjeenheter>(`/${oppdragsid}/${linjeid}/enhet`);
 
-const useFetchGrad = (oppdragsid: string, linjeid: string, shouldFetch: boolean) =>
-  useFetch<Grader>(shouldFetch, `/${oppdragsid}/${linjeid}/grad`);
+const useFetchGrad = (oppdragsid: string, linjeid: string) => useFetch<Grader>(`/${oppdragsid}/${linjeid}/grad`);
 
 const RestService = {
   fetchFaggrupper,

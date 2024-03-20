@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import RestService from "../../services/rest-service";
 import { isArray } from "@grafana/faro-web-sdk";
@@ -7,15 +7,13 @@ import { Enhet } from "../../models/Enhet";
 import ContentLoader from "../util/ContentLoader";
 
 const EnhetshistorikkVisning = ({ id }: { id: string }) => {
-  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data, isLoading] = RestService.useFetchEnhetshistorikk(id, shouldFetch);
+  const [data, isLoading] = RestService.useFetchEnhetshistorikk(id);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
     <div>
       <Button
         onClick={() => {
-          setShouldFetch(true);
           ref.current?.showModal();
         }}
       >

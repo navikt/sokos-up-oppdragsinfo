@@ -6,7 +6,7 @@ import { Skyldner } from "../../models/Skyldner";
 import ContentLoader from "../util/ContentLoader";
 
 const SkyldnersListVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchSkyldnersList(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchSkyldnersList(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

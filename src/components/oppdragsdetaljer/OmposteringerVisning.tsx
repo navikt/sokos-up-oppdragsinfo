@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import RestService from "../../services/rest-service";
 import { isArray } from "@grafana/faro-web-sdk";
@@ -7,8 +7,7 @@ import { Ompostering } from "../../models/Ompostering";
 import ContentLoader from "../util/ContentLoader";
 
 const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; id: string; enabled: boolean }) => {
-  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data, isLoading] = RestService.useFetchOmposteringer(gjelderId, id, shouldFetch);
+  const [data, isLoading] = RestService.useFetchOmposteringer(gjelderId, id);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -16,7 +15,6 @@ const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; i
       <Button
         disabled={!enabled}
         onClick={() => {
-          setShouldFetch(true);
           ref.current?.showModal();
         }}
       >

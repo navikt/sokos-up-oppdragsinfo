@@ -6,7 +6,7 @@ import { Grad } from "../../models/Grad";
 import ContentLoader from "../util/ContentLoader";
 
 const GraderVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchGrad(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchGrad(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

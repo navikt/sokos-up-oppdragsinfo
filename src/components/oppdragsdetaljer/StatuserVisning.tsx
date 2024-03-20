@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import RestService from "../../services/rest-service";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
@@ -7,8 +7,7 @@ import { Status } from "../../models/Status";
 import ContentLoader from "../util/ContentLoader";
 
 const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
-  const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data, isLoading] = RestService.useFetchStatus(oppdragsid, linjeid, shouldFetch);
+  const [data, isLoading] = RestService.useFetchStatus(oppdragsid, linjeid);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -16,7 +15,6 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
       <Button
         variant={"tertiary"}
         onClick={() => {
-          setShouldFetch(true);
           ref.current?.showModal();
         }}
       >

@@ -6,7 +6,7 @@ import { Kid } from "../../models/Kid";
 import ContentLoader from "../util/ContentLoader";
 
 const KidlisteVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchKidliste(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchKidliste(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

@@ -6,7 +6,7 @@ import { Maksdato } from "../../models/Maksdato";
 import ContentLoader from "../util/ContentLoader";
 
 const MaksdatoerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchMaksdato(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchMaksdato(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

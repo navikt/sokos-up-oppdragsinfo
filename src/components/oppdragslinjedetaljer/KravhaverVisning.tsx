@@ -6,7 +6,7 @@ import { Kravhaver } from "../../models/Kravhaver";
 import ContentLoader from "../util/ContentLoader";
 
 const KravhaverVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchKravhaver(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchKravhaver(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

@@ -4,26 +4,28 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import OppdragsdetaljerPage from "./pages/Oppdragsdetaljer.page";
 import OppdragslinjedetaljerPage from "./pages/OppdragslinjedetaljerPage";
 import RestService from "./services/rest-service";
-import { useEffect } from "react";
-import { initGrafanaFaro } from "./util/grafanaFaro";
+import { Suspense } from "react";
+import ContentLoader from "./components/util/ContentLoader";
 
 const App = () => {
-  useEffect(() => {
-    initGrafanaFaro();
-  }, []);
+  // useEffect(() => {
+  //   initGrafanaFaro();
+  // }, []);
   return (
-    <RouterProvider
-      router={createBrowserRouter(
-        createRoutesFromElements(
-          <>
-            <Route path={"/"} element={<SokAndTrefflistePage />} loader={RestService.fetchFaggrupper} />
-            <Route path={"/:oppdragsID"} element={<OppdragsdetaljerPage />} />
-            <Route path={"/:oppdragsID/:linjeID"} element={<OppdragslinjedetaljerPage />} />
-          </>,
-        ),
-        { basename: "/oppdragsinfo" },
-      )}
-    />
+    <Suspense fallback={<ContentLoader />}>
+      <RouterProvider
+        router={createBrowserRouter(
+          createRoutesFromElements(
+            <>
+              <Route path={"/"} element={<SokAndTrefflistePage />} loader={RestService.fetchFaggrupper} />
+              <Route path={"/:oppdragsID"} element={<OppdragsdetaljerPage />} />
+              <Route path={"/:oppdragsID/:linjeID"} element={<OppdragslinjedetaljerPage />} />
+            </>,
+          ),
+          { basename: "/oppdragsinfo" },
+        )}
+      />
+    </Suspense>
   );
 };
 

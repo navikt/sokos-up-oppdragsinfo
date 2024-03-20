@@ -6,7 +6,7 @@ import { Tekst } from "../../models/Tekst";
 import ContentLoader from "../util/ContentLoader";
 
 const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchTekster(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchTekster(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

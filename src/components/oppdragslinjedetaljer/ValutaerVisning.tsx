@@ -6,7 +6,7 @@ import { Valuta } from "../../models/Valuta";
 import ContentLoader from "../util/ContentLoader";
 
 const ValutaerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchValuta(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchValuta(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

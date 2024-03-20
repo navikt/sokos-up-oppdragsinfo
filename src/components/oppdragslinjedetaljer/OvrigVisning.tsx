@@ -6,7 +6,7 @@ import { Ovrig } from "../../models/Ovrig";
 import ContentLoader from "../util/ContentLoader";
 
 const OvrigVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchOvrig(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchOvrig(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 

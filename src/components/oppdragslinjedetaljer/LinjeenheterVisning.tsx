@@ -6,7 +6,7 @@ import { Linjeenhet } from "../../models/Linjeenhet";
 import ContentLoader from "../util/ContentLoader";
 
 const LinjeenheterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data, isLoading] = RestService.useFetchLinjeenheter(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchLinjeenheter(oppdragsid, linjeid);
 
   if (isLoading) return <ContentLoader />;
 
