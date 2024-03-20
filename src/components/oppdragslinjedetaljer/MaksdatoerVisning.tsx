@@ -3,9 +3,13 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Maksdato } from "../../models/Maksdato";
+import ContentLoader from "../util/ContentLoader";
 
 const MaksdatoerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchMaksdato(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchMaksdato(oppdragsid, linjeid, true);
+
+  if (isLoading) return <ContentLoader />;
+
   return (
     <Table zebraStripes>
       <Table.Header>

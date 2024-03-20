@@ -33,7 +33,7 @@ const OppdragsdetaljerPage = () => {
 
   return (
     <>
-      {gjelderId === "" && <Navigate to={"/"} />}
+      {gjelderId === "" && <Navigate to=".." relative="path" />}
       {isLoading && (
         <div className={commonstyles.contentloader}>
           <Loader size="3xlarge" title="Laster oppdragsdetaljer..." />

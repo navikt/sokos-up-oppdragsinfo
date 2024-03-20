@@ -3,9 +3,12 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Linjeenhet } from "../../models/Linjeenhet";
+import ContentLoader from "../util/ContentLoader";
 
 const LinjeenheterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchLinjeenheter(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchLinjeenheter(oppdragsid, linjeid, true);
+
+  if (isLoading) return <ContentLoader />;
 
   return (
     <Table zebraStripes>

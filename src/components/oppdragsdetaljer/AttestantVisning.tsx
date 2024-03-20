@@ -8,7 +8,7 @@ import ContentLoader from "../util/ContentLoader";
 
 const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data] = RestService.useFetchAttestant(oppdragsid, linjeid, shouldFetch);
+  const [data, isLoading] = RestService.useFetchAttestant(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -25,7 +25,7 @@ const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; 
 
       <Modal ref={ref} header={{ heading: "Attestant" }}>
         <Modal.Body>
-          {!data ? (
+          {isLoading ? (
             <ContentLoader width="215.6px" />
           ) : (
             <Table zebraStripes>

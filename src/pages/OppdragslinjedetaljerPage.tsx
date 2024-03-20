@@ -30,7 +30,7 @@ const OppdragslinjedetaljerPage = () => {
 
   return (
     <>
-      {gjelderId === "" && <Navigate to={"/"} />}
+      {gjelderId === "" && <Navigate to="../.." relative="path" />}
       <div className={commonstyles.knapperad__right}>
         <Link to={"/"}>
           <div className={commonstyles.singlerow}>

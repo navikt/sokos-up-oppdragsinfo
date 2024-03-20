@@ -8,7 +8,7 @@ import ContentLoader from "../util/ContentLoader";
 
 const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; id: string; enabled: boolean }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data] = RestService.useFetchOmposteringer(gjelderId, id, shouldFetch);
+  const [data, isLoading] = RestService.useFetchOmposteringer(gjelderId, id, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -25,7 +25,7 @@ const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; i
 
       <Modal ref={ref} header={{ heading: "Omposteringer" }} width={"2000px"}>
         <Modal.Body>
-          {!data ? (
+          {isLoading ? (
             <ContentLoader />
           ) : (
             <Table zebraStripes>

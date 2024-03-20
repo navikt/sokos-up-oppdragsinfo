@@ -8,7 +8,7 @@ import ContentLoader from "../util/ContentLoader";
 
 const StatushistorikkVisning = ({ id }: { id: string }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data] = RestService.useFetchStatushistorikk(id, shouldFetch);
+  const [data, isLoading] = RestService.useFetchStatushistorikk(id, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -24,7 +24,7 @@ const StatushistorikkVisning = ({ id }: { id: string }) => {
 
       <Modal ref={ref} header={{ heading: "Statushistorikk" }}>
         <Modal.Body>
-          {!data ? (
+          {isLoading ? (
             <ContentLoader />
           ) : (
             <Table zebraStripes>

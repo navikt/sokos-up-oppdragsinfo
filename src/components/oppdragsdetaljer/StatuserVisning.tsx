@@ -8,7 +8,7 @@ import ContentLoader from "../util/ContentLoader";
 
 const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
-  const [data] = RestService.useFetchStatus(oppdragsid, linjeid, shouldFetch);
+  const [data, isLoading] = RestService.useFetchStatus(oppdragsid, linjeid, shouldFetch);
   const ref = useRef<HTMLDialogElement>(null);
 
   return (
@@ -25,7 +25,7 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
 
       <Modal ref={ref} header={{ heading: "Status" }}>
         <Modal.Body>
-          {!data ? (
+          {isLoading ? (
             <ContentLoader width="477px" />
           ) : (
             <Table zebraStripes>

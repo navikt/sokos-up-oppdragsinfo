@@ -3,9 +3,12 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Valuta } from "../../models/Valuta";
+import ContentLoader from "../util/ContentLoader";
 
 const ValutaerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchValuta(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchValuta(oppdragsid, linjeid, true);
+
+  if (isLoading) return <ContentLoader />;
 
   return (
     <Table zebraStripes>

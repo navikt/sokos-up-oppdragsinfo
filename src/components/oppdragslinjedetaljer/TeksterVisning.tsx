@@ -3,9 +3,12 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Tekst } from "../../models/Tekst";
+import ContentLoader from "../util/ContentLoader";
 
 const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchTekster(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchTekster(oppdragsid, linjeid, true);
+
+  if (isLoading) return <ContentLoader />;
 
   return (
     <div>

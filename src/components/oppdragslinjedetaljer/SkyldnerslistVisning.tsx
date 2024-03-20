@@ -3,9 +3,13 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Skyldner } from "../../models/Skyldner";
+import ContentLoader from "../util/ContentLoader";
 
 const SkyldnersListVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchSkyldnersList(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchSkyldnersList(oppdragsid, linjeid, true);
+
+  if (isLoading) return <ContentLoader />;
+
   return (
     <Table zebraStripes>
       <Table.Header>

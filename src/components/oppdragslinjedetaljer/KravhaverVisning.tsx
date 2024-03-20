@@ -3,9 +3,12 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Kravhaver } from "../../models/Kravhaver";
+import ContentLoader from "../util/ContentLoader";
 
 const KravhaverVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchKravhaver(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchKravhaver(oppdragsid, linjeid, true);
+
+  if (isLoading) return <ContentLoader />;
 
   return (
     <Table zebraStripes>
