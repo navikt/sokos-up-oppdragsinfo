@@ -4,7 +4,7 @@ import { Button, Modal, Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Attestant } from "../../models/Attestant";
-import ContentLoader from "../util/ContentLoader";
+import ContentLoader from "../common/ContentLoader";
 
 const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
   const [data, isLoading] = RestService.useFetchAttestant(oppdragsid, linjeid);

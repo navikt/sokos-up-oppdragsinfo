@@ -1,0 +1,11 @@
+.treffliste {
+  @apply mx-36;
+}
+
+.treffliste__heading {
+  @apply bg-white px-5 py-2;
+}
+
+.treffliste__table {
+  @apply bg-white;
+}

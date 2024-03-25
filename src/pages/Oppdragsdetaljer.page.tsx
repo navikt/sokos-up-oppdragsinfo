@@ -8,7 +8,7 @@ import AttestantVisning from "../components/oppdragsdetaljer/AttestantVisning";
 import StatuserVisning from "../components/oppdragsdetaljer/StatuserVisning";
 import commonstyles from "../util/common-styles.module.css";
 import { Oppdragslinje } from "../models/Oppdragslinje";
-import LabelText from "../components/util/LabelText";
+import LabelText from "../components/common/LabelText";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import { Link, useParams } from "react-router-dom";
 import { isEmpty, retrieveId } from "../util/commonUtils";
@@ -44,7 +44,7 @@ const OppdragsdetaljerPage = () => {
       {!isLoading && oppdragsdetaljer && (
         <div>
           <div className={commonstyles.knapperad__right}>
-            <Link to={"/"}>
+            <Link to={"/treffliste"}>
               <div className={commonstyles.singlerow}>
                 <ChevronLeftIcon /> Treffliste
               </div>

@@ -3,7 +3,7 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Linjeenhet } from "../../models/Linjeenhet";
-import ContentLoader from "../util/ContentLoader";
+import ContentLoader from "../common/ContentLoader";
 
 const LinjeenheterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [data, isLoading] = RestService.useFetchLinjeenheter(oppdragsid, linjeid);

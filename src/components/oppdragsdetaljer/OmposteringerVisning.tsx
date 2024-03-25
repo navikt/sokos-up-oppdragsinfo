@@ -4,7 +4,7 @@ import RestService from "../../services/rest-service";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Ompostering } from "../../models/Ompostering";
-import ContentLoader from "../util/ContentLoader";
+import ContentLoader from "../common/ContentLoader";
 
 const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; id: string; enabled: boolean }) => {
   const [data, isLoading] = RestService.useFetchOmposteringer(gjelderId, id);

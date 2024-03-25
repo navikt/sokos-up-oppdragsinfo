@@ -13,8 +13,8 @@ import LinjeenheterVisning from "../components/oppdragslinjedetaljer/Linjeenhete
 import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
 import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import commonstyles from "../util/common-styles.module.css";
-import LinjedetaljAccordion from "../components/util/LinjedetaljAccordion";
-import ContentLoader from "../components/util/ContentLoader";
+import LinjedetaljAccordion from "../components/oppdragslinjedetaljer/LinjedetaljAccordion";
+import ContentLoader from "../components/common/ContentLoader";
 import { Link, useParams } from "react-router-dom";
 import { BASENAME } from "../util/constants";
 
@@ -34,7 +34,7 @@ const OppdragslinjedetaljerPage = () => {
   return (
     <>
       <div className={commonstyles.knapperad__right}>
-        <Link to={"/"}>
+        <Link to={"/treffliste"}>
           <div className={commonstyles.singlerow}>
             <ChevronLeftIcon /> Treffliste{" "}
           </div>

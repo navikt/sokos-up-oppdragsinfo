@@ -4,7 +4,7 @@ import RestService from "../../services/rest-service";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Enhet } from "../../models/Enhet";
-import ContentLoader from "../util/ContentLoader";
+import ContentLoader from "../common/ContentLoader";
 
 const EnhetshistorikkVisning = ({ id }: { id: string }) => {
   const [data, isLoading] = RestService.useFetchEnhetshistorikk(id);

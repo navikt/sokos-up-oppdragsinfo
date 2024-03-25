@@ -1,0 +1,19 @@
+.breadcrumbs {
+  @apply relative h-16 bg-[--a-surface-alt-1-subtle] rounded-lg;
+}
+
+.breadcrumbs__contents {
+  @apply flex flex-row min-w-56;
+}
+
+.breadcrumbs__left {
+  @apply absolute left-5 top-5;
+}
+
+.breadcrumbs__right {
+  @apply absolute right-5 top-5;
+}
+
+.breadcrumbs__crumb {
+  @apply ml-1;
+}

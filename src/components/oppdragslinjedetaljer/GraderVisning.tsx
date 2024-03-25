@@ -3,7 +3,7 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Grad } from "../../models/Grad";
-import ContentLoader from "../util/ContentLoader";
+import ContentLoader from "../common/ContentLoader";
 
 const GraderVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
   const [data, isLoading] = RestService.useFetchGrad(oppdragsid, linjeid);
