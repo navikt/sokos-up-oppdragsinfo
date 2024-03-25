@@ -87,7 +87,11 @@ const SokPage = () => {
   );
 
   const handleChooseFaggruppe = (faggruppenavn: string, isSelected: boolean) => {
-    if (!isSelected || faggruppenavn === "") clearFaggruppe();
+    console.log("handleChooseFaggruppe " + faggruppenavn + isSelected ? " true" : " false");
+    if (!isSelected || faggruppenavn === "") {
+      clearFaggruppe();
+      return;
+    }
     const faggruppe = faggruppetabell.find((f) => f.comboboxText === faggruppenavn);
     storeFaggruppe(faggruppe);
     setTrefflisteSokParameters((prevParameters) => ({
