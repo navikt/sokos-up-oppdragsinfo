@@ -87,7 +87,6 @@ const SokPage = () => {
   );
 
   const handleChooseFaggruppe = (faggruppenavn: string, isSelected: boolean) => {
-    console.log("handleChooseFaggruppe " + faggruppenavn + isSelected ? " true" : " false");
     if (!isSelected || faggruppenavn === "") {
       clearFaggruppe();
       return;
