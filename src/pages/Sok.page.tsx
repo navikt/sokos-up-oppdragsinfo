@@ -6,28 +6,20 @@ import {
   TrefflisteSearchParameters,
   TrefflisteSearchParametersSchema,
 } from "../components/sok/TrefflisteSokParameters";
-import { useEffect, useMemo, useState } from "react";
-import {
-  anyOppdragExists,
-  clearFaggruppe,
-  Combobox,
-  firstOf,
-  isEmpty,
-  retrieveFaggruppe,
-  retrieveId,
-  storeFaggruppe,
-  storeId,
-} from "../util/commonUtils";
+import { useEffect, useState } from "react";
+import { anyOppdragExists, firstOf, isEmpty, retrieveId, storeId } from "../util/commonUtils";
 import RestService from "../services/rest-service";
 import styles from "./Sok.module.css";
 import ContentLoader from "../components/common/ContentLoader";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { Faggruppe, FaggruppeStorageObject } from "../models/Faggruppe";
+import { Faggruppe } from "../models/Faggruppe";
 import { isArray } from "@grafana/faro-web-sdk";
 import SokHelp from "../components/sok/SokHelp";
 import NullstillButton from "../components/common/NullstillButton";
+import FaggrupperCombobox from "../components/sok/FaggrupperCombobox";
 
 const SokPage = () => {
+  const faggrupper = useLoaderData() as Faggruppe[];
   const [trefflisteSokParameters, setTrefflisteSokParameters] = useState<TrefflisteSearchParameters>({
     gjelderID: retrieveId(),
   });
@@ -67,41 +59,12 @@ const SokPage = () => {
     setTrefflisteSokParameters({ ...trefflisteSokParameters, gjelderID: gjelderID });
   };
 
-  const faggrupper = useLoaderData() as Faggruppe[];
-
-  const faggruppetabell: FaggruppeStorageObject[] = useMemo(
-    () =>
-      !!faggrupper
-        ? faggrupper.map((faggruppe) => ({
-            navn: faggruppe.navn,
-            type: faggruppe.type,
-            comboboxText: `${faggruppe.navn}(${faggruppe.type})`,
-          }))
-        : [],
-    [faggrupper],
-  );
-
-  const sortedFaggrupper = useMemo(
-    () => (!!faggruppetabell ? faggruppetabell.map((f) => f.comboboxText).sort((a, b) => a.localeCompare(b)) : []),
-    [faggruppetabell],
-  );
-
-  const handleChooseFaggruppe = (faggruppenavn: string, isSelected: boolean) => {
-    if (!isSelected || faggruppenavn === "") {
-      clearFaggruppe();
-      return;
-    }
-    const faggruppe = faggruppetabell.find((f) => f.comboboxText === faggruppenavn);
-    storeFaggruppe(faggruppe);
+  const handleChangeFaggruppe = (faggruppe: string) => {
     setTrefflisteSokParameters((prevParameters) => ({
       ...prevParameters,
-      faggruppe: faggruppe?.type,
+      faggruppe: faggruppe,
     }));
   };
-
-  const previouslyChosenFaggruppe = retrieveFaggruppe();
-
-  const faggruppe = trefflisteSokParameters?.faggruppe;
 
   return (
     <>
@@ -113,23 +76,26 @@ const SokPage = () => {
           <h1>Søk</h1>
 
           <div className={styles.sok_inputfields}>
-            <TextField
-              {...register("gjelderID")}
-              label="Gjelder-ID"
-              defaultValue={trefflisteSokParameters.gjelderID}
-              id="gjelderID"
-              error={errors.gjelderID?.message}
-            />
-            <Combobox
-              label={"Faggruppe"}
-              defaultValue={previouslyChosenFaggruppe?.comboboxText ?? undefined}
-              onToggleSelected={handleChooseFaggruppe}
-              options={["", ...sortedFaggrupper]}
-            />
+            <div className={styles.sok__inputGjelderID}>
+              <TextField
+                {...register("gjelderID")}
+                label="Gjelder-ID"
+                defaultValue={trefflisteSokParameters.gjelderID}
+                id="gjelderID"
+                error={errors.gjelderID?.message}
+              />
+            </div>
+            <FaggrupperCombobox faggrupper={faggrupper} handleChangeFaggruppe={handleChangeFaggruppe} />
           </div>
           <div className={styles.sok__knapperad}>
             <div className={styles.sok__buttonwrapper}>
-              <Button size="small" iconPosition="right" icon={<MagnifyingGlassIcon />} onClick={() => trigger()}>
+              <Button
+                size="small"
+                title={"tøm"}
+                iconPosition="right"
+                icon={<MagnifyingGlassIcon />}
+                onClick={() => trigger()}
+              >
                 Søk
               </Button>
             </div>
@@ -143,7 +109,7 @@ const SokPage = () => {
       {!trefflisteIsLoading && !anyOppdragExists(treffliste) && (
         <Alert variant="info">
           Null treff. Denne IDen har ingen oppdrag
-          {!!faggruppe ? ` med faggruppe ${faggruppe}` : ""}
+          {!!trefflisteSokParameters.faggruppe ? ` med faggruppe ${trefflisteSokParameters.faggruppe}` : ""}
         </Alert>
       )}
     </>

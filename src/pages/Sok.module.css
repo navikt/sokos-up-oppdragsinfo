@@ -7,7 +7,11 @@
 }
 
 .sok_inputfields {
-  @apply w-1/3 pb-6 space-y-5;
+  @apply w-1/2 pb-6 space-y-5;
+}
+
+.sok__inputGjelderID {
+  @apply min-w-128;
 }
 
 .sok__oppdrag {
@@ -15,7 +19,7 @@
 }
 
 .sok__knapperad {
-  @apply flex flex-row-reverse;
+  @apply flex flex-row-reverse min-w-64;
 }
 
 .sok__buttonwrapper {

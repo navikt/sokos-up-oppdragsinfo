@@ -16,7 +16,8 @@ export const getTime = () => {
   return `${dato.toLocaleDateString()} ${dato.toLocaleTimeString()},${dato.getMilliseconds()}`;
 };
 
-export const storeId = (id?: string) => sessionStorage.setItem("oppdragsinfo_gId", btoa(id ?? ""));
+export const storeId = (id?: string) =>
+  id ? sessionStorage.setItem("oppdragsinfo_gId", btoa(id)) : sessionStorage.removeItem("oppdragsinfo_gId");
 export const retrieveId = () => retrieveFromStorage("oppdragsinfo_gId") ?? "";
 export const clearId = () => storeId();
 

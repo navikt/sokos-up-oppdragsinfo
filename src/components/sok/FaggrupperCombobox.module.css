@@ -1,0 +1,7 @@
+.combobox {
+  @apply relative min-w-128;
+}
+
+.combobox__clearbutton {
+  @apply absolute right-9 top-10;
+}

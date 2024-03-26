@@ -14,7 +14,7 @@ const SokekriterierVisning = ({ gjelderId, navn, faggruppe }: SokekriterierProps
         <div className={styles.sokekriterier__content}>
           <LabelText label={"Gjelder ID"} text={gjelderId ?? ""} />
           <LabelText label={"Navn"} text={navn ?? ""} />
-          <LabelText label={"Faggruppe"} text={faggruppe ?? ""} />
+          <LabelText label={"Faggruppe"} text={faggruppe ?? "Alle"} />
         </div>
       </div>
     </>
