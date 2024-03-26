@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { comparator, SortState } from "../../util/commonUtils";
 import { Oppdrag } from "../../models/Oppdrag";
 import styles from "./TrefflisteTable.module.css";
-
+import commonstyles from "../../util/common-styles.module.css";
 const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
@@ -33,16 +33,20 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   console.log(treff.oppdragsListe.length);
 
   const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+  const pagecount = Math.ceil(treff.oppdragsListe.length / rowsPerPage);
 
   return (
     <>
-      <div className={styles.sortabletable__topinfo}>
-        <p>
-          {treff?.oppdragsListe?.length ?? 0} treff, {page} av {Math.ceil(treff.oppdragsListe.length / rowsPerPage)}{" "}
-          sider
-        </p>
-        <p>Vis {rowsPerPage} per side</p>
-      </div>
+      {pagecount > 1 ? (
+        <div className={styles.sortabletable__topinfo}>
+          <p>
+            {treff?.oppdragsListe?.length ?? 0} treff, {page} av {pagecount} sider
+          </p>
+          <p>Vis {rowsPerPage} per side</p>
+        </div>
+      ) : (
+        <div className={commonstyles.spacing}></div>
+      )}
       <div className={styles.sortabletable}>
         <Table sort={sort} onSortChange={handleSort}>
           <Table.Header>
@@ -73,14 +77,11 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
           </Table.Body>
         </Table>
       </div>
-      <div className={styles.sortabletable__pagination}>
-        <Pagination
-          page={page}
-          onPageChange={setPage}
-          count={Math.ceil(treff.oppdragsListe.length / rowsPerPage)}
-          size="small"
-        />
-      </div>
+      {pagecount > 1 && (
+        <div className={styles.sortabletable__pagination}>
+          <Pagination page={page} onPageChange={setPage} count={pagecount} size="small" />
+        </div>
+      )}
     </>
   );
 };

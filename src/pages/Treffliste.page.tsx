@@ -21,7 +21,7 @@ const TrefflistePage = () => {
     window.location.replace(BASENAME);
   }, [treffliste]);
 
-  const gjelderNavn = !!treffliste && !isEmpty(treffliste) ? firstOf(treffliste).gjelderNavn : "";
+  const gjelderNavn = !!treffliste && !isEmpty(treffliste) ? firstOf(treffliste)?.gjelderNavn : "";
   const faggruppeNavn = retrieveFaggruppe()?.navn;
 
   return (

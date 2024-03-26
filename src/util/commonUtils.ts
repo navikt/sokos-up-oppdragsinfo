@@ -50,6 +50,7 @@ export const comparator = <T>(a: T, b: T, orderBy: keyof T) => {
 };
 
 export const formatDate = (date$: string) => {
+  if (!date$ || date$ === "") return "";
   const date = new Date(date$);
   const y = date.getFullYear();
   const m = (date.getMonth() + 1).toString().padStart(2, "0");

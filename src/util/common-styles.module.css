@@ -17,6 +17,10 @@
   @apply flex flex-row;
 }
 
+.spacing {
+  @apply h-16;
+}
+
 .contentloader {
   width: 100%;
   text-align: center;
