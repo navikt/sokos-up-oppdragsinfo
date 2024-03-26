@@ -5,39 +5,183 @@
     "gjelderNavn": "cøgyg wåkacæbo omygåhPDL-TEST",
     "oppdragsListe": [
       {
-        "fagsystemId": "15003899",
-        "oppdragsId": 1,
-        "navnFagGruppe": "Inntektsytelser",
-        "navnFagOmraade": "Uføretrygd",
+        "fagsystemId": "000448656NS419.22.41.067353",
+        "oppdragsId": 70445294,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "Uføretrygd til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "000448633NS419.22.45.323821",
+        "oppdragsId": 70445297,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "Uføretrygd til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "000448718NS419.22.48.136913",
+        "oppdragsId": 70445300,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "Uføretrygd til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "0000004270AR403.19.42.492689",
+        "oppdragsId": 70045723,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "AAP til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "0000004271AR403.19.42.729406",
+        "oppdragsId": 70045726,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "AAP til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "11077531914-20210472044001-K",
+        "oppdragsId": 70046401,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "AAP til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "02085648473-20230407750001-K",
+        "oppdragsId": 70046699,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "AAP til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "000443938NS423.58.05.122935",
+        "oppdragsId": 70138929,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "Uføretrygd til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "000443989NS423.58.06.568967",
+        "oppdragsId": 70138933,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "Uføretrygd til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "061223-80000839778-27670",
+        "oppdragsId": 70126774,
+        "navnFagGruppe": "Skatteoppgjør - manuelle posteringer",
+        "navnFagOmraade": "Manuell opprydding skatt",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "061223-80000839778-27671",
+        "oppdragsId": 70127337,
+        "navnFagGruppe": "Skatteoppgjør - manuelle posteringer",
+        "navnFagOmraade": "Manuell opprydding skatt",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "12086925433-20230388263001-K",
+        "oppdragsId": 70129632,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "AAP til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "26026045710-20230412948001-K",
+        "oppdragsId": 70130125,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "AAP til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "PASS"
+      },
+      {
+        "fagsystemId": "0000001449AR400.23.44.205080",
+        "oppdragsId": 68216924,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "AAP til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
+        "kodeStatus": "AKTI"
+      },
+      {
+        "fagsystemId": "0001484462",
+        "oppdragsId": 70459870,
+        "navnFagGruppe": "Skatteoppgjør",
+        "navnFagOmraade": "Skatteoppgjør",
         "kjorIdag": "N",
         "typeBilag": "",
         "kodeStatus": "AKTI"
       },
       {
-        "fagsystemId": "UFORENG-06518006337",
-        "oppdragsId": 2,
-        "navnFagGruppe": "Inntektsytelser",
-        "navnFagOmraade": "Uføretrygdede engangsutbetaling",
+        "fagsystemId": "0001484463",
+        "oppdragsId": 70459871,
+        "navnFagGruppe": "Skatteoppgjør",
+        "navnFagOmraade": "Skatteoppgjør",
         "kjorIdag": "N",
         "typeBilag": "",
+        "kodeStatus": "AKTI"
+      },
+      {
+        "fagsystemId": "0001484464",
+        "oppdragsId": 70459872,
+        "navnFagGruppe": "Svalbardskatt",
+        "navnFagOmraade": "Svalbardskatt",
+        "kjorIdag": "N",
+        "typeBilag": "",
+        "kodeStatus": "AKTI"
+      },
+      {
+        "fagsystemId": "0001484465",
+        "oppdragsId": 70459873,
+        "navnFagGruppe": "Svalbardskatt",
+        "navnFagOmraade": "Svalbardskatt",
+        "kjorIdag": "N",
+        "typeBilag": "",
+        "kodeStatus": "AKTI"
+      },
+      {
+        "fagsystemId": "000313129NS423.33.02.279348",
+        "oppdragsId": 60010067,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "Uføretrygd til innkreving",
+        "kjorIdag": "N",
+        "typeBilag": "MEMO",
         "kodeStatus": "PASS"
       },
       {
-        "fagsystemId": "15003899",
-        "oppdragsId": 3,
-        "navnFagGruppe": "Pensjoner",
-        "navnFagOmraade": "Uførepensjon",
+        "fagsystemId": "000428484NS401.19.17.221833",
+        "oppdragsId": 69991645,
+        "navnFagGruppe": "Tilbakekreving",
+        "navnFagOmraade": "Uføretrygd til innkreving",
         "kjorIdag": "N",
-        "typeBilag": "",
-        "kodeStatus": "PASS"
-      },
-      {
-        "fagsystemId": "TU000946427010304",
-        "oppdragsId": 4,
-        "navnFagGruppe": "Tidsbegrenset uførestønad",
-        "navnFagOmraade": "Tidsbegrenset uførestønad",
-        "kjorIdag": "N",
-        "typeBilag": "STD",
+        "typeBilag": "MEMO",
         "kodeStatus": "PASS"
       }
     ]

@@ -3,9 +3,13 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Ovrig } from "../../models/Ovrig";
+import ContentLoader from "../common/ContentLoader";
 
 const OvrigVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchOvrig(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchOvrig(oppdragsid, linjeid);
+
+  if (isLoading) return <ContentLoader />;
+
   return (
     <Table zebraStripes>
       <Table.Header>

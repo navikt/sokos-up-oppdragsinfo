@@ -3,9 +3,12 @@ import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
 import { isEmpty } from "../../util/commonUtils";
 import { Grad } from "../../models/Grad";
+import ContentLoader from "../common/ContentLoader";
 
 const GraderVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchGrad(oppdragsid, linjeid, true);
+  const [data, isLoading] = RestService.useFetchGrad(oppdragsid, linjeid);
+
+  if (isLoading) return <ContentLoader />;
 
   return (
     <Table zebraStripes>

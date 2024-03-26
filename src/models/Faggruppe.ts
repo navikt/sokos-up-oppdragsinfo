@@ -6,3 +6,7 @@ export const FaggruppeSchema = z.object({
 });
 
 export type Faggruppe = z.infer<typeof FaggruppeSchema>;
+
+export type FaggruppeStorageObject = Faggruppe & {
+  comboboxText: string;
+};

@@ -13,4 +13,7 @@ const lengderegel: ZodEffects<ZodString, string, string> = z
 
 export const TrefflisteSearchParametersSchema = z.object({
   gjelderID: ikkeblank.pipe(baretallregel).pipe(lengderegel),
+  faggruppe: z.optional(z.string()),
 });
+
+export type TrefflisteSearchParameters = z.infer<typeof TrefflisteSearchParametersSchema>;
