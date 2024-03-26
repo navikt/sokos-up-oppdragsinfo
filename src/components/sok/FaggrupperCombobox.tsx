@@ -38,7 +38,7 @@ const FaggrupperCombobox = ({ faggrupper, handleChangeFaggruppe }: FaggruppeComb
     }
     const faggruppe = faggruppetabell.find((f) => f.comboboxText === faggruppenavn);
     storeFaggruppe(faggruppe);
-    handleChangeFaggruppe(faggruppe?.comboboxText ?? "");
+    handleChangeFaggruppe(faggruppe?.type ?? "");
   };
 
   return (
