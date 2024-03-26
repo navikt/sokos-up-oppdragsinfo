@@ -1,5 +1,5 @@
 .sortabletable {
-  @apply bg-white;
+  @apply bg-white min-w-1400;
 }
 
 .sortabletable__topinfo {

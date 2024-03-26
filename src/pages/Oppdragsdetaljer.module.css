@@ -1,11 +1,19 @@
+.oppdragsdetaljer {
+  @apply space-y-6;
+}
+
 .oppdragsdetaljer__toppinfo {
-  @apply space-y-5;
+  @apply mx-48 bg-[--a-surface-alt-1-subtle] p-3;
 }
 
 .oppdragsdetaljer__columns {
-  @apply grid grid-cols-2 grid-flow-row w-2/3;
+  @apply flex flex-row w-full p-3 justify-between;
 }
 
-.oppdragsdetaljer__enhet {
-  @apply columns-3;
+.oppdragsdetaljer__column {
+  @apply flex flex-col space-y-3;
+}
+
+.oppdragsdetaljer__heading {
+  @apply text-center;
 }

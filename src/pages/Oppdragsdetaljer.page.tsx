@@ -9,11 +9,12 @@ import StatuserVisning from "../components/oppdragsdetaljer/StatuserVisning";
 import commonstyles from "../util/common-styles.module.css";
 import { Oppdragslinje } from "../models/Oppdragslinje";
 import LabelText from "../components/common/LabelText";
-import { ChevronLeftIcon } from "@navikt/aksel-icons";
+import { ArrowLeftIcon } from "@navikt/aksel-icons";
 import { Link, useParams } from "react-router-dom";
-import { isEmpty, retrieveId } from "../util/commonUtils";
+import { firstOf, formatDate, isEmpty, retrieveId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
 import { BASENAME } from "../util/constants";
+import NullstillButton from "../components/common/NullstillButton";
 
 type OppdragsdetaljerParams = {
   oppdragsID: string;
@@ -42,39 +43,64 @@ const OppdragsdetaljerPage = () => {
         </div>
       )}
       {!isLoading && oppdragsdetaljer && (
-        <div>
+        <div className={styles.oppdragsdetaljer}>
           <div className={commonstyles.knapperad__right}>
-            <Link to={"/treffliste"}>
-              <div className={commonstyles.singlerow}>
-                <ChevronLeftIcon /> Treffliste
-              </div>
-            </Link>
-            <EnhetshistorikkVisning id={oppdragsID} />
             {gjelderId && (
               <OmposteringerVisning enabled={oppdragsdetaljer.harOmposteringer} gjelderId={gjelderId} id={oppdragsID} />
             )}
             <StatushistorikkVisning id={oppdragsID} />
+            <EnhetshistorikkVisning id={oppdragsID} />
+          </div>
+          <div>
+            <Link to={"/treffliste"}>
+              <div className={commonstyles.singlerow}>
+                <ArrowLeftIcon title="a11y-title" fontSize="1.5rem" /> Tilbake til trefflisten
+              </div>
+            </Link>
           </div>
           <div className={styles.oppdragsdetaljer__toppinfo}>
-            {gjelderId && oppdrag && (
-              <div className={styles.oppdragsdetaljer__columns}>
-                <LabelText label={"Gjelder ID"} text={gjelderId} />
-                <LabelText label={"Status"} text={oppdrag.kodeStatus} />
-                <LabelText label={"Fagområde"} text={oppdrag.navnFagOmraade} />
-                <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />
-                <LabelText label={"Beregnes nå"} text={oppdrag.kjorIdag} />
-                <LabelText label={"Oppdrags ID"} text={oppdrag.oppdragsId} />
-              </div>
-            )}
-            {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
-              <div className={styles.oppdragsdetaljer__enhet}>
-                <LabelText label={"Enhetstype"} text={oppdragsdetaljer.behandlendeEnhet.type} />
-                <LabelText label={"Dato fom"} text={oppdragsdetaljer.behandlendeEnhet.datoFom} />
-                <LabelText label={"Enhetsnr"} text={oppdragsdetaljer.behandlendeEnhet.enhet} />
-              </div>
-            )}
+            <div className={styles.oppdragsdetaljer__columns}>
+              {gjelderId && treffliste && (
+                <LabelText
+                  label={"Gjelder ID"}
+                  text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste).gjelderNavn} `}
+                />
+              )}
+            </div>
+            <div className={styles.oppdragsdetaljer__columns}>
+              {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
+                <div className={styles.oppdragsdetaljer__column}>
+                  <LabelText label={"Enhetstype"} text={oppdragsdetaljer.behandlendeEnhet.type} />
+                  <LabelText label={"Enhetsnr"} text={oppdragsdetaljer.behandlendeEnhet.enhet} />
+                  <LabelText label={"Dato fom"} text={formatDate(oppdragsdetaljer.behandlendeEnhet.datoFom)} />
+                </div>
+              )}
+              {gjelderId && oppdragsdetaljer.enhet && (
+                <div className={styles.oppdragsdetaljer__column}>
+                  <LabelText label={"Enhetstype"} text={oppdragsdetaljer.enhet.type} />
+                  <LabelText label={"Enhetsnr"} text={oppdragsdetaljer.enhet.enhet} />
+                  <LabelText label={"Dato fom"} text={formatDate(oppdragsdetaljer.enhet.datoFom)} />
+                </div>
+              )}
+              {gjelderId && oppdrag && (
+                <>
+                  <div className={styles.oppdragsdetaljer__column}>
+                    <LabelText label={"Fagområde"} text={oppdrag.navnFagOmraade} />
+                    <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />
+                    <LabelText label={"Oppdrags ID"} text={oppdrag.oppdragsId} />
+                  </div>
+                  <div className={styles.oppdragsdetaljer__column}>
+                    <LabelText label={"Beregnes nå"} text={oppdrag.kjorIdag} />
+                    <LabelText label={"Status"} text={oppdrag.kodeStatus} />
+                  </div>
+                </>
+              )}
+            </div>
+            <div className={commonstyles.knapperad__right}>
+              <NullstillButton />
+            </div>
           </div>
-
+          <h1 className={styles.oppdragsdetaljer__heading}>Oppdrag</h1>
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>

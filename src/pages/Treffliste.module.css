@@ -1,11 +1,7 @@
 .treffliste {
-  @apply mx-36;
+  @apply mx-36 min-w-1024;
 }
 
 .treffliste__heading {
-  @apply bg-white px-5 py-2;
-}
-
-.treffliste__table {
-  @apply bg-white;
+  @apply bg-white px-5 py-2 min-w-1024;
 }
