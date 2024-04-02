@@ -17,13 +17,15 @@ import { isArray } from "@grafana/faro-web-sdk";
 import SokHelp from "../components/sok/SokHelp";
 import NullstillButton from "../components/common/NullstillButton";
 import FaggrupperCombobox from "../components/sok/FaggrupperCombobox";
+import { useSWRConfig } from "swr";
 
 const SokPage = () => {
+  const { mutate } = useSWRConfig();
   const faggrupper = useLoaderData() as Faggruppe[];
   const [trefflisteSokParameters, setTrefflisteSokParameters] = useState<TrefflisteSearchParameters>({
     gjelderID: retrieveId(),
   });
-  const { treffliste, mutate, trefflisteIsLoading } = RestService.useFetchTreffliste(
+  const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
     trefflisteSokParameters.gjelderID,
     trefflisteSokParameters.faggruppe,
   );
@@ -41,7 +43,7 @@ const SokPage = () => {
   }, [treffliste]);
 
   useEffect(() => {
-    mutate([], { revalidate: true });
+    mutate("/oppdrag", []);
   }, [trefflisteSokParameters]);
 
   const {
@@ -56,13 +58,13 @@ const SokPage = () => {
   const handleChangeGjelderId: SubmitHandler<TrefflisteSearchParameters> = (data) => {
     const gjelderID = data.gjelderID?.replaceAll(/[\s.]/g, "") ?? "";
     setShouldGoToTreffliste(true);
-    setTrefflisteSokParameters({ ...trefflisteSokParameters, gjelderID: gjelderID });
+    setTrefflisteSokParameters((prev) => ({ gjelderID: gjelderID, faggruppe: prev.faggruppe }));
   };
 
   const handleChangeFaggruppe = (faggruppe: string) => {
     setTrefflisteSokParameters((prevParameters) => ({
-      ...prevParameters,
-      faggruppe: faggruppe,
+      gjelderID: prevParameters.gjelderID,
+      faggruppe,
     }));
   };
 
