@@ -44,12 +44,18 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
               <Table.ColumnHeader sortKey={"fagsystemId"} sortable>
                 Fagsystem ID
               </Table.ColumnHeader>
-              <Table.HeaderCell key={"Faggruppe"} scope="col" children={"Faggruppe"} />
+              <Table.ColumnHeader sortKey={"navnFagGruppe"} sortable>
+                Faggruppe
+              </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"navnFagOmraade"} sortable>
                 Fagområde
               </Table.ColumnHeader>
-              <Table.HeaderCell key={"Type bilag"} scope="col" children={"Type bilag"} />
-              <Table.HeaderCell key={"Status"} scope="col" children={"Status"} />
+              <Table.ColumnHeader sortKey={"typeBilag"} sortable>
+                Type bilag
+              </Table.ColumnHeader>
+              <Table.ColumnHeader sortKey={"kodeStatus"} sortable>
+                Status
+              </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>
           <Table.Body>
