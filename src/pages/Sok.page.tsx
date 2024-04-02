@@ -109,7 +109,7 @@ const SokPage = () => {
       {!trefflisteIsLoading && !anyOppdragExists(treffliste) && (
         <Alert variant="info">
           Null treff. Denne IDen har ingen oppdrag
-          {!!trefflisteSokParameters.faggruppe ? ` med faggruppe ${trefflisteSokParameters.faggruppe}` : ""}
+          {trefflisteSokParameters.faggruppe ? ` med faggruppe ${trefflisteSokParameters.faggruppe}` : ""}
         </Alert>
       )}
     </>

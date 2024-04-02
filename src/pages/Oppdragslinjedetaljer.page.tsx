@@ -1,6 +1,6 @@
 import RestService from "../services/rest-service";
 import { Accordion, Table } from "@navikt/ds-react";
-import { isEmpty, retrieveId } from "../util/commonUtils";
+import { firstOf, isEmpty, retrieveId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
 import KravhaverVisning from "../components/oppdragslinjedetaljer/KravhaverVisning";
 import OvrigVisning from "../components/oppdragslinjedetaljer/OvrigVisning";
@@ -11,12 +11,19 @@ import SkyldnersListVisning from "../components/oppdragslinjedetaljer/Skyldnersl
 import MaksdatoerVisning from "../components/oppdragslinjedetaljer/MaksdatoerVisning";
 import LinjeenheterVisning from "../components/oppdragslinjedetaljer/LinjeenheterVisning";
 import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
-import { ChevronLeftIcon } from "@navikt/aksel-icons";
 import commonstyles from "../util/common-styles.module.css";
 import LinjedetaljAccordion from "../components/oppdragslinjedetaljer/LinjedetaljAccordion";
 import ContentLoader from "../components/common/ContentLoader";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { BASENAME } from "../util/constants";
+import Breadcrumbs from "../components/common/Breadcrumbs";
+import styles from "./Oppdragslinjedetaljer.module.css";
+import { Oppdrag } from "../models/Oppdrag";
+import OmposteringerVisning from "../components/oppdragsdetaljer/OmposteringerVisning";
+import StatushistorikkVisning from "../components/oppdragsdetaljer/StatushistorikkVisning";
+import EnhetshistorikkVisning from "../components/oppdragsdetaljer/EnhetshistorikkVisning";
+import LabelText from "../components/common/LabelText";
+import NullstillButton from "../components/common/NullstillButton";
 
 type OppdragslinjedetaljerParams = {
   oppdragsID: string;
@@ -25,30 +32,59 @@ type OppdragslinjedetaljerParams = {
 const OppdragslinjedetaljerPage = () => {
   const { oppdragsID = "", linjeID = "" } = useParams<OppdragslinjedetaljerParams>();
   const gjelderId = retrieveId();
-  const { oppdrag } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
+  const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
   const [linjedetaljer, isLoading] = RestService.useFetchOppdragslinje(oppdragsID, linjeID ?? "");
   const linjedetalj = isArray(linjedetaljer) && !isEmpty(linjedetaljer) ? linjedetaljer[0] : undefined;
+  const { treffliste } = RestService.useFetchTreffliste(gjelderId);
 
   if (!gjelderId) window.location.replace(BASENAME);
 
+  const oppdrag: Oppdrag | null =
+    isArray(treffliste) &&
+    !isEmpty(treffliste) &&
+    !isEmpty(firstOf(treffliste).oppdragsListe) &&
+    firstOf(treffliste).oppdragsListe.some((a) => a.oppdragsId === +oppdragsID)
+      ? treffliste
+          .reduce((a) => a)
+          .oppdragsListe.filter((o) => o.oppdragsId === +oppdragsID)
+          .reduce((a) => a)
+      : null;
+
   return (
-    <>
-      <div className={commonstyles.knapperad__right}>
-        <Link to={"/treffliste"}>
-          <div className={commonstyles.singlerow}>
-            <ChevronLeftIcon /> Treffliste{" "}
-          </div>
-        </Link>
-        <Link to={`/${oppdragsID}`}>
-          <div className={commonstyles.singlerow}>
-            <ChevronLeftIcon /> Oppdragsdetaljer{" "}
-          </div>
-        </Link>
-      </div>
+    <div className={styles.oppdragslinjedetaljer}>
+      <Breadcrumbs soklink trefflistelink oppdraglink={oppdragsID} />
       {isLoading ? (
         <ContentLoader />
       ) : (
         <>
+          {!isLoading && oppdragsdetaljer && (
+            <div className={styles.oppdragsdetaljer}>
+              <div className={commonstyles.knapperad__right}>
+                {gjelderId && (
+                  <OmposteringerVisning
+                    enabled={oppdragsdetaljer.harOmposteringer}
+                    gjelderId={gjelderId}
+                    id={oppdragsID}
+                  />
+                )}
+                <StatushistorikkVisning id={oppdragsID} />
+                <EnhetshistorikkVisning id={oppdragsID} />
+              </div>
+              <div className={styles.oppdragslinjedetaljer__toppinfo}>
+                {gjelderId && treffliste && (
+                  <LabelText
+                    label={"Gjelder ID"}
+                    text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
+                  />
+                )}
+                {oppdrag && <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />}
+                <div className={commonstyles.knapperad__right}>
+                  <NullstillButton />
+                </div>
+              </div>
+            </div>
+          )}
+
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
@@ -64,7 +100,7 @@ const OppdragslinjedetaljerPage = () => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {(oppdrag?.oppdragsLinjer ?? [])
+              {(oppdragsdetaljer?.oppdragsLinjer ?? [])
                 .filter((linje) => linjedetalj?.korrigerteLinjeIder.includes(linje.linjeId))
                 .map((linje) => (
                   <Table.Row key={btoa("" + linje.linjeId)}>
@@ -112,7 +148,7 @@ const OppdragslinjedetaljerPage = () => {
           </Accordion>
         </>
       )}
-    </>
+    </div>
   );
 };
 export default OppdragslinjedetaljerPage;

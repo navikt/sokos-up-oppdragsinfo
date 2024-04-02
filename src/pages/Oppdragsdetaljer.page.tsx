@@ -6,14 +6,14 @@ import OmposteringerVisning from "../components/oppdragsdetaljer/OmposteringerVi
 import styles from "./Oppdragsdetaljer.module.css";
 import commonstyles from "../util/common-styles.module.css";
 import LabelText from "../components/common/LabelText";
-import { ArrowLeftIcon } from "@navikt/aksel-icons";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { firstOf, formatDate, isEmpty, retrieveId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
 import { BASENAME } from "../util/constants";
 import NullstillButton from "../components/common/NullstillButton";
 import OppdragTable from "../components/oppdragsdetaljer/OppdragTable";
 import { Oppdrag } from "../models/Oppdrag";
+import Breadcrumbs from "../components/common/Breadcrumbs";
 
 type OppdragsdetaljerParams = {
   oppdragsID: string;
@@ -39,6 +39,7 @@ const OppdragsdetaljerPage = () => {
 
   return (
     <>
+      <Breadcrumbs soklink trefflistelink />
       {isLoading && (
         <div className={commonstyles.contentloader}>
           <Loader size="3xlarge" title="Laster oppdragsdetaljer..." />
@@ -52,13 +53,6 @@ const OppdragsdetaljerPage = () => {
             )}
             <StatushistorikkVisning id={oppdragsID} />
             <EnhetshistorikkVisning id={oppdragsID} />
-          </div>
-          <div>
-            <Link to={"/treffliste"}>
-              <div className={commonstyles.singlerow}>
-                <ArrowLeftIcon title="a11y-title" fontSize="1.5rem" /> Tilbake til trefflisten
-              </div>
-            </Link>
           </div>
           <div className={styles.oppdragsdetaljer__toppinfo}>
             <div className={styles.oppdragsdetaljer__columns}>

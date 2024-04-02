@@ -1,0 +1,19 @@
+.oppdragslinjedetaljer {
+  @apply mx-36 min-w-1024;
+}
+
+.oppdragslinjedetaljer__toppinfo {
+  @apply relative mx-48 bg-[--a-surface-alt-1-subtle] p-3;
+}
+
+.oppdragslinjedetaljer__columns {
+  @apply flex flex-row w-full p-3 justify-between;
+}
+
+.oppdragslinjedetaljer__column {
+  @apply flex flex-col space-y-3;
+}
+
+.oppdragslinjedetaljer__heading {
+  @apply text-center;
+}

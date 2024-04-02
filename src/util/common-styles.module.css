@@ -2,7 +2,7 @@
   @apply flex flex-row space-x-1;
 }
 .knapperad__right {
-  @apply knapperad justify-end;
+  @apply knapperad justify-end m-5;
 }
 
 .bold {

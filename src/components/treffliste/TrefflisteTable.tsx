@@ -2,36 +2,26 @@ import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import { Treff } from "../../models/Treffliste";
 import { Link } from "react-router-dom";
-import { comparator, SortState } from "../../util/commonUtils";
+import { comparator, firstOf, handleSort, hasKey, SortState } from "../../util/commonUtils";
 import { Oppdrag } from "../../models/Oppdrag";
 import styles from "./TrefflisteTable.module.css";
 import commonstyles from "../../util/common-styles.module.css";
+
 const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
 
-  // @ts-expect-error aksel-eksempel
-  const handleSort = (sortKey) => {
-    setSort(
-      sort && sortKey === sort.orderBy && sort.direction === "descending"
-        ? undefined
-        : {
-            orderBy: sortKey,
-            direction: sort && sortKey === sort.orderBy && sort.direction === "ascending" ? "descending" : "ascending",
-          },
-    );
+  const fooSort = (sortKey?: string) => {
+    if (hasKey(firstOf(treff.oppdragsListe), sortKey)) handleSort<Oppdrag>(sortKey, setSort, sort);
   };
 
-  const sortedData = treff.oppdragsListe.slice().sort((a, b) => {
+  const sortedData: Oppdrag[] = treff.oppdragsListe.slice().sort((a, b) => {
     if (sort) {
       return sort.direction === "ascending" ? comparator(b, a, sort.orderBy) : comparator(a, b, sort.orderBy);
     }
     return 1;
   });
-
-  console.log(treff.oppdragsListe.length);
-
   const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   const pagecount = Math.ceil(treff.oppdragsListe.length / rowsPerPage);
 
@@ -48,7 +38,7 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
         <div className={commonstyles.spacing}></div>
       )}
       <div className={styles.sortabletable}>
-        <Table sort={sort} onSortChange={handleSort}>
+        <Table sort={sort} onSortChange={fooSort}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"fagsystemId"} sortable>

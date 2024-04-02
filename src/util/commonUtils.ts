@@ -1,11 +1,11 @@
 import { UNSAFE_Combobox } from "@navikt/ds-react";
-import { isArray } from "@grafana/faro-web-sdk";
+import { isArray, isNumber, isSymbol } from "@grafana/faro-web-sdk";
 import { Treffliste } from "../models/Treffliste";
 import { Faggruppe, FaggruppeStorageObject } from "../models/Faggruppe";
 
 export const isEmpty = (array: Array<unknown> | undefined | null) => !array || !Array.isArray(array) || !array.length;
 
-export const isString = (s?: string | null) => !!s && s !== "";
+export const isString = (s?: string | null): s is string => !!s && s !== "";
 
 export const capitalized = (s: string) => s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
 
@@ -47,6 +47,28 @@ export const comparator = <T>(a: T, b: T, orderBy: keyof T) => {
     return 1;
   }
   return 0;
+};
+
+export const handleSort = <T>(
+  sortKey: keyof T,
+  setSort: (ss?: SortState<T> | undefined) => void,
+  sort?: SortState<T>,
+) => {
+  setSort(
+    sort && sortKey === sort.orderBy && sort.direction === "descending"
+      ? undefined
+      : {
+          orderBy: sortKey,
+          direction: sort && sortKey === sort.orderBy && sort.direction === "ascending" ? "descending" : "ascending",
+        },
+  );
+};
+
+export const hasKey = <T extends object>(o: T, key: string | number | symbol | undefined): key is keyof T => {
+  if (!key) return false;
+  if (isNumber(key)) return false;
+  if (isSymbol(key)) return false;
+  return Object.keys(o).includes(key);
 };
 
 export const formatDate = (date$: string) => {
