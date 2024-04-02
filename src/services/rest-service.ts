@@ -35,7 +35,7 @@ const api = axios.create({
 const axiosGetFetcher = <T>(url: string) => api.get<T>(url).then((res) => res.data);
 
 // Brukes av omposteringer, oppdrag og treffliste for å kunne sende med fnr i requestbody
-const axiosPostFetcher = <T>(url: string, body: { gjelderId?: string; fagGruppeKode?: string }) =>
+const axiosPostFetcher = <T>(url: string, body: { gjelderId?: string; fagGruppeKode?: string | null }) =>
   api.post<T>(url, body).then((res) => res.data);
 
 const swrConfig = {
@@ -64,7 +64,7 @@ const fetchFaggrupper = async () => {
   const response = await api.get<Faggruppe[]>("/faggrupper");
   return response.data;
 };
-const useFetchTreffliste = (gjelderId?: string, faggruppe?: string) => {
+const useFetchTreffliste = (gjelderId?: string, faggruppe?: string | null) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   useEffect(() => {
     setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));

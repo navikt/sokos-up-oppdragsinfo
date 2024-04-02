@@ -6,16 +6,15 @@ import { useMemo, useState } from "react";
 
 type FaggruppeComboboxProps = {
   faggrupper: Faggruppe[];
-  handleChangeFaggruppe: (faggruppe: string) => void;
 };
 
-const FaggrupperCombobox = ({ faggrupper, handleChangeFaggruppe }: FaggruppeComboboxProps) => {
+const FaggrupperCombobox = ({ faggrupper }: FaggruppeComboboxProps) => {
   const previouslyChosenFaggruppe = retrieveFaggruppe();
   const [selectedOptions, setSelectedOptions] = useState<string[]>([previouslyChosenFaggruppe?.comboboxText ?? ""]);
 
   const faggruppetabell: FaggruppeStorageObject[] = useMemo(
     () =>
-      !!faggrupper
+      faggrupper
         ? faggrupper.map((faggruppe) => ({
             navn: faggruppe.navn,
             type: faggruppe.type,
@@ -26,7 +25,7 @@ const FaggrupperCombobox = ({ faggrupper, handleChangeFaggruppe }: FaggruppeComb
   );
 
   const sortedFaggrupper = useMemo(
-    () => (!!faggruppetabell ? faggruppetabell.map((f) => f.comboboxText).sort((a, b) => a.localeCompare(b)) : []),
+    () => (faggruppetabell ? faggruppetabell.map((f) => f.comboboxText).sort((a, b) => a.localeCompare(b)) : []),
     [faggruppetabell],
   );
 
@@ -38,7 +37,6 @@ const FaggrupperCombobox = ({ faggrupper, handleChangeFaggruppe }: FaggruppeComb
     }
     const faggruppe = faggruppetabell.find((f) => f.comboboxText === faggruppenavn);
     storeFaggruppe(faggruppe);
-    handleChangeFaggruppe(faggruppe?.type ?? "");
   };
 
   return (

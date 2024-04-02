@@ -7,7 +7,7 @@ import {
   TrefflisteSearchParametersSchema,
 } from "../components/sok/TrefflisteSokParameters";
 import { useEffect, useState } from "react";
-import { anyOppdragExists, firstOf, isEmpty, retrieveId, storeId } from "../util/commonUtils";
+import { anyOppdragExists, firstOf, isEmpty, retrieveFaggruppe, retrieveId, storeId } from "../util/commonUtils";
 import RestService from "../services/rest-service";
 import styles from "./Sok.module.css";
 import ContentLoader from "../components/common/ContentLoader";
@@ -25,9 +25,12 @@ const SokPage = () => {
   const [trefflisteSokParameters, setTrefflisteSokParameters] = useState<TrefflisteSearchParameters>({
     gjelderID: retrieveId(),
   });
+
+  const faggruppe = retrieveFaggruppe();
+
   const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
     trefflisteSokParameters.gjelderID,
-    trefflisteSokParameters.faggruppe,
+    faggruppe?.type,
   );
   const [shouldGoToTreffliste, setShouldGoToTreffliste] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -58,14 +61,7 @@ const SokPage = () => {
   const handleChangeGjelderId: SubmitHandler<TrefflisteSearchParameters> = (data) => {
     const gjelderID = data.gjelderID?.replaceAll(/[\s.]/g, "") ?? "";
     setShouldGoToTreffliste(true);
-    setTrefflisteSokParameters((prev) => ({ gjelderID: gjelderID, faggruppe: prev.faggruppe }));
-  };
-
-  const handleChangeFaggruppe = (faggruppe: string) => {
-    setTrefflisteSokParameters((prevParameters) => ({
-      gjelderID: prevParameters.gjelderID,
-      faggruppe,
-    }));
+    setTrefflisteSokParameters({ gjelderID: gjelderID });
   };
 
   return (
@@ -87,7 +83,7 @@ const SokPage = () => {
                 error={errors.gjelderID?.message}
               />
             </div>
-            <FaggrupperCombobox faggrupper={faggrupper} handleChangeFaggruppe={handleChangeFaggruppe} />
+            <FaggrupperCombobox faggrupper={faggrupper} />
           </div>
           <div className={styles.sok__knapperad}>
             <div className={styles.sok__buttonwrapper}>
@@ -111,7 +107,7 @@ const SokPage = () => {
       {!trefflisteIsLoading && !anyOppdragExists(treffliste) && (
         <Alert variant="info">
           Null treff. Denne IDen har ingen oppdrag
-          {trefflisteSokParameters.faggruppe ? ` med faggruppe ${trefflisteSokParameters.faggruppe}` : ""}
+          {faggruppe ? ` med faggruppe ${faggruppe.type}` : ""}
         </Alert>
       )}
     </>
