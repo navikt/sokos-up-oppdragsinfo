@@ -41,7 +41,7 @@ const SokPage = () => {
   }, [treffliste]);
 
   useEffect(() => {
-    mutate([]);
+    mutate([], { revalidate: true });
   }, [trefflisteSokParameters]);
 
   const {

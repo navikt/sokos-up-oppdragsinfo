@@ -1,5 +1,5 @@
 .oppdragslinjedetaljer {
-  @apply mx-36 min-w-1024;
+  @apply min-w-1024;
 }
 
 .oppdragslinjedetaljer__toppinfo {
