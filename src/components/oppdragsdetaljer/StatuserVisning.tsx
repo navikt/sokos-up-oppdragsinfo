@@ -12,6 +12,7 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
   return (
     <div>
       <Button
+        size="xsmall"
         variant={"tertiary"}
         onClick={() => {
           ref.current?.showModal();

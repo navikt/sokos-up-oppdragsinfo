@@ -14,6 +14,7 @@ const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; 
     <div>
       <Button
         variant={"tertiary"}
+        size="xsmall"
         onClick={() => {
           ref.current?.showModal();
         }}

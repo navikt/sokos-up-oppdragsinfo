@@ -13,6 +13,7 @@ const EnhetshistorikkVisning = ({ id }: { id: string }) => {
   return (
     <div>
       <Button
+        variant="secondary-neutral"
         onClick={() => {
           ref.current?.showModal();
         }}

@@ -7,13 +7,13 @@ import styles from "./Oppdragsdetaljer.module.css";
 import commonstyles from "../util/common-styles.module.css";
 import LabelText from "../components/common/LabelText";
 import { useParams } from "react-router-dom";
-import { firstOf, formatDate, isEmpty, retrieveId } from "../util/commonUtils";
+import { firstOf, isEmpty, retrieveId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
 import { BASENAME } from "../util/constants";
-import NullstillButton from "../components/common/NullstillButton";
 import OppdragTable from "../components/oppdragsdetaljer/OppdragTable";
 import { Oppdrag } from "../models/Oppdrag";
 import Breadcrumbs from "../components/common/Breadcrumbs";
+import EnhetVisning from "../components/oppdragsdetaljer/EnhetVisning";
 
 type OppdragsdetaljerParams = {
   oppdragsID: string;
@@ -47,41 +47,22 @@ const OppdragsdetaljerPage = () => {
       )}
       {!isLoading && oppdragsdetaljer && (
         <div className={styles.oppdragsdetaljer}>
-          <div className={commonstyles.knapperad__right}>
-            {gjelderId && (
-              <OmposteringerVisning enabled={oppdragsdetaljer.harOmposteringer} gjelderId={gjelderId} id={oppdragsID} />
-            )}
-            <StatushistorikkVisning id={oppdragsID} />
-            <EnhetshistorikkVisning id={oppdragsID} />
-          </div>
           <div className={styles.oppdragsdetaljer__toppinfo}>
-            <div className={styles.oppdragsdetaljer__columns}>
-              {gjelderId && treffliste && (
-                <LabelText
-                  label={"Gjelder ID"}
-                  text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
-                />
-              )}
-            </div>
-            <div className={styles.oppdragsdetaljer__columns}>
-              {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
-                <div className={styles.oppdragsdetaljer__column}>
-                  <LabelText label={"Enhetstype"} text={oppdragsdetaljer.behandlendeEnhet.type} />
-                  <LabelText label={"Enhetsnr"} text={oppdragsdetaljer.behandlendeEnhet.enhet} />
-                  <LabelText label={"Dato fom"} text={formatDate(oppdragsdetaljer.behandlendeEnhet.datoFom)} />
-                </div>
-              )}
-              {gjelderId && oppdragsdetaljer.enhet && (
-                <div className={styles.oppdragsdetaljer__column}>
-                  <LabelText label={"Enhetstype"} text={oppdragsdetaljer.enhet.type} />
-                  <LabelText label={"Enhetsnr"} text={oppdragsdetaljer.enhet.enhet} />
-                  <LabelText label={"Dato fom"} text={formatDate(oppdragsdetaljer.enhet.datoFom)} />
-                </div>
-              )}
+            <h1>Oppdrag</h1>
+            <div className={styles.oppdragsdetaljer__columns}></div>
+            <div className={styles.oppdragsdetaljer__column}>
               {gjelderId && oppdrag && (
-                <>
+                <div className={styles.oppdragsdetaljer__columns}>
                   <div className={styles.oppdragsdetaljer__column}>
+                    {gjelderId && treffliste && (
+                      <LabelText
+                        label={"Gjelder ID"}
+                        text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
+                      />
+                    )}
                     <LabelText label={"Fagområde"} text={oppdrag.navnFagOmraade} />
+                  </div>
+                  <div className={styles.oppdragsdetaljer__column}>
                     <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />
                     <LabelText label={"Oppdrags ID"} text={oppdrag.oppdragsId} />
                   </div>
@@ -89,14 +70,25 @@ const OppdragsdetaljerPage = () => {
                     <LabelText label={"Beregnes nå"} text={oppdrag.kjorIdag} />
                     <LabelText label={"Status"} text={oppdrag.kodeStatus} />
                   </div>
-                </>
+                </div>
               )}
+              {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
+                <EnhetVisning enhet={oppdragsdetaljer.behandlendeEnhet} />
+              )}
+              {gjelderId && oppdragsdetaljer.enhet && <EnhetVisning enhet={oppdragsdetaljer.enhet} />}
             </div>
             <div className={commonstyles.knapperad__right}>
-              <NullstillButton />
+              {gjelderId && (
+                <OmposteringerVisning
+                  enabled={oppdragsdetaljer.harOmposteringer}
+                  gjelderId={gjelderId}
+                  id={oppdragsID}
+                />
+              )}
+              <StatushistorikkVisning id={oppdragsID} />
+              <EnhetshistorikkVisning id={oppdragsID} />
             </div>
           </div>
-          <h1 className={styles.oppdragsdetaljer__heading}>Oppdrag</h1>
           <OppdragTable oppdragsid={oppdragsID} oppdragsdetaljer={oppdragsdetaljer} />
         </div>
       )}

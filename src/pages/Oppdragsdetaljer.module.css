@@ -1,13 +1,13 @@
 .oppdragsdetaljer {
-  @apply space-y-6;
+  @apply space-y-6 mt-6;
 }
 
 .oppdragsdetaljer__toppinfo {
-  @apply mx-48 bg-[--a-surface-alt-1-subtle] p-3;
+  @apply relative mx-48 bg-[--a-surface-default] min-w-1024 max-w-[1440px] p-6;
 }
 
 .oppdragsdetaljer__columns {
-  @apply flex flex-row w-full p-3 justify-between;
+  @apply flex flex-row p-3 justify-between space-x-16 w-4/5;
 }
 
 .oppdragsdetaljer__column {

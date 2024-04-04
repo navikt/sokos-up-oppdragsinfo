@@ -1,6 +1,6 @@
 import { Suspense, useState } from "react";
-import { Button, Loader, Pagination, Table } from "@navikt/ds-react";
-import { applySortDirection, firstOf, formatDate, SortState } from "../../util/commonUtils";
+import { Loader, Pagination, Table } from "@navikt/ds-react";
+import { applySortDirection, firstOf, formatDate, handleSort, hasKey, SortState } from "../../util/commonUtils";
 import styles from "./OppdragsTable.module.css";
 import commonstyles from "../../util/common-styles.module.css";
 import { Oppdragsdetaljer } from "../../models/Oppdragsdetaljer";
@@ -80,26 +80,14 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
                 <Table.DataCell>{linje.sats}</Table.DataCell>
                 <Table.DataCell>{linje.typeSats}</Table.DataCell>
                 <Table.DataCell>
-                  <Suspense
-                    fallback={
-                      <Button variant="tertiary">
-                        <Loader size="medium" title="Laster ..." />
-                      </Button>
-                    }
-                  >
+                  <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
                     <StatuserVisning tekst={linje.kodeStatus} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
                   </Suspense>
                 </Table.DataCell>
                 <Table.DataCell>{formatDate(linje.datoFom)}</Table.DataCell>
                 <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
                 <Table.DataCell>
-                  <Suspense
-                    fallback={
-                      <Button variant="tertiary">
-                        <Loader size="medium" title="Laster ..." />
-                      </Button>
-                    }
-                  >
+                  <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
                     <AttestantVisning tekst={linje.attestert} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
                   </Suspense>
                 </Table.DataCell>

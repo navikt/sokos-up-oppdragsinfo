@@ -13,6 +13,7 @@ const OmposteringerVisning = ({ gjelderId, id, enabled }: { gjelderId: string; i
   return (
     <div>
       <Button
+        variant="secondary-neutral"
         disabled={!enabled}
         onClick={() => {
           ref.current?.showModal();

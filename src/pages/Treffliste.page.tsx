@@ -33,9 +33,9 @@ const TrefflistePage = () => {
           <h1>Treffliste</h1>
           <SokekriterierVisning gjelderId={gjelderId} navn={gjelderNavn} faggruppe={faggruppeNavn} />
         </div>
+        {trefflisteIsLoading && <ContentLoader />}
+        {!trefflisteIsLoading && anyOppdragExists(treffliste) && <TrefflisteTable treff={firstOf(treffliste)} />}
       </div>
-      {trefflisteIsLoading && <ContentLoader />}
-      {!trefflisteIsLoading && anyOppdragExists(treffliste) && <TrefflisteTable treff={firstOf(treffliste)} />}
     </>
   );
 };

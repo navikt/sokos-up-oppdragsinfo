@@ -1,9 +1,9 @@
 .oppdragslinjedetaljer {
-  @apply min-w-1024;
+  @apply min-w-1024 space-y-6;
 }
 
 .oppdragslinjedetaljer__toppinfo {
-  @apply relative mx-48 bg-[--a-surface-alt-1-subtle] p-3;
+  @apply relative mx-48 bg-[--a-surface-default] max-w-[1440px] p-6 space-y-4;
 }
 
 .oppdragslinjedetaljer__columns {
