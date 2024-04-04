@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
-import { comparator, formatDate, SortState } from "../../util/commonUtils";
+import { firstOf, formatDate, applySortDirection, SortState } from "../../util/commonUtils";
 import styles from "./OppdragsTable.module.css";
 import commonstyles from "../../util/common-styles.module.css";
 import { Oppdragsdetaljer } from "../../models/Oppdragsdetaljer";
@@ -14,30 +14,14 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
 
-  // @ts-expect-error aksel-eksempel
-  const handleSort = (sortKey) => {
-    setSort(
-      sort && sortKey === sort.orderBy && sort.direction === "descending"
-        ? undefined
-        : {
-            orderBy: sortKey,
-            direction: sort && sortKey === sort.orderBy && sort.direction === "ascending" ? "descending" : "ascending",
-          },
-    );
+  const linjeSort = (sortKey?: string) => {
+    if (hasKey(firstOf(oppdragsdetaljer.oppdragsLinjer), sortKey)) handleSort<Oppdragslinje>(sortKey, setSort, sort);
   };
 
-  const sortedData = oppdragsdetaljer.oppdragsLinjer.slice().sort((a, b) => {
-    if (sort) {
-      return sort.direction === "ascending"
-        ? comparator<Oppdragslinje>(b, a, sort.orderBy)
-        : comparator<Oppdragslinje>(a, b, sort.orderBy);
-    }
-    return 1;
-  });
-
+  const sortedData = oppdragsdetaljer.oppdragsLinjer.slice().sort(applySortDirection(sort));
   const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
-
   const pagecount = Math.ceil(oppdragsdetaljer.oppdragsLinjer.length / rowsPerPage);
+
   return (
     <>
       {pagecount > 1 ? (
@@ -51,7 +35,7 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
         <div className={commonstyles.spacing} />
       )}
       <div className={styles.sortabletable}>
-        <Table sort={sort} onSortChange={handleSort}>
+        <Table sort={sort} onSortChange={linjeSort}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"linjeId"} sortable>

@@ -94,3 +94,10 @@ export const anyOppdragExists = (treffliste?: Treffliste): treffliste is Treffli
   if (isEmpty(oppdragsliste)) return false;
   return true;
 };
+
+export const applySortDirection = (sort) => (a, b) => {
+  if (sort) {
+    return sort.direction === "ascending" ? comparator(b, a, sort.orderBy) : comparator(a, b, sort.orderBy);
+  }
+  return 1;
+};

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import { Treff } from "../../models/Treffliste";
 import { Link } from "react-router-dom";
-import { comparator, firstOf, handleSort, hasKey, SortState } from "../../util/commonUtils";
+import { firstOf, applySortDirection, handleSort, hasKey, SortState } from "../../util/commonUtils";
 import { Oppdrag } from "../../models/Oppdrag";
 import styles from "./TrefflisteTable.module.css";
 import commonstyles from "../../util/common-styles.module.css";
@@ -12,16 +12,11 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   const [page, setPage] = useState(1);
   const rowsPerPage = 10;
 
-  const fooSort = (sortKey?: string) => {
+  const oppdragSort = (sortKey?: string) => {
     if (hasKey(firstOf(treff.oppdragsListe), sortKey)) handleSort<Oppdrag>(sortKey, setSort, sort);
   };
 
-  const sortedData: Oppdrag[] = treff.oppdragsListe.slice().sort((a, b) => {
-    if (sort) {
-      return sort.direction === "ascending" ? comparator(b, a, sort.orderBy) : comparator(a, b, sort.orderBy);
-    }
-    return 1;
-  });
+  const sortedData: Oppdrag[] = treff.oppdragsListe.slice().sort(applySortDirection(sort));
   const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   const pagecount = Math.ceil(treff.oppdragsListe.length / rowsPerPage);
 
@@ -38,7 +33,7 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
         <div className={commonstyles.spacing}></div>
       )}
       <div className={styles.sortabletable}>
-        <Table sort={sort} onSortChange={fooSort}>
+        <Table sort={sort} onSortChange={oppdragSort}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"fagsystemId"} sortable>
