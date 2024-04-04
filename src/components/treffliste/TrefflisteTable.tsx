@@ -33,7 +33,7 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
         <div className={commonstyles.spacing}></div>
       )}
       <div className={styles.sortabletable}>
-        <Table sort={sort} onSortChange={oppdragSort}>
+        <Table zebraStripes sort={sort} onSortChange={oppdragSort}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"fagsystemId"} sortable>

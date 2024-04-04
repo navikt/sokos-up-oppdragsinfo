@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Pagination, Table } from "@navikt/ds-react";
+import { Table } from "@navikt/ds-react";
 import { firstOf, formatDate, applySortDirection, SortState } from "../../util/commonUtils";
 import styles from "./OppdragsTable.module.css";
 import commonstyles from "../../util/common-styles.module.css";
@@ -8,6 +8,7 @@ import { Oppdragslinje } from "../../models/Oppdragslinje";
 import StatuserVisning from "./StatuserVisning";
 import AttestantVisning from "./AttestantVisning";
 import { Link } from "react-router-dom";
+import Pagination from "../../util/Pagination";
 
 const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; oppdragsdetaljer: Oppdragsdetaljer }) => {
   const [sort, setSort] = useState<SortState<Oppdragslinje> | undefined>();
@@ -35,7 +36,7 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
         <div className={commonstyles.spacing} />
       )}
       <div className={styles.sortabletable}>
-        <Table sort={sort} onSortChange={linjeSort}>
+        <Table zebraStripes sort={sort} onSortChange={linjeSort}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"linjeId"} sortable>
