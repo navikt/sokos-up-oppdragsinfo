@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Table } from "@navikt/ds-react";
-import { firstOf, formatDate, applySortDirection, SortState } from "../../util/commonUtils";
+import { Suspense, useState } from "react";
+import { Button, Loader, Pagination, Table } from "@navikt/ds-react";
+import { applySortDirection, firstOf, formatDate, SortState } from "../../util/commonUtils";
 import styles from "./OppdragsTable.module.css";
 import commonstyles from "../../util/common-styles.module.css";
 import { Oppdragsdetaljer } from "../../models/Oppdragsdetaljer";
@@ -8,7 +8,6 @@ import { Oppdragslinje } from "../../models/Oppdragslinje";
 import StatuserVisning from "./StatuserVisning";
 import AttestantVisning from "./AttestantVisning";
 import { Link } from "react-router-dom";
-import Pagination from "../../util/Pagination";
 
 const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; oppdragsdetaljer: Oppdragsdetaljer }) => {
   const [sort, setSort] = useState<SortState<Oppdragslinje> | undefined>();
@@ -81,12 +80,28 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
                 <Table.DataCell>{linje.sats}</Table.DataCell>
                 <Table.DataCell>{linje.typeSats}</Table.DataCell>
                 <Table.DataCell>
-                  <StatuserVisning tekst={linje.kodeStatus} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
+                  <Suspense
+                    fallback={
+                      <Button variant="tertiary">
+                        <Loader size="medium" title="Laster ..." />
+                      </Button>
+                    }
+                  >
+                    <StatuserVisning tekst={linje.kodeStatus} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
+                  </Suspense>
                 </Table.DataCell>
                 <Table.DataCell>{formatDate(linje.datoFom)}</Table.DataCell>
                 <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
                 <Table.DataCell>
-                  <AttestantVisning tekst={linje.attestert} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
+                  <Suspense
+                    fallback={
+                      <Button variant="tertiary">
+                        <Loader size="medium" title="Laster ..." />
+                      </Button>
+                    }
+                  >
+                    <AttestantVisning tekst={linje.attestert} oppdragsid={oppdragsid} linjeid={linje.linjeId} />
+                  </Suspense>
                 </Table.DataCell>
                 <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
                 <Table.DataCell>
