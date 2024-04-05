@@ -84,34 +84,28 @@ const useFetchOppdrag = (gjelderId?: string, id?: string) => {
   useEffect(() => {
     setOppdragsId(id);
   }, [id]);
-  const {
-    data: oppdrag,
-    error,
-    isValidating,
-  } = useSWR<Oppdragsdetaljer>(isString(oppdragsId) ? `/${oppdragsId}` : null, {
+  const { data: oppdrag } = useSWR<Oppdragsdetaljer>(isString(oppdragsId) ? `/${oppdragsId}` : null, {
     ...swrConfig,
     fetcher: (url) => axiosPostFetcher<Oppdragsdetaljer>(url, { gjelderId }),
   });
 
-  return { oppdrag, isLoading: (!error && !oppdrag) || isValidating };
+  return { oppdrag };
 };
 
 const usePostFetch = <T>(url: string, gjelderId: string) => {
-  const { data, error, isValidating } = useSWR<T>(url, {
+  const { data } = useSWR<T>(url, {
     ...swrConfig,
     fetcher: (url) => axiosPostFetcher<T>(url, { gjelderId }),
   });
-  const isLoading = (!error && !data) || isValidating;
-  return [data, isLoading];
+  return [data];
 };
 
 const useFetch = <T>(url: string) => {
-  const { data, error, isValidating } = useSWR<T>(url, {
+  const { data } = useSWR<T>(url, {
     ...swrConfig,
     fetcher: (url) => axiosGetFetcher<T>(url),
   });
-  const isLoading = (!error && !data) || isValidating;
-  return [data, isLoading];
+  return [data];
 };
 
 const useFetchEnhetshistorikk = (id: string) => useFetch<Enhetshistorikk>(`/${id}/enhetshistorikk`);

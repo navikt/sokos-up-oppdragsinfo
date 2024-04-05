@@ -9,7 +9,6 @@ import StatushistorikkVisning from "../components/oppdragsdetaljer/Statushistori
 import commonstyles from "../util/common-styles.module.css";
 import styles from "./Oppdragsdetaljer.module.css";
 import { BASENAME } from "../util/constants";
-import { Loader } from "@navikt/ds-react";
 import { Oppdrag } from "../models/Oppdrag";
 import { firstOf, retrieveId } from "../util/commonUtils";
 import { useParams } from "react-router-dom";
@@ -22,7 +21,7 @@ const OppdragsdetaljerPage = () => {
   const { oppdragsID = "" } = useParams<OppdragsdetaljerParams>();
   const gjelderId = retrieveId();
   const { treffliste } = RestService.useFetchTreffliste(gjelderId);
-  const { oppdrag: oppdragsdetaljer, isLoading } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
+  const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
 
   const oppdrag: Oppdrag | null = getOppdragFromTreffliste(treffliste, +oppdragsID);
 
@@ -31,12 +30,7 @@ const OppdragsdetaljerPage = () => {
   return (
     <>
       <Breadcrumbs soklink trefflistelink />
-      {isLoading && (
-        <div className={commonstyles.contentloader}>
-          <Loader size="3xlarge" title="Laster oppdragsdetaljer..." />
-        </div>
-      )}
-      {!isLoading && oppdragsdetaljer && (
+      {oppdragsdetaljer && (
         <div className={styles.oppdragsdetaljer}>
           <div className={styles.oppdragsdetaljer__toppinfo}>
             <h1>Oppdrag</h1>
