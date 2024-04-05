@@ -1,7 +1,7 @@
 import commonstyles from "../../util/common-styles.module.css";
 import LabelText from "../common/LabelText";
 import { formatDate } from "../../util/commonUtils";
-import { Enhet, Enhetstype, experimentEnhet } from "../../models/Enhet";
+import { Enhet, Enhetstype } from "../../models/Enhet";
 
 const enhetstypetekst: Record<Enhetstype, string> = {
   BEH: "Ansvarssted",
@@ -15,7 +15,6 @@ const EnhetVisning = ({ enhet }: { enhet: Enhet }) => (
     <div>{enhet.enhet}</div>
     ,
     <LabelText label={"Dato fom"} text={formatDate(enhet.datoFom)} />
-    <LabelText label={"validering"} text={experimentEnhet.success ? "Yay" : experimentEnhet.error.toString()} />
   </div>
 );
 

@@ -12,11 +12,3 @@ export const EnhetSchema = z.object({
 
 export type Enhet = z.infer<typeof EnhetSchema>;
 export type BehandlendeEnhet = z.infer<typeof EnhetSchema>;
-
-export const experimentEnhet = EnhetSchema.safeParse({
-  type: "BOS",
-  datoFom: "01.01.1234",
-  enhet: "1232",
-});
-
-// const melding = foo.success ? JSON.stringify(foo.data) : foo.error.message
