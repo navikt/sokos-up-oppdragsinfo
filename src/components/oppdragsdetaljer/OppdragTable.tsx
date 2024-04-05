@@ -41,7 +41,7 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
               <Table.ColumnHeader sortKey={"linjeId"} sortable>
                 Linjenr
               </Table.ColumnHeader>
-              <Table.ColumnHeader sortKey={"kodeklasse"} sortable>
+              <Table.ColumnHeader sortKey={"kodeKlasse"} sortable>
                 Kodeklasse
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakFom"} sortable>
@@ -56,7 +56,7 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
               <Table.ColumnHeader sortKey={"typeSats"} sortable>
                 Type sats
               </Table.ColumnHeader>
-              <Table.ColumnHeader sortKey={"status"} sortable>
+              <Table.ColumnHeader sortKey={"kodeStatus"} sortable>
                 Status
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoFom"} sortable>
