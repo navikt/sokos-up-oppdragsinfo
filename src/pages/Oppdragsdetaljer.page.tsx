@@ -57,7 +57,7 @@ const OppdragsdetaljerPage = () => {
                     {gjelderId && treffliste && (
                       <LabelText
                         label={"Gjelder ID"}
-                        text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
+                        text={`${gjelderId}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
                       />
                     )}
                     <LabelText label={"Fagområde"} text={oppdrag.navnFagOmraade} />

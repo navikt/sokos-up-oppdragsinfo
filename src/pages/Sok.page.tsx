@@ -2,10 +2,7 @@ import { Alert, Button, TextField } from "@navikt/ds-react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import {
-  TrefflisteSearchParameters,
-  TrefflisteSearchParametersSchema,
-} from "../components/sok/TrefflisteSokParameters";
+import { TrefflisteSearchParameters, TrefflisteSearchParametersSchema } from "../models/TrefflisteSokParameters";
 import { useEffect, useState } from "react";
 import { anyOppdragExists, firstOf, isEmpty, retrieveFaggruppe, retrieveId, storeId } from "../util/commonUtils";
 import RestService from "../services/rest-service";
