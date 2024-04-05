@@ -1,12 +1,12 @@
-import { anyOppdragExists, firstOf, isEmpty, retrieveFaggruppe, retrieveId } from "../util/commonUtils";
-import RestService from "../services/rest-service";
-import ContentLoader from "../components/common/ContentLoader";
 import Breadcrumbs from "../components/common/Breadcrumbs";
-import styles from "./Treffliste.module.css";
+import ContentLoader from "../components/common/ContentLoader";
+import RestService from "../services/rest-service";
 import SokekriterierVisning from "../components/treffliste/SokekriterierVisning";
-import { BASENAME } from "../util/constants";
-import { useEffect } from "react";
 import TrefflisteTable from "../components/treffliste/TrefflisteTable";
+import styles from "./Treffliste.module.css";
+import { BASENAME } from "../util/constants";
+import { anyOppdragExists, firstOf, isEmpty, retrieveFaggruppe, retrieveId } from "../util/commonUtils";
+import { useEffect } from "react";
 
 const TrefflistePage = () => {
   const gjelderId = retrieveId();

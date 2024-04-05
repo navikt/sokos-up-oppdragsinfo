@@ -1,20 +1,20 @@
-import { Alert, Button, TextField } from "@navikt/ds-react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { TrefflisteSearchParameters, TrefflisteSearchParametersSchema } from "../models/TrefflisteSokParameters";
-import { useEffect, useState } from "react";
-import { anyOppdragExists, firstOf, isEmpty, retrieveFaggruppe, retrieveId, storeId } from "../util/commonUtils";
-import RestService from "../services/rest-service";
-import styles from "./Sok.module.css";
 import ContentLoader from "../components/common/ContentLoader";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { Faggruppe } from "../models/Faggruppe";
-import { isArray } from "@grafana/faro-web-sdk";
-import SokHelp from "../components/sok/SokHelp";
-import NullstillButton from "../components/common/NullstillButton";
 import FaggrupperCombobox from "../components/sok/FaggrupperCombobox";
+import NullstillButton from "../components/common/NullstillButton";
+import RestService from "../services/rest-service";
+import SokHelp from "../components/sok/SokHelp";
+import styles from "./Sok.module.css";
+import { Alert, Button, TextField } from "@navikt/ds-react";
+import { Faggruppe } from "../models/Faggruppe";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { TrefflisteSearchParameters, TrefflisteSearchParametersSchema } from "../models/TrefflisteSokParameters";
+import { anyOppdragExists, firstOf, isEmpty, retrieveFaggruppe, retrieveId, storeId } from "../util/commonUtils";
+import { isArray } from "@grafana/faro-web-sdk";
+import { useEffect, useState } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const SokPage = () => {
   const { mutate } = useSWRConfig();

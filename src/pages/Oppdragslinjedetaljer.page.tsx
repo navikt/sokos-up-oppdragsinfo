@@ -1,28 +1,29 @@
+import Breadcrumbs from "../components/common/Breadcrumbs";
+import ContentLoader from "../components/common/ContentLoader";
+import EnhetshistorikkVisning from "../components/oppdragsdetaljer/EnhetshistorikkVisning";
+import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
+import KidlisteVisning from "../components/oppdragslinjedetaljer/KidlisteVisning";
+import KravhaverVisning from "../components/oppdragslinjedetaljer/KravhaverVisning";
+import LabelText from "../components/common/LabelText";
+import LinjedetaljAccordion from "../components/oppdragslinjedetaljer/LinjedetaljAccordion";
+import LinjeenheterVisning from "../components/oppdragslinjedetaljer/LinjeenheterVisning";
+import MaksdatoerVisning from "../components/oppdragslinjedetaljer/MaksdatoerVisning";
+import OmposteringerVisning from "../components/oppdragsdetaljer/OmposteringerVisning";
+import OvrigVisning from "../components/oppdragslinjedetaljer/OvrigVisning";
 import RestService from "../services/rest-service";
+import SkyldnersListVisning from "../components/oppdragslinjedetaljer/SkyldnerslistVisning";
+import StatushistorikkVisning from "../components/oppdragsdetaljer/StatushistorikkVisning";
+import TeksterVisning from "../components/oppdragslinjedetaljer/TeksterVisning";
+import ValutaerVisning from "../components/oppdragslinjedetaljer/ValutaerVisning";
+import commonstyles from "../util/common-styles.module.css";
+import styles from "./Oppdragslinjedetaljer.module.css";
 import { Accordion, Table } from "@navikt/ds-react";
+import { BASENAME } from "../util/constants";
+import { Oppdrag } from "../models/Oppdrag";
 import { firstOf, isEmpty, retrieveId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
-import KravhaverVisning from "../components/oppdragslinjedetaljer/KravhaverVisning";
-import OvrigVisning from "../components/oppdragslinjedetaljer/OvrigVisning";
-import KidlisteVisning from "../components/oppdragslinjedetaljer/KidlisteVisning";
-import ValutaerVisning from "../components/oppdragslinjedetaljer/ValutaerVisning";
-import TeksterVisning from "../components/oppdragslinjedetaljer/TeksterVisning";
-import SkyldnersListVisning from "../components/oppdragslinjedetaljer/SkyldnerslistVisning";
-import MaksdatoerVisning from "../components/oppdragslinjedetaljer/MaksdatoerVisning";
-import LinjeenheterVisning from "../components/oppdragslinjedetaljer/LinjeenheterVisning";
-import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
-import commonstyles from "../util/common-styles.module.css";
-import LinjedetaljAccordion from "../components/oppdragslinjedetaljer/LinjedetaljAccordion";
-import ContentLoader from "../components/common/ContentLoader";
 import { useParams } from "react-router-dom";
-import { BASENAME } from "../util/constants";
-import Breadcrumbs from "../components/common/Breadcrumbs";
-import styles from "./Oppdragslinjedetaljer.module.css";
-import { Oppdrag } from "../models/Oppdrag";
-import OmposteringerVisning from "../components/oppdragsdetaljer/OmposteringerVisning";
-import StatushistorikkVisning from "../components/oppdragsdetaljer/StatushistorikkVisning";
-import EnhetshistorikkVisning from "../components/oppdragsdetaljer/EnhetshistorikkVisning";
-import LabelText from "../components/common/LabelText";
+import { getOppdragFromTreffliste } from "../models/Treffliste";
 
 type OppdragslinjedetaljerParams = {
   oppdragsID: string;
@@ -38,16 +39,7 @@ const OppdragslinjedetaljerPage = () => {
 
   if (!gjelderId) window.location.replace(BASENAME);
 
-  const oppdrag: Oppdrag | null =
-    isArray(treffliste) &&
-    !isEmpty(treffliste) &&
-    !isEmpty(firstOf(treffliste).oppdragsListe) &&
-    firstOf(treffliste).oppdragsListe.some((a) => a.oppdragsId === +oppdragsID)
-      ? treffliste
-          .reduce((a) => a)
-          .oppdragsListe.filter((o) => o.oppdragsId === +oppdragsID)
-          .reduce((a) => a)
-      : null;
+  const oppdrag: Oppdrag | null = getOppdragFromTreffliste(treffliste, +oppdragsID);
 
   return (
     <div className={styles.oppdragslinjedetaljer}>
