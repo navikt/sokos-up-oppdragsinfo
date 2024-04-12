@@ -5,7 +5,7 @@ import { isEmpty } from "../../util/commonUtils";
 import { Kid } from "../../models/Kid";
 
 const KidlisteVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchKidliste(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchKidliste(oppdragsid, linjeid);
 
   return (
     <Table zebraStripes>

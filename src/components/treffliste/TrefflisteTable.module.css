@@ -1,0 +1,11 @@
+.sortabletable {
+  @apply bg-white min-w-1400;
+}
+
+.sortabletable__topinfo {
+  @apply flex flex-row justify-between min-w-1400;
+}
+
+.sortabletable__pagination {
+  @apply flex flex-row;
+}

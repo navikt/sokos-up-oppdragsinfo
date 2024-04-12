@@ -5,7 +5,7 @@ import { isEmpty } from "../../util/commonUtils";
 import { Kravhaver } from "../../models/Kravhaver";
 
 const KravhaverVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchKravhaver(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchKravhaver(oppdragsid, linjeid);
 
   return (
     <Table zebraStripes>

@@ -5,7 +5,8 @@ import { isEmpty } from "../../util/commonUtils";
 import { Maksdato } from "../../models/Maksdato";
 
 const MaksdatoerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchMaksdato(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchMaksdato(oppdragsid, linjeid);
+
   return (
     <Table zebraStripes>
       <Table.Header>

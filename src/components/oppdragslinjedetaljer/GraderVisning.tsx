@@ -5,7 +5,7 @@ import { isEmpty } from "../../util/commonUtils";
 import { Grad } from "../../models/Grad";
 
 const GraderVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchGrad(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchGrad(oppdragsid, linjeid);
 
   return (
     <Table zebraStripes>

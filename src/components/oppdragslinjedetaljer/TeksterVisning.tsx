@@ -5,7 +5,7 @@ import { isEmpty } from "../../util/commonUtils";
 import { Tekst } from "../../models/Tekst";
 
 const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchTekster(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchTekster(oppdragsid, linjeid);
 
   return (
     <div>

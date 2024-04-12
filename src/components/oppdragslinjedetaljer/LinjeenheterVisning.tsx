@@ -5,7 +5,7 @@ import { isEmpty } from "../../util/commonUtils";
 import { Linjeenhet } from "../../models/Linjeenhet";
 
 const LinjeenheterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchLinjeenheter(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchLinjeenheter(oppdragsid, linjeid);
 
   return (
     <Table zebraStripes>

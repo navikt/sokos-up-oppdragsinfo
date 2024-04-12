@@ -5,7 +5,8 @@ import { isEmpty } from "../../util/commonUtils";
 import { Skyldner } from "../../models/Skyldner";
 
 const SkyldnersListVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchSkyldnersList(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchSkyldnersList(oppdragsid, linjeid);
+
   return (
     <Table zebraStripes>
       <Table.Header>

@@ -1,16 +1,23 @@
 .knapperad {
-  @apply flex flex-row space-x-1;
+  @apply flex flex-row space-x-3;
 }
 .knapperad__right {
-  @apply knapperad justify-end;
+  @apply knapperad justify-end mx-4;
 }
-
 .bold {
-  @apply font-bold;
+  @apply font-bold whitespace-nowrap;
 }
 
 .row {
   @apply flex flex-row space-x-1;
+}
+
+.singlerow {
+  @apply flex flex-row;
+}
+
+.spacing {
+  @apply h-16;
 }
 
 .contentloader {
@@ -18,4 +25,20 @@
   text-align: center;
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+.sortabletable {
+  @apply bg-[--a-surface-default] min-w-1400;
+}
+
+.sortabletable__topinfo {
+  @apply flex flex-row justify-between;
+}
+
+.sortabletable__pagination {
+  @apply flex flex-row place-content-center;
+}
+
+.nowrap {
+  @apply whitespace-nowrap;
 }

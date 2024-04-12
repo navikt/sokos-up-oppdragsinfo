@@ -1,0 +1,31 @@
+h1 {
+  @apply text-center mx-auto;
+}
+
+h2 {
+  @apply text-4xl my-5;
+}
+
+.oppdragslinjedetaljer {
+  @apply min-w-1024 space-y-6;
+}
+
+.oppdragslinjedetaljer__top {
+  @apply max-w-[1440px] p-6 space-y-4 mx-auto;
+}
+
+.oppdragslinjedetaljer__toppinfo {
+  @apply relative bg-[--a-surface-default] p-6;
+}
+
+.oppdragslinjedetaljer__columns {
+  @apply flex flex-row w-full p-3 justify-between;
+}
+
+.oppdragslinjedetaljer__column {
+  @apply flex flex-col space-y-3;
+}
+
+.oppdragslinjedetaljer__heading {
+  @apply text-center;
+}

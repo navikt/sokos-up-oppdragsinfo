@@ -5,7 +5,7 @@ import { isEmpty } from "../../util/commonUtils";
 import { Valuta } from "../../models/Valuta";
 
 const ValutaerVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchValuta(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchValuta(oppdragsid, linjeid);
 
   return (
     <Table zebraStripes>

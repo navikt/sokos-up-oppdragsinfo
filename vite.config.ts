@@ -38,6 +38,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => ({
     },
     terser(),
   ],
+  base: "/oppdragsinfo",
   build: {
     lib: {
       entry: resolve(__dirname, "src/App.tsx"),

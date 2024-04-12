@@ -5,7 +5,8 @@ import { isEmpty } from "../../util/commonUtils";
 import { Ovrig } from "../../models/Ovrig";
 
 const OvrigVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
-  const [data] = RestService.useFetchOvrig(oppdragsid, linjeid, true);
+  const [data] = RestService.useFetchOvrig(oppdragsid, linjeid);
+
   return (
     <Table zebraStripes>
       <Table.Header>
