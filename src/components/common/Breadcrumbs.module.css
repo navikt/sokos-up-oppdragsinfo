@@ -1,5 +1,9 @@
 .breadcrumbs {
-  @apply relative h-16 bg-[--a-surface-alt-1-subtle] rounded-lg;
+  @apply relative h-16 bg-[--a-surface-alt-1-subtle] max-w-[1440px] rounded-lg;
+}
+
+.breadcrumbs a {
+  @apply text-[--a-text-action-on-action-subtle];
 }
 
 .breadcrumbs__contents {

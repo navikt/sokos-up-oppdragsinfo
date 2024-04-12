@@ -27,11 +27,13 @@ const TrefflistePage = () => {
   return (
     <>
       <div className={styles.treffliste}>
-        <Breadcrumbs soklink treffliste />
+        <div className={styles.treffliste__top}>
+          <Breadcrumbs soklink treffliste />
 
-        <div className={styles.treffliste__heading}>
-          <h1>Treffliste</h1>
-          <SokekriterierVisning gjelderId={gjelderId} navn={gjelderNavn} faggruppe={faggruppeNavn} />
+          <div className={styles.treffliste__heading}>
+            <h1>Treffliste</h1>
+            <SokekriterierVisning gjelderId={gjelderId} navn={gjelderNavn} faggruppe={faggruppeNavn} />
+          </div>
         </div>
         {trefflisteIsLoading && <ContentLoader />}
         {!trefflisteIsLoading && anyOppdragExists(treffliste) && <TrefflisteTable treff={firstOf(treffliste)} />}

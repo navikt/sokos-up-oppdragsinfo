@@ -57,7 +57,7 @@ Oppdragsinfo var en ubrukt funksjon som skulle vise noe fra en tabell som alltid
 
 Gammelt bilde som ikke enkelt kan redigeres:
 
-![Gammel oversikt](gammel_oversikt.png)
+![Gammel oversikt](images/gammel_oversikt.png)
 
 ## Faktisk utprøving av skjermbildet
 
@@ -139,7 +139,7 @@ med knapper for å navigere mellom dem.
 
 ### Søk
 
-![Søk](sok.png)
+![Søk](images/sok.png)
 
 Søket baserer seg på Faggruppe(nedtrekksmeny), Gjelder-ID, Fagsystem-ID og Dato FOM
 Vi kan lene oss kraftig på [ORS sitt Posteringsøk](https://github.com/navikt/sokos-up-ors/blob/master/src/components/PosteringS%C3%B8kPanel.tsx)
@@ -149,19 +149,19 @@ Foretrekk BodyShort og BodyLong foran mye css og br-elementer
 
 ### Treffliste
 
-![Treffliste](treffliste.png)
+![Treffliste](images/treffliste.png)
 
 ### Oppdragsdetaljtabell
 
-![Oppdragsdetaljtabell](oppdrag.png)
+![Oppdragsdetaljtabell](images/oppdrag.png)
 Knappene øverst til høyre for Statushistorikk og enhetshistorikk viste en popup.
 Treffliste navigerte tilbake til Treffliste
-![Statushistorikk](statushistorikk.png)
-![Enhetshistorikk](enhetshistorikk.png)
+![Statushistorikk](images/statushistorikk.png)
+![Enhetshistorikk](images/enhetshistorikk.png)
 
 ### Oppdragslinjedetaljtabell
 
-![Oppdragslinjedetaljtabell](linje.png)
+![Oppdragslinjedetaljtabell](images/linje.png)
 
 Knappene nederst er lenke til popuper:
-![Øvrige felter...](øvrigeFelter.png)
+![Øvrige felter...](images/øvrigeFelter.png)

@@ -8,11 +8,12 @@ import { Oppdragslinje } from "../../models/Oppdragslinje";
 import StatuserVisning from "./StatuserVisning";
 import AttestantVisning from "./AttestantVisning";
 import { Link } from "react-router-dom";
+import AntallSelector from "../common/AntallSelector";
 
 const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; oppdragsdetaljer: Oppdragsdetaljer }) => {
   const [sort, setSort] = useState<SortState<Oppdragslinje> | undefined>();
   const [page, setPage] = useState(1);
-  const rowsPerPage = 10;
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const linjeSort = (sortKey?: string) => {
     if (hasKey(firstOf(oppdragsdetaljer.oppdragsLinjer), sortKey)) handleSort<Oppdragslinje>(sortKey, setSort, sort);
@@ -22,18 +23,20 @@ const OppdragTable = ({ oppdragsid, oppdragsdetaljer }: { oppdragsid: string; op
   const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   const pagecount = Math.ceil(oppdragsdetaljer.oppdragsLinjer.length / rowsPerPage);
 
+  const antall = oppdragsdetaljer?.oppdragsLinjer?.length ?? 0;
+
   return (
     <>
-      {pagecount > 1 ? (
-        <div className={styles.sortabletable__topinfo}>
+      <div className={styles.sortabletable__topinfo}>
+        <div className={commonstyles.nowrap}>
           <p>
-            {oppdragsdetaljer?.oppdragsLinjer?.length ?? 0} treff, {page} av {pagecount} sider
+            {`${antall} treff`}
+            {antall > rowsPerPage && `, ${page} av ${pagecount} sider`}
           </p>
-          <p>Vis {rowsPerPage} per side</p>
         </div>
-      ) : (
-        <div className={commonstyles.spacing} />
-      )}
+
+        <AntallSelector antall={rowsPerPage} setAntall={setRowsPerPage} />
+      </div>
       <div className={styles.sortabletable}>
         <Table zebraStripes sort={sort} onSortChange={linjeSort}>
           <Table.Header>

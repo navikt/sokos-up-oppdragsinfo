@@ -29,49 +29,52 @@ const OppdragsdetaljerPage = () => {
 
   return (
     <>
-      <Breadcrumbs soklink trefflistelink />
+      <h1>Oppdragsinfo</h1>
       {oppdragsdetaljer && (
         <div className={styles.oppdragsdetaljer}>
-          <div className={styles.oppdragsdetaljer__toppinfo}>
-            <h1>Oppdrag</h1>
-            <div className={styles.oppdragsdetaljer__columns}></div>
-            <div className={styles.oppdragsdetaljer__column}>
-              {gjelderId && oppdrag && (
-                <div className={styles.oppdragsdetaljer__columns}>
-                  <div className={styles.oppdragsdetaljer__column}>
-                    {gjelderId && treffliste && (
-                      <LabelText
-                        label={"Gjelder ID"}
-                        text={`${gjelderId}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
-                      />
-                    )}
-                    <LabelText label={"Fagområde"} text={oppdrag.navnFagOmraade} />
+          <div className={styles.oppdragsdetaljer__top}>
+            <Breadcrumbs soklink trefflistelink oppdrag />
+            <div className={styles.oppdragsdetaljer__toppinfo}>
+              <h2>Oppdrag</h2>
+              <div className={styles.oppdragsdetaljer__columns}></div>
+              <div className={styles.oppdragsdetaljer__column}>
+                {gjelderId && oppdrag && (
+                  <div className={styles.oppdragsdetaljer__columns}>
+                    <div className={styles.oppdragsdetaljer__column}>
+                      {gjelderId && treffliste && (
+                        <LabelText
+                          label={"Gjelder ID"}
+                          text={`${gjelderId}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
+                        />
+                      )}
+                      <LabelText label={"Fagområde"} text={oppdrag.navnFagOmraade} />
+                    </div>
+                    <div className={styles.oppdragsdetaljer__column}>
+                      <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />
+                      <LabelText label={"Oppdrags ID"} text={oppdrag.oppdragsId} />
+                    </div>
+                    <div className={styles.oppdragsdetaljer__column}>
+                      <LabelText label={"Beregnes nå"} text={oppdrag.kjorIdag} />
+                      <LabelText label={"Status"} text={oppdrag.kodeStatus} />
+                    </div>
                   </div>
-                  <div className={styles.oppdragsdetaljer__column}>
-                    <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />
-                    <LabelText label={"Oppdrags ID"} text={oppdrag.oppdragsId} />
-                  </div>
-                  <div className={styles.oppdragsdetaljer__column}>
-                    <LabelText label={"Beregnes nå"} text={oppdrag.kjorIdag} />
-                    <LabelText label={"Status"} text={oppdrag.kodeStatus} />
-                  </div>
-                </div>
-              )}
-              {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
-                <EnhetVisning enhet={oppdragsdetaljer.behandlendeEnhet} />
-              )}
-              {gjelderId && oppdragsdetaljer.enhet && <EnhetVisning enhet={oppdragsdetaljer.enhet} />}
-            </div>
-            <div className={commonstyles.knapperad__right}>
-              {gjelderId && (
-                <OmposteringerVisning
-                  enabled={oppdragsdetaljer.harOmposteringer}
-                  gjelderId={gjelderId}
-                  id={oppdragsID}
-                />
-              )}
-              <StatushistorikkVisning id={oppdragsID} />
-              <EnhetshistorikkVisning id={oppdragsID} />
+                )}
+                {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
+                  <EnhetVisning enhet={oppdragsdetaljer.behandlendeEnhet} />
+                )}
+                {gjelderId && oppdragsdetaljer.enhet && <EnhetVisning enhet={oppdragsdetaljer.enhet} />}
+              </div>
+              <div className={commonstyles.knapperad__right}>
+                {gjelderId && (
+                  <OmposteringerVisning
+                    enabled={oppdragsdetaljer.harOmposteringer}
+                    gjelderId={gjelderId}
+                    id={oppdragsID}
+                  />
+                )}
+                <StatushistorikkVisning id={oppdragsID} />
+                <EnhetshistorikkVisning id={oppdragsID} />
+              </div>
             </div>
           </div>
           <OppdragTable oppdragsid={oppdragsID} oppdragsdetaljer={oppdragsdetaljer} />

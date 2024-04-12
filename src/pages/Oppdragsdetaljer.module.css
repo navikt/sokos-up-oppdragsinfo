@@ -1,13 +1,25 @@
+h1 {
+  @apply text-center mx-auto;
+}
+
+h2 {
+  @apply text-4xl my-5;
+}
+
 .oppdragsdetaljer {
-  @apply space-y-6 mt-6;
+  @apply space-y-6 mt-6 mx-auto my-3;
+}
+
+.oppdragsdetaljer__top {
+  @apply min-w-1024 max-w-[1440px] space-y-5 mx-auto;
 }
 
 .oppdragsdetaljer__toppinfo {
-  @apply relative mx-48 bg-[--a-surface-default] min-w-1024 max-w-[1440px] p-6;
+  @apply relative bg-[--a-surface-default] min-w-1024 p-6;
 }
 
 .oppdragsdetaljer__columns {
-  @apply flex flex-row p-3 justify-between space-x-16 w-4/5;
+  @apply flex flex-row p-3 justify-between space-x-16 w-11/12;
 }
 
 .oppdragsdetaljer__column {

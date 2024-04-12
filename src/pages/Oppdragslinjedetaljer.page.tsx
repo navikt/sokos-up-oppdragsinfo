@@ -42,29 +42,32 @@ const OppdragslinjedetaljerPage = () => {
 
   return (
     <div className={styles.oppdragslinjedetaljer}>
-      <Breadcrumbs soklink trefflistelink oppdraglink={oppdragsID} />
+      <h1>Oppdragsinfo</h1>
       <>
         {oppdragsdetaljer && (
           <div className={styles.oppdragsdetaljer}>
-            <div className={styles.oppdragslinjedetaljer__toppinfo}>
-              <h1>Oppdragslinjedetaljer</h1>
-              {gjelderId && treffliste && (
-                <LabelText
-                  label={"Gjelder ID"}
-                  text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
-                />
-              )}
-              {oppdrag && <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />}
-              <div className={commonstyles.knapperad__right}>
-                {gjelderId && (
-                  <OmposteringerVisning
-                    enabled={oppdragsdetaljer.harOmposteringer}
-                    gjelderId={gjelderId}
-                    id={oppdragsID}
+            <div className={styles.oppdragslinjedetaljer__top}>
+              <Breadcrumbs soklink trefflistelink oppdraglink={oppdragsID} detaljer />
+              <div className={styles.oppdragslinjedetaljer__toppinfo}>
+                <h2>Oppdragslinjedetaljer</h2>
+                {gjelderId && treffliste && (
+                  <LabelText
+                    label={"Gjelder ID"}
+                    text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
                   />
                 )}
-                <StatushistorikkVisning id={oppdragsID} />
-                <EnhetshistorikkVisning id={oppdragsID} />
+                {oppdrag && <LabelText label={"Fagsystem ID"} text={oppdrag.fagsystemId} />}
+                <div className={commonstyles.knapperad__right}>
+                  {gjelderId && (
+                    <OmposteringerVisning
+                      enabled={oppdragsdetaljer.harOmposteringer}
+                      gjelderId={gjelderId}
+                      id={oppdragsID}
+                    />
+                  )}
+                  <StatushistorikkVisning id={oppdragsID} />
+                  <EnhetshistorikkVisning id={oppdragsID} />
+                </div>
               </div>
             </div>
           </div>

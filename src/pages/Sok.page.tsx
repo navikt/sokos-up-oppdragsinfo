@@ -63,12 +63,13 @@ const SokPage = () => {
 
   return (
     <>
+      <h1>Oppdragsinfo</h1>
       <div className={styles.sok__sok}>
         <div className={styles.sok__help}>
           <SokHelp />
         </div>
         <form onSubmit={handleSubmit(handleChangeGjelderId)}>
-          <h1>Søk</h1>
+          <h2>Søk</h2>
 
           <div className={styles.sok_inputfields}>
             <div className={styles.sok__inputGjelderID}>
@@ -78,6 +79,8 @@ const SokPage = () => {
                 defaultValue={trefflisteSokParameters.gjelderID}
                 id="gjelderID"
                 error={errors.gjelderID?.message}
+                // eslint-disable-next-line jsx-a11y/no-autofocus
+                autoFocus
               />
             </div>
             <FaggrupperCombobox faggrupper={faggrupper} />

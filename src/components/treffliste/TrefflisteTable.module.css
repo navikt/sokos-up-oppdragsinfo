@@ -3,9 +3,9 @@
 }
 
 .sortabletable__topinfo {
-  @apply flex flex-row justify-between;
+  @apply flex flex-row justify-between min-w-1400;
 }
 
 .sortabletable__pagination {
-  @apply flex flex-row place-content-center;
+  @apply flex flex-row;
 }

@@ -8,9 +8,10 @@ type BreadcrumbsProps = {
   trefflistelink?: boolean;
   oppdrag?: boolean;
   oppdraglink?: string;
+  detaljer?: boolean;
 };
 
-const Breadcrumbs = ({ soklink, treffliste, trefflistelink, oppdrag, oppdraglink }: BreadcrumbsProps) => {
+const Breadcrumbs = ({ soklink, treffliste, trefflistelink, oppdrag, oppdraglink, detaljer }: BreadcrumbsProps) => {
   return (
     <div className={styles.breadcrumbs}>
       <div className={styles.breadcrumbs__left}>
@@ -32,6 +33,7 @@ const Breadcrumbs = ({ soklink, treffliste, trefflistelink, oppdrag, oppdraglink
               &gt; &gt; <Link to={`/${oppdraglink}`}>Oppdrag</Link>
             </div>
           )}
+          {detaljer && <div className={styles.breadcrumbs__crumb}>&gt; &gt; Detaljer</div>}
         </div>
       </div>
       <div className={styles.breadcrumbs__right}>

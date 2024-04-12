@@ -5,7 +5,7 @@
   @apply knapperad justify-end mx-4;
 }
 .bold {
-  @apply font-bold;
+  @apply font-bold whitespace-nowrap;
 }
 
 .row {
@@ -37,4 +37,8 @@
 
 .sortabletable__pagination {
   @apply flex flex-row place-content-center;
+}
+
+.nowrap {
+  @apply whitespace-nowrap;
 }

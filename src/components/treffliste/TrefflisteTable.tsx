@@ -2,15 +2,16 @@ import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import { Treff } from "../../models/Treffliste";
 import { Link } from "react-router-dom";
-import { firstOf, applySortDirection, handleSort, hasKey, SortState } from "../../util/commonUtils";
+import { applySortDirection, firstOf, handleSort, hasKey, SortState } from "../../util/commonUtils";
 import { Oppdrag } from "../../models/Oppdrag";
 import styles from "./TrefflisteTable.module.css";
 import commonstyles from "../../util/common-styles.module.css";
+import AntallSelector from "../common/AntallSelector";
 
 const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
-  const rowsPerPage = 10;
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const oppdragSort = (sortKey?: string) => {
     if (hasKey(firstOf(treff.oppdragsListe), sortKey)) handleSort<Oppdrag>(sortKey, setSort, sort);
@@ -20,18 +21,19 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   const pagecount = Math.ceil(treff.oppdragsListe.length / rowsPerPage);
 
+  const antall = treff?.oppdragsListe?.length ?? 0;
   return (
     <>
-      {pagecount > 1 ? (
-        <div className={styles.sortabletable__topinfo}>
+      <div className={styles.sortabletable__topinfo}>
+        <div className={commonstyles.nowrap}>
           <p>
-            {treff?.oppdragsListe?.length ?? 0} treff, {page} av {pagecount} sider
+            {`${antall} treff`}
+            {antall > rowsPerPage && `, ${page} av ${pagecount} sider`}
           </p>
-          <p>Vis {rowsPerPage} per side</p>
         </div>
-      ) : (
-        <div className={commonstyles.spacing}></div>
-      )}
+
+        <AntallSelector antall={rowsPerPage} setAntall={setRowsPerPage} />
+      </div>
       <div className={styles.sortabletable}>
         <Table zebraStripes sort={sort} onSortChange={oppdragSort}>
           <Table.Header>
