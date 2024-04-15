@@ -14,28 +14,28 @@
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.3.7",
     "@hookform/resolvers": "^3.3.4",
-    "@navikt/aksel-icons": "6.3.6",
-    "@navikt/ds-css": "6.3.6",
-    "@navikt/ds-react": "6.3.6",
+    "@navikt/aksel-icons": "6.5.0",
+    "@navikt/ds-css": "6.5.0",
+    "@navikt/ds-react": "6.5.0",
     "axios": "^1.6.7",
     "clsx": "^2.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.50.0",
+    "react-hook-form": "^7.51.3",
     "react-router-dom": "^6.22.1",
     "swr": "^2.2.4",
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@eik/rollup-plugin": "^4.0.61",
-    "@navikt/aksel-stylelint": "6.3.6",
+    "@eik/rollup-plugin": "^4.0.63",
+    "@navikt/aksel-stylelint": "6.5.0",
     "@rollup/plugin-terser": "^0.4.4",
-    "@types/react": "^18.2.53",
-    "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "7.5.0",
+    "@types/react": "^18.2.78",
+    "@types/react-dom": "^18.2.25",
+    "@typescript-eslint/eslint-plugin": "7.6.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.17",
-    "eslint": "^8.56.0",
+    "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
@@ -50,7 +50,7 @@
     "vite-plugin-css-injected-by-js": "^3.4.0",
     "vite-plugin-environment": "^1.1.3",
     "vite-plugin-mock": "^3.0.1",
-    "vitest": "^1.2.2"
+    "vitest": "^1.5.0"
   },
   "eslintConfig": {
     "extends": [
