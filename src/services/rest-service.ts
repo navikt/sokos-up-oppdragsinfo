@@ -22,7 +22,7 @@ import { Grader } from "../models/Grad";
 import { Maksdatoer } from "../models/Maksdato";
 import { Statushistorikk } from "../models/StatushistorikkStatus";
 
-const BASE_API_URL = "/nav-oppdrag-api/api/v1/oppdragsinfo";
+const BASE_API_URL = "/oppdrag-api/api/v1/oppdragsinfo";
 
 const api = axios.create({
   baseURL: BASE_API_URL,
