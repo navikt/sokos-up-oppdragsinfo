@@ -2,16 +2,15 @@ import importMapPlugin from "@eik/rollup-plugin";
 import terser from "@rollup/plugin-terser";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
-import { ConfigEnv } from "vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
-import { viteMockServe } from "vite-plugin-mock";
 import EnvironmentPlugin from "vite-plugin-environment";
-import { UserConfigExport } from "vitest/config";
+import { viteMockServe } from "vite-plugin-mock";
 
 const reactUrl = "https://www.nav.no/tms-min-side-assets/react/18/esm/index.js";
-const reactDomUrl = "https://www.nav.no/tms-min-side-assets/react-dom/18/esm/index.js";
+const reactDomUrl =
+  "https://www.nav.no/tms-min-side-assets/react-dom/18/esm/index.js";
 
-export default ({ command }: ConfigEnv): UserConfigExport => ({
+export default () => ({
   plugins: [
     react(),
     cssInjectedByJsPlugin(),
@@ -20,7 +19,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => ({
     }),
     viteMockServe({
       mockPath: "mock",
-      localEnabled: command === "serve",
+      enable: true,
     }),
     {
       ...importMapPlugin({
