@@ -1,12 +1,11 @@
-import { resolve } from "path";
-
 /* eslint-disable @typescript-eslint/no-var-requires */
 const cors = require("cors");
 const express = require("express");
 const expressStaticGzip = require("express-static-gzip");
+const path = require("path");
 
 const basePath = "/sokos-up-oppdragsinfo";
-const buildPath = resolve(__dirname, "../dist");
+const buildPath = path.resolve(__dirname, "../dist");
 const server = express();
 const corsAllowedOrigin =
   process.env.CORS_ALLOWED_ORIGIN || "http://localhost:5173";
