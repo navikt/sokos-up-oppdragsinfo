@@ -1,23 +1,29 @@
-const express = require("express");
+/* eslint-disable @typescript-eslint/no-var-requires */
 const cors = require("cors");
+const express = require("express");
+const expressStaticGzip = require("express-static-gzip");
 const path = require("path");
+
 const basePath = "/sokos-up-oppdragsinfo";
 const buildPath = path.resolve(__dirname, "../dist");
 const server = express();
-const corsAllowedOrigin = process.env.CORS_ALLOWED_ORIGIN || "http://localhost:5173";
+const corsAllowedOrigin =
+  process.env.CORS_ALLOWED_ORIGIN || "http://localhost:5173";
 
 server.use(cors({ origin: corsAllowedOrigin }));
-
-const expressStaticGzip = require("express-static-gzip");
 
 server.use(
   basePath,
   expressStaticGzip(buildPath, {
     enableBrotli: true,
     orderPreference: ["br"],
-  })
+  }),
 );
 
-server.get([`${basePath}/internal/isAlive`, `${basePath}/internal/isReady`], (_req, res) => res.sendStatus(200));
+server.get(
+  [`${basePath}/internal/isAlive`, `${basePath}/internal/isReady`],
+  (_req, res) => res.sendStatus(200),
+);
 
+// eslint-disable-next-line no-console
 server.listen(8080, () => console.log("Server listening on port 8080"));
