@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const cors = require("cors");
-const express = require("express");
-const expressStaticGzip = require("express-static-gzip");
-const path = require("path");
+import cors from "cors";
+import express, { Request, Response } from "express";
+import expressStaticGzip from "express-static-gzip";
+import path from "path";
 
 const basePath = "/sokos-up-oppdragsinfo";
 const buildPath = path.resolve(__dirname, "../dist");
@@ -22,7 +21,7 @@ server.use(
 
 server.get(
   [`${basePath}/internal/isAlive`, `${basePath}/internal/isReady`],
-  (_req, res) => res.sendStatus(200),
+  (_req: Request, res: Response) => res.sendStatus(200),
 );
 
 // eslint-disable-next-line no-console
