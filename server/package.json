@@ -1,20 +1,29 @@
 {
-  "name": "server",
+  "name": "sokos-up-oppdragsinfo-server",
   "version": "1.0.0",
-  "description": "server",
-  "main": "index.js",
+  "description": "Server for sokos-up-oppdragsinfo",
+  "main": "src/server.ts",
   "scripts": {
-    "start": "node server.js"
+    "dev": "nodemon src/server.ts",
+    "build": "tsc --build"
   },
   "author": "navikt",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.19.2",
+    "express": "^4.18.2",
     "express-static-gzip": "^2.1.7"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.16",
+    "nodemon": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "engines": {
     "node": ">=20.11.0",
-    "pnpm": ">=8"
+    "pnpm": ">=9"
   }
 }
