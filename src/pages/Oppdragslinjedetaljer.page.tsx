@@ -6,7 +6,7 @@ import LabelText from "../components/common/LabelText";
 import EnhetshistorikkModal from "../components/oppdragsdetaljer/EnhetshistorikkModal";
 import OmposteringModal from "../components/oppdragsdetaljer/OmposteringModal";
 import StatushistorikkModal from "../components/oppdragsdetaljer/StatushistorikkModal";
-import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
+import GraderTable from "../components/oppdragslinjedetaljer/GraderVisning";
 import KidlisteVisning from "../components/oppdragslinjedetaljer/KidlisteVisning";
 import KravhaverVisning from "../components/oppdragslinjedetaljer/KravhaverVisning";
 import LinjedetaljAccordion from "../components/oppdragslinjedetaljer/LinjedetaljAccordion";
@@ -174,7 +174,7 @@ const OppdragslinjedetaljerPage = () => {
               title={"Grader"}
               enabled={!!linjedetalj?.harGrader}
             >
-              <GraderVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <GraderTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Kravhavere"}

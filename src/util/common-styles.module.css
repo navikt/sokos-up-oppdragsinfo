@@ -1,11 +1,13 @@
 .knapperad {
   @apply flex flex-row space-x-3;
 }
+
 .knapperad__right {
-  @apply knapperad justify-end mx-4;
+  @apply knapperad mx-4 justify-end;
 }
+
 .bold {
-  @apply font-bold whitespace-nowrap;
+  @apply whitespace-nowrap font-bold;
 }
 
 .row {
@@ -28,7 +30,7 @@
 }
 
 .sortabletable {
-  @apply bg-[--a-surface-default] min-w-1400;
+  @apply min-w-1400 bg-[--a-surface-default];
 }
 
 .sortabletable__topinfo {

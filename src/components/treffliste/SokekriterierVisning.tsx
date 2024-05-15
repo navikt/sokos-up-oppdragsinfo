@@ -1,5 +1,5 @@
-import styles from "./SokekriterierVisning.module.css";
 import LabelText from "../common/LabelText";
+import styles from "./SokekriterierVisning.module.css";
 
 type SokekriterierProps = {
   gjelderId?: string;
@@ -7,7 +7,11 @@ type SokekriterierProps = {
   faggruppe?: string;
 };
 
-const SokekriterierVisning = ({ gjelderId, navn, faggruppe }: SokekriterierProps) => {
+const SokekriterierVisning = ({
+  gjelderId,
+  navn,
+  faggruppe,
+}: SokekriterierProps) => {
   return (
     <>
       <div className={styles.sokekriterier}>

@@ -1,10 +1,16 @@
-import RestService from "../../services/rest-service";
-import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../../util/commonUtils";
+import { Table } from "@navikt/ds-react";
 import { Kravhaver } from "../../models/Kravhaver";
+import RestService from "../../services/rest-service";
+import { isEmpty } from "../../util/commonUtils";
 
-const KravhaverVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
+const KravhaverVisning = ({
+  oppdragsid,
+  linjeid,
+}: {
+  oppdragsid: string;
+  linjeid: string;
+}) => {
   const [data] = RestService.useFetchKravhaver(oppdragsid, linjeid);
 
   return (
@@ -12,10 +18,22 @@ const KravhaverVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell key={"linjeId"} scope="col" children={"linjeId"} />
-          <Table.HeaderCell key={"kravhaverId"} scope="col" children={"kravhaverId"} />
+          <Table.HeaderCell
+            key={"kravhaverId"}
+            scope="col"
+            children={"kravhaverId"}
+          />
           <Table.HeaderCell key={"datoFom"} scope="col" children={"datoFom"} />
-          <Table.HeaderCell key={"tidspktReg"} scope="col" children={"tidspktReg"} />
-          <Table.HeaderCell key={"brukerid"} scope="col" children={"brukerid"} />
+          <Table.HeaderCell
+            key={"tidspktReg"}
+            scope="col"
+            children={"tidspktReg"}
+          />
+          <Table.HeaderCell
+            key={"brukerid"}
+            scope="col"
+            children={"brukerid"}
+          />
         </Table.Row>
       </Table.Header>
       <Table.Body>

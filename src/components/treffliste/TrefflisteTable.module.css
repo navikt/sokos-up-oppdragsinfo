@@ -1,9 +1,9 @@
 .sortabletable {
-  @apply bg-white min-w-1400;
+  @apply min-w-1400 bg-white;
 }
 
 .sortabletable__topinfo {
-  @apply flex flex-row justify-between min-w-1400;
+  @apply flex min-w-1400 flex-row justify-between;
 }
 
 .sortabletable__pagination {

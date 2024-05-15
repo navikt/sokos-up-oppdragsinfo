@@ -1,10 +1,16 @@
-import RestService from "../../services/rest-service";
-import { Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../../util/commonUtils";
+import { Table } from "@navikt/ds-react";
 import { Tekst } from "../../models/Tekst";
+import RestService from "../../services/rest-service";
+import { isEmpty } from "../../util/commonUtils";
 
-const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: string }) => {
+const TeksterVisning = ({
+  oppdragsid,
+  linjeid,
+}: {
+  oppdragsid: string;
+  linjeid: string;
+}) => {
   const [data] = RestService.useFetchTekster(oppdragsid, linjeid);
 
   return (
@@ -12,7 +18,11 @@ const TeksterVisning = ({ oppdragsid, linjeid }: { oppdragsid: string; linjeid: 
       <Table zebraStripes>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell key={"linjeId"} scope="col" children={"Linje-ID"} />
+            <Table.HeaderCell
+              key={"linjeId"}
+              scope="col"
+              children={"Linje-ID"}
+            />
             <Table.HeaderCell key={"tekst"} scope="col" children={"Tekst"} />
           </Table.Row>
         </Table.Header>

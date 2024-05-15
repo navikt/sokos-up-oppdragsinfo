@@ -5,7 +5,7 @@
     "harSkyldnere": false,
     "harKravhavere": true,
     "harEnheter": false,
-    "harGrader": false,
+    "harGrader": true,
     "harTekster": true,
     "harKidliste": false,
     "harMaksdatoer": true

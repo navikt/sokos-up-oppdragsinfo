@@ -5,4 +5,6 @@ export const TrefflisteSearchParametersSchema = z.object({
   gjelderID: GjelderIdSchema,
 });
 
-export type TrefflisteSearchParameters = z.infer<typeof TrefflisteSearchParametersSchema>;
+export type TrefflisteSearchParameters = z.infer<
+  typeof TrefflisteSearchParametersSchema
+>;

@@ -11,7 +11,9 @@ export const OppdragslinjedetaljSchema = z.object({
   harKidliste: z.boolean(),
   harMaksdatoer: z.boolean(),
 });
-export const OppdragslinjedetaljerSchema = z.array(OppdragslinjedetaljSchema).max(1);
+export const OppdragslinjedetaljerSchema = z
+  .array(OppdragslinjedetaljSchema)
+  .max(1);
 
 export type Oppdragslinjedetalj = z.infer<typeof OppdragslinjedetaljSchema>;
 
