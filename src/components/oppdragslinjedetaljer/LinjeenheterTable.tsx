@@ -4,7 +4,7 @@ import { Linjeenhet } from "../../models/Linjeenhet";
 import RestService from "../../services/rest-service";
 import { isEmpty } from "../../util/commonUtils";
 
-const LinjeenheterVisning = ({
+const LinjeenheterTable = ({
   oppdragsid,
   linjeid,
 }: {
@@ -62,4 +62,4 @@ const LinjeenheterVisning = ({
   );
 };
 
-export default LinjeenheterVisning;
+export default LinjeenheterTable;

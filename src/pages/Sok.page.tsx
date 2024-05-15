@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Alert, Button, TextField } from "@navikt/ds-react";
+import { Alert, Button, Heading, TextField } from "@navikt/ds-react";
 import ContentLoader from "../components/common/ContentLoader";
 import NullstillButton from "../components/common/ResetButton";
 import FaggrupperCombobox from "../components/sok/FaggrupperCombobox";
@@ -83,13 +83,17 @@ const SokPage = () => {
 
   return (
     <>
-      <h1>Oppdragsinfo</h1>
+      <Heading level="1" size="large" spacing>
+        Oppdragsinfo
+      </Heading>
       <div className={styles.sok__sok}>
         <div className={styles.sok__help}>
           <SokHelp />
         </div>
         <form onSubmit={handleSubmit(handleChangeGjelderId)}>
-          <h2>Søk</h2>
+          <Heading level="2" size="medium" spacing>
+            Søk
+          </Heading>
 
           <div className={styles.sok_inputfields}>
             <div className={styles.sok__inputGjelderID}>

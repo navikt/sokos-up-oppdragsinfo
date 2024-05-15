@@ -1,27 +1,27 @@
 import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
-import { Kravhaver } from "../../models/Kravhaver";
+import { Skyldner } from "../../models/Skyldner";
 import RestService from "../../services/rest-service";
 import { isEmpty } from "../../util/commonUtils";
 
-const KravhaverVisning = ({
+const SkyldnersListTable = ({
   oppdragsid,
   linjeid,
 }: {
   oppdragsid: string;
   linjeid: string;
 }) => {
-  const [data] = RestService.useFetchKravhaver(oppdragsid, linjeid);
+  const [data] = RestService.useFetchSkyldnersList(oppdragsid, linjeid);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell key={"linjeId"} scope="col" children={"linjeId"} />
+          <Table.HeaderCell key={"linjeId"} scope="col" children={"Linje-ID"} />
           <Table.HeaderCell
-            key={"kravhaverId"}
+            key={"skyldnerId"}
             scope="col"
-            children={"kravhaverId"}
+            children={"skyldnerId"}
           />
           <Table.HeaderCell key={"datoFom"} scope="col" children={"datoFom"} />
           <Table.HeaderCell
@@ -40,13 +40,13 @@ const KravhaverVisning = ({
         {data &&
           isArray(data) &&
           !isEmpty(data) &&
-          data?.map((kravhaver: Kravhaver) => (
-            <Table.Row key={btoa(kravhaver.linjeId)}>
-              <Table.DataCell>{kravhaver.linjeId}</Table.DataCell>
-              <Table.DataCell>{kravhaver.kravhaverId}</Table.DataCell>
-              <Table.DataCell>{kravhaver.datoFom}</Table.DataCell>
-              <Table.DataCell>{kravhaver.tidspktReg}</Table.DataCell>
-              <Table.DataCell>{kravhaver.brukerid}</Table.DataCell>
+          data?.map((skyldner: Skyldner) => (
+            <Table.Row key={btoa(skyldner.linjeId)}>
+              <Table.DataCell>{skyldner.linjeId}</Table.DataCell>
+              <Table.DataCell>{skyldner.skyldnerId}</Table.DataCell>
+              <Table.DataCell>{skyldner.datoFom}</Table.DataCell>
+              <Table.DataCell>{skyldner.tidspktReg}</Table.DataCell>
+              <Table.DataCell>{skyldner.brukerid}</Table.DataCell>
             </Table.Row>
           ))}
       </Table.Body>
@@ -54,4 +54,4 @@ const KravhaverVisning = ({
   );
 };
 
-export default KravhaverVisning;
+export default SkyldnersListTable;

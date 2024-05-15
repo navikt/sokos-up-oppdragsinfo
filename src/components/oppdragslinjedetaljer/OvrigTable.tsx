@@ -4,7 +4,7 @@ import { Ovrig } from "../../models/Ovrig";
 import RestService from "../../services/rest-service";
 import { isEmpty } from "../../util/commonUtils";
 
-const OvrigVisning = ({
+const OvrigTable = ({
   oppdragsid,
   linjeid,
 }: {
@@ -52,4 +52,4 @@ const OvrigVisning = ({
   );
 };
 
-export default OvrigVisning;
+export default OvrigTable;

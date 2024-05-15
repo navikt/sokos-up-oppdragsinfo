@@ -1,28 +1,24 @@
 import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
-import { Maksdato } from "../../models/Maksdato";
+import { Kid } from "../../models/Kid";
 import RestService from "../../services/rest-service";
 import { isEmpty } from "../../util/commonUtils";
 
-const MaksdatoerVisning = ({
+const KidlisteTable = ({
   oppdragsid,
   linjeid,
 }: {
   oppdragsid: string;
   linjeid: string;
 }) => {
-  const [data] = RestService.useFetchMaksdato(oppdragsid, linjeid);
+  const [data] = RestService.useFetchKidliste(oppdragsid, linjeid);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell key={"linjeId"} scope="col" children={"Linje-ID"} />
-          <Table.HeaderCell
-            key={"maksdato"}
-            scope="col"
-            children={"maksdato"}
-          />
+          <Table.HeaderCell key={"kid"} scope="col" children={"kid"} />
           <Table.HeaderCell key={"datoFom"} scope="col" children={"datoFom"} />
           <Table.HeaderCell
             key={"tidspktReg"}
@@ -40,13 +36,13 @@ const MaksdatoerVisning = ({
         {data &&
           isArray(data) &&
           !isEmpty(data) &&
-          data?.map((maksdato: Maksdato) => (
-            <Table.Row key={btoa(JSON.stringify(maksdato))}>
-              <Table.DataCell>{maksdato.linjeId}</Table.DataCell>
-              <Table.DataCell>{maksdato.maksdato}</Table.DataCell>
-              <Table.DataCell>{maksdato.datoFom}</Table.DataCell>
-              <Table.DataCell>{maksdato.tidspktReg}</Table.DataCell>
-              <Table.DataCell>{maksdato.brukerid}</Table.DataCell>
+          data?.map((kid: Kid) => (
+            <Table.Row key={btoa(kid.linjeId)}>
+              <Table.DataCell>{kid.linjeId}</Table.DataCell>
+              <Table.DataCell>{kid.kid}</Table.DataCell>
+              <Table.DataCell>{kid.datoFom}</Table.DataCell>
+              <Table.DataCell>{kid.tidspktReg}</Table.DataCell>
+              <Table.DataCell>{kid.brukerid}</Table.DataCell>
             </Table.Row>
           ))}
       </Table.Body>
@@ -54,4 +50,4 @@ const MaksdatoerVisning = ({
   );
 };
 
-export default MaksdatoerVisning;
+export default KidlisteTable;

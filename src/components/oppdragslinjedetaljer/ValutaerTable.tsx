@@ -4,7 +4,7 @@ import { Valuta } from "../../models/Valuta";
 import RestService from "../../services/rest-service";
 import { isEmpty } from "../../util/commonUtils";
 
-const ValutaerVisning = ({
+const ValutaerTable = ({
   oppdragsid,
   linjeid,
 }: {
@@ -60,4 +60,4 @@ const ValutaerVisning = ({
   );
 };
 
-export default ValutaerVisning;
+export default ValutaerTable;

@@ -1,17 +1,9 @@
-h1 {
-  @apply mx-auto text-center;
-}
-
-h2 {
-  @apply my-5 text-4xl;
-}
-
 .sok {
   @apply space-y-2;
 }
 
 .sok__sok {
-  @apply relative mx-auto max-w-[1440px] bg-[--a-surface-alt-1-subtle] p-5 pt-2;
+  @apply relative mx-auto max-w-[1440px] bg-[--a-surface-alt-1-subtle] p-5;
 }
 
 .sok_inputfields {

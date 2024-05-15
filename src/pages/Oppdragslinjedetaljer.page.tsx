@@ -6,16 +6,16 @@ import LabelText from "../components/common/LabelText";
 import EnhetshistorikkModal from "../components/oppdragsdetaljer/EnhetshistorikkModal";
 import OmposteringModal from "../components/oppdragsdetaljer/OmposteringModal";
 import StatushistorikkModal from "../components/oppdragsdetaljer/StatushistorikkModal";
-import GraderTable from "../components/oppdragslinjedetaljer/GraderVisning";
-import KidlisteVisning from "../components/oppdragslinjedetaljer/KidlisteVisning";
-import KravhaverVisning from "../components/oppdragslinjedetaljer/KravhaverVisning";
+import GraderTable from "../components/oppdragslinjedetaljer/GraderTable";
+import KidlisteTable from "../components/oppdragslinjedetaljer/KidlisteTable";
+import KravhaverTable from "../components/oppdragslinjedetaljer/KravhaverTable";
 import LinjedetaljAccordion from "../components/oppdragslinjedetaljer/LinjedetaljAccordion";
-import LinjeenheterVisning from "../components/oppdragslinjedetaljer/LinjeenheterVisning";
-import MaksdatoerVisning from "../components/oppdragslinjedetaljer/MaksdatoerVisning";
-import OvrigVisning from "../components/oppdragslinjedetaljer/OvrigVisning";
-import SkyldnersListVisning from "../components/oppdragslinjedetaljer/SkyldnerslistVisning";
-import TeksterVisning from "../components/oppdragslinjedetaljer/TeksterVisning";
-import ValutaerVisning from "../components/oppdragslinjedetaljer/ValutaerVisning";
+import LinjeenheterTable from "../components/oppdragslinjedetaljer/LinjeenheterTable";
+import MaksdatoerTable from "../components/oppdragslinjedetaljer/MaksdatoerTable";
+import OvrigTable from "../components/oppdragslinjedetaljer/OvrigTable";
+import SkyldnersListTable from "../components/oppdragslinjedetaljer/SkyldnerslistTable";
+import TeksterTable from "../components/oppdragslinjedetaljer/TeksterTable";
+import ValutaerTable from "../components/oppdragslinjedetaljer/ValutaerTable";
 import { Oppdrag } from "../models/Oppdrag";
 import { getOppdragFromTreffliste } from "../models/Treffliste";
 import RestService from "../services/rest-service";
@@ -168,7 +168,7 @@ const OppdragslinjedetaljerPage = () => {
               title={"Enheter"}
               enabled={!!linjedetalj?.harEnheter}
             >
-              <LinjeenheterVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <LinjeenheterTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Grader"}
@@ -180,40 +180,40 @@ const OppdragslinjedetaljerPage = () => {
               title={"Kravhavere"}
               enabled={!!linjedetalj?.harKravhavere}
             >
-              <KravhaverVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <KravhaverTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Valutaer"}
               enabled={!!linjedetalj?.harValutaer}
             >
-              <ValutaerVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <ValutaerTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Tekster"}
               enabled={!!linjedetalj?.harTekster}
             >
-              <TeksterVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <TeksterTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Kidliste"}
               enabled={!!linjedetalj?.harKidliste}
             >
-              <KidlisteVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <KidlisteTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Skyldnere"}
               enabled={!!linjedetalj?.harSkyldnere}
             >
-              <SkyldnersListVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <SkyldnersListTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Maksdato"}
               enabled={!!linjedetalj?.harMaksdatoer}
             >
-              <MaksdatoerVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <MaksdatoerTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Øvrig"} enabled>
-              <OvrigVisning oppdragsid={oppdragsID} linjeid={linjeID} />
+              <OvrigTable oppdragsid={oppdragsID} linjeid={linjeID} />
             </LinjedetaljAccordion>
           </Accordion>
         </div>

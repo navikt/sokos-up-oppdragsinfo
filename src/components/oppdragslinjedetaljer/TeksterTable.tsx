@@ -4,7 +4,7 @@ import { Tekst } from "../../models/Tekst";
 import RestService from "../../services/rest-service";
 import { isEmpty } from "../../util/commonUtils";
 
-const TeksterVisning = ({
+const TeksterTable = ({
   oppdragsid,
   linjeid,
 }: {
@@ -42,4 +42,4 @@ const TeksterVisning = ({
   );
 };
 
-export default TeksterVisning;
+export default TeksterTable;

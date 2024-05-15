@@ -110,11 +110,13 @@ export const anyOppdragExists = (
   return true;
 };
 
-export const applySortDirection = (sort) => (a, b) => {
-  if (sort) {
-    return sort.direction === "ascending"
-      ? comparator(b, a, sort.orderBy)
-      : comparator(a, b, sort.orderBy);
-  }
-  return 1;
-};
+export const applySortDirection =
+  <T>(sort?: SortState<T>) =>
+  (a: T, b: T) => {
+    if (sort) {
+      return sort.direction === "ascending"
+        ? comparator<T>(b, a, sort.orderBy)
+        : comparator<T>(a, b, sort.orderBy);
+    }
+    return 1;
+  };
