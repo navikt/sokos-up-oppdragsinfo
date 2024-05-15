@@ -29,6 +29,7 @@ const RowsPerPageSelector = ({
               <Dropdown.Menu.Divider />
               {[5, 10, 25, 50].map((n) => (
                 <Dropdown.Menu.GroupedList.Item
+                  key={n}
                   onClick={() => setRowsPerPage(n)}
                 >
                   {n}

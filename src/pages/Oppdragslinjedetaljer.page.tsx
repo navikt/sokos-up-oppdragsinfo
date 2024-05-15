@@ -5,7 +5,7 @@ import Breadcrumbs from "../components/common/Breadcrumbs";
 import LabelText from "../components/common/LabelText";
 import EnhetshistorikkModal from "../components/oppdragsdetaljer/EnhetshistorikkModal";
 import OmposteringModal from "../components/oppdragsdetaljer/OmposteringModal";
-import StatushistorikkVisning from "../components/oppdragsdetaljer/StatushistorikkVisning";
+import StatushistorikkModal from "../components/oppdragsdetaljer/StatushistorikkModal";
 import GraderVisning from "../components/oppdragslinjedetaljer/GraderVisning";
 import KidlisteVisning from "../components/oppdragslinjedetaljer/KidlisteVisning";
 import KravhaverVisning from "../components/oppdragslinjedetaljer/KravhaverVisning";
@@ -88,7 +88,7 @@ const OppdragslinjedetaljerPage = () => {
                       id={oppdragsID}
                     />
                   )}
-                  <StatushistorikkVisning id={oppdragsID} />
+                  <StatushistorikkModal id={oppdragsID} />
                   <EnhetshistorikkModal id={oppdragsID} />
                 </div>
               </div>

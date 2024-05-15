@@ -1,11 +1,11 @@
+import { isArray } from "@grafana/faro-web-sdk";
 import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import RestService from "../../services/rest-service";
-import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../../util/commonUtils";
 import { StatushistorikkStatus } from "../../models/StatushistorikkStatus";
+import RestService from "../../services/rest-service";
+import { isEmpty } from "../../util/commonUtils";
 
-const StatushistorikkVisning = ({ id }: { id: string }) => {
+const StatushistorikkModal = ({ id }: { id: string }) => {
   const [data] = RestService.useFetchStatushistorikk(id);
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -25,9 +25,21 @@ const StatushistorikkVisning = ({ id }: { id: string }) => {
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell key={"kodeStatus"} scope="col" children={"kodeStatus"} />
-                <Table.HeaderCell key={"tidspktReg"} scope="col" children={"tidspktReg"} />
-                <Table.HeaderCell key={"brukerid"} scope="col" children={"brukerid"} />
+                <Table.HeaderCell
+                  key={"kodeStatus"}
+                  scope="col"
+                  children={"kodeStatus"}
+                />
+                <Table.HeaderCell
+                  key={"tidspktReg"}
+                  scope="col"
+                  children={"tidspktReg"}
+                />
+                <Table.HeaderCell
+                  key={"brukerid"}
+                  scope="col"
+                  children={"brukerid"}
+                />
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -54,4 +66,4 @@ const StatushistorikkVisning = ({ id }: { id: string }) => {
   );
 };
 
-export default StatushistorikkVisning;
+export default StatushistorikkModal;

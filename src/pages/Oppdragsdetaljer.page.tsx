@@ -5,7 +5,7 @@ import EnhetLabel from "../components/oppdragsdetaljer/EnhetLabel";
 import EnhetshistorikkModal from "../components/oppdragsdetaljer/EnhetshistorikkModal";
 import OmposteringModal from "../components/oppdragsdetaljer/OmposteringModal";
 import OppdragTable from "../components/oppdragsdetaljer/OppdragTable";
-import StatushistorikkVisning from "../components/oppdragsdetaljer/StatushistorikkVisning";
+import StatushistorikkModal from "../components/oppdragsdetaljer/StatushistorikkModal";
 import { Oppdrag } from "../models/Oppdrag";
 import { getOppdragFromTreffliste } from "../models/Treffliste";
 import RestService from "../services/rest-service";
@@ -92,7 +92,7 @@ const OppdragsdetaljerPage = () => {
                     id={oppdragsID}
                   />
                 )}
-                <StatushistorikkVisning id={oppdragsID} />
+                <StatushistorikkModal id={oppdragsID} />
                 <EnhetshistorikkModal id={oppdragsID} />
               </div>
             </div>
