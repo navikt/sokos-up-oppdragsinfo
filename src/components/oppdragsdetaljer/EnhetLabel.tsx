@@ -1,7 +1,7 @@
-import commonstyles from "../../util/common-styles.module.css";
-import LabelText from "../common/LabelText";
-import { formatDate } from "../../util/commonUtils";
 import { Enhet, Enhetstype } from "../../models/Enhet";
+import commonstyles from "../../util/common-styles.module.css";
+import { formatDate } from "../../util/commonUtils";
+import LabelText from "../common/LabelText";
 
 const enhetstypetekst: Record<Enhetstype, string> = {
   BEH: "Ansvarssted",
@@ -9,7 +9,7 @@ const enhetstypetekst: Record<Enhetstype, string> = {
   ANKE: "Ankeenhet",
 };
 
-const EnhetVisning = ({ enhet }: { enhet: Enhet }) => (
+const EnhetLabel = ({ enhet }: { enhet: Enhet }) => (
   <div className={commonstyles.row}>
     <div className={commonstyles.bold}>{enhetstypetekst[enhet.type]}:</div>
     <div>{enhet.enhet}</div>
@@ -18,4 +18,4 @@ const EnhetVisning = ({ enhet }: { enhet: Enhet }) => (
   </div>
 );
 
-export default EnhetVisning;
+export default EnhetLabel;
