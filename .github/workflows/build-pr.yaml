@@ -39,5 +39,8 @@ jobs:
       - name: Install dependencies for server
         run: cd server && pnpm install
 
+      - name: Build server
+        run: cd server && pnpm run build
+
       - name: Build app
         run: pnpm run build
