@@ -16,7 +16,11 @@ function isValidHnumber(day: number, month: number): boolean {
 }
 
 function isValidDate(day: number, month: number): boolean {
-  return isValidPnumber(day, month) || isValidDnumber(day, month) || isValidHnumber(day, month);
+  return (
+    isValidPnumber(day, month) ||
+    isValidDnumber(day, month) ||
+    isValidHnumber(day, month)
+  );
 }
 
 const isValidNavTestdate = (dag: number, maned: number) => {
@@ -29,7 +33,8 @@ const isValidSkatteetatenTestdate = (dag: number, maned: number) => {
 
 const isValidTestdate = (dag: number, maned: number) => {
   return (
-    getEnvironment() !== "production" && (isValidNavTestdate(dag, maned) || isValidSkatteetatenTestdate(dag, maned))
+    getEnvironment() !== "production" &&
+    (isValidNavTestdate(dag, maned) || isValidSkatteetatenTestdate(dag, maned))
   );
 };
 
@@ -40,7 +45,10 @@ function isValidFodselsdato(fodselsdato: string): boolean {
   return isValidDate(day, month) || isValidTestdate(day, month);
 }
 
-function getControlDigit(fodselsnummer: number[], controlRow: number[]): number {
+function getControlDigit(
+  fodselsnummer: number[],
+  controlRow: number[],
+): number {
   let sum = 0;
   for (let digitNumber = 0; digitNumber < fodselsnummer.length; digitNumber++) {
     sum += fodselsnummer[digitNumber] * controlRow[digitNumber];
@@ -56,8 +64,19 @@ export function isValidGjelderId(fodselsnummer: string): boolean {
   if (!isValidFodselsdato(fodselsnummer.substring(0, 6))) {
     return false;
   }
-  const fodselsnummerDigitList = fodselsnummer.split("").map((x: string) => parseInt(x, 10));
-  const controlDigit1 = getControlDigit(fodselsnummerDigitList.slice(0, 9), controlNumberRow1);
-  const controlDigit2 = getControlDigit(fodselsnummerDigitList.slice(0, 10), controlNumberRow2);
-  return fodselsnummerDigitList[9] === controlDigit1 && fodselsnummerDigitList[10] === controlDigit2;
+  const fodselsnummerDigitList = fodselsnummer
+    .split("")
+    .map((x: string) => parseInt(x, 10));
+  const controlDigit1 = getControlDigit(
+    fodselsnummerDigitList.slice(0, 9),
+    controlNumberRow1,
+  );
+  const controlDigit2 = getControlDigit(
+    fodselsnummerDigitList.slice(0, 10),
+    controlNumberRow2,
+  );
+  return (
+    fodselsnummerDigitList[9] === controlDigit1 &&
+    fodselsnummerDigitList[10] === controlDigit2
+  );
 }

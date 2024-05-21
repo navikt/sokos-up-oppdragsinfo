@@ -10,9 +10,9 @@ metadata:
     config.linkerd.io/proxy-memory-request: "128Mi"
 spec:
   env:
-  - name: CORS_ALLOWED_ORIGIN
-    value: "https://utbetalingsportalen.intern.dev.nav.no"
-  image: {{ image }}
+    - name: CORS_ALLOWED_ORIGIN
+      value: "https://utbetalingsportalen.intern.dev.nav.no"
+  image: { { image } }
   port: 8080
   liveness:
     path: /sokos-up-oppdragsinfo/internal/isAlive

@@ -1,11 +1,11 @@
-import { Button } from "@navikt/ds-react";
+import { FormEvent } from "react";
 import { EraserIcon } from "@navikt/aksel-icons";
+import { Button } from "@navikt/ds-react";
 import { clearFaggruppe, clearId } from "../../util/commonUtils";
 import { BASENAME } from "../../util/constants";
-import { FormEvent } from "react";
 
-const NullstillButton = () => {
-  const nullstill = (e: FormEvent) => {
+const ResetButton = () => {
+  const reset = (e: FormEvent) => {
     e.preventDefault();
     clearId();
     clearFaggruppe();
@@ -17,11 +17,11 @@ const NullstillButton = () => {
       size="small"
       variant="tertiary"
       iconPosition="right"
-      icon={<EraserIcon title="Nullstill søk" fontSize="1.5rem" />}
-      onClick={nullstill}
+      icon={<EraserIcon title="reset søk" fontSize="1.5rem" />}
+      onClick={reset}
     >
       Nullstill søk
     </Button>
   );
 };
-export default NullstillButton;
+export default ResetButton;

@@ -1,7 +1,11 @@
-import { Accordion } from "@navikt/ds-react";
 import { PropsWithChildren } from "react";
+import { Accordion } from "@navikt/ds-react";
 
-const LinjedetaljAccordion = ({ title, enabled, children }: PropsWithChildren<{ title: string; enabled: boolean }>) => {
+const LinjedetaljAccordion = ({
+  title,
+  enabled,
+  children,
+}: PropsWithChildren<{ title: string; enabled: boolean }>) => {
   return (
     <Accordion.Item>
       {enabled && (

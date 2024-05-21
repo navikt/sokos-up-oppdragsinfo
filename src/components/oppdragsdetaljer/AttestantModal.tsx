@@ -1,11 +1,19 @@
-import { useRef } from "react";
-import RestService from "../../services/rest-service";
-import { Button, Modal, Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../../util/commonUtils";
+import { useRef } from "react";
+import { Button, Modal, Table } from "@navikt/ds-react";
 import { Attestant } from "../../models/Attestant";
+import RestService from "../../services/rest-service";
+import { isEmpty } from "../../util/commonUtils";
 
-const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
+const AttestantModal = ({
+  oppdragsid,
+  linjeid,
+  text,
+}: {
+  oppdragsid: string;
+  linjeid: string;
+  text: string;
+}) => {
   const [data] = RestService.useFetchAttestant(oppdragsid, linjeid);
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -18,7 +26,7 @@ const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; 
           ref.current?.showModal();
         }}
       >
-        {tekst}
+        {text}
       </Button>
 
       <Modal ref={ref} header={{ heading: "Attestant" }}>
@@ -26,8 +34,16 @@ const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; 
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell key={"attestantId"} scope="col" children={"Attestant-ID"} />
-                <Table.HeaderCell key={"ugyldigFom"} scope="col" children={"ugyldigFom"} />
+                <Table.HeaderCell
+                  key={"attestantId"}
+                  scope="col"
+                  children={"Attestant-ID"}
+                />
+                <Table.HeaderCell
+                  key={"ugyldigFom"}
+                  scope="col"
+                  children={"ugyldigFom"}
+                />
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -53,4 +69,4 @@ const AttestantVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; 
   );
 };
 
-export default AttestantVisning;
+export default AttestantModal;

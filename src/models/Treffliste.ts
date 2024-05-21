@@ -1,7 +1,7 @@
-import { z } from "zod";
-import { OppdragSchema } from "./Oppdrag";
 import { isArray } from "@grafana/faro-web-sdk";
+import { z } from "zod";
 import { firstOf, isEmpty } from "../util/commonUtils";
+import { OppdragSchema } from "./Oppdrag";
 
 export const TreffSchema = z.object({
   gjelderId: z.string(),
@@ -15,7 +15,10 @@ export const TrefflisteSchema = z.array(TreffSchema);
 
 export type Treffliste = z.infer<typeof TrefflisteSchema>;
 
-export const getOppdragFromTreffliste = (treffliste: Treffliste | undefined, oppdragsID: number) =>
+export const getOppdragFromTreffliste = (
+  treffliste: Treffliste | undefined,
+  oppdragsID: number,
+) =>
   isArray(treffliste) &&
   !isEmpty(treffliste) &&
   !isEmpty(firstOf(treffliste).oppdragsListe) &&

@@ -1,11 +1,11 @@
+import { isArray } from "@grafana/faro-web-sdk";
 import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import RestService from "../../services/rest-service";
-import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../../util/commonUtils";
 import { Enhet } from "../../models/Enhet";
+import RestService from "../../services/rest-service";
+import { isEmpty } from "../../util/commonUtils";
 
-const EnhetshistorikkVisning = ({ id }: { id: string }) => {
+const EnhetshistorikkModal = ({ id }: { id: string }) => {
   const [data] = RestService.useFetchEnhetshistorikk(id);
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -26,8 +26,16 @@ const EnhetshistorikkVisning = ({ id }: { id: string }) => {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell key={"type"} scope="col" children={"type"} />
-                <Table.HeaderCell key={"datoFom"} scope="col" children={"datoFom"} />
-                <Table.HeaderCell key={"enhet"} scope="col" children={"enhet"} />
+                <Table.HeaderCell
+                  key={"datoFom"}
+                  scope="col"
+                  children={"datoFom"}
+                />
+                <Table.HeaderCell
+                  key={"enhet"}
+                  scope="col"
+                  children={"enhet"}
+                />
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -54,4 +62,4 @@ const EnhetshistorikkVisning = ({ id }: { id: string }) => {
   );
 };
 
-export default EnhetshistorikkVisning;
+export default EnhetshistorikkModal;

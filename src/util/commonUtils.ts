@@ -1,13 +1,15 @@
-import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { isArray, isNumber, isSymbol } from "@grafana/faro-web-sdk";
-import { Treffliste } from "../models/Treffliste";
+import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { Faggruppe, FaggruppeStorageObject } from "../models/Faggruppe";
+import { Treffliste } from "../models/Treffliste";
 
-export const isEmpty = (array: Array<unknown> | undefined | null) => !array || !Array.isArray(array) || !array.length;
+export const isEmpty = (array: Array<unknown> | undefined | null) =>
+  !array || !Array.isArray(array) || !array.length;
 
 export const isString = (s?: string | null): s is string => !!s && s !== "";
 
-export const capitalized = (s: string) => s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+export const capitalized = (s: string) =>
+  s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
 
 export const Combobox = UNSAFE_Combobox;
 
@@ -17,13 +19,18 @@ export const getTime = () => {
 };
 
 export const storeId = (id?: string) =>
-  id ? sessionStorage.setItem("oppdragsinfo_gId", btoa(id)) : sessionStorage.removeItem("oppdragsinfo_gId");
+  id
+    ? sessionStorage.setItem("oppdragsinfo_gId", btoa(id))
+    : sessionStorage.removeItem("oppdragsinfo_gId");
 export const retrieveId = () => retrieveFromStorage("oppdragsinfo_gId") ?? "";
 export const clearId = () => storeId();
 
 export const storeFaggruppe = (faggruppe?: Faggruppe) =>
   faggruppe
-    ? sessionStorage.setItem("oppdragsinfo_faggruppe", btoa(JSON.stringify(faggruppe)))
+    ? sessionStorage.setItem(
+        "oppdragsinfo_faggruppe",
+        btoa(JSON.stringify(faggruppe)),
+      )
     : sessionStorage.removeItem("oppdragsinfo_faggruppe");
 export const clearFaggruppe = () => {
   storeFaggruppe();
@@ -59,12 +66,18 @@ export const handleSort = <T>(
       ? undefined
       : {
           orderBy: sortKey,
-          direction: sort && sortKey === sort.orderBy && sort.direction === "ascending" ? "descending" : "ascending",
+          direction:
+            sort && sortKey === sort.orderBy && sort.direction === "ascending"
+              ? "descending"
+              : "ascending",
         },
   );
 };
 
-export const hasKey = <T extends object>(o: T, key: string | number | symbol | undefined): key is keyof T => {
+export const hasKey = <T extends object>(
+  o: T,
+  key: string | number | symbol | undefined,
+): key is keyof T => {
   if (!key) return false;
   if (isNumber(key)) return false;
   if (isSymbol(key)) return false;
@@ -87,7 +100,9 @@ export interface SortState<T> {
 
 export const firstOf = <T>(ar: Array<T>) => ar.reduce((a) => a);
 
-export const anyOppdragExists = (treffliste?: Treffliste): treffliste is Treffliste => {
+export const anyOppdragExists = (
+  treffliste?: Treffliste,
+): treffliste is Treffliste => {
   if (!treffliste) return false;
   if (!isArray(treffliste) || isEmpty(treffliste)) return false;
   const oppdragsliste = treffliste.flatMap((t) => t.oppdragsListe);
@@ -95,9 +110,13 @@ export const anyOppdragExists = (treffliste?: Treffliste): treffliste is Treffli
   return true;
 };
 
-export const applySortDirection = (sort) => (a, b) => {
-  if (sort) {
-    return sort.direction === "ascending" ? comparator(b, a, sort.orderBy) : comparator(a, b, sort.orderBy);
-  }
-  return 1;
-};
+export const applySortDirection =
+  <T>(sort?: SortState<T>) =>
+  (a: T, b: T) => {
+    if (sort) {
+      return sort.direction === "ascending"
+        ? comparator<T>(b, a, sort.orderBy)
+        : comparator<T>(a, b, sort.orderBy);
+    }
+    return 1;
+  };

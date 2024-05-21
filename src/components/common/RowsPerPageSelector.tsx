@@ -1,14 +1,24 @@
-import { Button, Dropdown } from "@navikt/ds-react";
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import styles from "./AntallSelector.module.css";
+import { Button, Dropdown } from "@navikt/ds-react";
 import commonstyles from "../../util/common-styles.module.css";
+import styles from "./RowsPerPageSelector.module.css";
 
-const AntallSelector = ({ antall, setAntall }: { antall: number; setAntall: (n: number) => void }) => {
+const RowsPerPageSelector = ({
+  rowsPerPage,
+  setRowsPerPage,
+}: {
+  rowsPerPage: number;
+  setRowsPerPage: (n: number) => void;
+}) => {
   return (
     <>
-      <div className={styles.antallselector}>
+      <div className={styles.rowsperpageselector}>
         <Dropdown>
-          <Button size={"xsmall"} variant={"tertiary-neutral"} as={Dropdown.Toggle}>
+          <Button
+            size={"xsmall"}
+            variant={"tertiary-neutral"}
+            as={Dropdown.Toggle}
+          >
             <ChevronDownIcon title="a11y-title" fontSize="1.5rem" />
           </Button>
           <Dropdown.Menu>
@@ -18,17 +28,22 @@ const AntallSelector = ({ antall, setAntall }: { antall: number; setAntall: (n: 
               </Dropdown.Menu.GroupedList.Heading>
               <Dropdown.Menu.Divider />
               {[5, 10, 25, 50].map((n) => (
-                <Dropdown.Menu.GroupedList.Item onClick={() => setAntall(n)}>{n}</Dropdown.Menu.GroupedList.Item>
+                <Dropdown.Menu.GroupedList.Item
+                  key={n}
+                  onClick={() => setRowsPerPage(n)}
+                >
+                  {n}
+                </Dropdown.Menu.GroupedList.Item>
               ))}
             </Dropdown.Menu.GroupedList>
           </Dropdown.Menu>
         </Dropdown>
         <div className={commonstyles.nowrap}>
-          <p>Vis {antall} per side</p>
+          <p>Vis {rowsPerPage} per side</p>
         </div>
       </div>
     </>
   );
 };
 
-export default AntallSelector;
+export default RowsPerPageSelector;

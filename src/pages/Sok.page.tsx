@@ -1,27 +1,39 @@
-import ContentLoader from "../components/common/ContentLoader";
-import FaggrupperCombobox from "../components/sok/FaggrupperCombobox";
-import NullstillButton from "../components/common/NullstillButton";
-import RestService from "../services/rest-service";
-import SokHelp from "../components/sok/SokHelp";
-import styles from "./Sok.module.css";
-import { Alert, Button, TextField } from "@navikt/ds-react";
-import { Faggruppe } from "../models/Faggruppe";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { TrefflisteSearchParameters, TrefflisteSearchParametersSchema } from "../models/TrefflisteSokParameters";
-import { anyOppdragExists, firstOf, isEmpty, retrieveFaggruppe, retrieveId, storeId } from "../util/commonUtils";
 import { isArray } from "@grafana/faro-web-sdk";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSWRConfig } from "swr";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Alert, Button, Heading, TextField } from "@navikt/ds-react";
+import ContentLoader from "../components/common/ContentLoader";
+import NullstillButton from "../components/common/ResetButton";
+import FaggrupperCombobox from "../components/sok/FaggrupperCombobox";
+import SokHelp from "../components/sok/SokHelp";
+import { Faggruppe } from "../models/Faggruppe";
+import {
+  TrefflisteSearchParameters,
+  TrefflisteSearchParametersSchema,
+} from "../models/TrefflisteSokParameters";
+import RestService from "../services/rest-service";
+import commonstyles from "../util/common-styles.module.css";
+import {
+  anyOppdragExists,
+  firstOf,
+  isEmpty,
+  retrieveFaggruppe,
+  retrieveId,
+  storeId,
+} from "../util/commonUtils";
+import styles from "./Sok.module.css";
 
 const SokPage = () => {
   const { mutate } = useSWRConfig();
   const faggrupper = useLoaderData() as Faggruppe[];
-  const [trefflisteSokParameters, setTrefflisteSokParameters] = useState<TrefflisteSearchParameters>({
-    gjelderID: retrieveId(),
-  });
+  const [trefflisteSokParameters, setTrefflisteSokParameters] =
+    useState<TrefflisteSearchParameters>({
+      gjelderID: retrieveId(),
+    });
 
   const faggruppe = retrieveFaggruppe();
 
@@ -29,7 +41,8 @@ const SokPage = () => {
     trefflisteSokParameters.gjelderID,
     faggruppe?.type,
   );
-  const [shouldGoToTreffliste, setShouldGoToTreffliste] = useState<boolean>(false);
+  const [shouldGoToTreffliste, setShouldGoToTreffliste] =
+    useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,11 +53,17 @@ const SokPage = () => {
         setShouldGoToTreffliste(false);
       }
     }
-  }, [treffliste]);
+  }, [
+    treffliste,
+    setShouldGoToTreffliste,
+    trefflisteIsLoading,
+    shouldGoToTreffliste,
+    navigate,
+  ]);
 
   useEffect(() => {
     mutate("/oppdrag", []);
-  }, [trefflisteSokParameters]);
+  }, [trefflisteSokParameters, mutate]);
 
   const {
     register,
@@ -55,7 +74,9 @@ const SokPage = () => {
     resolver: zodResolver(TrefflisteSearchParametersSchema),
   });
 
-  const handleChangeGjelderId: SubmitHandler<TrefflisteSearchParameters> = (data) => {
+  const handleChangeGjelderId: SubmitHandler<TrefflisteSearchParameters> = (
+    data,
+  ) => {
     const gjelderID = data.gjelderID?.replaceAll(/[\s.]/g, "") ?? "";
     setShouldGoToTreffliste(true);
     setTrefflisteSokParameters({ gjelderID: gjelderID });
@@ -63,13 +84,19 @@ const SokPage = () => {
 
   return (
     <>
-      <h1>Oppdragsinfo</h1>
+      <div className={commonstyles.pageheading}>
+        <Heading level="1" size="large" spacing>
+          Oppdragsinfo
+        </Heading>
+      </div>
       <div className={styles.sok__sok}>
         <div className={styles.sok__help}>
           <SokHelp />
         </div>
         <form onSubmit={handleSubmit(handleChangeGjelderId)}>
-          <h2>Søk</h2>
+          <Heading level="2" size="medium" spacing>
+            Søk
+          </Heading>
 
           <div className={styles.sok_inputfields}>
             <div className={styles.sok__inputGjelderID}>
@@ -103,7 +130,9 @@ const SokPage = () => {
           </div>
         </form>
       </div>
-      {!!trefflisteSokParameters.gjelderID && trefflisteIsLoading && <ContentLoader />}
+      {!!trefflisteSokParameters.gjelderID && trefflisteIsLoading && (
+        <ContentLoader />
+      )}
       {!trefflisteIsLoading && !anyOppdragExists(treffliste) && (
         <Alert variant="info">
           Null treff. Denne IDen har ingen oppdrag

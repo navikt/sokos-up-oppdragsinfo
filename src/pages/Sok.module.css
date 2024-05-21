@@ -1,21 +1,13 @@
-h1 {
-  @apply text-center mx-auto;
-}
-
-h2 {
-  @apply text-4xl my-5;
-}
-
 .sok {
   @apply space-y-2;
 }
 
 .sok__sok {
-  @apply relative bg-[--a-surface-alt-1-subtle] p-5 pt-2 max-w-[1440px] mx-auto;
+  @apply relative mx-auto max-w-[1440px] bg-[--a-surface-alt-1-subtle] p-5;
 }
 
 .sok_inputfields {
-  @apply w-1/2 pb-6 space-y-5;
+  @apply w-1/2 space-y-5 pb-6;
 }
 
 .sok__inputGjelderID {
@@ -27,7 +19,7 @@ h2 {
 }
 
 .sok__knapperad {
-  @apply flex flex-row-reverse min-w-64;
+  @apply flex min-w-64 flex-row-reverse;
 }
 
 .sok__buttonwrapper {

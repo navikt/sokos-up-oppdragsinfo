@@ -1,12 +1,18 @@
 import { useState } from "react";
-import { Pagination, Table } from "@navikt/ds-react";
-import { Treff } from "../../models/Treffliste";
 import { Link } from "react-router-dom";
-import { applySortDirection, firstOf, handleSort, hasKey, SortState } from "../../util/commonUtils";
+import { Pagination, Table } from "@navikt/ds-react";
 import { Oppdrag } from "../../models/Oppdrag";
-import styles from "./TrefflisteTable.module.css";
+import { Treff } from "../../models/Treffliste";
 import commonstyles from "../../util/common-styles.module.css";
-import AntallSelector from "../common/AntallSelector";
+import {
+  SortState,
+  applySortDirection,
+  firstOf,
+  handleSort,
+  hasKey,
+} from "../../util/commonUtils";
+import RowsPerPageSelector from "../common/RowsPerPageSelector";
+import styles from "../common/sortable-table.module.css";
 
 const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
@@ -14,17 +20,23 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const oppdragSort = (sortKey?: string) => {
-    if (hasKey(firstOf(treff.oppdragsListe), sortKey)) handleSort<Oppdrag>(sortKey, setSort, sort);
+    if (hasKey(firstOf(treff.oppdragsListe), sortKey))
+      handleSort<Oppdrag>(sortKey, setSort, sort);
   };
 
-  const sortedData: Oppdrag[] = treff.oppdragsListe.slice().sort(applySortDirection(sort));
-  const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+  const sortedData: Oppdrag[] = treff.oppdragsListe
+    .slice()
+    .sort(applySortDirection(sort));
+  const pageData = sortedData.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage,
+  );
   const pagecount = Math.ceil(treff.oppdragsListe.length / rowsPerPage);
 
   const antall = treff?.oppdragsListe?.length ?? 0;
   return (
     <>
-      <div className={styles.sortabletable__topinfo}>
+      <div className={styles["sortable-table__topinfo"]}>
         <div className={commonstyles.nowrap}>
           <p>
             {`${antall} treff`}
@@ -32,9 +44,12 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
           </p>
         </div>
 
-        <AntallSelector antall={rowsPerPage} setAntall={setRowsPerPage} />
+        <RowsPerPageSelector
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+        />
       </div>
-      <div className={styles.sortabletable}>
+      <div className={styles["sortable-table"]}>
         <Table zebraStripes sort={sort} onSortChange={oppdragSort}>
           <Table.Header>
             <Table.Row>
@@ -59,7 +74,9 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
             {pageData.map((oppdrag) => (
               <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                 <Table.DataCell>
-                  <Link to={`/${oppdrag.oppdragsId}`}>{oppdrag.fagsystemId}</Link>
+                  <Link to={`/${oppdrag.oppdragsId}`}>
+                    {oppdrag.fagsystemId}
+                  </Link>
                 </Table.DataCell>
                 <Table.DataCell>{oppdrag.navnFagGruppe}</Table.DataCell>
                 <Table.DataCell>{oppdrag.navnFagOmraade}</Table.DataCell>
@@ -71,8 +88,13 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
         </Table>
       </div>
       {pagecount > 1 && (
-        <div className={styles.sortabletable__pagination}>
-          <Pagination page={page} onPageChange={setPage} count={pagecount} size="small" />
+        <div className={styles["sortable-table__pagination"]}>
+          <Pagination
+            page={page}
+            onPageChange={setPage}
+            count={pagecount}
+            size="small"
+          />
         </div>
       )}
     </>

@@ -1,0 +1,3 @@
+.rowsperpageselector {
+  @apply flex w-full flex-row-reverse space-x-1;
+}

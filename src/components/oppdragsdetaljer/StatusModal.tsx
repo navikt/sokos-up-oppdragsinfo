@@ -1,11 +1,19 @@
-import { useRef } from "react";
-import RestService from "../../services/rest-service";
-import { Button, Modal, Table } from "@navikt/ds-react";
 import { isArray } from "@grafana/faro-web-sdk";
-import { isEmpty } from "../../util/commonUtils";
+import { useRef } from "react";
+import { Button, Modal, Table } from "@navikt/ds-react";
 import { Status } from "../../models/Status";
+import RestService from "../../services/rest-service";
+import { isEmpty } from "../../util/commonUtils";
 
-const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; linjeid: string; tekst: string }) => {
+const StatusModal = ({
+  oppdragsid,
+  linjeid,
+  text,
+}: {
+  oppdragsid: string;
+  linjeid: string;
+  text: string;
+}) => {
   const [data] = RestService.useFetchStatus(oppdragsid, linjeid);
   const ref = useRef<HTMLDialogElement>(null);
 
@@ -18,7 +26,7 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
           ref.current?.showModal();
         }}
       >
-        {tekst}
+        {text}
       </Button>
 
       <Modal ref={ref} header={{ heading: "Status" }}>
@@ -26,10 +34,26 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell key={"status"} scope="col" children={"Status"} />
-                <Table.HeaderCell key={"datoFom"} scope="col" children={"Dato Fom"} />
-                <Table.HeaderCell key={"tidspktReg"} scope="col" children={"Tidspkt Reg"} />
-                <Table.HeaderCell key={"brukerid"} scope="col" children={"Bruker-ID"} />
+                <Table.HeaderCell
+                  key={"status"}
+                  scope="col"
+                  children={"Status"}
+                />
+                <Table.HeaderCell
+                  key={"datoFom"}
+                  scope="col"
+                  children={"Dato Fom"}
+                />
+                <Table.HeaderCell
+                  key={"tidspktReg"}
+                  scope="col"
+                  children={"Tidspkt Reg"}
+                />
+                <Table.HeaderCell
+                  key={"brukerid"}
+                  scope="col"
+                  children={"Bruker-ID"}
+                />
               </Table.Row>
             </Table.Header>
             <Table.Body>
@@ -57,4 +81,4 @@ const StatuserVisning = ({ oppdragsid, linjeid, tekst }: { oppdragsid: string; l
   );
 };
 
-export default StatuserVisning;
+export default StatusModal;

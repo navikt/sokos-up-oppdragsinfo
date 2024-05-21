@@ -1,0 +1,7 @@
+.sokekriterier {
+  @apply rounded-xl bg-white;
+}
+
+.sokekriterier__content {
+  @apply flex flex-row space-x-12 p-5;
+}
