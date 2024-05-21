@@ -1,7 +1,7 @@
 {
   "name": "sokos-up-oppdragsinfo",
   "version": "1.0.0",
-  "description": "Mikrofrontend for Utbetalingsportalen",
+  "description": "Oppdragsinfo i Utbetalingsportalen",
   "type": "module",
   "scripts": {
     "dev": "vite",

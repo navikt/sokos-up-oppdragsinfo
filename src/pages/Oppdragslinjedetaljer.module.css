@@ -1,11 +1,3 @@
-h1 {
-  @apply mx-auto text-center;
-}
-
-h2 {
-  @apply my-5 text-4xl;
-}
-
 .oppdragslinjedetaljer {
   @apply min-w-1024 space-y-6;
 }
@@ -24,8 +16,4 @@ h2 {
 
 .oppdragslinjedetaljer__column {
   @apply flex flex-col space-y-3;
-}
-
-.oppdragslinjedetaljer__heading {
-  @apply text-center;
 }

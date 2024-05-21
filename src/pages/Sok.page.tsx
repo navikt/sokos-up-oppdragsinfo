@@ -16,6 +16,7 @@ import {
   TrefflisteSearchParametersSchema,
 } from "../models/TrefflisteSokParameters";
 import RestService from "../services/rest-service";
+import commonstyles from "../util/common-styles.module.css";
 import {
   anyOppdragExists,
   firstOf,
@@ -83,9 +84,11 @@ const SokPage = () => {
 
   return (
     <>
-      <Heading level="1" size="large" spacing>
-        Oppdragsinfo
-      </Heading>
+      <div className={commonstyles.pageheading}>
+        <Heading level="1" size="large" spacing>
+          Oppdragsinfo
+        </Heading>
+      </div>
       <div className={styles.sok__sok}>
         <div className={styles.sok__help}>
           <SokHelp />

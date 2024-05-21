@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { Heading } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import ContentLoader from "../components/common/ContentLoader";
-import SokekriterierVisning from "../components/treffliste/SokekriterierVisning";
+import TrefflisteParameters from "../components/treffliste/TrefflisteParameters";
 import TrefflisteTable from "../components/treffliste/TrefflisteTable";
 import RestService from "../services/rest-service";
+import commonstyles from "../util/common-styles.module.css";
 import {
   anyOppdragExists,
   firstOf,
@@ -36,13 +38,20 @@ const TrefflistePage = () => {
 
   return (
     <>
+      <div className={commonstyles.pageheading}>
+        <Heading level="1" size="large">
+          Oppdragsinfo
+        </Heading>
+      </div>
       <div className={styles.treffliste}>
         <div className={styles.treffliste__top}>
           <Breadcrumbs searchLink treffliste />
 
-          <div className={styles.treffliste__heading}>
-            <h1>Treffliste</h1>
-            <SokekriterierVisning
+          <div className={styles.treffliste__top_info}>
+            <Heading level="2" size="medium">
+              Treffliste
+            </Heading>
+            <TrefflisteParameters
               gjelderId={gjelderId}
               navn={gjelderNavn}
               faggruppe={faggruppeNavn}

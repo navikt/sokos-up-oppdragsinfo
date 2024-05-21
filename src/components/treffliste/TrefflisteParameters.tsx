@@ -1,5 +1,5 @@
 import LabelText from "../common/LabelText";
-import styles from "./SokekriterierVisning.module.css";
+import styles from "./TrefflisteParameters.module.css";
 
 type SokekriterierProps = {
   gjelderId?: string;
@@ -7,7 +7,7 @@ type SokekriterierProps = {
   faggruppe?: string;
 };
 
-const SokekriterierVisning = ({
+const TrefflisteParameters = ({
   gjelderId,
   navn,
   faggruppe,
@@ -24,4 +24,4 @@ const SokekriterierVisning = ({
     </>
   );
 };
-export default SokekriterierVisning;
+export default TrefflisteParameters;

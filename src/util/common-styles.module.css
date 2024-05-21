@@ -26,18 +26,10 @@
   @apply w-full py-16 text-center;
 }
 
-.sortabletable {
-  @apply min-w-1400 bg-[--a-surface-default];
-}
-
-.sortabletable__topinfo {
-  @apply flex flex-row justify-between;
-}
-
-.sortabletable__pagination {
-  @apply flex flex-row place-content-center;
-}
-
 .nowrap {
   @apply whitespace-nowrap;
+}
+
+.pageheading {
+  @apply text-center;
 }

@@ -6,6 +6,6 @@
   @apply mx-36 min-w-1024 space-y-5;
 }
 
-.treffliste__heading {
+.treffliste__top_info {
   @apply bg-white px-5 py-2;
 }

@@ -1,11 +1,3 @@
-h1 {
-  @apply mx-auto text-center;
-}
-
-h2 {
-  @apply my-5 text-4xl;
-}
-
 .oppdragsdetaljer {
   @apply mx-auto my-3 mt-6 space-y-6;
 }
@@ -24,8 +16,4 @@ h2 {
 
 .oppdragsdetaljer__column {
   @apply flex flex-col space-y-3;
-}
-
-.oppdragsdetaljer__heading {
-  @apply text-center;
 }

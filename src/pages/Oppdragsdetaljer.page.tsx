@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { Heading } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import LabelText from "../components/common/LabelText";
 import EnhetLabel from "../components/oppdragsdetaljer/EnhetLabel";
@@ -35,13 +36,19 @@ const OppdragsdetaljerPage = () => {
 
   return (
     <>
-      <h1>Oppdragsinfo</h1>
+      <div className={commonstyles.pageheading}>
+        <Heading level="1" size="large">
+          Oppdragsinfo
+        </Heading>
+      </div>
       {oppdragsdetaljer && (
         <div className={styles.oppdragsdetaljer}>
           <div className={styles.oppdragsdetaljer__top}>
             <Breadcrumbs searchLink trefflistelink oppdrag />
             <div className={styles.oppdragsdetaljer__toppinfo}>
-              <h2>Oppdrag</h2>
+              <Heading level="2" size="medium">
+                Oppdrag
+              </Heading>
               <div className={styles.oppdragsdetaljer__columns}></div>
               <div className={styles.oppdragsdetaljer__column}>
                 {gjelderId && oppdrag && (
