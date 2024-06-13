@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Table } from "@navikt/ds-react";
-import { Oppdrag } from "../../models/Oppdrag";
+import { Oppdragegenskaper } from "../../models/Oppdragegenskaper";
 import { Treff } from "../../models/Treffliste";
 import commonstyles from "../../util/common-styles.module.css";
 import {
@@ -15,16 +15,16 @@ import RowsPerPageSelector from "../common/RowsPerPageSelector";
 import styles from "../common/sortable-table.module.css";
 
 const TrefflisteTable = ({ treff }: { treff: Treff }) => {
-  const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
+  const [sort, setSort] = useState<SortState<Oppdragegenskaper> | undefined>();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const oppdragSort = (sortKey?: string) => {
     if (hasKey(firstOf(treff.oppdragsListe), sortKey))
-      handleSort<Oppdrag>(sortKey, setSort, sort);
+      handleSort<Oppdragegenskaper>(sortKey, setSort, sort);
   };
 
-  const sortedData: Oppdrag[] = treff.oppdragsListe
+  const sortedData: Oppdragegenskaper[] = treff.oppdragsListe
     .slice()
     .sort(applySortDirection(sort));
   const pageData = sortedData.slice(

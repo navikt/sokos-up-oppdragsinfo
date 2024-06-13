@@ -1,7 +1,7 @@
 import { Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader, Pagination, Table } from "@navikt/ds-react";
-import { Oppdragsdetaljer } from "../../models/Oppdragsdetaljer";
+import { Oppdrag } from "../../models/Oppdrag";
 import { Oppdragslinje } from "../../models/Oppdragslinje";
 import commonstyles from "../../util/common-styles.module.css";
 import {
@@ -22,7 +22,7 @@ const OppdragTable = ({
   oppdragsdetaljer,
 }: {
   oppdragsid: string;
-  oppdragsdetaljer: Oppdragsdetaljer;
+  oppdragsdetaljer: Oppdrag;
 }) => {
   const [sort, setSort] = useState<SortState<Oppdragslinje> | undefined>();
   const [currentPage, setCurrentPage] = useState(1);

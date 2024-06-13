@@ -7,11 +7,10 @@ import EnhetshistorikkModal from "../components/oppdragsdetaljer/Enhetshistorikk
 import OmposteringModal from "../components/oppdragsdetaljer/OmposteringModal";
 import OppdragTable from "../components/oppdragsdetaljer/OppdragTable";
 import StatushistorikkModal from "../components/oppdragsdetaljer/StatushistorikkModal";
-import { Oppdrag } from "../models/Oppdrag";
-import { getOppdragFromTreffliste } from "../models/Treffliste";
+import { Oppdragegenskaper } from "../models/Oppdragegenskaper";
 import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
-import { firstOf, retrieveId } from "../util/commonUtils";
+import { retrieveId } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
 import styles from "./Oppdragsdetaljer.module.css";
 
@@ -21,16 +20,10 @@ type OppdragsdetaljerParams = {
 const OppdragsdetaljerPage = () => {
   const { oppdragsID = "" } = useParams<OppdragsdetaljerParams>();
   const gjelderId = retrieveId();
-  const { treffliste } = RestService.useFetchTreffliste(gjelderId);
-  const { oppdrag: oppdragsdetaljer } = RestService.useFetchOppdrag(
-    gjelderId,
-    oppdragsID,
-  );
+  const { oppdrag } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
 
-  const oppdrag: Oppdrag | null = getOppdragFromTreffliste(
-    treffliste,
-    +oppdragsID,
-  );
+  const oppdragsegenskaper: Oppdragegenskaper | undefined =
+    oppdrag?.oppdragsegenskaper;
 
   if (!gjelderId) window.location.replace(BASENAME);
 
@@ -41,7 +34,7 @@ const OppdragsdetaljerPage = () => {
           Oppdragsinfo
         </Heading>
       </div>
-      {oppdragsdetaljer && (
+      {oppdrag && (
         <div className={styles.oppdragsdetaljer}>
           <div className={styles.oppdragsdetaljer__top}>
             <Breadcrumbs searchLink trefflistelink oppdrag />
@@ -51,50 +44,53 @@ const OppdragsdetaljerPage = () => {
               </Heading>
               <div className={styles.oppdragsdetaljer__columns}></div>
               <div className={styles.oppdragsdetaljer__column}>
-                {gjelderId && oppdrag && (
+                {gjelderId && oppdragsegenskaper && (
                   <div className={styles.oppdragsdetaljer__columns}>
                     <div className={styles.oppdragsdetaljer__column}>
-                      {gjelderId && treffliste && (
+                      {gjelderId && (
                         <LabelText
                           label={"Gjelder ID"}
-                          text={`${gjelderId}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
+                          text={`${gjelderId}, N.N.`}
                         />
                       )}
                       <LabelText
                         label={"Fagområde"}
-                        text={oppdrag.navnFagOmraade}
+                        text={oppdragsegenskaper.navnFagOmraade}
                       />
                     </div>
                     <div className={styles.oppdragsdetaljer__column}>
                       <LabelText
                         label={"Fagsystem ID"}
-                        text={oppdrag.fagsystemId}
+                        text={oppdragsegenskaper.fagsystemId}
                       />
                       <LabelText
                         label={"Oppdrags ID"}
-                        text={oppdrag.oppdragsId}
+                        text={oppdragsegenskaper.oppdragsId}
                       />
                     </div>
                     <div className={styles.oppdragsdetaljer__column}>
                       <LabelText
                         label={"Beregnes nå"}
-                        text={oppdrag.kjorIdag}
+                        text={oppdragsegenskaper.kjorIdag}
                       />
-                      <LabelText label={"Status"} text={oppdrag.kodeStatus} />
+                      <LabelText
+                        label={"Status"}
+                        text={oppdragsegenskaper.kodeStatus}
+                      />
                     </div>
                   </div>
                 )}
-                {gjelderId && oppdragsdetaljer.behandlendeEnhet && (
-                  <EnhetLabel enhet={oppdragsdetaljer.behandlendeEnhet} />
+                {gjelderId && oppdrag.behandlendeEnhet && (
+                  <EnhetLabel enhet={oppdrag.behandlendeEnhet} />
                 )}
-                {gjelderId && oppdragsdetaljer.enhet && (
-                  <EnhetLabel enhet={oppdragsdetaljer.enhet} />
+                {gjelderId && oppdrag.enhet && (
+                  <EnhetLabel enhet={oppdrag.enhet} />
                 )}
               </div>
               <div className={commonstyles.knapperad__right}>
                 {gjelderId && (
                   <OmposteringModal
-                    enabled={oppdragsdetaljer.harOmposteringer}
+                    enabled={oppdrag.harOmposteringer}
                     gjelderId={gjelderId}
                     id={oppdragsID}
                   />
@@ -104,10 +100,7 @@ const OppdragsdetaljerPage = () => {
               </div>
             </div>
           </div>
-          <OppdragTable
-            oppdragsid={oppdragsID}
-            oppdragsdetaljer={oppdragsdetaljer}
-          />
+          <OppdragTable oppdragsid={oppdragsID} oppdragsdetaljer={oppdrag} />
         </div>
       )}
     </>

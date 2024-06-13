@@ -10,7 +10,7 @@ import { Kravhavere } from "../models/Kravhaver";
 import { Linjeenheter } from "../models/Linjeenhet";
 import { Maksdatoer } from "../models/Maksdato";
 import { Omposteringer } from "../models/Ompostering";
-import { Oppdragsdetaljer } from "../models/Oppdragsdetaljer";
+import { Oppdrag } from "../models/Oppdrag";
 import { Oppdragslinjedetaljer } from "../models/Oppdragslinjedetaljer";
 import { Ovrige } from "../models/Ovrig";
 import { SkyldnersList } from "../models/Skyldner";
@@ -77,7 +77,7 @@ const useFetchTreffliste = (gjelderId?: string, faggruppe?: string | null) => {
     setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));
   }, [gjelderId]);
   const { data, error, mutate, isValidating } = useSWR<Treffliste>(
-    shouldFetch ? "/oppdrag" : null,
+    shouldFetch ? "/oppdragsinfo" : null,
     {
       ...swrConfig,
       fetcher: (url) =>
@@ -103,11 +103,11 @@ const useFetchOppdrag = (gjelderId?: string, id?: string) => {
   useEffect(() => {
     setOppdragsId(id);
   }, [id]);
-  const { data: oppdrag } = useSWR<Oppdragsdetaljer>(
+  const { data: oppdrag } = useSWR<Oppdrag>(
     isString(oppdragsId) ? `/${oppdragsId}` : null,
     {
       ...swrConfig,
-      fetcher: (url) => axiosPostFetcher<Oppdragsdetaljer>(url, { gjelderId }),
+      fetcher: (url) => axiosPostFetcher<Oppdrag>(url, { gjelderId }),
     },
   );
 

@@ -25,7 +25,7 @@ export default [
   },
   {
     method: "POST",
-    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdrag",
+    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdragsinfo",
     /*...............*/ response: () => oppdragSok,
   },
   {

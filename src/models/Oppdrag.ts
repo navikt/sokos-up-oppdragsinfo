@@ -1,13 +1,14 @@
 import { z } from "zod";
+import { EnhetSchema } from "./Enhet";
+import { OppdragsegenskaperSchema } from "./Oppdragegenskaper";
+import { OppdragslinjeSchema } from "./Oppdragslinje";
 
 export const OppdragSchema = z.object({
-  fagsystemId: z.string(),
-  oppdragsId: z.number().int(),
-  navnFagGruppe: z.string(),
-  navnFagOmraade: z.string(),
-  kjorIdag: z.string(),
-  typeBilag: z.optional(z.string()),
-  kodeStatus: z.string(),
+  oppdragsegenskaper: OppdragsegenskaperSchema,
+  enhet: EnhetSchema,
+  behandlendeEnhet: EnhetSchema,
+  harOmposteringer: z.boolean(),
+  oppdragsLinjer: z.array(OppdragslinjeSchema),
 });
 
 export type Oppdrag = z.infer<typeof OppdragSchema>;
