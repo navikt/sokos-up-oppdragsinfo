@@ -15,7 +15,7 @@ import TeksterTable from "../components/oppdragslinjedetaljer/TeksterTable";
 import ValutaerTable from "../components/oppdragslinjedetaljer/ValutaerTable";
 import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
-import { firstOf, isEmpty, retrieveId } from "../util/commonUtils";
+import { isEmpty, retrieveId, retrieveNavn } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
 import styles from "./Oppdragslinjedetaljer.module.css";
 
@@ -61,7 +61,7 @@ const OppdragslinjedetaljerPage = () => {
               {gjelderId && treffliste && (
                 <LabelText
                   label={"Gjelder ID"}
-                  text={`${gjelderId.substring(0, 6)} ${gjelderId.substring(6)}, ${firstOf(treffliste)?.gjelderNavn ?? "N.N."} `}
+                  text={`${gjelderId}, ${retrieveNavn()} `}
                 />
               )}
             </div>

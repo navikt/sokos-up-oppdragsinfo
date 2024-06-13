@@ -25,6 +25,14 @@ export const storeId = (id?: string) =>
 export const retrieveId = () => retrieveFromStorage("oppdragsinfo_gId") ?? "";
 export const clearId = () => storeId();
 
+export const storeNavn = (navn?: string) =>
+  navn
+    ? sessionStorage.setItem("oppdragsinfo_navn", btoa(navn))
+    : sessionStorage.removeItem("oppdragsinfo_navn");
+export const retrieveNavn = () =>
+  retrieveFromStorage("oppdragsinfo_navn") ?? "";
+export const clearNavn = () => storeId();
+
 export const storeFaggruppe = (faggruppe?: Faggruppe) =>
   faggruppe
     ? sessionStorage.setItem(

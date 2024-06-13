@@ -10,7 +10,7 @@ import StatushistorikkModal from "../components/oppdragsdetaljer/Statushistorikk
 import { Oppdragegenskaper } from "../models/Oppdragegenskaper";
 import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
-import { retrieveId } from "../util/commonUtils";
+import { retrieveId, retrieveNavn } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
 import styles from "./Oppdragsdetaljer.module.css";
 
@@ -50,7 +50,7 @@ const OppdragsdetaljerPage = () => {
                       {gjelderId && (
                         <LabelText
                           label={"Gjelder ID"}
-                          text={`${gjelderId}, N.N.`}
+                          text={`${gjelderId}, ${retrieveNavn()}`}
                         />
                       )}
                       <LabelText
