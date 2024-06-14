@@ -27,7 +27,6 @@ const OppdragslinjedetaljerPage = () => {
   const { oppdragsID = "", linjeID = "" } =
     useParams<OppdragslinjedetaljerParams>();
   const gjelderId = retrieveId();
-  const { oppdrag } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
   const [linjedetaljer] = RestService.useFetchOppdragslinje(
     oppdragsID,
     linjeID ?? "",
@@ -36,7 +35,6 @@ const OppdragslinjedetaljerPage = () => {
     isArray(linjedetaljer) && !isEmpty(linjedetaljer)
       ? linjedetaljer[0]
       : undefined;
-  const { treffliste } = RestService.useFetchTreffliste(gjelderId);
 
   if (!gjelderId) window.location.replace(BASENAME);
 
@@ -58,7 +56,7 @@ const OppdragslinjedetaljerPage = () => {
             />
             <div className={styles.oppdragslinjedetaljer__toppinfo}>
               <h2>Oppdragslinjedetaljer</h2>
-              {gjelderId && treffliste && (
+              {gjelderId && (
                 <LabelText
                   label={"Gjelder ID"}
                   text={`${gjelderId}, ${retrieveNavn()} `}
@@ -116,23 +114,19 @@ const OppdragslinjedetaljerPage = () => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {(oppdrag?.oppdragsLinjer ?? [])
-                .filter((linje) =>
-                  linjedetalj?.korrigerteLinjeIder.includes(linje.linjeId),
-                )
-                .map((linje) => (
-                  <Table.Row key={btoa("" + linje.linjeId)}>
-                    <Table.DataCell>{linje.linjeId}</Table.DataCell>
-                    <Table.DataCell>{linje.delytelseId}</Table.DataCell>
-                    <Table.DataCell>{linje.sats}</Table.DataCell>
-                    <Table.DataCell>{linje.datoVedtakFom}</Table.DataCell>
-                    <Table.DataCell>{linje.datoVedtakTom}</Table.DataCell>
-                    <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
-                    <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
-                    <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
-                    <Table.DataCell>{linje.brukerId}</Table.DataCell>
-                  </Table.Row>
-                ))}
+              {linjedetalj?.korrigerteLinjeIder.map((linje) => (
+                <Table.Row key={btoa("" + linje.linjeId)}>
+                  <Table.DataCell>{linje.linjeId}</Table.DataCell>
+                  <Table.DataCell>{linje.delytelseId}</Table.DataCell>
+                  <Table.DataCell>{linje.sats}</Table.DataCell>
+                  <Table.DataCell>{linje.datoVedtakFom}</Table.DataCell>
+                  <Table.DataCell>{linje.datoVedtakTom}</Table.DataCell>
+                  <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
+                  <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
+                  <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
+                  <Table.DataCell>{linje.brukerId}</Table.DataCell>
+                </Table.Row>
+              ))}
             </Table.Body>
           </Table>
           <Accordion>
