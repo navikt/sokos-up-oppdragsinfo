@@ -1,4 +1,3 @@
-[
   {
     "korrigerteLinjeIder": [
       {
@@ -16,39 +15,8 @@
         "refunderesOrgnr": "",
         "brukerId": "BPEN080",
         "tidspktReg": "2014-10-04 17:40:10.35806"
-      },
-      {
-        "linjeId": 2,
-        "kodeKlasse": "UFOREUT",
-        "datoVedtakFom": "2015-05-01",
-        "sats": 17113.0,
-        "typeSats": "MND",
-        "kodeStatus": "KORR",
-        "datoFom": "2016-05-01",
-        "linjeIdKorr": 3,
-        "attestert": "J",
-        "delytelseId": "220273708",
-        "utbetalesTilId": "06518006337",
-        "refunderesOrgnr": "",
-        "brukerId": "BPEN068",
-        "tidspktReg": "2015-05-23 19:50:40.750754"
-      },
-      {
-        "linjeId": 3,
-        "kodeKlasse": "UFOREUT",
-        "datoVedtakFom": "2016-05-01",
-        "sats": 17589.0,
-        "typeSats": "MND",
-        "kodeStatus": "KORR",
-        "datoFom": "2016-09-01",
-        "linjeIdKorr": 4,
-        "attestert": "J",
-        "delytelseId": "260628120",
-        "utbetalesTilId": "06518006337",
-        "refunderesOrgnr": "",
-        "brukerId": "BPEN068",
-        "tidspktReg": "2016-05-21 18:53:24.093975"
-      }],
+      }
+    ],
     "harValutaer": false,
     "harSkyldnere": false,
     "harKravhavere": true,
@@ -58,4 +26,3 @@
     "harKidliste": false,
     "harMaksdatoer": true
   }
-]

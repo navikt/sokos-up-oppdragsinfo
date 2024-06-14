@@ -11,7 +11,7 @@ import { Linjeenheter } from "../models/Linjeenhet";
 import { Maksdatoer } from "../models/Maksdato";
 import { Omposteringer } from "../models/Ompostering";
 import { Oppdrag } from "../models/Oppdrag";
-import { Oppdragslinjedetaljer } from "../models/Oppdragslinjedetaljer";
+import { Oppdragslinjedetalj } from "../models/Oppdragslinjedetaljer";
 import { Ovrige } from "../models/Ovrig";
 import { SkyldnersList } from "../models/Skyldner";
 import { Statuser } from "../models/Status";
@@ -161,7 +161,7 @@ const useFetchStatushistorikk = (id: string) =>
   useFetch<Statushistorikk>(`/${id}/statushistorikk`);
 
 const useFetchOppdragslinje = (oppdragsid: string, linjeid: string) =>
-  useFetch<Oppdragslinjedetaljer>(`/${oppdragsid}/${linjeid}/detaljer`);
+  useFetch<Oppdragslinjedetalj>(`/${oppdragsid}/${linjeid}/detaljer`);
 
 const useFetchAttestant = (oppdragsid: string, linjeid: string) =>
   useFetch<Attestanter>(`/${oppdragsid}/${linjeid}/attestant`);

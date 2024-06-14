@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { useParams } from "react-router-dom";
 import { Accordion, Heading, Table } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
@@ -15,7 +14,7 @@ import TeksterTable from "../components/oppdragslinjedetaljer/TeksterTable";
 import ValutaerTable from "../components/oppdragslinjedetaljer/ValutaerTable";
 import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
-import { isEmpty, retrieveId, retrieveNavn } from "../util/commonUtils";
+import { retrieveId, retrieveNavn } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
 import styles from "./Oppdragslinjedetaljer.module.css";
 
@@ -27,14 +26,10 @@ const OppdragslinjedetaljerPage = () => {
   const { oppdragsID = "", linjeID = "" } =
     useParams<OppdragslinjedetaljerParams>();
   const gjelderId = retrieveId();
-  const [linjedetaljer] = RestService.useFetchOppdragslinje(
+  const [linjedetalj] = RestService.useFetchOppdragslinje(
     oppdragsID,
     linjeID ?? "",
   );
-  const linjedetalj =
-    isArray(linjedetaljer) && !isEmpty(linjedetaljer)
-      ? linjedetaljer[0]
-      : undefined;
 
   if (!gjelderId) window.location.replace(BASENAME);
 
