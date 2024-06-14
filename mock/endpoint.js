@@ -19,13 +19,18 @@ import valuta from "./oppdragsinfo/popups/linje/GET_valuta.json";
 
 export default [
   {
+    method: "POST",
+    url: "/oppdrag-api/api/v1/integration/hent-navn",
+    response: () => "Yutte Hermsgervørdenbrøtbørda"
+  },
+  {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/faggrupper",
     /*............*/ response: () => faggrupper,
   },
   {
     method: "POST",
-    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdrag",
+    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdragsinfo",
     /*...............*/ response: () => oppdragSok,
   },
   {

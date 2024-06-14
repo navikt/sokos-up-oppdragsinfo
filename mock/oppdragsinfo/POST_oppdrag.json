@@ -1,4 +1,13 @@
 {
+  "oppdragsegenskaper": {
+    "fagsystemId": "26026045710-20230412948001-K",
+    "oppdragsId": 70130125,
+    "navnFagGruppe": "Tilbakekreving",
+    "navnFagOmraade": "AAP til innkreving",
+    "kjorIdag": "N",
+    "typeBilag": "MEMO",
+    "kodeStatus": "PASS"
+  },
   "enhet": {
     "type": "BOS",
     "datoFom": "2021-02-13",

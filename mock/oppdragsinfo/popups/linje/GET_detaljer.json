@@ -1,6 +1,22 @@
-[
   {
-    "korrigerteLinjeIder": [1, 2, 3],
+    "korrigerteLinjeIder": [
+      {
+        "linjeId": 1,
+        "kodeKlasse": "UFOREUT",
+        "datoVedtakFom": "2015-01-01",
+        "sats": 16790.0,
+        "typeSats": "MND",
+        "kodeStatus": "KORR",
+        "datoFom": "2015-05-01",
+        "linjeIdKorr": 2,
+        "attestert": "J",
+        "delytelseId": "179988065",
+        "utbetalesTilId": "06518006337",
+        "refunderesOrgnr": "",
+        "brukerId": "BPEN080",
+        "tidspktReg": "2014-10-04 17:40:10.35806"
+      }
+    ],
     "harValutaer": false,
     "harSkyldnere": false,
     "harKravhavere": true,
@@ -10,4 +26,3 @@
     "harKidliste": false,
     "harMaksdatoer": true
   }
-]

@@ -9,9 +9,9 @@ import commonstyles from "../util/common-styles.module.css";
 import {
   anyOppdragExists,
   firstOf,
-  isEmpty,
   retrieveFaggruppe,
   retrieveId,
+  retrieveNavn,
 } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
 import styles from "./Treffliste.module.css";
@@ -30,10 +30,7 @@ const TrefflistePage = () => {
     window.location.replace(BASENAME);
   }, [treffliste, trefflisteIsLoading, gjelderId]);
 
-  const gjelderNavn =
-    !!treffliste && !isEmpty(treffliste)
-      ? firstOf(treffliste)?.gjelderNavn
-      : "";
+  const gjelderNavn = retrieveNavn();
   const faggruppeNavn = retrieveFaggruppe()?.navn;
 
   return (

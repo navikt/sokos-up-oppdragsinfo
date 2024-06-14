@@ -15,7 +15,7 @@ import {
   TrefflisteSearchParameters,
   TrefflisteSearchParametersSchema,
 } from "../models/TrefflisteSokParameters";
-import RestService from "../services/rest-service";
+import RestService, { fetchAndStoreNavn } from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
 import {
   anyOppdragExists,
@@ -47,7 +47,9 @@ const SokPage = () => {
 
   useEffect(() => {
     if (isArray(treffliste) && !isEmpty(treffliste) && !trefflisteIsLoading) {
-      storeId(firstOf(treffliste).gjelderId);
+      const gjelderId = firstOf(treffliste).gjelderId;
+      storeId(gjelderId);
+      fetchAndStoreNavn(gjelderId);
       if (anyOppdragExists(treffliste) && shouldGoToTreffliste) {
         navigate("/treffliste");
         setShouldGoToTreffliste(false);
@@ -62,7 +64,7 @@ const SokPage = () => {
   ]);
 
   useEffect(() => {
-    mutate("/oppdrag", []);
+    mutate("/oppdragsinfo", []);
   }, [trefflisteSokParameters, mutate]);
 
   const {

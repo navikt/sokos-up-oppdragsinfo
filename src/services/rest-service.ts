@@ -10,8 +10,8 @@ import { Kravhavere } from "../models/Kravhaver";
 import { Linjeenheter } from "../models/Linjeenhet";
 import { Maksdatoer } from "../models/Maksdato";
 import { Omposteringer } from "../models/Ompostering";
-import { Oppdragsdetaljer } from "../models/Oppdragsdetaljer";
-import { Oppdragslinjedetaljer } from "../models/Oppdragslinjedetaljer";
+import { Oppdrag } from "../models/Oppdrag";
+import { Oppdragslinjedetalj } from "../models/Oppdragslinjedetaljer";
 import { Ovrige } from "../models/Ovrig";
 import { SkyldnersList } from "../models/Skyldner";
 import { Statuser } from "../models/Status";
@@ -20,12 +20,25 @@ import { Tekster } from "../models/Tekst";
 import { Treffliste } from "../models/Treffliste";
 import { Valutaer } from "../models/Valuta";
 import { ApiError, HttpStatusCodeError } from "../types/errors";
-import { isString } from "../util/commonUtils";
+import { isString, storeNavn } from "../util/commonUtils";
 
 const BASE_API_URL = "/oppdrag-api/api/v1/oppdragsinfo";
+const BASE_INTEGRATION_URL = "/oppdrag-api/api/v1/integration";
 
 const api = axios.create({
   baseURL: BASE_API_URL,
+  timeout: 30000,
+  withCredentials: true,
+  headers: {
+    Pragma: "no-cache",
+    "Cache-Control": "no-cache",
+    "Content-Type": "application/json",
+  },
+  validateStatus: (status) => status < 400,
+});
+
+const integrationApi = axios.create({
+  baseURL: BASE_INTEGRATION_URL,
   timeout: 30000,
   withCredentials: true,
   headers: {
@@ -71,13 +84,23 @@ const fetchFaggrupper = async () => {
   const response = await api.get<Faggruppe[]>("/faggrupper");
   return response.data;
 };
+
+export const fetchAndStoreNavn = async (gjelderId: string) => {
+  integrationApi
+    .post<string>("/hent-navn", {
+      gjelderId,
+    })
+    .then((it) => it.data)
+    .then(storeNavn);
+};
+
 const useFetchTreffliste = (gjelderId?: string, faggruppe?: string | null) => {
   const [shouldFetch, setShouldFetch] = useState<boolean>(false);
   useEffect(() => {
     setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));
   }, [gjelderId]);
   const { data, error, mutate, isValidating } = useSWR<Treffliste>(
-    shouldFetch ? "/oppdrag" : null,
+    shouldFetch ? "/oppdragsinfo" : null,
     {
       ...swrConfig,
       fetcher: (url) =>
@@ -103,11 +126,11 @@ const useFetchOppdrag = (gjelderId?: string, id?: string) => {
   useEffect(() => {
     setOppdragsId(id);
   }, [id]);
-  const { data: oppdrag } = useSWR<Oppdragsdetaljer>(
+  const { data: oppdrag } = useSWR<Oppdrag>(
     isString(oppdragsId) ? `/${oppdragsId}` : null,
     {
       ...swrConfig,
-      fetcher: (url) => axiosPostFetcher<Oppdragsdetaljer>(url, { gjelderId }),
+      fetcher: (url) => axiosPostFetcher<Oppdrag>(url, { gjelderId }),
     },
   );
 
@@ -138,7 +161,7 @@ const useFetchStatushistorikk = (id: string) =>
   useFetch<Statushistorikk>(`/${id}/statushistorikk`);
 
 const useFetchOppdragslinje = (oppdragsid: string, linjeid: string) =>
-  useFetch<Oppdragslinjedetaljer>(`/${oppdragsid}/${linjeid}/detaljer`);
+  useFetch<Oppdragslinjedetalj>(`/${oppdragsid}/${linjeid}/detaljer`);
 
 const useFetchAttestant = (oppdragsid: string, linjeid: string) =>
   useFetch<Attestanter>(`/${oppdragsid}/${linjeid}/attestant`);

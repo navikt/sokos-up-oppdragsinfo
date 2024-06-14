@@ -1,7 +1,8 @@
 import { z } from "zod";
+import { OppdragslinjeSchema } from "./Oppdragslinje";
 
 export const OppdragslinjedetaljSchema = z.object({
-  korrigerteLinjeIder: z.array(z.string()).min(1),
+  korrigerteLinjeIder: z.array(OppdragslinjeSchema).min(1),
   harValutaer: z.boolean(),
   harSkyldnere: z.boolean(),
   harKravhavere: z.boolean(),
