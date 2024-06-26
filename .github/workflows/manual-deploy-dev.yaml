@@ -1,4 +1,4 @@
-name: Manual deploy to dev
+name: Deploy application manual to dev
 
 on:
   workflow_dispatch:
@@ -76,4 +76,5 @@ jobs:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
           CLUSTER: dev-gcp
           IMAGE: ${{ needs.build.outputs.image }}
+          TIMEOUT: 10m
           RESOURCE: .nais/naiserator-dev.yaml
