@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Maksdato } from "../../models/Maksdato";
 import RestService from "../../services/rest-service";
@@ -38,7 +37,7 @@ const MaksdatoerTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((maksdato: Maksdato) => (
             <Table.Row key={btoa(JSON.stringify(maksdato))}>

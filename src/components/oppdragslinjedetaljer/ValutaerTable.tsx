@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Valuta } from "../../models/Valuta";
 import RestService from "../../services/rest-service";
@@ -41,7 +40,7 @@ const ValutaerTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((valuta: Valuta) => (
             <Table.Row key={btoa(valuta.linjeId + valuta.nokkelId)}>

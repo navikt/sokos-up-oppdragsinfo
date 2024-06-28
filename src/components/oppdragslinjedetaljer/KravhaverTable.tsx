@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Kravhaver } from "../../models/Kravhaver";
 import RestService from "../../services/rest-service";
@@ -38,7 +37,7 @@ const KravhaverTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((kravhaver: Kravhaver) => (
             <Table.Row key={btoa(kravhaver.linjeId)}>

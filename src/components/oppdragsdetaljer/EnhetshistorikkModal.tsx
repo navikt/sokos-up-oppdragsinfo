@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { Enhet } from "../../models/Enhet";
@@ -40,7 +39,7 @@ const EnhetshistorikkModal = ({ id }: { id: string }) => {
             </Table.Header>
             <Table.Body>
               {data &&
-                isArray(data) &&
+                Array.isArray(data) &&
                 !isEmpty(data) &&
                 data?.map((enhet: Enhet) => (
                   <Table.Row key={btoa(JSON.stringify(enhet))}>

@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -46,7 +45,11 @@ const SokPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isArray(treffliste) && !isEmpty(treffliste) && !trefflisteIsLoading) {
+    if (
+      Array.isArray(treffliste) &&
+      !isEmpty(treffliste) &&
+      !trefflisteIsLoading
+    ) {
       const gjelderId = firstOf(treffliste).gjelderId;
       storeId(gjelderId);
       fetchAndStoreNavn(gjelderId);

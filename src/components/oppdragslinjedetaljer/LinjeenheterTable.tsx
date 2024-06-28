@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Linjeenhet } from "../../models/Linjeenhet";
 import RestService from "../../services/rest-service";
@@ -44,7 +43,7 @@ const LinjeenheterTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((linjeenhet: Linjeenhet) => (
             <Table.Row key={btoa(JSON.stringify(linjeenhet))}>

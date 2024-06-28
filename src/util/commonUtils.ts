@@ -1,4 +1,3 @@
-import { isArray, isNumber, isSymbol } from "@grafana/faro-web-sdk";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { Faggruppe, FaggruppeStorageObject } from "../models/Faggruppe";
 import { Treffliste } from "../models/Treffliste";
@@ -7,6 +6,10 @@ export const isEmpty = (array: Array<unknown> | undefined | null) =>
   !array || !Array.isArray(array) || !array.length;
 
 export const isString = (s?: string | null): s is string => !!s && s !== "";
+
+export const isSymbol = (x: unknown): x is symbol => typeof x === "symbol";
+
+export const isNumber = (n: unknown): n is number => typeof n === "number";
 
 export const capitalized = (s: string) =>
   s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
@@ -112,7 +115,7 @@ export const anyOppdragExists = (
   treffliste?: Treffliste,
 ): treffliste is Treffliste => {
   if (!treffliste) return false;
-  if (!isArray(treffliste) || isEmpty(treffliste)) return false;
+  if (!Array.isArray(treffliste) || isEmpty(treffliste)) return false;
   const oppdragsliste = treffliste.flatMap((t) => t.oppdragsListe);
   if (isEmpty(oppdragsliste)) return false;
   return true;

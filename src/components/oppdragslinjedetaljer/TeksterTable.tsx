@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Tekst } from "../../models/Tekst";
 import RestService from "../../services/rest-service";
@@ -28,7 +27,7 @@ const TeksterTable = ({
         </Table.Header>
         <Table.Body>
           {data &&
-            isArray(data) &&
+            Array.isArray(data) &&
             !isEmpty(data) &&
             data.map((tekst: Tekst) => (
               <Table.Row key={btoa(tekst.linjeId)}>

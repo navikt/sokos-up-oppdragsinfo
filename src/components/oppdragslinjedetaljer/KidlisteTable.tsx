@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Kid } from "../../models/Kid";
 import RestService from "../../services/rest-service";
@@ -34,7 +33,7 @@ const KidlisteTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((kid: Kid) => (
             <Table.Row key={btoa(kid.linjeId)}>

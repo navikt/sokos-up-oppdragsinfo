@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { Status } from "../../models/Status";
@@ -58,7 +57,7 @@ const StatusModal = ({
             </Table.Header>
             <Table.Body>
               {data &&
-                isArray(data) &&
+                Array.isArray(data) &&
                 !isEmpty(data) &&
                 data?.map((status: Status) => (
                   <Table.Row key={btoa(status.status + status.tidspktReg)}>

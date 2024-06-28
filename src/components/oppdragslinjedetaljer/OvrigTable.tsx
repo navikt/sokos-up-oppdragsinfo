@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Ovrig } from "../../models/Ovrig";
 import RestService from "../../services/rest-service";
@@ -37,7 +36,7 @@ const OvrigTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((ovrig: Ovrig) => (
             <Table.Row key={btoa(ovrig.linjeId)}>

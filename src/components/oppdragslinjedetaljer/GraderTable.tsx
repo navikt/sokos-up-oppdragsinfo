@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Grad } from "../../models/Grad";
 import RestService from "../../services/rest-service";
@@ -38,7 +37,7 @@ const GraderTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((grad: Grad) => (
             <Table.Row key={btoa(grad.linjeId)}>

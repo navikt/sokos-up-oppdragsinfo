@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { Table } from "@navikt/ds-react";
 import { Skyldner } from "../../models/Skyldner";
 import RestService from "../../services/rest-service";
@@ -38,7 +37,7 @@ const SkyldnersListTable = ({
       </Table.Header>
       <Table.Body>
         {data &&
-          isArray(data) &&
+          Array.isArray(data) &&
           !isEmpty(data) &&
           data?.map((skyldner: Skyldner) => (
             <Table.Row key={btoa(skyldner.linjeId)}>

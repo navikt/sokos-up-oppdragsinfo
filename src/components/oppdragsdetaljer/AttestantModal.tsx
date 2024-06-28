@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { Attestant } from "../../models/Attestant";
@@ -48,7 +47,7 @@ const AttestantModal = ({
             </Table.Header>
             <Table.Body>
               {data &&
-                isArray(data) &&
+                Array.isArray(data) &&
                 !isEmpty(data) &&
                 data?.map((attestant: Attestant) => (
                   <Table.Row key={btoa(attestant.attestantId)}>

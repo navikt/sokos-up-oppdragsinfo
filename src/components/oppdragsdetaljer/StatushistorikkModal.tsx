@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { StatushistorikkStatus } from "../../models/StatushistorikkStatus";
@@ -44,7 +43,7 @@ const StatushistorikkModal = ({ id }: { id: string }) => {
             </Table.Header>
             <Table.Body>
               {data &&
-                isArray(data) &&
+                Array.isArray(data) &&
                 !isEmpty(data) &&
                 data?.map((status: StatushistorikkStatus) => (
                   <Table.Row key={btoa(status.kodeStatus)}>

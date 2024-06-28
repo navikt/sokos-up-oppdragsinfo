@@ -1,4 +1,3 @@
-import { isArray } from "@grafana/faro-web-sdk";
 import { useRef } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import { Ompostering } from "../../models/Ompostering";
@@ -86,7 +85,7 @@ const OmposteringModal = ({
             </Table.Header>
             <Table.Body>
               {data &&
-                isArray(data) &&
+                Array.isArray(data) &&
                 !isEmpty(data) &&
                 data?.map((ompostering: Ompostering) => (
                   <Table.Row
