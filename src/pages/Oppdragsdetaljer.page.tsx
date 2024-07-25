@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Heading } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import LabelText from "../components/common/LabelText";
@@ -7,25 +7,31 @@ import EnhetshistorikkModal from "../components/oppdragsdetaljer/Enhetshistorikk
 import OmposteringModal from "../components/oppdragsdetaljer/OmposteringModal";
 import OppdragTable from "../components/oppdragsdetaljer/OppdragTable";
 import StatushistorikkModal from "../components/oppdragsdetaljer/StatushistorikkModal";
-import { Oppdragegenskaper } from "../models/Oppdragegenskaper";
+import { OppdragsEgenskap } from "../models/OppdragsEgenskaper";
 import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
 import { retrieveId, retrieveNavn } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
 import styles from "./Oppdragsdetaljer.module.css";
 
-type OppdragsdetaljerParams = {
-  oppdragsID: string;
-};
 const OppdragsdetaljerPage = () => {
-  const { oppdragsID = "" } = useParams<OppdragsdetaljerParams>();
-  const gjelderId = retrieveId();
-  const { oppdrag } = RestService.useFetchOppdrag(gjelderId, oppdragsID);
+  //const { oppdragsID = "" } = useParams<OppdragsdetaljerParams>();
+  const location = useLocation();
+  const oppdragsEgenskap = location.state;
 
-  const oppdragsegenskaper: Oppdragegenskaper | undefined =
-    oppdrag?.oppdragsegenskaper;
+  console.log("OppdragsEgenskap:", oppdragsEgenskap); // Debugging line
+
+  const gjelderId = retrieveId();
+  const { oppdragslinjeListe } = RestService.useFetchOppdragslinjer(
+    gjelderId,
+    oppdragsEgenskap.oppdragsId,
+  );
 
   if (!gjelderId) window.location.replace(BASENAME);
+
+  console.log("OppdragsEgenskap after fetch:", oppdragsEgenskap); // Debugging line
+  console.log("OppdragslinjeListe:", oppdragslinjeListe); // Debugging line
+
 
   return (
     <>
@@ -34,7 +40,7 @@ const OppdragsdetaljerPage = () => {
           Oppdragsinfo
         </Heading>
       </div>
-      {oppdrag && (
+      {oppdragslinjeListe && (
         <div className={styles.oppdragsdetaljer}>
           <div className={styles.oppdragsdetaljer__top}>
             <Breadcrumbs searchLink trefflistelink oppdrag />
@@ -44,7 +50,7 @@ const OppdragsdetaljerPage = () => {
               </Heading>
               <div className={styles.oppdragsdetaljer__columns}></div>
               <div className={styles.oppdragsdetaljer__column}>
-                {gjelderId && oppdragsegenskaper && (
+                {gjelderId && oppdragsEgenskap && (
                   <div className={styles.oppdragsdetaljer__columns}>
                     <div className={styles.oppdragsdetaljer__column}>
                       {gjelderId && (
@@ -55,52 +61,56 @@ const OppdragsdetaljerPage = () => {
                       )}
                       <LabelText
                         label={"Fagområde"}
-                        text={oppdragsegenskaper.navnFagOmraade}
+                        text={oppdragsEgenskap.navnFagOmraade}
                       />
                     </div>
                     <div className={styles.oppdragsdetaljer__column}>
                       <LabelText
                         label={"Fagsystem ID"}
-                        text={oppdragsegenskaper.fagsystemId}
+                        text={oppdragsEgenskap.fagsystemId}
                       />
                       <LabelText
                         label={"Oppdrags ID"}
-                        text={oppdragsegenskaper.oppdragsId}
+                        text={oppdragsEgenskap.oppdragsId}
                       />
                     </div>
                     <div className={styles.oppdragsdetaljer__column}>
                       <LabelText
                         label={"Beregnes nå"}
-                        text={oppdragsegenskaper.kjorIdag}
+                        text={oppdragsEgenskap.kjorIdag}
                       />
                       <LabelText
                         label={"Status"}
-                        text={oppdragsegenskaper.kodeStatus}
+                        text={oppdragsEgenskap.kodeStatus}
                       />
                     </div>
                   </div>
                 )}
-                {gjelderId && oppdrag.behandlendeEnhet && (
+                // TODO: Lag mock-endepunkt for den nye DTO klassen fra backend
+                {/* {gjelderId && oppdrag.behandlendeEnhet && (
                   <EnhetLabel enhet={oppdrag.behandlendeEnhet} />
                 )}
                 {gjelderId && oppdrag.enhet && (
                   <EnhetLabel enhet={oppdrag.enhet} />
-                )}
+                )} */}
               </div>
               <div className={commonstyles.knapperad__right}>
                 {gjelderId && (
                   <OmposteringModal
-                    enabled={oppdrag.harOmposteringer}
+                    enabled={oppdragsEgenskap.harOmposteringer}
                     gjelderId={gjelderId}
-                    id={oppdragsID}
+                    id={oppdragsEgenskap.oppdragsID}
                   />
                 )}
-                <StatushistorikkModal id={oppdragsID} />
-                <EnhetshistorikkModal id={oppdragsID} />
+                <StatushistorikkModal id={oppdragsEgenskap.oppdragsID} />
+                <EnhetshistorikkModal id={oppdragsEgenskap.oppdragsID} />
               </div>
             </div>
           </div>
-          <OppdragTable oppdragsid={oppdragsID} oppdragsdetaljer={oppdrag} />
+          <OppdragTable
+            oppdragsid={oppdragsEgenskap.oppdragsID}
+            oppdragsdetaljer={oppdragsEgenskap.oppdrag}
+          />
         </div>
       )}
     </>

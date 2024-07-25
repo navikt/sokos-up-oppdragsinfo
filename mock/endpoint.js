@@ -30,7 +30,7 @@ export default [
   },
   {
     method: "POST",
-    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdragsinfo",
+    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdragsegenskaper",
     /*...............*/ response: () => oppdragSok,
   },
   {
@@ -55,7 +55,7 @@ export default [
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestant",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestanter",
     /**/ response: () => attestant,
   },
   {
@@ -65,27 +65,27 @@ export default [
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/enhet",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/enheter",
     /*....*/ response: () => enhet,
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/grad",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/grader",
     /*.....*/ response: () => grad,
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/kidliste",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/kid",
     /*.*/ response: () => kidliste,
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/kravhaver",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/kravhavere",
     /**/ response: () => kravhaver,
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/maksdato",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/maksdatoer",
     /*.*/ response: () => maksdato,
   },
   {
@@ -95,22 +95,22 @@ export default [
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/skyldner",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/skyldnere",
     /*.*/ response: () => skyldner,
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/status",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/statuser",
     /*...*/ response: () => status,
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/tekst",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/tekster",
     /*....*/ response: () => tekst,
   },
   {
     method: "GET",
-    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/valuta",
+    /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/valutaer",
     /*...*/ response: () => valuta,
   },
 ];

@@ -1,6 +1,6 @@
 import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { Faggruppe, FaggruppeStorageObject } from "../models/Faggruppe";
-import { Treffliste } from "../models/Treffliste";
+import { OppdragsEgenskaper } from "../models/OppdragsEgenskaper";
 
 export const isEmpty = (array: Array<unknown> | undefined | null) =>
   !array || !Array.isArray(array) || !array.length;
@@ -112,12 +112,11 @@ export interface SortState<T> {
 export const firstOf = <T>(ar: Array<T>) => ar.reduce((a) => a);
 
 export const anyOppdragExists = (
-  treffliste?: Treffliste,
-): treffliste is Treffliste => {
+  treffliste?: OppdragsEgenskaper,
+): treffliste is OppdragsEgenskaper => {
   if (!treffliste) return false;
   if (!Array.isArray(treffliste) || isEmpty(treffliste)) return false;
-  const oppdragsliste = treffliste.flatMap((t) => t.oppdragsListe);
-  if (isEmpty(oppdragsliste)) return false;
+  if (isEmpty(treffliste)) return false;
   return true;
 };
 

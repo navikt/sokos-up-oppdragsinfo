@@ -8,7 +8,6 @@ import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
 import {
   anyOppdragExists,
-  firstOf,
   retrieveFaggruppe,
   retrieveId,
   retrieveNavn,
@@ -57,7 +56,7 @@ const TrefflistePage = () => {
         </div>
         {trefflisteIsLoading && <ContentLoader />}
         {!trefflisteIsLoading && anyOppdragExists(treffliste) && (
-          <TrefflisteTable treff={firstOf(treffliste)} />
+          <TrefflisteTable treff={treffliste} />
         )}
       </div>
     </>

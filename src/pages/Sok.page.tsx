@@ -50,9 +50,8 @@ const SokPage = () => {
       !isEmpty(treffliste) &&
       !trefflisteIsLoading
     ) {
-      const gjelderId = firstOf(treffliste).gjelderId;
-      storeId(gjelderId);
-      fetchAndStoreNavn(gjelderId);
+      storeId(trefflisteSokParameters.gjelderID);
+      fetchAndStoreNavn(trefflisteSokParameters.gjelderID);
       if (anyOppdragExists(treffliste) && shouldGoToTreffliste) {
         navigate("/treffliste");
         setShouldGoToTreffliste(false);

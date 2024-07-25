@@ -1,7 +1,4 @@
-[
-  {
-    "gjelderId": "06518006337",
-    "oppdragsListe": [
+ [
       {
         "fagsystemId": "000448656NS419.22.41.067353",
         "oppdragsId": 70445294,
@@ -183,5 +180,3 @@
         "kodeStatus": "PASS"
       }
     ]
-  }
-]

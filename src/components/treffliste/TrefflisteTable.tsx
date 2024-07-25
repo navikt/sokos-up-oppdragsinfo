@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Table } from "@navikt/ds-react";
-import { Oppdragegenskaper } from "../../models/Oppdragegenskaper";
-import { Treff } from "../../models/Treffliste";
+import {
+  OppdragsEgenskap,
+  OppdragsEgenskaper,
+} from "../../models/OppdragsEgenskaper";
 import commonstyles from "../../util/common-styles.module.css";
 import {
   SortState,
@@ -14,26 +16,26 @@ import {
 import RowsPerPageSelector from "../common/RowsPerPageSelector";
 import styles from "../common/sortable-table.module.css";
 
-const TrefflisteTable = ({ treff }: { treff: Treff }) => {
-  const [sort, setSort] = useState<SortState<Oppdragegenskaper> | undefined>();
+const TrefflisteTable = ({ treff }: { treff: OppdragsEgenskaper }) => {
+  const [sort, setSort] = useState<SortState<OppdragsEgenskap> | undefined>();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const oppdragSort = (sortKey?: string) => {
-    if (hasKey(firstOf(treff.oppdragsListe), sortKey))
-      handleSort<Oppdragegenskaper>(sortKey, setSort, sort);
+    if (hasKey(firstOf(treff), sortKey))
+      handleSort<OppdragsEgenskap>(sortKey, setSort, sort);
   };
 
-  const sortedData: Oppdragegenskaper[] = treff.oppdragsListe
+  const sortedData: OppdragsEgenskaper = treff
     .slice()
     .sort(applySortDirection(sort));
   const pageData = sortedData.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage,
   );
-  const pagecount = Math.ceil(treff.oppdragsListe.length / rowsPerPage);
+  const pagecount = Math.ceil(treff.length / rowsPerPage);
 
-  const antall = treff?.oppdragsListe?.length ?? 0;
+  const antall = treff?.length ?? 0;
   return (
     <>
       <div className={styles["sortable-table__topinfo"]}>
@@ -71,17 +73,24 @@ const TrefflisteTable = ({ treff }: { treff: Treff }) => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {pageData.map((oppdrag) => (
-              <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
+            {pageData.map((oppdragsEgenskap) => (
+              <Table.Row key={btoa("" + oppdragsEgenskap.oppdragsId)}>
                 <Table.DataCell>
-                  <Link to={`/${oppdrag.oppdragsId}`}>
-                    {oppdrag.fagsystemId}
+                  <Link
+                    to={`/${oppdragsEgenskap.oppdragsId}`}
+                    state={oppdragsEgenskap}
+                  >
+                    {oppdragsEgenskap.fagsystemId}
                   </Link>
                 </Table.DataCell>
-                <Table.DataCell>{oppdrag.navnFagGruppe}</Table.DataCell>
-                <Table.DataCell>{oppdrag.navnFagOmraade}</Table.DataCell>
-                <Table.DataCell>{oppdrag.typeBilag}</Table.DataCell>
-                <Table.DataCell>{oppdrag.kodeStatus}</Table.DataCell>
+                <Table.DataCell>
+                  {oppdragsEgenskap.navnFagGruppe}
+                </Table.DataCell>
+                <Table.DataCell>
+                  {oppdragsEgenskap.navnFagOmraade}
+                </Table.DataCell>
+                <Table.DataCell>{oppdragsEgenskap.typeBilag}</Table.DataCell>
+                <Table.DataCell>{oppdragsEgenskap.kodeStatus}</Table.DataCell>
               </Table.Row>
             ))}
           </Table.Body>

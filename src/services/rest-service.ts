@@ -11,13 +11,14 @@ import { Linjeenheter } from "../models/Linjeenhet";
 import { Maksdatoer } from "../models/Maksdato";
 import { Omposteringer } from "../models/Ompostering";
 import { Oppdrag } from "../models/Oppdrag";
+import { OppdragsEgenskaper } from "../models/OppdragsEgenskaper";
+import { OppdragslinjeListe } from "../models/Oppdragslinje";
 import { Oppdragslinjedetalj } from "../models/Oppdragslinjedetaljer";
 import { Ovrige } from "../models/Ovrig";
 import { SkyldnersList } from "../models/Skyldner";
 import { Statuser } from "../models/Status";
 import { Statushistorikk } from "../models/StatushistorikkStatus";
 import { Tekster } from "../models/Tekst";
-import { Treffliste } from "../models/Treffliste";
 import { Valutaer } from "../models/Valuta";
 import { ApiError, HttpStatusCodeError } from "../types/errors";
 import { isString, storeNavn } from "../util/commonUtils";
@@ -99,12 +100,12 @@ const useFetchTreffliste = (gjelderId?: string, faggruppe?: string | null) => {
   useEffect(() => {
     setShouldFetch(!!gjelderId && [9, 11].includes(gjelderId.length));
   }, [gjelderId]);
-  const { data, error, mutate, isValidating } = useSWR<Treffliste>(
-    shouldFetch ? "/oppdragsinfo" : null,
+  const { data, error, mutate, isValidating } = useSWR<OppdragsEgenskaper>(
+    shouldFetch ? "/oppdragsegenskaper" : null,
     {
       ...swrConfig,
       fetcher: (url) =>
-        axiosPostFetcher<Treffliste>(url, {
+        axiosPostFetcher<OppdragsEgenskaper>(url, {
           gjelderId,
           fagGruppeKode: faggruppe,
         }),
@@ -121,20 +122,22 @@ const useFetchTreffliste = (gjelderId?: string, faggruppe?: string | null) => {
   };
 };
 
-const useFetchOppdrag = (gjelderId?: string, id?: string) => {
+const useFetchOppdragslinjer = (gjelderId?: string, id?: string) => {
+  console.log("Fra useFetchOppdragslinjer: ", gjelderId, id);
   const [oppdragsId, setOppdragsId] = useState<string>();
   useEffect(() => {
     setOppdragsId(id);
   }, [id]);
-  const { data: oppdrag } = useSWR<Oppdrag>(
+  const { data: oppdragslinjeListe } = useSWR<OppdragslinjeListe>(
     isString(oppdragsId) ? `/${oppdragsId}` : null,
     {
       ...swrConfig,
-      fetcher: (url) => axiosPostFetcher<Oppdrag>(url, { gjelderId }),
+      fetcher: (url) =>
+        axiosPostFetcher<OppdragslinjeListe>(url, { gjelderId }),
     },
   );
 
-  return { oppdrag };
+  return { oppdragslinjeListe };
 };
 
 const usePostFetch = <T>(url: string, gjelderId: string) => {
@@ -160,50 +163,50 @@ const useFetchOmposteringer = (gjelderId: string, id: string) =>
 const useFetchStatushistorikk = (id: string) =>
   useFetch<Statushistorikk>(`/${id}/statushistorikk`);
 
-const useFetchOppdragslinje = (oppdragsid: string, linjeid: string) =>
+const useFetchOppdragslinjeDetaljer = (oppdragsid: string, linjeid: string) =>
   useFetch<Oppdragslinjedetalj>(`/${oppdragsid}/${linjeid}/detaljer`);
 
 const useFetchAttestant = (oppdragsid: string, linjeid: string) =>
-  useFetch<Attestanter>(`/${oppdragsid}/${linjeid}/attestant`);
+  useFetch<Attestanter>(`/${oppdragsid}/${linjeid}/attestanter`);
 
 const useFetchKravhaver = (oppdragsid: string, linjeid: string) =>
-  useFetch<Kravhavere>(`/${oppdragsid}/${linjeid}/kravhaver`);
+  useFetch<Kravhavere>(`/${oppdragsid}/${linjeid}/kravhavere`);
 
 const useFetchOvrig = (oppdragsid: string, linjeid: string) =>
   useFetch<Ovrige>(`/${oppdragsid}/${linjeid}/ovrig`);
 
 const useFetchStatus = (oppdragsid: string, linjeid: string) =>
-  useFetch<Statuser>(`/${oppdragsid}/${linjeid}/status`);
+  useFetch<Statuser>(`/${oppdragsid}/${linjeid}/statuser`);
 
 const useFetchValuta = (oppdragsid: string, linjeid: string) =>
-  useFetch<Valutaer>(`/${oppdragsid}/${linjeid}/valuta`);
+  useFetch<Valutaer>(`/${oppdragsid}/${linjeid}/valutaer`);
 
 const useFetchKidliste = (oppdragsid: string, linjeid: string) =>
-  useFetch<Kidliste>(`/${oppdragsid}/${linjeid}/kidliste`);
+  useFetch<Kidliste>(`/${oppdragsid}/${linjeid}/kid`);
 
 const useFetchTekster = (oppdragsid: string, linjeid: string) =>
-  useFetch<Tekster>(`/${oppdragsid}/${linjeid}/tekst`);
+  useFetch<Tekster>(`/${oppdragsid}/${linjeid}/tekster`);
 
 const useFetchSkyldnersList = (oppdragsid: string, linjeid: string) =>
-  useFetch<SkyldnersList>(`/${oppdragsid}/${linjeid}/skyldner`);
+  useFetch<SkyldnersList>(`/${oppdragsid}/${linjeid}/skyldnere`);
 
 const useFetchMaksdato = (oppdragsid: string, linjeid: string) =>
-  useFetch<Maksdatoer>(`/${oppdragsid}/${linjeid}/maksdato`);
+  useFetch<Maksdatoer>(`/${oppdragsid}/${linjeid}/maksdatoer`);
 
 const useFetchLinjeenheter = (oppdragsid: string, linjeid: string) =>
-  useFetch<Linjeenheter>(`/${oppdragsid}/${linjeid}/enhet`);
+  useFetch<Linjeenheter>(`/${oppdragsid}/${linjeid}/enheter`);
 
 const useFetchGrad = (oppdragsid: string, linjeid: string) =>
-  useFetch<Grader>(`/${oppdragsid}/${linjeid}/grad`);
+  useFetch<Grader>(`/${oppdragsid}/${linjeid}/grader`);
 
 const RestService = {
   fetchFaggrupper,
   useFetchTreffliste,
-  useFetchOppdrag,
+  useFetchOppdragslinjer,
   useFetchEnhetshistorikk,
   useFetchStatushistorikk,
   useFetchOmposteringer,
-  useFetchOppdragslinje,
+  useFetchOppdragslinjeDetaljer,
   useFetchAttestant,
   useFetchKidliste,
   useFetchKravhaver,

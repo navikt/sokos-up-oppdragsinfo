@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { EnhetSchema } from "./Enhet";
-import { OppdragsegenskaperSchema } from "./Oppdragegenskaper";
+import { OppdragsEgenskapSchema } from "./OppdragsEgenskaper";
 import { OppdragslinjeSchema } from "./Oppdragslinje";
 
 export const OppdragSchema = z.object({
-  oppdragsegenskaper: OppdragsegenskaperSchema,
+  oppdragsegenskaper: OppdragsEgenskapSchema,
   enhet: EnhetSchema,
   behandlendeEnhet: EnhetSchema,
   harOmposteringer: z.boolean(),

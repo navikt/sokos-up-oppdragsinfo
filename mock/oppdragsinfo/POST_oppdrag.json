@@ -1,25 +1,4 @@
-{
-  "oppdragsegenskaper": {
-    "fagsystemId": "26026045710-20230412948001-K",
-    "oppdragsId": 70130125,
-    "navnFagGruppe": "Tilbakekreving",
-    "navnFagOmraade": "AAP til innkreving",
-    "kjorIdag": "N",
-    "typeBilag": "MEMO",
-    "kodeStatus": "PASS"
-  },
-  "enhet": {
-    "type": "BOS",
-    "datoFom": "2021-02-13",
-    "enhet": "4402"
-  },
-  "behandlendeEnhet": {
-    "type": "BEH",
-    "datoFom": "2021-02-13",
-    "enhet": "4819"
-  },
-  "harOmposteringer": false,
-  "oppdragsLinjer": [
+[
     {
       "linjeId": 1,
       "kodeKlasse": "UFOREUT",
@@ -288,4 +267,3 @@
       "tidspktReg": "2023-12-19 23:39:22.37"
     }
   ]
-}

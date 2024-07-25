@@ -19,3 +19,7 @@ export const OppdragslinjeSchema = z.object({
 });
 
 export type Oppdragslinje = z.infer<typeof OppdragslinjeSchema>;
+
+export const OppdragslinjeListeSchema = z.array(OppdragslinjeSchema);
+
+export type OppdragslinjeListe = z.infer<typeof OppdragslinjeListeSchema>;
