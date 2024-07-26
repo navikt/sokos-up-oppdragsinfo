@@ -1,20 +1,24 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import { StatushistorikkStatus } from "../../models/StatushistorikkStatus";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { OppdragsStatus } from "../../types/OppdragsStatus";
+import RestService from "../../api/rest-service";
+import { isEmpty } from "../../util/commonUtil";
 
-const StatushistorikkModal = ({ id }: { id: string }) => {
-  const [data] = RestService.useFetchStatushistorikk(id);
+const StatushistorikkModal = ({ oppdragsId }: { oppdragsId: string }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
+  const { data } = RestService.useFetchHentOppdragsStatushistorikk(oppdragsId, isOpen);
+
+  const handleClick = () => {
+    setIsOpen(true);
+    ref.current?.showModal();
+  };
 
   return (
     <div>
       <Button
         variant="secondary-neutral"
-        onClick={() => {
-          ref.current?.showModal();
-        }}
+        onClick={handleClick}
       >
         Statushistorikk
       </Button>
@@ -42,10 +46,8 @@ const StatushistorikkModal = ({ id }: { id: string }) => {
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {data &&
-                Array.isArray(data) &&
-                !isEmpty(data) &&
-                data?.map((status: StatushistorikkStatus) => (
+              {data && !isEmpty(data) &&
+                data?.map((status: OppdragsStatus) => (
                   <Table.Row key={btoa(status.kodeStatus)}>
                     <Table.DataCell>{status.kodeStatus}</Table.DataCell>
                     <Table.DataCell>{status.tidspktReg}</Table.DataCell>

@@ -1,9 +1,10 @@
 import faggrupper from "./oppdragsinfo/GET_faggrupper.json";
-import oppdragsLinjer from "./oppdragsinfo/POST_oppdrag.json";
+import oppdragsLinjer from "./oppdragsinfo/GET_oppdragslinjer.json";
 import oppdragsEgenskaper from "./oppdragsinfo/POST_treffliste.json";
+import oppdragsEnehter from "./oppdragsinfo/GET_oppdrag_enheter.json";
 import enhetshistorikk from "./oppdragsinfo/popups/GET_enhetshistorikk.json";
 import statushistorikk from "./oppdragsinfo/popups/GET_statushistorikk.json";
-import omposteringer from "./oppdragsinfo/popups/POST_omposteringer.json";
+import omposteringer from "./oppdragsinfo/popups/GET_omposteringer.json";
 import attestant from "./oppdragsinfo/popups/linje/GET_attestant.json";
 import detaljer from "./oppdragsinfo/popups/linje/GET_detaljer.json";
 import enhet from "./oppdragsinfo/popups/linje/GET_enhet.json";
@@ -20,97 +21,102 @@ import valuta from "./oppdragsinfo/popups/linje/GET_valuta.json";
 export default [
   {
     method: "POST",
-    url: "/oppdrag-api/api/v1/integration/hent-navn",
+    url: "/oppdrag-api/api/v1/integration/hentnavn",
     response: () => "Yutte Hermsgervørdenbrøtbørda"
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/faggrupper",
-    /*............*/ response: () => faggrupper,
+    /*............*/ response: () => faggrupper
   },
   {
     method: "POST",
-    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdragsegenskaper",
-    /*...............*/ response: () => oppdragsEgenskaper,
+    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/sok",
+    /*...............*/ response: () => oppdragsEgenskaper
   },
   {
-    method: "POST",
+    method: "GET",
     /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/oppdragsLinjer",
-    /*...................*/ response: () => oppdragsLinjer,
+    /*...................*/ response: () => oppdragsLinjer
+  },
+  {
+    method: "GET",
+    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/enheter",
+    /*...................*/ response: () => oppdragsEnehter
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/enhetshistorikk",
-    /*...*/ response: () => enhetshistorikk,
+    /*...*/ response: () => enhetshistorikk
   },
   {
-    method: "POST",
+    method: "GET",
     /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/omposteringer",
-    /*.....*/ response: () => omposteringer,
+    /*.....*/ response: () => omposteringer
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/statushistorikk",
-    /*..*/ response: () => statushistorikk,
+    /*..*/ response: () => statushistorikk
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestanter",
-    /**/ response: () => attestant,
+    /**/ response: () => attestant
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/detaljer",
-    /*.*/ response: () => detaljer,
+    /*.*/ response: () => detaljer
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/enheter",
-    /*....*/ response: () => enhet,
+    /*....*/ response: () => enhet
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/grader",
-    /*.....*/ response: () => grad,
+    /*.....*/ response: () => grad
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/kid",
-    /*.*/ response: () => kidliste,
+    /*.*/ response: () => kidliste
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/kravhavere",
-    /**/ response: () => kravhaver,
+    /**/ response: () => kravhaver
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/maksdatoer",
-    /*.*/ response: () => maksdato,
+    /*.*/ response: () => maksdato
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/ovrig",
-    /*....*/ response: () => ovrig,
+    /*....*/ response: () => ovrig
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/skyldnere",
-    /*.*/ response: () => skyldner,
+    /*.*/ response: () => skyldner
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/statuser",
-    /*...*/ response: () => status,
+    /*...*/ response: () => status
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/tekster",
-    /*....*/ response: () => tekst,
+    /*....*/ response: () => tekst
   },
   {
     method: "GET",
     /*.....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/valutaer",
-    /*...*/ response: () => valuta,
-  },
+    /*...*/ response: () => valuta
+  }
 ];

@@ -1,41 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Table } from "@navikt/ds-react";
-import {
-  OppdragsEgenskap,
-  OppdragsEgenskaper,
-} from "../../models/OppdragsEgenskaper";
-import commonstyles from "../../util/common-styles.module.css";
-import {
-  SortState,
-  applySortDirection,
-  firstOf,
-  handleSort,
-  hasKey,
-} from "../../util/commonUtils";
+import { OppdragsListe, Oppdrag } from "../../types/Oppdrag";
+import commonstyles from "../../styles/common-styles.module.css";
+import { applySortDirection, firstOf, handleSort, hasKey, SortState } from "../../util/commonUtil";
 import RowsPerPageSelector from "../common/RowsPerPageSelector";
 import styles from "../common/sortable-table.module.css";
 
-const TrefflisteTable = ({ treff }: { treff: OppdragsEgenskaper }) => {
-  const [sort, setSort] = useState<SortState<OppdragsEgenskap> | undefined>();
+const TrefflisteTable = ({ oppdragsEgenskaper }: { oppdragsEgenskaper: Oppdrag }) => {
+  const [sort, setSort] = useState<SortState<OppdragsListe> | undefined>();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const oppdragSort = (sortKey?: string) => {
-    if (hasKey(firstOf(treff), sortKey))
-      handleSort<OppdragsEgenskap>(sortKey, setSort, sort);
+    if (hasKey(firstOf(oppdragsEgenskaper), sortKey))
+      handleSort<OppdragsListe>(sortKey, setSort, sort);
   };
 
-  const sortedData: OppdragsEgenskaper = treff
-    .slice()
-    .sort(applySortDirection(sort));
-  const pageData = sortedData.slice(
-    (page - 1) * rowsPerPage,
-    page * rowsPerPage,
-  );
-  const pagecount = Math.ceil(treff.length / rowsPerPage);
+  const sortedData: Oppdrag = oppdragsEgenskaper.slice().sort(applySortDirection(sort));
+  const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+  const pagecount = Math.ceil(oppdragsEgenskaper.length / rowsPerPage);
 
-  const antall = treff?.length ?? 0;
+  const antall = oppdragsEgenskaper?.length ?? 0;
   return (
     <>
       <div className={styles["sortable-table__topinfo"]}>

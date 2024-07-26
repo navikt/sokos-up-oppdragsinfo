@@ -4,6 +4,7 @@
   "description": "Oppdragsinfo i Utbetalingsportalen",
   "type": "module",
   "scripts": {
+    "dev-backend": "NODE_ENV=development-local vite",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -18,12 +19,14 @@
     "@navikt/ds-css": "6.13.0",
     "@navikt/ds-react": "6.13.0",
     "axios": "^1.7.2",
+    "moment": "^2.30.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
     "react-router-dom": "^6.25.1",
     "swr": "^2.2.5",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@eik/rollup-plugin": "^4.0.63",

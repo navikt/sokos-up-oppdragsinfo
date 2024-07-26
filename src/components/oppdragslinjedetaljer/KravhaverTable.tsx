@@ -1,38 +1,22 @@
 import { Table } from "@navikt/ds-react";
-import { Kravhaver } from "../../models/Kravhaver";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { Kravhaver } from "../../types/Kravhaver";
+import RestService from "../../api/rest-service";
+import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
-const KravhaverTable = ({
-  oppdragsid,
-  linjeid,
-}: {
-  oppdragsid: string;
-  linjeid: string;
-}) => {
-  const [data] = RestService.useFetchKravhaver(oppdragsid, linjeid);
+const KravhaverTable = (
+  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
+) => {
+  const { data } = RestService.useFetchKravhaver(oppdragsId, linjeId);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell key={"linjeId"} scope="col" children={"linjeId"} />
-          <Table.HeaderCell
-            key={"kravhaverId"}
-            scope="col"
-            children={"kravhaverId"}
-          />
-          <Table.HeaderCell key={"datoFom"} scope="col" children={"datoFom"} />
-          <Table.HeaderCell
-            key={"tidspktReg"}
-            scope="col"
-            children={"tidspktReg"}
-          />
-          <Table.HeaderCell
-            key={"brukerid"}
-            scope="col"
-            children={"brukerid"}
-          />
+          <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Kravhaver Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Bruker Id</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -44,7 +28,7 @@ const KravhaverTable = ({
               <Table.DataCell>{kravhaver.linjeId}</Table.DataCell>
               <Table.DataCell>{kravhaver.kravhaverId}</Table.DataCell>
               <Table.DataCell>{kravhaver.datoFom}</Table.DataCell>
-              <Table.DataCell>{kravhaver.tidspktReg}</Table.DataCell>
+              <Table.DataCell>{formatDateTime(kravhaver.tidspktReg)}</Table.DataCell>
               <Table.DataCell>{kravhaver.brukerid}</Table.DataCell>
             </Table.Row>
           ))}

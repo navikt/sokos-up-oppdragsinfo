@@ -1,36 +1,34 @@
-import { useEffect } from "react";
 import { Heading } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
-import ContentLoader from "../components/common/ContentLoader";
 import TrefflisteParameters from "../components/treffliste/TrefflisteParameters";
 import TrefflisteTable from "../components/treffliste/TrefflisteTable";
-import RestService from "../services/rest-service";
-import commonstyles from "../util/common-styles.module.css";
-import {
-  anyOppdragExists,
-  retrieveFaggruppe,
-  retrieveId,
-  retrieveNavn,
-} from "../util/commonUtils";
-import { BASENAME } from "../util/constants";
+import commonstyles from "../styles/common-styles.module.css";
+import { isEmpty } from "../util/commonUtil";
 import styles from "./TrefflistePage.module.css";
+import { useAppState } from "../store/AppState";
+import { useEffect } from "react";
+import { BASENAME } from "../util/constant";
+import RestService from "../api/rest-service";
+import { redirect } from "react-router-dom";
 
 const TrefflistePage = () => {
-  const gjelderId = retrieveId();
-  const { treffliste, trefflisteIsLoading } =
-    RestService.useFetchTreffliste(gjelderId);
+  const { gjelderId, faggruppeVisningText, oppdragsEgenskaper } = useAppState.getState();
+  const { gjelderNavn, setGjelderNavn } = useAppState(state => ({
+    gjelderNavn: state.gjelderNavn,
+    setGjelderNavn: state.setGjelderNavn
+  }));
 
   useEffect(() => {
-    if (!gjelderId) window.location.replace(BASENAME);
+    if (!gjelderId) redirect(BASENAME);
 
-    if (trefflisteIsLoading) return;
-    if (anyOppdragExists(treffliste)) return;
+    if (oppdragsEgenskaper === undefined || isEmpty(oppdragsEgenskaper)) redirect(BASENAME);
 
-    window.location.replace(BASENAME);
-  }, [treffliste, trefflisteIsLoading, gjelderId]);
-
-  const gjelderNavn = retrieveNavn();
-  const faggruppeNavn = retrieveFaggruppe()?.navn;
+    if (gjelderNavn === "") {
+      RestService.useHentNavn({ gjelderId: gjelderId }).then(response => {
+        setGjelderNavn(response.navn);
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -50,13 +48,12 @@ const TrefflistePage = () => {
             <TrefflisteParameters
               gjelderId={gjelderId}
               navn={gjelderNavn}
-              faggruppe={faggruppeNavn}
+              faggruppe={faggruppeVisningText}
             />
           </div>
         </div>
-        {trefflisteIsLoading && <ContentLoader />}
-        {!trefflisteIsLoading && anyOppdragExists(treffliste) && (
-          <TrefflisteTable treff={treffliste} />
+        {!oppdragsEgenskaper || !isEmpty(oppdragsEgenskaper) && (
+          <TrefflisteTable oppdragsEgenskaper={oppdragsEgenskaper!} />
         )}
       </div>
     </>

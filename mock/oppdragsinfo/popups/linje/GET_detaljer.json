@@ -17,12 +17,12 @@
         "tidspktReg": "2014-10-04 17:40:10.35806"
       }
     ],
-    "harValutaer": false,
-    "harSkyldnere": false,
+    "harValutaer": true,
+    "harSkyldnere": true,
     "harKravhavere": true,
-    "harEnheter": false,
+    "harEnheter": true,
     "harGrader": true,
     "harTekster": true,
-    "harKidliste": false,
+    "harKidliste": true,
     "harMaksdatoer": true
   }

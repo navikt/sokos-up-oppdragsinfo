@@ -1,30 +1,33 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import { Attestant } from "../../models/Attestant";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { Attestant } from "../../types/Attestant";
+import RestService from "../../api/rest-service";
+import { isEmpty } from "../../util/commonUtil";
 
 const AttestantModal = ({
-  oppdragsid,
-  linjeid,
-  text,
-}: {
-  oppdragsid: string;
-  linjeid: string;
+                          oppdragsId,
+                          linjeId,
+                          text
+                        }: {
+  oppdragsId: string;
+  linjeId: string;
   text: string;
 }) => {
-  const [data] = RestService.useFetchAttestant(oppdragsid, linjeid);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
+  const { data } = RestService.useFetchHentAttestanter(oppdragsId, linjeId, isOpen);
+
+  const handleClick = () => {
+    setIsOpen(true);
+    ref.current?.showModal();
+  };
 
   return (
     <div>
       <Button
         variant={"tertiary"}
         size="xsmall"
-        onClick={() => {
-          ref.current?.showModal();
-        }}
-      >
+        onClick={handleClick}>
         {text}
       </Button>
 
@@ -41,20 +44,17 @@ const AttestantModal = ({
                 <Table.HeaderCell
                   key={"ugyldigFom"}
                   scope="col"
-                  children={"ugyldigFom"}
+                  children={"Ugyldig Fom"}
                 />
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {data &&
-                Array.isArray(data) &&
-                !isEmpty(data) &&
-                data?.map((attestant: Attestant) => (
-                  <Table.Row key={btoa(attestant.attestantId)}>
-                    <Table.DataCell>{attestant.attestantId}</Table.DataCell>
-                    <Table.DataCell>{attestant.ugyldigFom}</Table.DataCell>
-                  </Table.Row>
-                ))}
+              {data && !isEmpty(data) && data?.map((attestant: Attestant) => (
+                <Table.Row key={btoa(attestant.attestantId)}>
+                  <Table.DataCell>{attestant.attestantId}</Table.DataCell>
+                  <Table.DataCell>{attestant.ugyldigFom}</Table.DataCell>
+                </Table.Row>
+              ))}
             </Table.Body>
           </Table>
         </Modal.Body>

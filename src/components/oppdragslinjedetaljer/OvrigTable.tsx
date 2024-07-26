@@ -1,37 +1,21 @@
 import { Table } from "@navikt/ds-react";
-import { Ovrig } from "../../models/Ovrig";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { Ovrig } from "../../types/Ovrig";
+import RestService from "../../api/rest-service";
+import { isEmpty } from "../../util/commonUtil";
 
-const OvrigTable = ({
-  oppdragsid,
-  linjeid,
-}: {
-  oppdragsid: string;
-  linjeid: string;
-}) => {
-  const [data] = RestService.useFetchOvrig(oppdragsid, linjeid);
+const OvrigTable = (
+  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
+) => {
+  const { data } = RestService.useFetchOvrig(oppdragsId, linjeId);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell key={"linjeId"} scope="col" children={"Linje-ID"} />
-          <Table.HeaderCell
-            key={"vedtaksId"}
-            scope="col"
-            children={"vedtaksId"}
-          />
-          <Table.HeaderCell
-            key={"henvisning"}
-            scope="col"
-            children={"henvisning"}
-          />
-          <Table.HeaderCell
-            key={"soknadsType"}
-            scope="col"
-            children={"soknadsType"}
-          />
+          <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Vedtak Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Henvisning</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Søknad type</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>

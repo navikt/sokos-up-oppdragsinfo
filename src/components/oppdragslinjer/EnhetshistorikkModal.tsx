@@ -1,20 +1,24 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import { Enhet } from "../../models/Enhet";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { EnhetsType } from "../../types/EnhetsType";
+import RestService from "../../api/rest-service";
+import { isEmpty } from "../../util/commonUtil";
 
-const EnhetshistorikkModal = ({ id }: { id: string }) => {
-  const [data] = RestService.useFetchEnhetshistorikk(id);
+const EnhetshistorikkModal = ({ oppdragsId }: { oppdragsId: string }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
+  const { data } = RestService.useFetchHentOppdragsEnhethistorikk(oppdragsId, isOpen);
+
+  const handleClick = () => {
+    setIsOpen(true);
+    ref.current?.showModal();
+  };
 
   return (
     <div>
       <Button
         variant="secondary-neutral"
-        onClick={() => {
-          ref.current?.showModal();
-        }}
+        onClick={handleClick}
       >
         Enhetshistorikk
       </Button>
@@ -41,7 +45,7 @@ const EnhetshistorikkModal = ({ id }: { id: string }) => {
               {data &&
                 Array.isArray(data) &&
                 !isEmpty(data) &&
-                data?.map((enhet: Enhet) => (
+                data?.map((enhet: EnhetsType) => (
                   <Table.Row key={btoa(JSON.stringify(enhet))}>
                     <Table.DataCell>{enhet.type}</Table.DataCell>
                     <Table.DataCell>{enhet.datoFom}</Table.DataCell>

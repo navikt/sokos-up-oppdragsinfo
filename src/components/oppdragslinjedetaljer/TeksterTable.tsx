@@ -1,28 +1,20 @@
 import { Table } from "@navikt/ds-react";
-import { Tekst } from "../../models/Tekst";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { Tekst } from "../../types/Tekst";
+import RestService from "../../api/rest-service";
+import { isEmpty } from "../../util/commonUtil";
 
-const TeksterTable = ({
-  oppdragsid,
-  linjeid,
-}: {
-  oppdragsid: string;
-  linjeid: string;
-}) => {
-  const [data] = RestService.useFetchTekster(oppdragsid, linjeid);
+const TeksterTable = (
+  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
+) => {
+  const { data } = RestService.useFetchTekster(oppdragsId, linjeId);
 
   return (
     <div>
       <Table zebraStripes>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell
-              key={"linjeId"}
-              scope="col"
-              children={"Linje-ID"}
-            />
-            <Table.HeaderCell key={"tekst"} scope="col" children={"Tekst"} />
+            <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Tekst</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

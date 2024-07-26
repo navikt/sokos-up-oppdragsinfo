@@ -1,90 +1,78 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { useSWRConfig } from "swr";
+import { useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Alert, Button, Heading, TextField } from "@navikt/ds-react";
+import { Alert, Button, Heading, TextField, UNSAFE_Combobox } from "@navikt/ds-react";
 import ContentLoader from "../components/common/ContentLoader";
-import NullstillButton from "../components/common/ResetButton";
-import FaggrupperCombobox from "../components/sok/FaggrupperCombobox";
+import ResetButton from "../components/common/ResetButton";
 import SokHelp from "../components/sok/SokHelp";
-import { Faggruppe } from "../models/Faggruppe";
-import {
-  TrefflisteSearchParameters,
-  TrefflisteSearchParametersSchema,
-} from "../models/TrefflisteSokParameters";
-import RestService, { fetchAndStoreNavn } from "../services/rest-service";
-import commonstyles from "../util/common-styles.module.css";
-import {
-  anyOppdragExists,
-  firstOf,
-  isEmpty,
-  retrieveFaggruppe,
-  retrieveId,
-  storeId,
-} from "../util/commonUtils";
+import { Faggruppe, FaggruppeVisning } from "../types/Faggruppe";
+import { SearchParameter, SearchParameterSchema } from "../types/SearchParameter";
+import RestService from "../api/rest-service";
+import { useAppState } from "../store/AppState";
+import commonstyles from "../styles/common-styles.module.css";
+import { isEmpty } from "../util/commonUtil";
 import styles from "./SokPage.module.css";
 
-const SokPage = () => {
-  const { mutate } = useSWRConfig();
-  const faggrupper = useLoaderData() as Faggruppe[];
-  const [trefflisteSokParameters, setTrefflisteSokParameters] =
-    useState<TrefflisteSearchParameters>({
-      gjelderID: retrieveId(),
-    });
 
-  const faggruppe = retrieveFaggruppe();
-
-  const { treffliste, trefflisteIsLoading } = RestService.useFetchTreffliste(
-    trefflisteSokParameters.gjelderID,
-    faggruppe?.type,
-  );
-  const [shouldGoToTreffliste, setShouldGoToTreffliste] =
-    useState<boolean>(false);
+export default function SokPage() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (
-      Array.isArray(treffliste) &&
-      !isEmpty(treffliste) &&
-      !trefflisteIsLoading
-    ) {
-      storeId(trefflisteSokParameters.gjelderID);
-      fetchAndStoreNavn(trefflisteSokParameters.gjelderID);
-      if (anyOppdragExists(treffliste) && shouldGoToTreffliste) {
-        navigate("/treffliste");
-        setShouldGoToTreffliste(false);
-      }
-    }
-  }, [
-    treffliste,
-    setShouldGoToTreffliste,
-    trefflisteIsLoading,
-    shouldGoToTreffliste,
-    navigate,
-  ]);
-
-  useEffect(() => {
-    mutate("/oppdragsinfo", []);
-  }, [trefflisteSokParameters, mutate]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const { gjelderId, faggruppeVisningText, faggruppeType, reset } = useAppState.getState();
+  const faggrupper = RestService.useFetchHentFaggrupper().data!;
+  const [sokParameter, setSokParameter] =
+    useState<SearchParameter>({
+      gjelderId: gjelderId,
+      faggruppeType: faggruppeVisningText
+    });
 
   const {
     register,
     handleSubmit,
     trigger,
-    formState: { errors },
-  } = useForm<TrefflisteSearchParameters>({
-    resolver: zodResolver(TrefflisteSearchParametersSchema),
+    formState: { errors }
+  } = useForm<SearchParameter>({
+    resolver: zodResolver(SearchParameterSchema)
   });
 
-  const handleChangeGjelderId: SubmitHandler<TrefflisteSearchParameters> = (
-    data,
-  ) => {
-    const gjelderID = data.gjelderID?.replaceAll(/[\s.]/g, "") ?? "";
-    setShouldGoToTreffliste(true);
-    setTrefflisteSokParameters({ gjelderID: gjelderID });
-  };
+  function handleSokSubmit(parameter: SearchParameter): void {
+    setIsSubmit(true);
+    setIsLoading(true);
+
+    const gjelderId = parameter.gjelderId?.replaceAll(/[\s.]/g, "") ?? "";
+    const faggruppeType = faggruppeOptions.find((faggruppe) => faggruppe.comboboxText === sokParameter.faggruppeType)?.type;
+
+    useAppState.setState({
+      gjelderId: gjelderId,
+      faggruppeVisningText: sokParameter.faggruppeType,
+      faggruppeType: faggruppeType
+    });
+
+    RestService.useHentOppdrag({ gjelderId: gjelderId, faggruppeType: faggruppeType })
+      .then(response => {
+        setIsLoading(false);
+        if (!isEmpty(response)) {
+          useAppState.setState({ oppdragsEgenskaper: response });
+          navigate("/treffliste");
+        }
+      })
+      .catch(error => {
+        setIsLoading(false);
+        console.error("Error fetching oppdrags egenskaper:", error);
+      });
+  }
+
+  const faggruppeOptions: FaggruppeVisning[] = useMemo(
+    () => faggrupper.map(faggruppe => ({
+      navn: faggruppe.navn,
+      type: faggruppe.type,
+      comboboxText: `${faggruppe.navn}(${faggruppe.type})`
+    })),
+    [faggrupper]
+  );
+
 
   return (
     <>
@@ -97,7 +85,7 @@ const SokPage = () => {
         <div className={styles.sok__help}>
           <SokHelp />
         </div>
-        <form onSubmit={handleSubmit(handleChangeGjelderId)}>
+        <form onSubmit={handleSubmit(handleSokSubmit)}>
           <Heading level="2" size="medium" spacing>
             Søk
           </Heading>
@@ -105,16 +93,37 @@ const SokPage = () => {
           <div className={styles.sok_inputfields}>
             <div className={styles.sok__inputGjelderID}>
               <TextField
-                {...register("gjelderID")}
+                {...register("gjelderId")}
                 label="Gjelder-ID"
-                defaultValue={trefflisteSokParameters.gjelderID}
-                id="gjelderID"
-                error={errors.gjelderID?.message}
+                defaultValue={sokParameter.gjelderId}
+                id="gjelderId"
+                error={errors.gjelderId?.message}
                 // eslint-disable-next-line jsx-a11y/no-autofocus
                 autoFocus
               />
             </div>
-            <FaggrupperCombobox faggrupper={faggrupper} />
+            <div className={styles.combobox}>
+              <UNSAFE_Combobox
+                label={"Faggruppe"}
+                onToggleSelected={(comboboxText) => {
+                  setSokParameter({ ...sokParameter, faggruppeType: comboboxText });
+                }}
+                selectedOptions={[sokParameter.faggruppeType ?? ""]}
+                options={[...faggruppeOptions.map(faggruppe => faggruppe.comboboxText)]}
+              />
+              <div className={styles.combobox__clearbutton}>
+                <Button
+                  variant="secondary-neutral"
+                  size={"small"}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSokParameter({ ...sokParameter, faggruppeType: undefined });
+                  }}
+                >
+                  Tøm
+                </Button>
+              </div>
+            </div>
           </div>
           <div className={styles.sok__knapperad}>
             <div className={styles.sok__buttonwrapper}>
@@ -129,21 +138,22 @@ const SokPage = () => {
               </Button>
             </div>
             <div>
-              <NullstillButton />
+              <ResetButton />
             </div>
           </div>
         </form>
       </div>
-      {!!trefflisteSokParameters.gjelderID && trefflisteIsLoading && (
+      {!!sokParameter.gjelderId && isLoading && (
         <ContentLoader />
       )}
-      {!trefflisteIsLoading && !anyOppdragExists(treffliste) && (
-        <Alert variant="info">
-          Null treff. Denne IDen har ingen oppdrag
-          {faggruppe ? ` med faggruppe ${faggruppe.type}` : ""}
-        </Alert>
+      {!isLoading && isSubmit && (
+        <div className={styles.sok__feil}>
+          <Alert variant="info">
+            Null treff. Denne IDen har ingen oppdrag
+            {sokParameter.faggruppeType ? ` med faggruppe ${sokParameter.faggruppeType}` : ""}
+          </Alert>
+        </div>
       )}
     </>
   );
-};
-export default SokPage;
+}

@@ -1,4 +1,4 @@
-import commonstyles from "../../util/common-styles.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 
 const LabelText = ({
   label,

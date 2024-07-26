@@ -1,5 +1,5 @@
 import { Loader } from "@navikt/ds-react";
-import commonstyles from "../../util/common-styles.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 
 const ContentLoader = ({ width }: { width?: string }) => (
   <div

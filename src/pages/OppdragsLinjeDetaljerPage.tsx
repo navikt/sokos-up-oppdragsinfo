@@ -3,31 +3,29 @@ import { Accordion, Heading, Table } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import LabelText from "../components/common/LabelText";
 import GraderTable from "../components/oppdragslinjedetaljer/GraderTable";
-import KidlisteTable from "../components/oppdragslinjedetaljer/KidlisteTable";
+import KidTable from "../components/oppdragslinjedetaljer/KidTable";
 import KravhaverTable from "../components/oppdragslinjedetaljer/KravhaverTable";
-import LinjedetaljAccordion from "../components/oppdragslinjedetaljer/LinjedetaljAccordion";
-import LinjeenheterTable from "../components/oppdragslinjedetaljer/LinjeenheterTable";
+import LinjeDetaljerAccordion from "../components/oppdragslinjedetaljer/LinjeDetaljerAccordion";
+import EnheterTable from "../components/oppdragslinjedetaljer/EnheterTable";
 import MaksdatoerTable from "../components/oppdragslinjedetaljer/MaksdatoerTable";
 import OvrigTable from "../components/oppdragslinjedetaljer/OvrigTable";
-import SkyldnersListTable from "../components/oppdragslinjedetaljer/SkyldnerslistTable";
+import SkyldnereTable from "../components/oppdragslinjedetaljer/SkyldnereTable";
 import TeksterTable from "../components/oppdragslinjedetaljer/TeksterTable";
 import ValutaerTable from "../components/oppdragslinjedetaljer/ValutaerTable";
-import RestService from "../services/rest-service";
-import commonstyles from "../util/common-styles.module.css";
-import { retrieveId, retrieveNavn } from "../util/commonUtils";
-import { BASENAME } from "../util/constants";
+import RestService from "../api/rest-service";
+import commonstyles from "../styles/common-styles.module.css";
+import { BASENAME } from "../util/constant";
 import styles from "./OppdragsLinjeDetaljerPage.module.css";
+import { useAppState } from "../store/AppState";
+import { formatDateTime } from "../util/commonUtil";
 
 const OppdragsLinjeDetaljerPage = () => {
   const location = useLocation();
   const oppdragsId = location.state.oppdragsId;
   const linjeId = location.state.linjeId;
-  const gjelderId = retrieveId();
+  const { gjelderId, gjelderNavn } = useAppState.getState();
 
-  const [linjedetalj] = RestService.useFetchOppdragslinjeDetaljer(
-    oppdragsId,
-    linjeId,
-  );
+  const oppdragsLinjeDetajer = RestService.useFetchOppdragslinjeDetaljer(oppdragsId, linjeId).data;
 
   if (!gjelderId) window.location.replace(BASENAME);
 
@@ -52,7 +50,7 @@ const OppdragsLinjeDetaljerPage = () => {
               {gjelderId && (
                 <LabelText
                   label={"Gjelder ID"}
-                  text={`${gjelderId}, ${retrieveNavn()} `}
+                  text={`${gjelderId}, ${gjelderNavn} `}
                 />
               )}
             </div>
@@ -63,51 +61,19 @@ const OppdragsLinjeDetaljerPage = () => {
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell
-                  key={"Linje-ID"}
-                  scope="col"
-                  children={"Linje-ID"}
-                />
-                <Table.HeaderCell
-                  key={"DelytelseId"}
-                  scope="col"
-                  children={"DelytelseId"}
-                />
-                <Table.HeaderCell key={"Sats"} scope="col" children={"Sats"} />
-                <Table.HeaderCell
-                  key={"Dato Vedtak FOM"}
-                  scope="col"
-                  children={"Dato Vedtak FOM"}
-                />
-                <Table.HeaderCell
-                  key={"Dato Vedtak TOM"}
-                  scope="col"
-                  children={"Dato Vedtak TOM"}
-                />
-                <Table.HeaderCell
-                  key={"Utbetales til"}
-                  scope="col"
-                  children={"Utbetales til"}
-                />
-                <Table.HeaderCell
-                  key={"refunderesOrgnr"}
-                  scope="col"
-                  children={"refunderesOrgnr"}
-                />
-                <Table.HeaderCell
-                  key={"tidspktReg"}
-                  scope="col"
-                  children={"tidspktReg"}
-                />
-                <Table.HeaderCell
-                  key={"brukerId"}
-                  scope="col"
-                  children={"brukerId"}
-                />
+                <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Delytelse Id</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Sats</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Vedtak fom</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Vedtak tom</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Utbetales til</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Refund Id</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
+                <Table.HeaderCell scope="col">Bruker Id</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {linjedetalj?.korrigerteLinjeIder.map((linje) => (
+              {oppdragsLinjeDetajer?.korrigerteLinjeIder.map((linje) => (
                 <Table.Row key={btoa("" + linje.linjeId)}>
                   <Table.DataCell>{linje.linjeId}</Table.DataCell>
                   <Table.DataCell>{linje.delytelseId}</Table.DataCell>
@@ -116,64 +82,64 @@ const OppdragsLinjeDetaljerPage = () => {
                   <Table.DataCell>{linje.datoVedtakTom}</Table.DataCell>
                   <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
                   <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
-                  <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
+                  <Table.DataCell>{formatDateTime(linje.tidspktReg)}</Table.DataCell>
                   <Table.DataCell>{linje.brukerId}</Table.DataCell>
                 </Table.Row>
               ))}
             </Table.Body>
           </Table>
           <Accordion>
-            <LinjedetaljAccordion
+            <LinjeDetaljerAccordion
               title={"Enheter"}
-              enabled={!!linjedetalj?.harEnheter}
+              enabled={!!oppdragsLinjeDetajer?.harEnheter}
             >
-              <LinjeenheterTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion
+              <EnheterTable oppdragsId={oppdragsId} linjeId={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion
               title={"Grader"}
-              enabled={!!linjedetalj?.harGrader}
+              enabled={!!oppdragsLinjeDetajer?.harGrader}
             >
-              <GraderTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion
+              <GraderTable oppdragsId={oppdragsId} linjeId={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion
               title={"Kravhavere"}
-              enabled={!!linjedetalj?.harKravhavere}
+              enabled={!!oppdragsLinjeDetajer?.harKravhavere}
             >
-              <KravhaverTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion
+              <KravhaverTable oppdragsId={oppdragsId} linjeId={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion
               title={"Valutaer"}
-              enabled={!!linjedetalj?.harValutaer}
+              enabled={!!oppdragsLinjeDetajer?.harValutaer}
             >
-              <ValutaerTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion
+              <ValutaerTable oppdragsId={oppdragsId} linjeId={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion
               title={"Tekster"}
-              enabled={!!linjedetalj?.harTekster}
+              enabled={!!oppdragsLinjeDetajer?.harTekster}
             >
-              <TeksterTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion
-              title={"Kidliste"}
-              enabled={!!linjedetalj?.harKidliste}
+              <TeksterTable oppdragsId={oppdragsId} linjeId={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion
+              title={"Kid"}
+              enabled={!!oppdragsLinjeDetajer?.harKidliste}
             >
-              <KidlisteTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion
+              <KidTable oppdragsid={oppdragsId} linjeid={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion
               title={"Skyldnere"}
-              enabled={!!linjedetalj?.harSkyldnere}
+              enabled={!!oppdragsLinjeDetajer?.harSkyldnere}
             >
-              <SkyldnersListTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion
+              <SkyldnereTable oppdragsid={oppdragsId} linjeid={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion
               title={"Maksdato"}
-              enabled={!!linjedetalj?.harMaksdatoer}
+              enabled={!!oppdragsLinjeDetajer?.harMaksdatoer}
             >
-              <MaksdatoerTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
-            <LinjedetaljAccordion title={"Øvrig"} enabled>
-              <OvrigTable oppdragsid={oppdragsId} linjeid={linjeId} />
-            </LinjedetaljAccordion>
+              <MaksdatoerTable oppdragsId={oppdragsId} linjeId={linjeId} />
+            </LinjeDetaljerAccordion>
+            <LinjeDetaljerAccordion title={"Øvrig"} enabled>
+              <OvrigTable oppdragsId={oppdragsId} linjeId={linjeId} />
+            </LinjeDetaljerAccordion>
           </Accordion>
         </div>
       </div>

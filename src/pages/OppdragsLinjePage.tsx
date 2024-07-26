@@ -2,28 +2,38 @@ import { useLocation } from "react-router-dom";
 import { Heading } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import LabelText from "../components/common/LabelText";
-import EnhetLabel from "../components/oppdragslinjer/EnhetLabel";
 import EnhetshistorikkModal from "../components/oppdragslinjer/EnhetshistorikkModal";
 import OmposteringModal from "../components/oppdragslinjer/OmposteringModal";
-import OppdragTable from "../components/oppdragslinjer/OppdragTable";
 import StatushistorikkModal from "../components/oppdragslinjer/StatushistorikkModal";
-import RestService from "../services/rest-service";
-import commonstyles from "../util/common-styles.module.css";
-import { retrieveId, retrieveNavn } from "../util/commonUtils";
-import { BASENAME } from "../util/constants";
+import RestService from "../api/rest-service";
+import commonstyles from "../styles/common-styles.module.css";
+import { BASENAME } from "../util/constant";
 import styles from "./OppdragsLinjePage.module.css";
+import { useAppState } from "../store/AppState";
+import { useEffect } from "react";
+import EnhetLabel from "../components/oppdragslinjer/EnhetLabel";
+import OppdragTable from "../components/oppdragslinjer/OppdragTable";
 
 const OppdragsLinjePage = () => {
   const location = useLocation();
-  const oppdragsEgenskap = location.state;
+  const { gjelderId, gjelderNavn } = useAppState.getState();
+  const { oppdragsEgenskap, setOppdragsEgenskap } = useAppState((state) => ({
+    oppdragsEgenskap: state.selectedOppdragsEgenskap!,
+    setOppdragsEgenskap: state.setSelectedOppdragsEgenskap
+  }));
+  const oppdragsLinjer = RestService.useFetchHentOppdragsLinjer(oppdragsEgenskap?.oppdragsId).data;
+  const oppdragsEnhet = RestService.useFetchHentOppdragsEnheter(oppdragsEgenskap?.oppdragsId).data;
 
-  const gjelderId = retrieveId();
-  const { oppdragslinjeListe } = RestService.useFetchOppdragslinjer(
-    gjelderId,
-    oppdragsEgenskap.oppdragsId,
-  );
+  useEffect(() => {
+    if (!gjelderId || (!location.state && oppdragsEgenskap === undefined)) {
+      window.location.replace(BASENAME);
+      return;
+    }
 
-  if (!gjelderId) window.location.replace(BASENAME);
+    if (oppdragsEgenskap === undefined || (location.state !== null && oppdragsEgenskap.oppdragsId !== location.state.oppdragsId)) {
+      setOppdragsEgenskap(location.state);
+    }
+  }, [oppdragsLinjer]);
 
   return (
     <>
@@ -32,7 +42,7 @@ const OppdragsLinjePage = () => {
           Oppdragsinfo
         </Heading>
       </div>
-      {oppdragslinjeListe && (
+      {oppdragsLinjer && (
         <div className={styles.oppdragsdetaljer}>
           <div className={styles.oppdragsdetaljer__top}>
             <Breadcrumbs searchLink trefflistelink oppdrag />
@@ -48,7 +58,7 @@ const OppdragsLinjePage = () => {
                       {gjelderId && (
                         <LabelText
                           label={"Gjelder ID"}
-                          text={`${gjelderId}, ${retrieveNavn()}`}
+                          text={`${gjelderId}, ${gjelderNavn}`}
                         />
                       )}
                       <LabelText
@@ -78,35 +88,29 @@ const OppdragsLinjePage = () => {
                     </div>
                   </div>
                 )}
-                // TODO: Lag mock-endepunkt for den nye DTO klassen fra backend
-                {/* {gjelderId && oppdrag.behandlendeEnhet && (
-                  <EnhetLabel enhet={oppdrag.behandlendeEnhet} />
+                {oppdragsEnhet && oppdragsEnhet.behandlendeEnhet && (
+                  <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
                 )}
-                {gjelderId && oppdrag.enhet && (
-                  <EnhetLabel enhet={oppdrag.enhet} />
-                )} */}
+                {oppdragsEnhet && oppdragsEnhet.enhet && (
+                  <EnhetLabel enhet={oppdragsEnhet.enhet} />
+                )}
               </div>
               <div className={commonstyles.knapperad__right}>
-                {gjelderId && (
-                  <OmposteringModal
-                    enabled={oppdragsEgenskap.harOmposteringer}
-                    gjelderId={gjelderId}
-                    id={oppdragsEgenskap.oppdragsId}
-                  />
-                )}
-                <StatushistorikkModal id={oppdragsEgenskap.oppdragsId} />
-                <EnhetshistorikkModal id={oppdragsEgenskap.oppdragsId} />
+                <OmposteringModal oppdragsId={oppdragsEgenskap.oppdragsId} />
+                <StatushistorikkModal oppdragsId={oppdragsEgenskap.oppdragsId} />
+                <EnhetshistorikkModal oppdragsId={oppdragsEgenskap.oppdragsId} />
               </div>
             </div>
           </div>
           <OppdragTable
             oppdragsId={oppdragsEgenskap.oppdragsId}
-            oppdragsLinjer={oppdragslinjeListe}
+            oppdragsLinjer={oppdragsLinjer}
             oppdragsEgenskap={oppdragsEgenskap}
           />
         </div>
       )}
     </>
-  );
+  )
+    ;
 };
 export default OppdragsLinjePage;

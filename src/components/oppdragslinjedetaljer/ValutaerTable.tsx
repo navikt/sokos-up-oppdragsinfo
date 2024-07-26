@@ -1,41 +1,25 @@
 import { Table } from "@navikt/ds-react";
-import { Valuta } from "../../models/Valuta";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { Valuta } from "../../types/Valuta";
+import RestService from "../../api/rest-service";
+import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
-const ValutaerTable = ({
-  oppdragsid,
-  linjeid,
-}: {
-  oppdragsid: string;
-  linjeid: string;
-}) => {
-  const [data] = RestService.useFetchValuta(oppdragsid, linjeid);
+const ValutaerTable = (
+  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
+) => {
+  const { data } = RestService.useFetchValuta(oppdragsId, linjeId);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell key={"linjeId"} scope="col" children={"Linje-ID"} />
-          <Table.HeaderCell key={"type"} scope="col" children={"type"} />
-          <Table.HeaderCell key={"datoFom"} scope="col" children={"datoFom"} />
-          <Table.HeaderCell
-            key={"nokkelId"}
-            scope="col"
-            children={"nokkelId"}
-          />
-          <Table.HeaderCell key={"valuta"} scope="col" children={"valuta"} />
-          <Table.HeaderCell key={"feilreg"} scope="col" children={"feilreg"} />
-          <Table.HeaderCell
-            key={"tidspktReg"}
-            scope="col"
-            children={"tidspktReg"}
-          />
-          <Table.HeaderCell
-            key={"brukerid"}
-            scope="col"
-            children={"brukerid"}
-          />
+          <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Type</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Nøkkel Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Valuta</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Feil registrert</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Bruker Id</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -50,7 +34,7 @@ const ValutaerTable = ({
               <Table.DataCell>{valuta.nokkelId}</Table.DataCell>
               <Table.DataCell>{valuta.valuta}</Table.DataCell>
               <Table.DataCell>{valuta.feilreg}</Table.DataCell>
-              <Table.DataCell>{valuta.tidspktReg}</Table.DataCell>
+              <Table.DataCell>{formatDateTime(valuta.tidspktReg)}</Table.DataCell>
               <Table.DataCell>{valuta.brukerid}</Table.DataCell>
             </Table.Row>
           ))}

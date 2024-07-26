@@ -1,30 +1,23 @@
 import { Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader, Pagination, Table } from "@navikt/ds-react";
-import { OppdragsLinje, OppdragsLinjer } from "../../models/Oppdragslinje";
-import commonstyles from "../../util/common-styles.module.css";
-import {
-  SortState,
-  applySortDirection,
-  firstOf,
-  formatDate,
-  handleSort,
-  hasKey,
-} from "../../util/commonUtils";
+import { OppdragsLinje, OppdragsLinjer } from "../../types/Oppdragslinje";
+import commonstyles from "../../styles/common-styles.module.css";
+import { applySortDirection, firstOf, formatDate, formatDateTime, handleSort, hasKey, SortState } from "../../util/commonUtil";
 import RowsPerPageSelector from "../common/RowsPerPageSelector";
 import styles from "../common/sortable-table.module.css";
 import AttestantModal from "./AttestantModal";
 import StatusModal from "./StatusModal";
-import { OppdragsEgenskap } from "../../models/OppdragsEgenskaper";
+import { OppdragsListe } from "../../types/Oppdrag";
 
 const OppdragTable = ({
-  oppdragsId,
-  oppdragsLinjer,
-  oppdragsEgenskap,
-}: {
+                        oppdragsId,
+                        oppdragsLinjer,
+                        oppdragsEgenskap
+                      }: {
   oppdragsId: string;
   oppdragsLinjer: OppdragsLinjer;
-  oppdragsEgenskap: OppdragsEgenskap;
+  oppdragsEgenskap: OppdragsListe;
 }) => {
   const [sort, setSort] = useState<SortState<OppdragsLinje> | undefined>();
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,12 +29,8 @@ const OppdragTable = ({
   };
 
   const sortedData = oppdragsLinjer.slice().sort(applySortDirection(sort));
-  const pageData = sortedData.slice(
-    (currentPage - 1) * rowsPerPage,
-    currentPage * rowsPerPage,
-  );
+  const pageData = sortedData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
   const pagecount = Math.ceil(oppdragsLinjer.length / rowsPerPage);
-
   const antall = oppdragsLinjer?.length ?? 0;
 
   return (
@@ -64,16 +53,16 @@ const OppdragTable = ({
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"linjeId"} sortable>
-                Linjenr
+                Linje Id
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"kodeKlasse"} sortable>
-                Kodeklasse
+                Kode klasse
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakFom"} sortable>
-                Dato Vedtak FOM
+                Dato vedtak fom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakTom"} sortable>
-                Dato Vedtak TOM
+                Dato vedtak tom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"sats"} sortable>
                 Sats
@@ -85,26 +74,14 @@ const OppdragTable = ({
                 Status
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoFom"} sortable>
-                Dato Fom
+                Dato fom
               </Table.ColumnHeader>
-              <Table.HeaderCell
-                key={"LinjeIdKorr"}
-                scope="col"
-                children={"LinjeIdKorr"}
-              />
-              <Table.HeaderCell
-                key={"Attestert"}
-                scope="col"
-                children={"Attestert"}
-              />
+              <Table.HeaderCell scope="col">Linje Id ref</Table.HeaderCell>
+              <Table.HeaderCell scope="col">Attestert</Table.HeaderCell>
               <Table.ColumnHeader sortKey={"tidspktReg"} sortable>
                 Tidspunkt registrert
               </Table.ColumnHeader>
-              <Table.HeaderCell
-                key={"Detaljer"}
-                scope="col"
-                children={"Detaljer"}
-              />
+              <Table.HeaderCell scope="col"/>
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -121,37 +98,33 @@ const OppdragTable = ({
                 <Table.DataCell>{linje.sats}</Table.DataCell>
                 <Table.DataCell>{linje.typeSats}</Table.DataCell>
                 <Table.DataCell>
-                  <Suspense
-                    fallback={<Loader size="medium" title="Laster ..." />}
-                  >
+                  <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
                     <StatusModal
                       text={linje.kodeStatus}
-                      oppdragsid={oppdragsId}
-                      linjeid={linje.linjeId}
+                      oppdragsId={oppdragsId}
+                      linjeId={linje.linjeId}
                     />
                   </Suspense>
                 </Table.DataCell>
                 <Table.DataCell>{formatDate(linje.datoFom)}</Table.DataCell>
                 <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
                 <Table.DataCell>
-                  <Suspense
-                    fallback={<Loader size="medium" title="Laster ..." />}
-                  >
+                  <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
                     <AttestantModal
                       text={linje.attestert}
-                      oppdragsid={oppdragsId}
-                      linjeid={linje.linjeId}
+                      oppdragsId={oppdragsId}
+                      linjeId={linje.linjeId}
                     />
                   </Suspense>
                 </Table.DataCell>
-                <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
+                <Table.DataCell>{formatDateTime(linje.tidspktReg)}</Table.DataCell>
                 <Table.DataCell>
                   <Link
                     to={`/${oppdragsId}/${linje.linjeId}`}
                     state={{
                       oppdragsId: oppdragsId,
                       linjeId: linje.linjeId,
-                      oppdragsEgenskap: oppdragsEgenskap,
+                      oppdragsEgenskap: oppdragsEgenskap
                     }}
                   >
                     Detaljer...

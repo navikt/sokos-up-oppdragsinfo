@@ -1,31 +1,24 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import { Ompostering } from "../../models/Ompostering";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import { Ompostering } from "../../types/Ompostering";
+import RestService from "../../api/rest-service";
+import { isEmpty } from "../../util/commonUtil";
 
-type OmposteringModalProps = {
-  gjelderId: string;
-  id: string;
-  enabled: boolean;
-};
-
-const OmposteringModal = ({
-  gjelderId,
-  id,
-  enabled,
-}: OmposteringModalProps) => {
-  const [data] = RestService.useFetchOmposteringer(gjelderId, id);
+const OmposteringModal = ({ oppdragsId }: { oppdragsId: string }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
+  const { data } = RestService.useFetchHentOppdragsOmposteringer(oppdragsId, isOpen);
+
+  const handleClick = () => {
+    setIsOpen(true);
+    ref.current?.showModal();
+  };
 
   return (
     <div>
       <Button
         variant="secondary-neutral"
-        disabled={!enabled}
-        onClick={() => {
-          ref.current?.showModal();
-        }}
+        onClick={handleClick}
       >
         Omposteringer
       </Button>
