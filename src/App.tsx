@@ -7,10 +7,10 @@ import {
 } from "react-router-dom";
 import "./App.module.css";
 import ContentLoader from "./components/common/ContentLoader";
-import OppdragsdetaljerPage from "./pages/Oppdragsdetaljer.page";
-import OppdragslinjedetaljerPage from "./pages/Oppdragslinjedetaljer.page";
-import SokPage from "./pages/Sok.page";
-import TrefflistePage from "./pages/Treffliste.page";
+import OppdragsLinjeDetaljerPage from "./pages/OppdragsLinjeDetaljerPage";
+import OppdragsLinjePage from "./pages/OppdragsLinjePage";
+import SokPage from "./pages/SokPage";
+import TrefflistePage from "./pages/TrefflistePage";
 import RestService from "./services/rest-service";
 import { BASENAME } from "./util/constants";
 import { initGrafanaFaro } from "./util/grafanaFaro";
@@ -31,10 +31,10 @@ const App = () => {
                 loader={RestService.fetchFaggrupper}
               />
               <Route path={"/treffliste"} element={<TrefflistePage />} />
-              <Route path={"/:oppdragsID"} element={<OppdragsdetaljerPage />} />
+              <Route path={"/:oppdragsID"} element={<OppdragsLinjePage />} />
               <Route
                 path={"/:oppdragsID/:linjeID"}
-                element={<OppdragslinjedetaljerPage />}
+                element={<OppdragsLinjeDetaljerPage />}
               />
             </>,
           ),

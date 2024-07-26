@@ -13,7 +13,7 @@ import {
   retrieveNavn,
 } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
-import styles from "./Treffliste.module.css";
+import styles from "./TrefflistePage.module.css";
 
 const TrefflistePage = () => {
   const gjelderId = retrieveId();

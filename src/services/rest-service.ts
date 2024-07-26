@@ -10,9 +10,8 @@ import { Kravhavere } from "../models/Kravhaver";
 import { Linjeenheter } from "../models/Linjeenhet";
 import { Maksdatoer } from "../models/Maksdato";
 import { Omposteringer } from "../models/Ompostering";
-import { Oppdrag } from "../models/Oppdrag";
 import { OppdragsEgenskaper } from "../models/OppdragsEgenskaper";
-import { OppdragslinjeListe } from "../models/Oppdragslinje";
+import { OppdragsLinjer } from "../models/Oppdragslinje";
 import { Oppdragslinjedetalj } from "../models/Oppdragslinjedetaljer";
 import { Ovrige } from "../models/Ovrig";
 import { SkyldnersList } from "../models/Skyldner";
@@ -123,17 +122,15 @@ const useFetchTreffliste = (gjelderId?: string, faggruppe?: string | null) => {
 };
 
 const useFetchOppdragslinjer = (gjelderId?: string, id?: string) => {
-  console.log("Fra useFetchOppdragslinjer: ", gjelderId, id);
   const [oppdragsId, setOppdragsId] = useState<string>();
   useEffect(() => {
     setOppdragsId(id);
   }, [id]);
-  const { data: oppdragslinjeListe } = useSWR<OppdragslinjeListe>(
-    isString(oppdragsId) ? `/${oppdragsId}` : null,
+  const { data: oppdragslinjeListe } = useSWR<OppdragsLinjer>(
+    isString(oppdragsId) ? `/${oppdragsId}/oppdragsLinjer` : null,
     {
       ...swrConfig,
-      fetcher: (url) =>
-        axiosPostFetcher<OppdragslinjeListe>(url, { gjelderId }),
+      fetcher: (url) => axiosPostFetcher<OppdragsLinjer>(url, { gjelderId }),
     },
   );
 

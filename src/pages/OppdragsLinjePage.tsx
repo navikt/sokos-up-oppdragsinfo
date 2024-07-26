@@ -1,25 +1,21 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Heading } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import LabelText from "../components/common/LabelText";
-import EnhetLabel from "../components/oppdragsdetaljer/EnhetLabel";
-import EnhetshistorikkModal from "../components/oppdragsdetaljer/EnhetshistorikkModal";
-import OmposteringModal from "../components/oppdragsdetaljer/OmposteringModal";
-import OppdragTable from "../components/oppdragsdetaljer/OppdragTable";
-import StatushistorikkModal from "../components/oppdragsdetaljer/StatushistorikkModal";
-import { OppdragsEgenskap } from "../models/OppdragsEgenskaper";
+import EnhetLabel from "../components/oppdragslinjer/EnhetLabel";
+import EnhetshistorikkModal from "../components/oppdragslinjer/EnhetshistorikkModal";
+import OmposteringModal from "../components/oppdragslinjer/OmposteringModal";
+import OppdragTable from "../components/oppdragslinjer/OppdragTable";
+import StatushistorikkModal from "../components/oppdragslinjer/StatushistorikkModal";
 import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
 import { retrieveId, retrieveNavn } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
-import styles from "./Oppdragsdetaljer.module.css";
+import styles from "./OppdragsLinjePage.module.css";
 
-const OppdragsdetaljerPage = () => {
-  //const { oppdragsID = "" } = useParams<OppdragsdetaljerParams>();
+const OppdragsLinjePage = () => {
   const location = useLocation();
   const oppdragsEgenskap = location.state;
-
-  console.log("OppdragsEgenskap:", oppdragsEgenskap); // Debugging line
 
   const gjelderId = retrieveId();
   const { oppdragslinjeListe } = RestService.useFetchOppdragslinjer(
@@ -28,10 +24,6 @@ const OppdragsdetaljerPage = () => {
   );
 
   if (!gjelderId) window.location.replace(BASENAME);
-
-  console.log("OppdragsEgenskap after fetch:", oppdragsEgenskap); // Debugging line
-  console.log("OppdragslinjeListe:", oppdragslinjeListe); // Debugging line
-
 
   return (
     <>
@@ -99,21 +91,22 @@ const OppdragsdetaljerPage = () => {
                   <OmposteringModal
                     enabled={oppdragsEgenskap.harOmposteringer}
                     gjelderId={gjelderId}
-                    id={oppdragsEgenskap.oppdragsID}
+                    id={oppdragsEgenskap.oppdragsId}
                   />
                 )}
-                <StatushistorikkModal id={oppdragsEgenskap.oppdragsID} />
-                <EnhetshistorikkModal id={oppdragsEgenskap.oppdragsID} />
+                <StatushistorikkModal id={oppdragsEgenskap.oppdragsId} />
+                <EnhetshistorikkModal id={oppdragsEgenskap.oppdragsId} />
               </div>
             </div>
           </div>
           <OppdragTable
-            oppdragsid={oppdragsEgenskap.oppdragsID}
-            oppdragsdetaljer={oppdragsEgenskap.oppdrag}
+            oppdragsId={oppdragsEgenskap.oppdragsId}
+            oppdragsLinjer={oppdragslinjeListe}
+            oppdragsEgenskap={oppdragsEgenskap}
           />
         </div>
       )}
     </>
   );
 };
-export default OppdragsdetaljerPage;
+export default OppdragsLinjePage;

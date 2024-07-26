@@ -1,8 +1,7 @@
 import { Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader, Pagination, Table } from "@navikt/ds-react";
-import { Oppdrag } from "../../models/Oppdrag";
-import { Oppdragslinje } from "../../models/Oppdragslinje";
+import { OppdragsLinje, OppdragsLinjer } from "../../models/Oppdragslinje";
 import commonstyles from "../../util/common-styles.module.css";
 import {
   SortState,
@@ -16,35 +15,34 @@ import RowsPerPageSelector from "../common/RowsPerPageSelector";
 import styles from "../common/sortable-table.module.css";
 import AttestantModal from "./AttestantModal";
 import StatusModal from "./StatusModal";
+import { OppdragsEgenskap } from "../../models/OppdragsEgenskaper";
 
 const OppdragTable = ({
-  oppdragsid,
-  oppdragsdetaljer,
+  oppdragsId,
+  oppdragsLinjer,
+  oppdragsEgenskap,
 }: {
-  oppdragsid: string;
-  oppdragsdetaljer: Oppdrag;
+  oppdragsId: string;
+  oppdragsLinjer: OppdragsLinjer;
+  oppdragsEgenskap: OppdragsEgenskap;
 }) => {
-  const [sort, setSort] = useState<SortState<Oppdragslinje> | undefined>();
+  const [sort, setSort] = useState<SortState<OppdragsLinje> | undefined>();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const linjeSort = (sortKey?: string) => {
-    if (hasKey(firstOf(oppdragsdetaljer.oppdragsLinjer), sortKey))
-      handleSort<Oppdragslinje>(sortKey, setSort, sort);
+    if (hasKey(firstOf(oppdragsLinjer), sortKey))
+      handleSort<OppdragsLinje>(sortKey, setSort, sort);
   };
 
-  const sortedData = oppdragsdetaljer.oppdragsLinjer
-    .slice()
-    .sort(applySortDirection(sort));
+  const sortedData = oppdragsLinjer.slice().sort(applySortDirection(sort));
   const pageData = sortedData.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage,
   );
-  const pagecount = Math.ceil(
-    oppdragsdetaljer.oppdragsLinjer.length / rowsPerPage,
-  );
+  const pagecount = Math.ceil(oppdragsLinjer.length / rowsPerPage);
 
-  const antall = oppdragsdetaljer?.oppdragsLinjer?.length ?? 0;
+  const antall = oppdragsLinjer?.length ?? 0;
 
   return (
     <>
@@ -110,7 +108,7 @@ const OppdragTable = ({
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {pageData.map((linje: Oppdragslinje) => (
+            {pageData.map((linje: OppdragsLinje) => (
               <Table.Row key={btoa("" + linje.linjeId)}>
                 <Table.DataCell>{linje.linjeId}</Table.DataCell>
                 <Table.DataCell>{linje.kodeKlasse}</Table.DataCell>
@@ -128,7 +126,7 @@ const OppdragTable = ({
                   >
                     <StatusModal
                       text={linje.kodeStatus}
-                      oppdragsid={oppdragsid}
+                      oppdragsid={oppdragsId}
                       linjeid={linje.linjeId}
                     />
                   </Suspense>
@@ -141,14 +139,21 @@ const OppdragTable = ({
                   >
                     <AttestantModal
                       text={linje.attestert}
-                      oppdragsid={oppdragsid}
+                      oppdragsid={oppdragsId}
                       linjeid={linje.linjeId}
                     />
                   </Suspense>
                 </Table.DataCell>
                 <Table.DataCell>{linje.tidspktReg}</Table.DataCell>
                 <Table.DataCell>
-                  <Link to={`/${oppdragsid}/${linje.linjeId}`}>
+                  <Link
+                    to={`/${oppdragsId}/${linje.linjeId}`}
+                    state={{
+                      oppdragsId: oppdragsId,
+                      linjeId: linje.linjeId,
+                      oppdragsEgenskap: oppdragsEgenskap,
+                    }}
+                  >
                     Detaljer...
                   </Link>
                 </Table.DataCell>

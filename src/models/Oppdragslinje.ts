@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const OppdragslinjeSchema = z.object({
+export const OppdragsLinjeSchema = z.object({
   linjeId: z.string(),
   kodeKlasse: z.string(),
   datoVedtakFom: z.string(),
@@ -18,8 +18,8 @@ export const OppdragslinjeSchema = z.object({
   tidspktReg: z.string(),
 });
 
-export type Oppdragslinje = z.infer<typeof OppdragslinjeSchema>;
+export type OppdragsLinje = z.infer<typeof OppdragsLinjeSchema>;
 
-export const OppdragslinjeListeSchema = z.array(OppdragslinjeSchema);
+export const OppdragsLinjerSchema = z.array(OppdragsLinjeSchema);
 
-export type OppdragslinjeListe = z.infer<typeof OppdragslinjeListeSchema>;
+export type OppdragsLinjer = z.infer<typeof OppdragsLinjerSchema>;

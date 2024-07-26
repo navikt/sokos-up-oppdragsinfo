@@ -1,6 +1,6 @@
 import faggrupper from "./oppdragsinfo/GET_faggrupper.json";
-import oppdrag from "./oppdragsinfo/POST_oppdrag.json";
-import oppdragSok from "./oppdragsinfo/POST_treffliste.json";
+import oppdragsLinjer from "./oppdragsinfo/POST_oppdrag.json";
+import oppdragsEgenskaper from "./oppdragsinfo/POST_treffliste.json";
 import enhetshistorikk from "./oppdragsinfo/popups/GET_enhetshistorikk.json";
 import statushistorikk from "./oppdragsinfo/popups/GET_statushistorikk.json";
 import omposteringer from "./oppdragsinfo/popups/POST_omposteringer.json";
@@ -31,12 +31,12 @@ export default [
   {
     method: "POST",
     /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/oppdragsegenskaper",
-    /*...............*/ response: () => oppdragSok,
+    /*...............*/ response: () => oppdragsEgenskaper,
   },
   {
     method: "POST",
-    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id",
-    /*...................*/ response: () => oppdrag,
+    /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/:id/oppdragsLinjer",
+    /*...................*/ response: () => oppdragsLinjer,
   },
   {
     method: "GET",

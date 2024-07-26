@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Accordion, Heading, Table } from "@navikt/ds-react";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import LabelText from "../components/common/LabelText";
@@ -16,19 +16,17 @@ import RestService from "../services/rest-service";
 import commonstyles from "../util/common-styles.module.css";
 import { retrieveId, retrieveNavn } from "../util/commonUtils";
 import { BASENAME } from "../util/constants";
-import styles from "./Oppdragslinjedetaljer.module.css";
+import styles from "./OppdragsLinjeDetaljerPage.module.css";
 
-type OppdragslinjedetaljerParams = {
-  oppdragsID: string;
-  linjeID: string;
-};
-const OppdragslinjedetaljerPage = () => {
-  const { oppdragsID = "", linjeID = "" } =
-    useParams<OppdragslinjedetaljerParams>();
+const OppdragsLinjeDetaljerPage = () => {
+  const location = useLocation();
+  const oppdragsId = location.state.oppdragsId;
+  const linjeId = location.state.linjeId;
   const gjelderId = retrieveId();
-  const [linjedetalj] = RestService.useFetchOppdragslinje(
-    oppdragsID,
-    linjeID ?? "",
+
+  const [linjedetalj] = RestService.useFetchOppdragslinjeDetaljer(
+    oppdragsId,
+    linjeId,
   );
 
   if (!gjelderId) window.location.replace(BASENAME);
@@ -46,7 +44,7 @@ const OppdragslinjedetaljerPage = () => {
             <Breadcrumbs
               searchLink
               trefflistelink
-              oppdraglink={oppdragsID}
+              oppdraglink={oppdragsId}
               oppdragsdetaljer
             />
             <div className={styles.oppdragslinjedetaljer__toppinfo}>
@@ -129,52 +127,52 @@ const OppdragslinjedetaljerPage = () => {
               title={"Enheter"}
               enabled={!!linjedetalj?.harEnheter}
             >
-              <LinjeenheterTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <LinjeenheterTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Grader"}
               enabled={!!linjedetalj?.harGrader}
             >
-              <GraderTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <GraderTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Kravhavere"}
               enabled={!!linjedetalj?.harKravhavere}
             >
-              <KravhaverTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <KravhaverTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Valutaer"}
               enabled={!!linjedetalj?.harValutaer}
             >
-              <ValutaerTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <ValutaerTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Tekster"}
               enabled={!!linjedetalj?.harTekster}
             >
-              <TeksterTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <TeksterTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Kidliste"}
               enabled={!!linjedetalj?.harKidliste}
             >
-              <KidlisteTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <KidlisteTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Skyldnere"}
               enabled={!!linjedetalj?.harSkyldnere}
             >
-              <SkyldnersListTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <SkyldnersListTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion
               title={"Maksdato"}
               enabled={!!linjedetalj?.harMaksdatoer}
             >
-              <MaksdatoerTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <MaksdatoerTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
             <LinjedetaljAccordion title={"Øvrig"} enabled>
-              <OvrigTable oppdragsid={oppdragsID} linjeid={linjeID} />
+              <OvrigTable oppdragsid={oppdragsId} linjeid={linjeId} />
             </LinjedetaljAccordion>
           </Accordion>
         </div>
@@ -182,4 +180,4 @@ const OppdragslinjedetaljerPage = () => {
     </>
   );
 };
-export default OppdragslinjedetaljerPage;
+export default OppdragsLinjeDetaljerPage;

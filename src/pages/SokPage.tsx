@@ -24,7 +24,7 @@ import {
   retrieveId,
   storeId,
 } from "../util/commonUtils";
-import styles from "./Sok.module.css";
+import styles from "./SokPage.module.css";
 
 const SokPage = () => {
   const { mutate } = useSWRConfig();
