@@ -22,7 +22,7 @@ export default [
   {
     method: "POST",
     url: "/oppdrag-api/api/v1/integration/hentnavn",
-    response: () => "Yutte Hermsgervørdenbrøtbørda"
+    response: () => ({navn: "Yutte Hermsgervørdenbrøtbørda"})
   },
   {
     method: "GET",
