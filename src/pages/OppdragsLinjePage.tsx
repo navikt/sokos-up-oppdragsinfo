@@ -57,18 +57,19 @@ const OppdragsLinjePage = () => {
                 )}
               </div>
             </div>
+            <div className={commonstyles.knapperad__left}>
+              <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+                <OmposteringModal oppdragsId={oppdrag.oppdragsId} />
+              </Suspense>
+              <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+                <StatushistorikkModal oppdragsId={oppdrag.oppdragsId} />
+              </Suspense>
+              <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+                <EnhetshistorikkModal oppdragsId={oppdrag.oppdragsId} />
+              </Suspense>
+            </div>
           </div>
-          <div className={commonstyles.knapperad__left}>
-            <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
-              <OmposteringModal oppdragsId={oppdrag.oppdragsId} />
-            </Suspense>
-            <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
-              <StatushistorikkModal oppdragsId={oppdrag.oppdragsId} />
-            </Suspense>
-            <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
-              <EnhetshistorikkModal oppdragsId={oppdrag.oppdragsId} />
-            </Suspense>
-          </div>
+
           <OppdragLinjerTable
             oppdragsId={oppdrag.oppdragsId}
             oppdragsLinjer={oppdragsLinjer}
