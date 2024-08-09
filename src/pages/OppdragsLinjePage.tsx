@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Heading } from "@navikt/ds-react";
+import { Heading, Loader } from "@navikt/ds-react";
 import apiService from "../api/apiService";
 import Breadcrumbs from "../components/common/Breadcrumbs";
 import OppdragsEgenskapPanel from "../components/common/OppdragsEgenskapPanel";
@@ -59,9 +59,15 @@ const OppdragsLinjePage = () => {
             </div>
           </div>
           <div className={commonstyles.knapperad__left}>
-            <OmposteringModal oppdragsId={oppdrag.oppdragsId} />
-            <StatushistorikkModal oppdragsId={oppdrag.oppdragsId} />
-            <EnhetshistorikkModal oppdragsId={oppdrag.oppdragsId} />
+            <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+              <OmposteringModal oppdragsId={oppdrag.oppdragsId} />
+            </Suspense>
+            <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+              <StatushistorikkModal oppdragsId={oppdrag.oppdragsId} />
+            </Suspense>
+            <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+              <EnhetshistorikkModal oppdragsId={oppdrag.oppdragsId} />
+            </Suspense>
           </div>
           <OppdragLinjerTable
             oppdragsId={oppdrag.oppdragsId}
