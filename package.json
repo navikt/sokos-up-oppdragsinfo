@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:backend": "NODE_ENV=development-local vite",
-    "build": "tsc && pnpm run lint && vite build",
+    "build": "tsc && vite build",
     "test": "vitest",
     "lint": "eslint",
     "prepare": "husky"
