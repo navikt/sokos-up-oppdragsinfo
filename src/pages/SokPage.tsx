@@ -28,6 +28,8 @@ export default function SokPage() {
       faggruppeType: faggruppeVisningText
     });
 
+    console.log(faggrupper);
+
   const {
     register,
     handleSubmit,
