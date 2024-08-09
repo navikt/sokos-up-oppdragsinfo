@@ -23,20 +23,20 @@ function isValidDate(day: number, month: number): boolean {
   );
 }
 
-const isValidNavTestdate = (dag: number, maned: number) => {
+function isValidNavTestdate(dag: number, maned: number) {
   return isValidDate(dag, maned - 40);
-};
+}
 
-const isValidSkatteetatenTestdate = (dag: number, maned: number) => {
+function isValidSkatteetatenTestdate(dag: number, maned: number) {
   return isValidDate(dag, maned - 80);
-};
+}
 
-const isValidTestdate = (dag: number, maned: number) => {
+function isValidTestdate(dag: number, maned: number) {
   return (
     getEnvironment() !== "production" &&
     (isValidNavTestdate(dag, maned) || isValidSkatteetatenTestdate(dag, maned))
   );
-};
+}
 
 function isValidFodselsdato(fodselsdato: string): boolean {
   const day = parseInt(fodselsdato.substring(0, 2), 10);

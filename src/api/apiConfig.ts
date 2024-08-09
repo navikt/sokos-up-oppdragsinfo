@@ -8,12 +8,12 @@ const config = (baseUri: string): CreateAxiosDefaults => ({
   headers: {
     Pragma: "no-cache",
     "Cache-Control": "no-cache",
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   },
-  validateStatus: (status) => status < 400
+  validateStatus: (status) => status < 400,
 });
 
-const api = (baseUri: string) => {
+function api(baseUri: string) {
   const instance = axios.create(config(baseUri));
 
   instance.interceptors.response.use(
@@ -28,27 +28,24 @@ const api = (baseUri: string) => {
         return Promise.reject(error);
       }
       throw new ApiError("Issues with connection to backend");
-    }
+    },
   );
   return instance;
-};
+}
 
 export const BASE_URI = {
   OPPDRAGSINFO: "/oppdrag-api/api/v1/oppdragsinfo",
-  INTEGRATION: "/oppdrag-api/api/v1/integration"
+  INTEGRATION: "/oppdrag-api/api/v1/integration",
 };
 
-export const axiosFetcher = <T>(baseUri: string, url: string) =>
-  api(baseUri)
+export function axiosFetcher<T>(baseUri: string, url: string) {
+  return api(baseUri)
     .get<T>(url)
     .then((res) => res.data);
+}
 
-export const axiosPostFetcher = <T, U>(
-  baseUri: string,
-  url: string,
-  body?: T
-) =>
-  api(baseUri)
+export function axiosPostFetcher<T, U>(baseUri: string, url: string, body?: T) {
+  return api(baseUri)
     .post<U>(url, body)
     .then((res) => res.data);
-
+}

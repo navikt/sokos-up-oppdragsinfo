@@ -1,32 +1,32 @@
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
-import { OppdragsListe, Oppdrag } from "../types/Oppdrag";
+import { Oppdrag, OppdragsListe } from "../types/OppdragsListe";
 
 type AppState = {
   gjelderId: string;
   faggruppeVisningText?: string;
   faggruppeType?: string;
   gjelderNavn: string;
-  oppdragsEgenskaper?: Oppdrag
-  selectedOppdragsEgenskap?: OppdragsListe
+  oppdragsListe?: OppdragsListe;
+  oppdrag?: Oppdrag;
 };
 
 type AppStateActions = {
-  reset: () => void;
-  setGjelderId: (gjelderId: string) => void,
+  resetState: () => void;
+  setGjelderId: (gjelderId: string) => void;
   setFaggruppeVisningText: (faggruppeVisningText: string) => void;
-  setFaggruppeType: (faggruppeType: string) => void,
-  setSelectedOppdragsEgenskap: (selectedOppdragsEgenskap: OppdragsListe) => void;
+  setFaggruppeType: (faggruppeType: string) => void;
+  setOppdrag: (oppdrag: Oppdrag) => void;
   setGjelderNavn: (gjelerNavn: string) => void;
-}
+};
 
 const initAppState = {
   gjelderId: "",
   faggruppeVisningText: undefined,
   faggruppeType: undefined,
   gjelderNavn: "",
-  oppdragsEgenskaper: undefined,
-  selectedOppdragsEgenskap: undefined
+  oppdragsListe: undefined,
+  oppdrag: undefined,
 };
 
 export const useAppState = create<AppState & AppStateActions>()(
@@ -34,17 +34,18 @@ export const useAppState = create<AppState & AppStateActions>()(
     persist(
       (set) => ({
         ...initAppState,
-        reset: () => set({ ...initAppState }),
+        resetState: () => set({ ...initAppState }),
         setGjelderId: (gjelderId: string) => set({ gjelderId }),
-        setFaggruppeVisningText: (faggruppeVisningText: string) => set({ faggruppeVisningText }),
+        setFaggruppeVisningText: (faggruppeVisningText: string) =>
+          set({ faggruppeVisningText }),
         setFaggruppeType: (faggruppeType: string) => set({ faggruppeType }),
         setGjelderNavn: (gjelderNavn: string) => set({ gjelderNavn }),
-        setSelectedOppdragsEgenskap: (selectedOppdragsEgenskap: OppdragsListe) => set({ selectedOppdragsEgenskap })
+        setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag: oppdrag }),
       }),
       {
         name: "app-state",
-        storage: createJSONStorage(() => sessionStorage)
-      }
-    )
-  )
+        storage: createJSONStorage(() => sessionStorage),
+      },
+    ),
+  ),
 );

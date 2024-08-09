@@ -1,26 +1,21 @@
 import { Table } from "@navikt/ds-react";
+import apiService from "../../api/apiService";
 import { Kid } from "../../types/Kid";
-import RestService from "../../api/rest-service";
+import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
-const KidTable = ({
-                         oppdragsid,
-                         linjeid
-                       }: {
-  oppdragsid: string;
-  linjeid: string;
-}) => {
-  const { data } = RestService.useFetchKid(oppdragsid, linjeid);
+export default function KidTable(props: OppdragsIdent) {
+  const { data } = apiService.useFetchKid(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
           <Table.HeaderCell scope="col">Kid</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Dato FOM</Table.HeaderCell>
           <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Bruker Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Bruker ID</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -39,6 +34,4 @@ const KidTable = ({
       </Table.Body>
     </Table>
   );
-};
-
-export default KidTable;
+}

@@ -1,22 +1,24 @@
 import { Table } from "@navikt/ds-react";
+import apiService from "../../api/apiService";
 import { Kravhaver } from "../../types/Kravhaver";
-import RestService from "../../api/rest-service";
+import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
-const KravhaverTable = (
-  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
-) => {
-  const { data } = RestService.useFetchKravhaver(oppdragsId, linjeId);
+export default function KravhaverTable(props: OppdragsIdent) {
+  const { data } = apiService.useFetchKravhaver(
+    props.oppdragsId,
+    props.linjeId,
+  );
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Kravhaver Id</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Kravhaver ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Dato FOM</Table.HeaderCell>
           <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Bruker Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Bruker ID</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -28,13 +30,13 @@ const KravhaverTable = (
               <Table.DataCell>{kravhaver.linjeId}</Table.DataCell>
               <Table.DataCell>{kravhaver.kravhaverId}</Table.DataCell>
               <Table.DataCell>{kravhaver.datoFom}</Table.DataCell>
-              <Table.DataCell>{formatDateTime(kravhaver.tidspktReg)}</Table.DataCell>
+              <Table.DataCell>
+                {formatDateTime(kravhaver.tidspktReg)}
+              </Table.DataCell>
               <Table.DataCell>{kravhaver.brukerid}</Table.DataCell>
             </Table.Row>
           ))}
       </Table.Body>
     </Table>
   );
-};
-
-export default KravhaverTable;
+}

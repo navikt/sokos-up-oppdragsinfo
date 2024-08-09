@@ -1,37 +1,46 @@
 import { Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader, Pagination, Table } from "@navikt/ds-react";
-import { OppdragsLinje, OppdragsLinjer } from "../../types/Oppdragslinje";
 import commonstyles from "../../styles/common-styles.module.css";
-import { applySortDirection, firstOf, formatDate, formatDateTime, handleSort, hasKey, SortState } from "../../util/commonUtil";
+import { OppdragsLinje, OppdragsLinjer } from "../../types/Oppdragslinje";
+import {
+  SortState,
+  applySortDirection,
+  firstOf,
+  formatDate,
+  formatDateTime,
+  handleSort,
+  hasKey,
+} from "../../util/commonUtil";
 import RowsPerPageSelector from "../common/RowsPerPageSelector";
 import styles from "../common/sortable-table.module.css";
 import AttestantModal from "./AttestantModal";
 import StatusModal from "./StatusModal";
-import { OppdragsListe } from "../../types/Oppdrag";
 
-const OppdragTable = ({
-                        oppdragsId,
-                        oppdragsLinjer,
-                        oppdragsEgenskap
-                      }: {
+interface OppdragLinjerTableProps {
   oppdragsId: string;
   oppdragsLinjer: OppdragsLinjer;
-  oppdragsEgenskap: OppdragsListe;
-}) => {
+}
+
+export default function OppdragLinjerTable(props: OppdragLinjerTableProps) {
   const [sort, setSort] = useState<SortState<OppdragsLinje> | undefined>();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const linjeSort = (sortKey?: string) => {
-    if (hasKey(firstOf(oppdragsLinjer), sortKey))
+    if (hasKey(firstOf(props.oppdragsLinjer), sortKey))
       handleSort<OppdragsLinje>(sortKey, setSort, sort);
   };
 
-  const sortedData = oppdragsLinjer.slice().sort(applySortDirection(sort));
-  const pageData = sortedData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
-  const pagecount = Math.ceil(oppdragsLinjer.length / rowsPerPage);
-  const antall = oppdragsLinjer?.length ?? 0;
+  const sortedData = props.oppdragsLinjer
+    .slice()
+    .sort(applySortDirection(sort));
+  const pageData = sortedData.slice(
+    (currentPage - 1) * rowsPerPage,
+    currentPage * rowsPerPage,
+  );
+  const pagecount = Math.ceil(props.oppdragsLinjer.length / rowsPerPage);
+  const antall = props.oppdragsLinjer.length ?? 0;
 
   return (
     <>
@@ -53,35 +62,35 @@ const OppdragTable = ({
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"linjeId"} sortable>
-                Linje Id
+                Linje-ID
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"kodeKlasse"} sortable>
-                Kode klasse
+                Klassekode
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakFom"} sortable>
-                Dato vedtak fom
+                Vedtak FOM
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakTom"} sortable>
-                Dato vedtak tom
+                Vedtak TOM
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"sats"} sortable>
                 Sats
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"typeSats"} sortable>
-                Type sats
+                Satstype
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"kodeStatus"} sortable>
                 Status
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoFom"} sortable>
-                Dato fom
+                Status FOM
               </Table.ColumnHeader>
               <Table.HeaderCell scope="col">Linje Id ref</Table.HeaderCell>
               <Table.HeaderCell scope="col">Attestert</Table.HeaderCell>
               <Table.ColumnHeader sortKey={"tidspktReg"} sortable>
                 Tidspunkt registrert
               </Table.ColumnHeader>
-              <Table.HeaderCell scope="col"/>
+              <Table.HeaderCell scope="col" />
             </Table.Row>
           </Table.Header>
           <Table.Body>
@@ -98,10 +107,12 @@ const OppdragTable = ({
                 <Table.DataCell>{linje.sats}</Table.DataCell>
                 <Table.DataCell>{linje.typeSats}</Table.DataCell>
                 <Table.DataCell>
-                  <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+                  <Suspense
+                    fallback={<Loader size="medium" title="Laster ..." />}
+                  >
                     <StatusModal
                       text={linje.kodeStatus}
-                      oppdragsId={oppdragsId}
+                      oppdragsId={props.oppdragsId}
                       linjeId={linje.linjeId}
                     />
                   </Suspense>
@@ -109,22 +120,25 @@ const OppdragTable = ({
                 <Table.DataCell>{formatDate(linje.datoFom)}</Table.DataCell>
                 <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
                 <Table.DataCell>
-                  <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+                  <Suspense
+                    fallback={<Loader size="medium" title="Laster ..." />}
+                  >
                     <AttestantModal
                       text={linje.attestert}
-                      oppdragsId={oppdragsId}
+                      oppdragsId={props.oppdragsId}
                       linjeId={linje.linjeId}
                     />
                   </Suspense>
                 </Table.DataCell>
-                <Table.DataCell>{formatDateTime(linje.tidspktReg)}</Table.DataCell>
+                <Table.DataCell>
+                  {formatDateTime(linje.tidspktReg)}
+                </Table.DataCell>
                 <Table.DataCell>
                   <Link
-                    to={`/${oppdragsId}/${linje.linjeId}`}
+                    to={`/${props.oppdragsId}/${linje.linjeId}`}
                     state={{
-                      oppdragsId: oppdragsId,
+                      oppdragsId: props.oppdragsId,
                       linjeId: linje.linjeId,
-                      oppdragsEgenskap: oppdragsEgenskap
                     }}
                   >
                     Detaljer...
@@ -142,11 +156,10 @@ const OppdragTable = ({
             onPageChange={setCurrentPage}
             count={pagecount}
             size="small"
+            prevNextTexts
           />
         </div>
       )}
     </>
   );
-};
-
-export default OppdragTable;
+}

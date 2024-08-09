@@ -2,8 +2,8 @@
   @apply flex flex-row space-x-3;
 }
 
-.knapperad__right {
-  @apply knapperad mx-4 justify-end;
+.knapperad__left {
+  @apply knapperad mx-4 justify-start;
 }
 
 .bold {

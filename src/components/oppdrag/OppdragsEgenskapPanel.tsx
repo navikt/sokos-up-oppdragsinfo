@@ -1,5 +1,5 @@
 import LabelText from "../common/LabelText";
-import styles from "./TrefflisteParameters.module.css";
+import styles from "./OppdragEgenskaper.module.css";
 
 type SokekriterierProps = {
   gjelderId?: string;
@@ -7,21 +7,20 @@ type SokekriterierProps = {
   faggruppe?: string;
 };
 
-const TrefflisteParameters = ({
+export default function OppdragsEgenskapPanel({
   gjelderId,
   navn,
   faggruppe,
-}: SokekriterierProps) => {
+}: SokekriterierProps) {
   return (
     <>
       <div className={styles.sokekriterier}>
         <div className={styles.sokekriterier__content}>
-          <LabelText label={"Gjelder ID"} text={gjelderId ?? ""} />
+          <LabelText label={"Gjelder-ID"} text={gjelderId ?? ""} />
           <LabelText label={"Navn"} text={navn ?? ""} />
           <LabelText label={"Faggruppe"} text={faggruppe ?? "Alle"} />
         </div>
       </div>
     </>
   );
-};
-export default TrefflisteParameters;
+}

@@ -1,80 +1,92 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
-import { Alert, Button, Heading, TextField, UNSAFE_Combobox } from "@navikt/ds-react";
+import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import {
+  Alert,
+  Button,
+  Heading,
+  TextField,
+  UNSAFE_Combobox,
+} from "@navikt/ds-react";
+import apiService from "../api/apiService";
 import ContentLoader from "../components/common/ContentLoader";
-import ResetButton from "../components/common/ResetButton";
 import SokHelp from "../components/sok/SokHelp";
-import { Faggruppe, FaggruppeVisning } from "../types/Faggruppe";
-import { SearchParameter, SearchParameterSchema } from "../types/SearchParameter";
-import RestService from "../api/rest-service";
 import { useAppState } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
+import { FaggruppeVisning } from "../types/Faggruppe";
+import { SokParameter, SokParameterSchema } from "../types/SokParameter";
 import { isEmpty } from "../util/commonUtil";
 import styles from "./SokPage.module.css";
-
 
 export default function SokPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const { gjelderId, faggruppeVisningText, faggruppeType, reset } = useAppState.getState();
-  const faggrupper = RestService.useFetchHentFaggrupper().data!;
-  const [sokParameter, setSokParameter] =
-    useState<SearchParameter>({
-      gjelderId: gjelderId,
-      faggruppeType: faggruppeVisningText
-    });
-
-    console.log(faggrupper);
+  const { gjelderId, faggruppeVisningText, resetState } =
+    useAppState.getState();
+  const faggrupper = apiService.useFetchHentFaggrupper().data!;
+  const [sokParameter, setSokParameter] = useState<SokParameter>({
+    gjelderId: gjelderId,
+    faggruppeType: faggruppeVisningText,
+  });
 
   const {
     register,
     handleSubmit,
     trigger,
-    formState: { errors }
-  } = useForm<SearchParameter>({
-    resolver: zodResolver(SearchParameterSchema)
+    reset,
+    formState: { errors },
+  } = useForm<SokParameter>({
+    resolver: zodResolver(SokParameterSchema),
   });
 
-  function handleSokSubmit(parameter: SearchParameter): void {
+  const faggruppeOptions: FaggruppeVisning[] = useMemo(
+    () =>
+      faggrupper.map((faggruppe) => ({
+        navn: faggruppe.navn,
+        type: faggruppe.type,
+        comboboxText: `${faggruppe.navn}(${faggruppe.type})`,
+      })),
+    [faggrupper],
+  );
+
+  function handleReset(e: FormEvent) {
+    e.preventDefault();
+    setSokParameter({ gjelderId: "", faggruppeType: undefined });
+    reset();
+    resetState();
+  }
+
+  function handleSokSubmit(parameter: SokParameter) {
     setIsSubmit(true);
     setIsLoading(true);
 
     const gjelderId = parameter.gjelderId?.replaceAll(/[\s.]/g, "") ?? "";
-    const faggruppeType = faggruppeOptions.find((faggruppe) => faggruppe.comboboxText === sokParameter.faggruppeType)?.type;
+    const faggruppeType = faggruppeOptions.find(
+      (faggruppe) => faggruppe.comboboxText === sokParameter.faggruppeType,
+    )?.type;
 
     useAppState.setState({
       gjelderId: gjelderId,
       faggruppeVisningText: sokParameter.faggruppeType,
-      faggruppeType: faggruppeType
+      faggruppeType: faggruppeType,
     });
 
-    RestService.useHentOppdrag({ gjelderId: gjelderId, faggruppeType: faggruppeType })
-      .then(response => {
+    apiService
+      .useHentOppdrag({ gjelderId: gjelderId, faggruppeType: faggruppeType })
+      .then((response) => {
         setIsLoading(false);
         if (!isEmpty(response)) {
-          useAppState.setState({ oppdragsEgenskaper: response });
-          navigate("/treffliste");
+          useAppState.setState({ oppdragsListe: response });
+          navigate("/oppdrag");
         }
       })
-      .catch(error => {
+      .catch(() => {
         setIsLoading(false);
-        console.error("Error fetching oppdrags egenskaper:", error);
       });
   }
-
-  const faggruppeOptions: FaggruppeVisning[] = useMemo(
-    () => faggrupper.map(faggruppe => ({
-      navn: faggruppe.navn,
-      type: faggruppe.type,
-      comboboxText: `${faggruppe.navn}(${faggruppe.type})`
-    })),
-    [faggrupper]
-  );
-
 
   return (
     <>
@@ -108,10 +120,17 @@ export default function SokPage() {
               <UNSAFE_Combobox
                 label={"Faggruppe"}
                 onToggleSelected={(comboboxText) => {
-                  setSokParameter({ ...sokParameter, faggruppeType: comboboxText });
+                  setSokParameter({
+                    ...sokParameter,
+                    faggruppeType: comboboxText,
+                  });
                 }}
                 selectedOptions={[sokParameter.faggruppeType ?? ""]}
-                options={[...faggruppeOptions.map(faggruppe => faggruppe.comboboxText)]}
+                options={[
+                  ...faggruppeOptions.map(
+                    (faggruppe) => faggruppe.comboboxText,
+                  ),
+                ]}
               />
               <div className={styles.combobox__clearbutton}>
                 <Button
@@ -119,7 +138,10 @@ export default function SokPage() {
                   size={"small"}
                   onClick={(e) => {
                     e.preventDefault();
-                    setSokParameter({ ...sokParameter, faggruppeType: undefined });
+                    setSokParameter({
+                      ...sokParameter,
+                      faggruppeType: undefined,
+                    });
                   }}
                 >
                   Tøm
@@ -140,19 +162,27 @@ export default function SokPage() {
               </Button>
             </div>
             <div>
-              <ResetButton />
+              <Button
+                size="small"
+                variant="tertiary"
+                iconPosition="right"
+                icon={<EraserIcon title="reset søk" fontSize="1.5rem" />}
+                onClick={handleReset}
+              >
+                Nullstill søk
+              </Button>
             </div>
           </div>
         </form>
       </div>
-      {!!sokParameter.gjelderId && isLoading && (
-        <ContentLoader />
-      )}
+      {!!sokParameter.gjelderId && isLoading && <ContentLoader />}
       {!isLoading && isSubmit && (
         <div className={styles.sok__feil}>
           <Alert variant="info">
             Null treff. Denne IDen har ingen oppdrag
-            {sokParameter.faggruppeType ? ` med faggruppe ${sokParameter.faggruppeType}` : ""}
+            {sokParameter.faggruppeType
+              ? ` med faggruppe ${sokParameter.faggruppeType}`
+              : ""}
           </Alert>
         </div>
       )}

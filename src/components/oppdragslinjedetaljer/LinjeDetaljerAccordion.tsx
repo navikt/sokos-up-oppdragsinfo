@@ -1,21 +1,23 @@
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren, ReactNode } from "react";
 import { Accordion } from "@navikt/ds-react";
 
-const LinjeDetaljerAccordion = ({
-  title,
-  enabled,
-  children,
-}: PropsWithChildren<{ title: string; enabled: boolean }>) => {
+interface LinjeDetaljerAccordionProps {
+  title: string;
+  enabled: boolean;
+  children: ReactNode;
+}
+
+export default function LinjeDetaljerAccordion(
+  props: PropsWithChildren<LinjeDetaljerAccordionProps>,
+) {
   return (
     <Accordion.Item>
-      {enabled && (
+      {props.enabled && (
         <>
-          <Accordion.Header>{title}</Accordion.Header>
-          <Accordion.Content>{children}</Accordion.Content>
+          <Accordion.Header>{props.title}</Accordion.Header>
+          <Accordion.Content>{props.children}</Accordion.Content>
         </>
       )}
     </Accordion.Item>
   );
-};
-
-export default LinjeDetaljerAccordion;
+}

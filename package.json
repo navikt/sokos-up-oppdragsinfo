@@ -4,6 +4,7 @@
   "description": "Oppdragsinfo i Utbetalingsportalen",
   "type": "module",
   "scripts": {
+    "postinstall": "cd server && pnpm install",
     "dev": "vite",
     "dev:backend": "NODE_ENV=development-local vite",
     "build": "tsc && vite build",

@@ -1,21 +1,23 @@
 import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
+import apiService from "../../api/apiService";
 import { Attestant } from "../../types/Attestant";
-import RestService from "../../api/rest-service";
 import { isEmpty } from "../../util/commonUtil";
 
-const AttestantModal = ({
-                          oppdragsId,
-                          linjeId,
-                          text
-                        }: {
+interface AttestantModalProps {
   oppdragsId: string;
   linjeId: string;
   text: string;
-}) => {
+}
+
+export default function AttestantModal(props: AttestantModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = RestService.useFetchHentAttestanter(oppdragsId, linjeId, isOpen);
+  const { data } = apiService.useFetchHentAttestanter(
+    props.oppdragsId,
+    props.linjeId,
+    isOpen,
+  );
 
   const handleClick = () => {
     setIsOpen(true);
@@ -24,11 +26,8 @@ const AttestantModal = ({
 
   return (
     <div>
-      <Button
-        variant={"tertiary"}
-        size="xsmall"
-        onClick={handleClick}>
-        {text}
+      <Button variant={"tertiary"} size="xsmall" onClick={handleClick}>
+        {props.text}
       </Button>
 
       <Modal ref={ref} header={{ heading: "Attestant" }}>
@@ -49,12 +48,14 @@ const AttestantModal = ({
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {data && !isEmpty(data) && data?.map((attestant: Attestant) => (
-                <Table.Row key={btoa(attestant.attestantId)}>
-                  <Table.DataCell>{attestant.attestantId}</Table.DataCell>
-                  <Table.DataCell>{attestant.ugyldigFom}</Table.DataCell>
-                </Table.Row>
-              ))}
+              {data &&
+                !isEmpty(data) &&
+                data?.map((attestant: Attestant) => (
+                  <Table.Row key={btoa(attestant.attestantId)}>
+                    <Table.DataCell>{attestant.attestantId}</Table.DataCell>
+                    <Table.DataCell>{attestant.ugyldigFom}</Table.DataCell>
+                  </Table.Row>
+                ))}
             </Table.Body>
           </Table>
         </Modal.Body>
@@ -66,6 +67,4 @@ const AttestantModal = ({
       </Modal>
     </div>
   );
-};
-
-export default AttestantModal;
+}

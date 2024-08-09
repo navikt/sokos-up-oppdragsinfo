@@ -1,22 +1,21 @@
 import { Table } from "@navikt/ds-react";
+import apiService from "../../api/apiService";
 import { Grad } from "../../types/Grad";
-import RestService from "../../api/rest-service";
+import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
-const GraderTable = (
-  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
-) => {
-  const { data } = RestService.useFetchGrad(oppdragsId, linjeId);
+export default function GraderTable(props: OppdragsIdent) {
+  const { data } = apiService.useFetchGrad(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Type grad</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Gradstype</Table.HeaderCell>
           <Table.HeaderCell scope="col">Grad</Table.HeaderCell>
           <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Bruker Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Bruker ID</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -35,6 +34,4 @@ const GraderTable = (
       </Table.Body>
     </Table>
   );
-};
-
-export default GraderTable;
+}

@@ -1,27 +1,43 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Table } from "@navikt/ds-react";
-import { OppdragsListe, Oppdrag } from "../../types/Oppdrag";
 import commonstyles from "../../styles/common-styles.module.css";
-import { applySortDirection, firstOf, handleSort, hasKey, SortState } from "../../util/commonUtil";
+import { Oppdrag, OppdragsListe } from "../../types/OppdragsListe";
+import {
+  SortState,
+  applySortDirection,
+  firstOf,
+  handleSort,
+  hasKey,
+} from "../../util/commonUtil";
 import RowsPerPageSelector from "../common/RowsPerPageSelector";
 import styles from "../common/sortable-table.module.css";
 
-const TrefflisteTable = ({ oppdragsEgenskaper }: { oppdragsEgenskaper: Oppdrag }) => {
-  const [sort, setSort] = useState<SortState<OppdragsListe> | undefined>();
+export default function OppdragTable({
+  oppdragsListe,
+}: {
+  oppdragsListe: OppdragsListe;
+}) {
+  const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
-  const oppdragSort = (sortKey?: string) => {
-    if (hasKey(firstOf(oppdragsEgenskaper), sortKey))
-      handleSort<OppdragsListe>(sortKey, setSort, sort);
-  };
+  const sortedData: OppdragsListe = oppdragsListe
+    .slice()
+    .sort(applySortDirection(sort));
+  const pageData = sortedData.slice(
+    (page - 1) * rowsPerPage,
+    page * rowsPerPage,
+  );
+  const pagecount = Math.ceil(oppdragsListe.length / rowsPerPage);
 
-  const sortedData: Oppdrag = oppdragsEgenskaper.slice().sort(applySortDirection(sort));
-  const pageData = sortedData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
-  const pagecount = Math.ceil(oppdragsEgenskaper.length / rowsPerPage);
+  const antall = oppdragsListe?.length ?? 0;
 
-  const antall = oppdragsEgenskaper?.length ?? 0;
+  function oppdragSort(sortKey?: string) {
+    if (hasKey(firstOf(oppdragsListe), sortKey))
+      handleSort<Oppdrag>(sortKey, setSort, sort);
+  }
+
   return (
     <>
       <div className={styles["sortable-table__topinfo"]}>
@@ -51,7 +67,7 @@ const TrefflisteTable = ({ oppdragsEgenskaper }: { oppdragsEgenskaper: Oppdrag }
                 Fagområde
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"typeBilag"} sortable>
-                Type bilag
+                Bilagstype
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"kodeStatus"} sortable>
                 Status
@@ -59,24 +75,17 @@ const TrefflisteTable = ({ oppdragsEgenskaper }: { oppdragsEgenskaper: Oppdrag }
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {pageData.map((oppdragsEgenskap) => (
-              <Table.Row key={btoa("" + oppdragsEgenskap.oppdragsId)}>
+            {pageData.map((oppdrag) => (
+              <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                 <Table.DataCell>
-                  <Link
-                    to={`/${oppdragsEgenskap.oppdragsId}`}
-                    state={oppdragsEgenskap}
-                  >
-                    {oppdragsEgenskap.fagsystemId}
+                  <Link to={`/${oppdrag.oppdragsId}`} state={oppdrag}>
+                    {oppdrag.fagsystemId}
                   </Link>
                 </Table.DataCell>
-                <Table.DataCell>
-                  {oppdragsEgenskap.navnFagGruppe}
-                </Table.DataCell>
-                <Table.DataCell>
-                  {oppdragsEgenskap.navnFagOmraade}
-                </Table.DataCell>
-                <Table.DataCell>{oppdragsEgenskap.typeBilag}</Table.DataCell>
-                <Table.DataCell>{oppdragsEgenskap.kodeStatus}</Table.DataCell>
+                <Table.DataCell>{oppdrag.navnFagGruppe}</Table.DataCell>
+                <Table.DataCell>{oppdrag.navnFagOmraade}</Table.DataCell>
+                <Table.DataCell>{oppdrag.typeBilag}</Table.DataCell>
+                <Table.DataCell>{oppdrag.kodeStatus}</Table.DataCell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -89,11 +98,10 @@ const TrefflisteTable = ({ oppdragsEgenskaper }: { oppdragsEgenskaper: Oppdrag }
             onPageChange={setPage}
             count={pagecount}
             size="small"
+            prevNextTexts
           />
         </div>
       )}
     </>
   );
-};
-
-export default TrefflisteTable;
+}

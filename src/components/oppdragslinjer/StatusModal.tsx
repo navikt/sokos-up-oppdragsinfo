@@ -1,21 +1,23 @@
 import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
+import apiService from "../../api/apiService";
 import { Status } from "../../types/Status";
-import RestService from "../../api/rest-service";
 import { isEmpty } from "../../util/commonUtil";
 
-const StatusModal = ({
-                       oppdragsId,
-                       linjeId,
-                       text
-                     }: {
+interface StatusModalProps {
   oppdragsId: string;
   linjeId: string;
   text: string;
-}) => {
+}
+
+export default function StatusModal(props: StatusModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = RestService.useFetchHentOppdragsLinjeStatuser(oppdragsId, linjeId, isOpen);
+  const { data } = apiService.useFetchHentOppdragsLinjeStatuser(
+    props.oppdragsId,
+    props.linjeId,
+    isOpen,
+  );
 
   const handleClick = () => {
     setIsOpen(true);
@@ -24,12 +26,8 @@ const StatusModal = ({
 
   return (
     <div>
-      <Button
-        size="xsmall"
-        variant={"tertiary"}
-        onClick={handleClick}
-      >
-        {text}
+      <Button size="xsmall" variant={"tertiary"} onClick={handleClick}>
+        {props.text}
       </Button>
 
       <Modal ref={ref} header={{ heading: "Status" }}>
@@ -60,7 +58,8 @@ const StatusModal = ({
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {data && !isEmpty(data) &&
+              {data &&
+                !isEmpty(data) &&
                 data?.map((status: Status) => (
                   <Table.Row key={btoa(status.status + status.tidspktReg)}>
                     <Table.DataCell>{status.status}</Table.DataCell>
@@ -80,6 +79,4 @@ const StatusModal = ({
       </Modal>
     </div>
   );
-};
-
-export default StatusModal;
+}

@@ -1,19 +1,18 @@
 import { Table } from "@navikt/ds-react";
+import apiService from "../../api/apiService";
+import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { Tekst } from "../../types/Tekst";
-import RestService from "../../api/rest-service";
 import { isEmpty } from "../../util/commonUtil";
 
-const TeksterTable = (
-  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
-) => {
-  const { data } = RestService.useFetchTekster(oppdragsId, linjeId);
+export default function TeksterTable(props: OppdragsIdent) {
+  const { data } = apiService.useFetchTekster(props.oppdragsId, props.linjeId);
 
   return (
     <div>
       <Table zebraStripes>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
+            <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
             <Table.HeaderCell scope="col">Tekst</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
@@ -31,6 +30,4 @@ const TeksterTable = (
       </Table>
     </div>
   );
-};
-
-export default TeksterTable;
+}

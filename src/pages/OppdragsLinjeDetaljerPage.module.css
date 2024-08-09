@@ -1,5 +1,5 @@
 .oppdragslinjedetaljer {
-  @apply min-w-1024 space-y-6;
+  @apply mx-auto my-3 mt-6 space-y-6;
 }
 
 .oppdragslinjedetaljer__top {

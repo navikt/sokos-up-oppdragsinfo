@@ -1,21 +1,20 @@
 import { Table } from "@navikt/ds-react";
+import apiService from "../../api/apiService";
+import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { Ovrig } from "../../types/Ovrig";
-import RestService from "../../api/rest-service";
 import { isEmpty } from "../../util/commonUtil";
 
-const OvrigTable = (
-  { oppdragsId, linjeId }: { oppdragsId: string; linjeId: string; }
-) => {
-  const { data } = RestService.useFetchOvrig(oppdragsId, linjeId);
+export default function OvrigTable(props: OppdragsIdent) {
+  const { data } = apiService.useFetchOvrig(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">Linje Id</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Vedtak Id</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Vedtak ID</Table.HeaderCell>
           <Table.HeaderCell scope="col">Henvisning</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Søknad type</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Søknadstype</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -33,6 +32,4 @@ const OvrigTable = (
       </Table.Body>
     </Table>
   );
-};
-
-export default OvrigTable;
+}

@@ -1,18 +1,19 @@
 import { FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import { EraserIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
-import { BASENAME } from "../../util/constant";
 import { useAppState } from "../../store/AppState";
-import { useNavigate } from "react-router-dom";
+import { BASENAME } from "../../util/constant";
 
-const ResetButton = () => {
+export default function ResetButton() {
   const navigate = useNavigate();
-  const { reset } = useAppState();
-  const handleReset = (e: FormEvent) => {
+  const { resetState } = useAppState();
+
+  function handleReset(e: FormEvent) {
     e.preventDefault();
-    reset();
+    resetState();
     navigate(BASENAME);
-  };
+  }
 
   return (
     <Button
@@ -22,8 +23,7 @@ const ResetButton = () => {
       icon={<EraserIcon title="reset søk" fontSize="1.5rem" />}
       onClick={handleReset}
     >
-      Nullstill søk
+      Nytt søk
     </Button>
   );
-};
-export default ResetButton;
+}

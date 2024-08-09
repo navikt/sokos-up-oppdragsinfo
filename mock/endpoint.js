@@ -1,6 +1,6 @@
 import faggrupper from "./oppdragsinfo/GET_faggrupper.json";
 import oppdragsLinjer from "./oppdragsinfo/GET_oppdragslinjer.json";
-import oppdragsEgenskaper from "./oppdragsinfo/POST_treffliste.json";
+import oppdrag from "./oppdragsinfo/POST_oppdrag.json";
 import oppdragsEnehter from "./oppdragsinfo/GET_oppdrag_enheter.json";
 import enhetshistorikk from "./oppdragsinfo/popups/GET_enhetshistorikk.json";
 import statushistorikk from "./oppdragsinfo/popups/GET_statushistorikk.json";
@@ -17,12 +17,13 @@ import skyldner from "./oppdragsinfo/popups/linje/GET_skyldner.json";
 import status from "./oppdragsinfo/popups/linje/GET_status.json";
 import tekst from "./oppdragsinfo/popups/linje/GET_tekst.json";
 import valuta from "./oppdragsinfo/popups/linje/GET_valuta.json";
+import gjelderNavn from "./oppdragsinfo/POST_gjelderNavn.json";
 
 export default [
   {
     method: "POST",
     url: "/oppdrag-api/api/v1/integration/hentnavn",
-    response: () => ({navn: "Yutte Hermsgervørdenbrøtbørda"})
+    response: () => gjelderNavn
   },
   {
     method: "GET",
@@ -32,7 +33,7 @@ export default [
   {
     method: "POST",
     /*....*/ url: "/oppdrag-api/api/v1/oppdragsinfo/sok",
-    /*...............*/ response: () => oppdragsEgenskaper
+    /*...............*/ response: () => oppdrag
   },
   {
     method: "GET",
