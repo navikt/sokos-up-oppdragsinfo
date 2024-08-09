@@ -8,8 +8,8 @@
     "dev:backend": "NODE_ENV=development-local vite",
     "build": "tsc && pnpm run lint && vite build",
     "test": "vitest",
-    "prepare": "husky",
-    "lint": "eslint"
+    "lint": "eslint",
+    "prepare": "husky"
   },
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.8.2",
@@ -62,7 +62,7 @@
     "vite-plugin-mock": "^3.0.2",
     "vitest": "^2.0.3"
   },
-    "browserslist": {
+  "browserslist": {
     "production": [
       ">0.2%",
       "not dead",
