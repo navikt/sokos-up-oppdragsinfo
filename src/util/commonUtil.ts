@@ -5,7 +5,7 @@ const isSymbol = (x: unknown): x is symbol => typeof x === "symbol";
 const isNumber = (n: unknown): n is number => typeof n === "number";
 
 const comparator = <T>(a: T, b: T, orderBy: keyof T) => {
-  if (b[orderBy] < a[orderBy] || b[orderBy] === undefined) {
+  if (b[orderBy] === null || b[orderBy] === undefined || b[orderBy] < a[orderBy]) {
     return -1;
   }
   if (b[orderBy] > a[orderBy]) {
@@ -13,6 +13,7 @@ const comparator = <T>(a: T, b: T, orderBy: keyof T) => {
   }
   return 0;
 };
+
 
 export const isEmpty = (array: Array<unknown> | undefined | null) =>
   !array || !Array.isArray(array) || !array.length;
@@ -70,4 +71,3 @@ export const applySortDirection =
       }
       return 1;
     };
-

@@ -4,12 +4,10 @@
   "description": "Oppdragsinfo i Utbetalingsportalen",
   "type": "module",
   "scripts": {
-    "dev-backend": "NODE_ENV=development-local vite",
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev:backend": "NODE_ENV=development-local vite",
+    "build": "tsc && pnpm run lint && build",
     "test": "vitest",
-    "prepare": "husky",
     "lint": "eslint"
   },
   "dependencies": {
@@ -62,6 +60,19 @@
     "vite-plugin-environment": "^1.1.3",
     "vite-plugin-mock": "^3.0.2",
     "vitest": "^2.0.3"
+  },
+    "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "stylelint": {
     "extends": [

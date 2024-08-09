@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import { OppdragsListe, Oppdrag } from "../types/Oppdrag";
@@ -30,13 +29,12 @@ const initAppState = {
   selectedOppdragsEgenskap: undefined
 };
 
-export const useAppState = create<AppState & AppStateActions>(
+export const useAppState = create<AppState & AppStateActions>()(
   devtools(
     persist(
       (set) => ({
         ...initAppState,
-        reset: () =>
-          set({ ...initAppState }),
+        reset: () => set({ ...initAppState }),
         setGjelderId: (gjelderId: string) => set({ gjelderId }),
         setFaggruppeVisningText: (faggruppeVisningText: string) => set({ faggruppeVisningText }),
         setFaggruppeType: (faggruppeType: string) => set({ faggruppeType }),
@@ -50,5 +48,3 @@ export const useAppState = create<AppState & AppStateActions>(
     )
   )
 );
-
-
