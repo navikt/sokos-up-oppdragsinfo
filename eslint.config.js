@@ -10,7 +10,6 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   eslintConfigPrettier,
   {
-    ignores: ["dist/bundle.js"],
     languageOptions: {
       globals: {
         ...globals.browser,
