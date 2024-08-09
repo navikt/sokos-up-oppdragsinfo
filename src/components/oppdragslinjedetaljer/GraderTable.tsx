@@ -1,38 +1,21 @@
 import { Table } from "@navikt/ds-react";
-import { Grad } from "../../models/Grad";
-import RestService from "../../services/rest-service";
-import { isEmpty } from "../../util/commonUtils";
+import apiService from "../../api/apiService";
+import { Grad } from "../../types/Grad";
+import { OppdragsIdent } from "../../types/OppdragsIdent";
+import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
-const GraderTable = ({
-  oppdragsid,
-  linjeid,
-}: {
-  oppdragsid: string;
-  linjeid: string;
-}) => {
-  const [data] = RestService.useFetchGrad(oppdragsid, linjeid);
+export default function GraderTable(props: OppdragsIdent) {
+  const { data } = apiService.useFetchGrad(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell key={"linjeId"} scope="col" children={"linjeId"} />
-          <Table.HeaderCell
-            key={"typeGrad"}
-            scope="col"
-            children={"typeGrad"}
-          />
-          <Table.HeaderCell key={"grad"} scope="col" children={"grad"} />
-          <Table.HeaderCell
-            key={"tidspktReg"}
-            scope="col"
-            children={"tidspktReg"}
-          />
-          <Table.HeaderCell
-            key={"brukerid"}
-            scope="col"
-            children={"brukerid"}
-          />
+          <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Gradstype</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Grad</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Bruker ID</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -44,13 +27,11 @@ const GraderTable = ({
               <Table.DataCell>{grad.linjeId}</Table.DataCell>
               <Table.DataCell>{grad.typeGrad}</Table.DataCell>
               <Table.DataCell>{grad.grad}</Table.DataCell>
-              <Table.DataCell>{grad.tidspktReg}</Table.DataCell>
+              <Table.DataCell>{formatDateTime(grad.tidspktReg)}</Table.DataCell>
               <Table.DataCell>{grad.brukerid}</Table.DataCell>
             </Table.Row>
           ))}
       </Table.Body>
     </Table>
   );
-};
-
-export default GraderTable;
+}

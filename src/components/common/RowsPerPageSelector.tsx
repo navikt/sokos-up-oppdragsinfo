@@ -1,15 +1,14 @@
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Button, Dropdown } from "@navikt/ds-react";
-import commonstyles from "../../util/common-styles.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 import styles from "./RowsPerPageSelector.module.css";
 
-const RowsPerPageSelector = ({
-  rowsPerPage,
-  setRowsPerPage,
-}: {
+interface RowsPerPageSelectorProps {
   rowsPerPage: number;
   setRowsPerPage: (n: number) => void;
-}) => {
+}
+
+export default function RowsPerPageSelector(props: RowsPerPageSelectorProps) {
   return (
     <>
       <div className={styles.rowsperpageselector}>
@@ -30,7 +29,7 @@ const RowsPerPageSelector = ({
               {[5, 10, 25, 50].map((n) => (
                 <Dropdown.Menu.GroupedList.Item
                   key={n}
-                  onClick={() => setRowsPerPage(n)}
+                  onClick={() => props.setRowsPerPage(n)}
                 >
                   {n}
                 </Dropdown.Menu.GroupedList.Item>
@@ -39,11 +38,9 @@ const RowsPerPageSelector = ({
           </Dropdown.Menu>
         </Dropdown>
         <div className={commonstyles.nowrap}>
-          <p>Vis {rowsPerPage} per side</p>
+          <p>Vis {props.rowsPerPage} per side</p>
         </div>
       </div>
     </>
   );
-};
-
-export default RowsPerPageSelector;
+}

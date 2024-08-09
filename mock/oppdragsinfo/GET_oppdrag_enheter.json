@@ -1,0 +1,12 @@
+{
+  "enhet": {
+    "type": "BOS",
+    "datoFom": "2021-02-13",
+    "enhet": "4402"
+  },
+  "behandlendeEnhet": {
+    "type": "BEH",
+    "datoFom": "2021-02-13",
+    "enhet": "4819"
+  }
+}

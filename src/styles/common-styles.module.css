@@ -1,0 +1,35 @@
+.knapperad {
+  @apply flex flex-row space-x-3;
+}
+
+.knapperad__left {
+  @apply knapperad mx-4 justify-start;
+}
+
+.bold {
+  @apply whitespace-nowrap font-bold;
+}
+
+.row {
+  @apply flex flex-row space-x-1;
+}
+
+.singlerow {
+  @apply flex flex-row;
+}
+
+.spacing {
+  @apply h-16;
+}
+
+.contentloader {
+  @apply w-full py-16 text-center;
+}
+
+.nowrap {
+  @apply whitespace-nowrap;
+}
+
+.pageheading {
+  @apply text-center;
+}

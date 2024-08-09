@@ -1,15 +1,15 @@
-import commonstyles from "../../util/common-styles.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 
-const LabelText = ({
-  label,
-  text,
-}: {
+interface LabelTextProps {
   label: string;
   text: string | number;
-}) => (
-  <div className={commonstyles.row}>
-    <div className={commonstyles.bold}>{label}:</div>
-    <div>{text}</div>
-  </div>
-);
-export default LabelText;
+}
+
+export default function LabelText(props: LabelTextProps) {
+  return (
+    <div className={commonstyles.row}>
+      <div className={commonstyles.bold}>{props.label}:</div>
+      <div>{props.text}</div>
+    </div>
+  );
+}
