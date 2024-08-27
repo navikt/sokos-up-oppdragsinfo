@@ -1,8 +1,9 @@
+/* eslint-disable */
 import { z } from "zod";
 
-const OppdragsRequestSchema = z.object({
+export const OppdragsRequestSchema = z.object({
   gjelderId: z.string(),
-  faggruppeKode: z.string().optional(),
+  fagGruppeKode: z.string().optional(),
 });
 
 export type OppdragsRequest = z.infer<typeof OppdragsRequestSchema>;
