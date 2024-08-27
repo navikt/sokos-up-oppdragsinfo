@@ -38,7 +38,7 @@ export const useAppState = create<AppState & AppStateActions>()(
         setGjelderId: (gjelderId: string) => set({ gjelderId }),
         setFaggruppeVisningText: (faggruppeVisningText: string) =>
           set({ faggruppeVisningText }),
-        setfagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode })
+        setfagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode }),
         setGjelderNavn: (gjelderNavn: string) => set({ gjelderNavn }),
         setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag: oppdrag }),
       }),
