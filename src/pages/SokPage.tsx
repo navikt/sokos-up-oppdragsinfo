@@ -29,7 +29,7 @@ export default function SokPage() {
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
   const [sokParameter, setSokParameter] = useState<SokParameter>({
     gjelderId: gjelderId,
-    faggruppeKode: faggruppeVisningText,
+    fagGruppeKode: faggruppeVisningText,
   });
 
   const {
@@ -54,7 +54,7 @@ export default function SokPage() {
 
   function handleReset(e: FormEvent) {
     e.preventDefault();
-    setSokParameter({ gjelderId: "", faggruppeKode: undefined });
+    setSokParameter({ gjelderId: "", fagGruppeKode: undefined });
     reset();
     resetState();
   }
@@ -64,18 +64,18 @@ export default function SokPage() {
     setIsLoading(true);
 
     const gjelderId = parameter.gjelderId?.replaceAll(/[\s.]/g, "") ?? "";
-    const faggruppeKode = faggruppeOptions.find(
-      (faggruppe) => faggruppe.comboboxText === sokParameter.faggruppeKode,
+    const fagGruppeKode = faggruppeOptions.find(
+      (faggruppe) => faggruppe.comboboxText === sokParameter.fagGruppeKode,
     )?.type;
 
     useAppState.setState({
       gjelderId: gjelderId,
-      faggruppeVisningText: sokParameter.faggruppeKode,
-      faggruppeKode: faggruppeKode,
+      faggruppeVisningText: sokParameter.fagGruppeKode,
+      fagGruppeKode: fagGruppeKode,
     });
 
     apiService
-      .useHentOppdrag({ gjelderId: gjelderId, faggruppeKode: faggruppeKode })
+      .useHentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppeKode })
       .then((response) => {
         setIsLoading(false);
         if (!isEmpty(response)) {
@@ -122,10 +122,10 @@ export default function SokPage() {
                 onToggleSelected={(comboboxText) => {
                   setSokParameter({
                     ...sokParameter,
-                    faggruppeKode: comboboxText,
+                    fagGruppeKode: comboboxText,
                   });
                 }}
-                selectedOptions={[sokParameter.faggruppeKode ?? ""]}
+                selectedOptions={[sokParameter.fagGruppeKode ?? ""]}
                 options={[
                   ...faggruppeOptions.map(
                     (faggruppe) => faggruppe.comboboxText,
@@ -140,7 +140,7 @@ export default function SokPage() {
                     e.preventDefault();
                     setSokParameter({
                       ...sokParameter,
-                      faggruppeKode: undefined,
+                      fagGruppeKode: undefined,
                     });
                   }}
                 >
@@ -180,8 +180,8 @@ export default function SokPage() {
         <div className={styles.sok__feil}>
           <Alert variant="info">
             Null treff. Denne IDen har ingen oppdrag
-            {sokParameter.faggruppeKode
-              ? ` med faggruppe ${sokParameter.faggruppeKode}`
+            {sokParameter.fagGruppeKode
+              ? ` med faggruppe ${sokParameter.fagGruppeKode}`
               : ""}
           </Alert>
         </div>
