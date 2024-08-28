@@ -4,7 +4,7 @@ import { Oppdrag, OppdragsListe } from "../types/OppdragsListe";
 
 type AppState = {
   gjelderId: string;
-  faggruppeVisningText?: string;
+  fagGruppeVisningText?: string;
   fagGruppeKode?: string;
   gjelderNavn: string;
   oppdragsListe?: OppdragsListe;
@@ -14,15 +14,15 @@ type AppState = {
 type AppStateActions = {
   resetState: () => void;
   setGjelderId: (gjelderId: string) => void;
-  setFaggruppeVisningText: (faggruppeVisningText: string) => void;
-  setfagGruppeKode: (fagGruppeKode: string) => void;
+  setFagGruppeVisningText: (faggruppeVisningText: string) => void;
+  setFagGruppeKode: (fagGruppeKode: string) => void;
   setOppdrag: (oppdrag: Oppdrag) => void;
   setGjelderNavn: (gjelerNavn: string) => void;
 };
 
 const initAppState = {
   gjelderId: "",
-  faggruppeVisningText: undefined,
+  fagGruppeVisningText: undefined,
   fagGruppeKode: undefined,
   gjelderNavn: "",
   oppdragsListe: undefined,
@@ -36,9 +36,9 @@ export const useAppState = create<AppState & AppStateActions>()(
         ...initAppState,
         resetState: () => set({ ...initAppState }),
         setGjelderId: (gjelderId: string) => set({ gjelderId }),
-        setFaggruppeVisningText: (faggruppeVisningText: string) =>
-          set({ faggruppeVisningText }),
-        setfagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode }),
+        setFagGruppeVisningText: (fagGruppeVisningText: string) =>
+          set({ fagGruppeVisningText }),
+        setFagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode }),
         setGjelderNavn: (gjelderNavn: string) => set({ gjelderNavn }),
         setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag: oppdrag }),
       }),
