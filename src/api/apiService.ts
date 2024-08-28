@@ -1,7 +1,7 @@
 import useSWRImmutable from "swr/immutable";
 import { Attestanter } from "../types/Attestant";
 import { Enhetshistorikk } from "../types/Enhetshistorikk";
-import { Faggrupper } from "../types/Faggruppe";
+import { FagGrupper } from "../types/FagGruppe";
 import { GjelderNavn } from "../types/GjelderNavn";
 import { Grader } from "../types/Grad";
 import { KidListe } from "../types/Kid";
@@ -47,7 +47,7 @@ async function useHentNavn(request: GjelderIdRequest) {
 }
 
 function useFetchHentFaggrupper() {
-  return useSWRImmutable<Faggrupper>(`/faggrupper`, {
+  return useSWRImmutable<FagGrupper>(`/faggrupper`, {
     ...swrConfig,
     fallbackData: [],
     revalidateOnMount: true,

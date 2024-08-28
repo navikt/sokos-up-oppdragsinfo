@@ -15,7 +15,7 @@ import ContentLoader from "../components/common/ContentLoader";
 import SokHelp from "../components/sok/SokHelp";
 import { useAppState } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
-import { FaggruppeVisning } from "../types/Faggruppe";
+import { FagGruppeVisning } from "../types/FagGruppe";
 import { SokParameter, SokParameterSchema } from "../types/SokParameter";
 import { isEmpty } from "../util/commonUtil";
 import styles from "./SokPage.module.css";
@@ -24,12 +24,12 @@ export default function SokPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const { gjelderId, faggruppeVisningText, resetState } =
+  const { gjelderId, fagGruppeVisningText, resetState } =
     useAppState.getState();
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
   const [sokParameter, setSokParameter] = useState<SokParameter>({
     gjelderId: gjelderId,
-    fagGruppeKode: faggruppeVisningText,
+    fagGruppeKode: fagGruppeVisningText,
   });
 
   const {
@@ -42,7 +42,7 @@ export default function SokPage() {
     resolver: zodResolver(SokParameterSchema),
   });
 
-  const faggruppeOptions: FaggruppeVisning[] = useMemo(
+  const faggruppeOptions: FagGruppeVisning[] = useMemo(
     () =>
       faggrupper.map((faggruppe) => ({
         navn: faggruppe.navn,
@@ -70,7 +70,7 @@ export default function SokPage() {
 
     useAppState.setState({
       gjelderId: gjelderId,
-      faggruppeVisningText: sokParameter.fagGruppeKode,
+      fagGruppeVisningText: sokParameter.fagGruppeKode,
       fagGruppeKode: fagGruppeKode,
     });
 

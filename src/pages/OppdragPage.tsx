@@ -12,7 +12,7 @@ import { BASENAME } from "../util/constant";
 import styles from "./OppdragPage.module.css";
 
 export default function OppdragPage() {
-  const { gjelderId, faggruppeVisningText, oppdragsListe } =
+  const { gjelderId, fagGruppeVisningText, oppdragsListe } =
     useAppState.getState();
   const { gjelderNavn, setGjelderNavn } = useAppState((state) => ({
     gjelderNavn: state.gjelderNavn,
@@ -47,7 +47,7 @@ export default function OppdragPage() {
             <OppdragsEgenskapPanel
               gjelderId={gjelderId}
               navn={gjelderNavn}
-              faggruppe={faggruppeVisningText}
+              faggruppe={fagGruppeVisningText}
             />
           </div>
         </div>
