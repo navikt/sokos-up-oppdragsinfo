@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const OmposteringSchema = z.object({
+const _OmposteringSchema = z.object({
   id: z.number().int(),
   kodeFaggruppe: z.string(),
   lopenr: z.string(),
@@ -10,10 +10,10 @@ const OmposteringSchema = z.object({
   beregningsId: z.string(),
   utfort: z.string(),
   brukerid: z.string(),
-  tidspktReg: z.string()
+  tidspktReg: z.string(),
 });
 
-const OmposteringerSchema = z.array(OmposteringSchema);
+const _OmposteringerSchema = z.array(_OmposteringSchema);
 
-export type Ompostering = z.infer<typeof OmposteringSchema>;
-export type Omposteringer = z.infer<typeof OmposteringerSchema>;
+export type Ompostering = z.infer<typeof _OmposteringSchema>;
+export type Omposteringer = z.infer<typeof _OmposteringerSchema>;

@@ -8,7 +8,7 @@ export const IsoDateSchema = z
   .refine((value) => isoDateFormat.test(value), {
     message: "Must be an ISO date (YYYY-MM-DD)",
   });
-const NorwegianDateSchema = z
+const _NorwegianDateSchema = z
   .string()
   .refine((value) => norwegianDateFormat.test(value), {
     message: "Must be a Norwegian date (DD.MM.YYYY)",
@@ -23,6 +23,6 @@ export const DateSchema = z
     },
   );
 
-export type NorwegianDate = z.infer<typeof NorwegianDateSchema>;
+export type NorwegianDate = z.infer<typeof _NorwegianDateSchema>;
 export type IsoDate = z.infer<typeof IsoDateSchema>;
 export type Date = z.infer<typeof DateSchema>;

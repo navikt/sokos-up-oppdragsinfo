@@ -25,6 +25,18 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       "no-console": "error",
       "no-duplicate-imports": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          args: "all",
+          argsIgnorePattern: "^_",
+          caughtErrors: "all",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
     },
     settings: {
       react: {
@@ -33,6 +45,6 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ["dist/", "server/build/", "src/api/models/OppdragsRequest.ts"],
+    ignores: ["dist/", "server/build/"],
   },
 );

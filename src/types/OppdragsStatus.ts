@@ -1,13 +1,13 @@
 import { z } from "zod";
 
-const OppdragsStatusSchema = z.object({
+const _OppdragsStatusSchema = z.object({
   kodeStatus: z.string(),
   tidspktReg: z.string(),
-  brukerid: z.string()
+  brukerid: z.string(),
 });
 
-const OppdragsStatuserSchema = z.array(OppdragsStatusSchema);
+const _OppdragsStatuserSchema = z.array(_OppdragsStatusSchema);
 
-export type OppdragsStatus = z.infer<typeof OppdragsStatusSchema>;
+export type OppdragsStatus = z.infer<typeof _OppdragsStatusSchema>;
 
-export type OppdragsStatuser = z.infer<typeof OppdragsStatuserSchema>;
+export type OppdragsStatuser = z.infer<typeof _OppdragsStatuserSchema>;

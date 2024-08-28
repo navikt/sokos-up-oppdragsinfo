@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const OppdragSchema = z.object({
+const _OppdragSchema = z.object({
   fagsystemId: z.string(),
   oppdragsId: z.string(),
   navnFagGruppe: z.string(),
@@ -10,8 +10,8 @@ const OppdragSchema = z.object({
   kodeStatus: z.string(),
 });
 
-const OppdragsListeSchema = z.array(OppdragSchema);
+const _OppdragsListeSchema = z.array(_OppdragSchema);
 
-export type OppdragsListe = z.infer<typeof OppdragsListeSchema>;
+export type OppdragsListe = z.infer<typeof _OppdragsListeSchema>;
 
-export type Oppdrag = z.infer<typeof OppdragSchema>;
+export type Oppdrag = z.infer<typeof _OppdragSchema>;

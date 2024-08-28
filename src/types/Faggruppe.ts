@@ -1,14 +1,14 @@
 import { z } from "zod";
 
-const FaggruppeSchema = z.object({
+const _FaggruppeSchema = z.object({
   navn: z.string(),
-  type: z.string()
+  type: z.string(),
 });
 
-const FaggrupperSchema = z.array(FaggruppeSchema);
+const _FaggrupperSchema = z.array(_FaggruppeSchema);
 
-export type Faggruppe = z.infer<typeof FaggruppeSchema>;
-export type Faggrupper = z.infer<typeof FaggrupperSchema>;
+export type Faggruppe = z.infer<typeof _FaggruppeSchema>;
+export type Faggrupper = z.infer<typeof _FaggrupperSchema>;
 export type FaggruppeVisning = Faggruppe & {
   comboboxText: string;
 };

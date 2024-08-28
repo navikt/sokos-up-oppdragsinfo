@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-const GjelderIdRequestSchema = z.object({
-  gjelderId: z.string()
+const _GjelderIdRequestSchema = z.object({
+  gjelderId: z.string(),
 });
 
-export type GjelderIdRequest = z.infer<typeof GjelderIdRequestSchema>
+export type GjelderIdRequest = z.infer<typeof _GjelderIdRequestSchema>;
