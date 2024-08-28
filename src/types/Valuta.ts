@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const ValutaSchema = z.object({
+export const _ValutaSchema = z.object({
   linjeId: z.string(),
   type: z.string(),
   datoFom: z.string(),
@@ -8,11 +8,11 @@ const ValutaSchema = z.object({
   valuta: z.string(),
   feilreg: z.string(),
   tidspktReg: z.string(),
-  brukerid: z.string()
+  brukerid: z.string(),
 });
 
-const ValutaerSchema = z.array(ValutaSchema);
+const _ValutaerSchema = z.array(_ValutaSchema);
 
-export type Valuta = z.infer<typeof ValutaSchema>;
+export type Valuta = z.infer<typeof _ValutaSchema>;
 
-export type Valutaer = z.infer<typeof ValutaerSchema>;
+export type Valutaer = z.infer<typeof _ValutaerSchema>;

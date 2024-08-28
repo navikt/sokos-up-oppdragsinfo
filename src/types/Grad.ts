@@ -1,14 +1,14 @@
 import { z } from "zod";
 
-const GradSchema = z.object({
+const _GradSchema = z.object({
   linjeId: z.string(),
   typeGrad: z.string(),
   grad: z.number().int().min(0).max(100),
   tidspktReg: z.string(),
-  brukerid: z.string()
+  brukerid: z.string(),
 });
 
-const GraderSchema = z.array(GradSchema);
+const _GraderSchema = z.array(_GradSchema);
 
-export type Grad = z.infer<typeof GradSchema>;
-export type Grader = z.infer<typeof GraderSchema>;
+export type Grad = z.infer<typeof _GradSchema>;
+export type Grader = z.infer<typeof _GraderSchema>;
