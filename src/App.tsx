@@ -4,7 +4,6 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
-  useRouteError,
 } from "react-router-dom";
 import "./App.module.css";
 import ContentLoader from "./components/common/ContentLoader";
@@ -20,34 +19,29 @@ export default function App() {
     if (window.location.hostname !== "localhost") initGrafanaFaro();
   }, []);
 
+  throw new Error("Error: Cannot find module 'react-router-dom'");
   return (
     <Suspense fallback={<ContentLoader />}>
       <RouterProvider
         router={createBrowserRouter(
           createRoutesFromElements(
-            <Route
-              path="/"
-              element={<div>test</div>}
-              errorElement={<ErrorBoundry />}
-            >
-              <Route path={"/"} element={<SokPage />} />
+            <>
+              <Route
+                path={"/"}
+                element={<SokPage />}
+                errorElement={<div>test</div>}
+              />
               <Route path={"/oppdrag"} element={<OppdragPage />} />
               <Route path={"/:oppdragsID"} element={<OppdragsLinjePage />} />
               <Route
                 path={"/:oppdragsId/:linjeId"}
                 element={<OppdragsLinjeDetaljerPage />}
               />
-            </Route>,
+            </>,
           ),
           { basename: BASENAME },
         )}
       />
     </Suspense>
   );
-}
-
-function ErrorBoundry() {
-  const error = useRouteError();
-  throw error;
-  return <></>;
 }
