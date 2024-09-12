@@ -4,6 +4,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  useRouteError,
 } from "react-router-dom";
 import "./App.module.css";
 import ContentLoader from "./components/common/ContentLoader";
@@ -24,7 +25,7 @@ export default function App() {
       <RouterProvider
         router={createBrowserRouter(
           createRoutesFromElements(
-            <>
+            <Route path={"/"} ErrorBoundary={ErrorBoundary}>
               <Route path={"/"} element={<SokPage />} />
               <Route path={"/oppdrag"} element={<OppdragPage />} />
               <Route path={"/:oppdragsID"} element={<OppdragsLinjePage />} />
@@ -32,11 +33,16 @@ export default function App() {
                 path={"/:oppdragsId/:linjeId"}
                 element={<OppdragsLinjeDetaljerPage />}
               />
-            </>,
+            </Route>,
           ),
           { basename: BASENAME },
         )}
       />
     </Suspense>
   );
+}
+
+function ErrorBoundary(): JSX.Element {
+  const error = useRouteError();
+  throw error;
 }
