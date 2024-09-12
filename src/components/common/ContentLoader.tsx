@@ -11,7 +11,7 @@ export default function ContentLoader({ width }: ContentLoaderProps) {
       className={commonstyles.contentloader}
       style={{ width: width ? width + "" : "100%" }}
     >
-      <Loader size="3xlarge" title="Laster ..." />
+      <Loader size="2xlarge" title="Laster ..." variant="interaction" />
     </div>
   );
 }
