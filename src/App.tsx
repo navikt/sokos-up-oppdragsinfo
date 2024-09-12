@@ -25,28 +25,15 @@ export default function App() {
       <RouterProvider
         router={createBrowserRouter(
           createRoutesFromElements(
-            <>
-              <Route
-                ErrorBoundary={ErrorBoundary}
-                path={"/"}
-                element={<SokPage />}
-              />
-              <Route
-                path={"/oppdrag"}
-                element={<OppdragPage />}
-                ErrorBoundary={ErrorBoundary}
-              />
-              <Route
-                path={"/:oppdragsID"}
-                element={<OppdragsLinjePage />}
-                ErrorBoundary={ErrorBoundary}
-              />
+            <Route path={"/"} ErrorBoundary={ErrorBoundary}>
+              <Route path={"/"} element={<SokPage />} />
+              <Route path={"/oppdrag"} element={<OppdragPage />} />
+              <Route path={"/:oppdragsID"} element={<OppdragsLinjePage />} />
               <Route
                 path={"/:oppdragsId/:linjeId"}
                 element={<OppdragsLinjeDetaljerPage />}
-                ErrorBoundary={ErrorBoundary}
               />
-            </>,
+            </Route>,
           ),
           { basename: BASENAME },
         )}
@@ -55,8 +42,7 @@ export default function App() {
   );
 }
 
-function ErrorBoundary() {
+function ErrorBoundary(): JSX.Element {
   const error = useRouteError();
   throw error;
-  return <div>test</div>;
 }
