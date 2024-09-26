@@ -15,7 +15,7 @@ import ContentLoader from "../components/common/ContentLoader";
 import SokHelp from "../components/sok/SokHelp";
 import { useAppState } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
-import { FagGruppeVisning } from "../types/FagGruppe";
+import { FaggruppeVisning } from "../types/Faggruppe";
 import { SokParameter, SokParameterSchema } from "../types/SokParameter";
 import { isEmpty } from "../util/commonUtil";
 import styles from "./SokPage.module.css";
@@ -24,12 +24,12 @@ export default function SokPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const { gjelderId, fagGruppeVisningText, resetState } =
+  const { gjelderId, faggruppeVisningText, resetState } =
     useAppState.getState();
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
   const [sokParameter, setSokParameter] = useState<SokParameter>({
     gjelderId: gjelderId,
-    fagGruppeKode: fagGruppeVisningText,
+    faggruppeKode: faggruppeVisningText,
   });
 
   const {
@@ -42,7 +42,7 @@ export default function SokPage() {
     resolver: zodResolver(SokParameterSchema),
   });
 
-  const faggruppeOptions: FagGruppeVisning[] = useMemo(
+  const faggruppeOptions: FaggruppeVisning[] = useMemo(
     () =>
       faggrupper.map((faggruppe) => ({
         navn: faggruppe.navn,
@@ -54,7 +54,7 @@ export default function SokPage() {
 
   function handleReset(e: FormEvent) {
     e.preventDefault();
-    setSokParameter({ gjelderId: "", fagGruppeKode: undefined });
+    setSokParameter({ gjelderId: "", faggruppeKode: undefined });
     reset();
     resetState();
   }
@@ -64,18 +64,18 @@ export default function SokPage() {
     setIsLoading(true);
 
     const gjelderId = parameter.gjelderId?.replaceAll(/[\s.]/g, "") ?? "";
-    const fagGruppeKode = faggruppeOptions.find(
-      (faggruppe) => faggruppe.comboboxText === sokParameter.fagGruppeKode,
+    const faggruppeKode = faggruppeOptions.find(
+      (faggruppe) => faggruppe.comboboxText === sokParameter.faggruppeKode,
     )?.type;
 
     useAppState.setState({
       gjelderId: gjelderId,
-      fagGruppeVisningText: sokParameter.fagGruppeKode,
-      fagGruppeKode: fagGruppeKode,
+      faggruppeVisningText: sokParameter.faggruppeKode,
+      faggruppeKode: faggruppeKode,
     });
 
     apiService
-      .useHentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppeKode })
+      .useHentOppdrag({ gjelderId: gjelderId, faggruppeKode: faggruppeKode })
       .then((response) => {
         setIsLoading(false);
         if (!isEmpty(response)) {
@@ -122,10 +122,10 @@ export default function SokPage() {
                 onToggleSelected={(comboboxText) => {
                   setSokParameter({
                     ...sokParameter,
-                    fagGruppeKode: comboboxText,
+                    faggruppeKode: comboboxText,
                   });
                 }}
-                selectedOptions={[sokParameter.fagGruppeKode ?? ""]}
+                selectedOptions={[sokParameter.faggruppeKode ?? ""]}
                 options={[
                   ...faggruppeOptions.map(
                     (faggruppe) => faggruppe.comboboxText,
@@ -140,7 +140,7 @@ export default function SokPage() {
                     e.preventDefault();
                     setSokParameter({
                       ...sokParameter,
-                      fagGruppeKode: undefined,
+                      faggruppeKode: undefined,
                     });
                   }}
                 >
@@ -180,8 +180,8 @@ export default function SokPage() {
         <div className={styles.sok__feil}>
           <Alert variant="info">
             Null treff. Denne IDen har ingen oppdrag
-            {sokParameter.fagGruppeKode
-              ? ` med faggruppe ${sokParameter.fagGruppeKode}`
+            {sokParameter.faggruppeKode
+              ? ` med faggruppe ${sokParameter.faggruppeKode}`
               : ""}
           </Alert>
         </div>

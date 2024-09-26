@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { EnhetsTypeSchema } from "./EnhetsType";
+import { EnhetstypeSchema } from "./Enhetstype";
 
-export const EnhetshistorikkSchema = z.array(EnhetsTypeSchema);
+export const EnhetshistorikkSchema = z.array(EnhetstypeSchema);
 
 export type Enhetshistorikk = z.infer<typeof EnhetshistorikkSchema>;

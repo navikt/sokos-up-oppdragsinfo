@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Alert, Button, Modal, Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { OppdragsId } from "../../types/OppdragsId";
-import { OppdragsStatus } from "../../types/OppdragsStatus";
+import { Oppdragsstatus } from "../../types/Oppdragsstatus";
 import { isEmpty } from "../../util/commonUtil";
 
 export default function StatushistorikkModal(props: OppdragsId) {
@@ -38,7 +38,7 @@ export default function StatushistorikkModal(props: OppdragsId) {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {data.map((status: OppdragsStatus) => (
+                {data.map((status: Oppdragsstatus) => (
                   <Table.Row key={btoa(status.kodeStatus)}>
                     <Table.DataCell>{status.kodeStatus}</Table.DataCell>
                     <Table.DataCell>{status.tidspktReg}</Table.DataCell>

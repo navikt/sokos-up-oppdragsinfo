@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { _OppdragsLinjeSchema } from "./Oppdragslinje";
 
-export const OppdragsLinjeDetaljerSchema = z.object({
+export const OppdragslinjeDetaljerSchema = z.object({
   korrigerteLinjeIder: z.array(_OppdragsLinjeSchema).min(1),
   harValutaer: z.boolean(),
   harSkyldnere: z.boolean(),
@@ -13,4 +13,4 @@ export const OppdragsLinjeDetaljerSchema = z.object({
   harMaksdatoer: z.boolean(),
 });
 
-export type OppdragsLinjeDetaljer = z.infer<typeof OppdragsLinjeDetaljerSchema>;
+export type OppdragslinjeDetaljer = z.infer<typeof OppdragslinjeDetaljerSchema>;

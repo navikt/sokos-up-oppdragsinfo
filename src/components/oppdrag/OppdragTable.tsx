@@ -60,10 +60,10 @@ export default function OppdragTable({
               <Table.ColumnHeader sortKey={"fagsystemId"} sortable>
                 Fagsystem ID
               </Table.ColumnHeader>
-              <Table.ColumnHeader sortKey={"navnFagGruppe"} sortable>
+              <Table.ColumnHeader sortKey={"navnFaggruppe"} sortable>
                 Faggruppe
               </Table.ColumnHeader>
-              <Table.ColumnHeader sortKey={"navnFagOmraade"} sortable>
+              <Table.ColumnHeader sortKey={"navnFagomraade"} sortable>
                 Fagområde
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"typeBilag"} sortable>
@@ -82,8 +82,8 @@ export default function OppdragTable({
                     {oppdrag.fagsystemId}
                   </Link>
                 </Table.DataCell>
-                <Table.DataCell>{oppdrag.navnFagGruppe}</Table.DataCell>
-                <Table.DataCell>{oppdrag.navnFagOmraade}</Table.DataCell>
+                <Table.DataCell>{oppdrag.navnFaggruppe}</Table.DataCell>
+                <Table.DataCell>{oppdrag.navnFagomraade}</Table.DataCell>
                 <Table.DataCell>{oppdrag.typeBilag}</Table.DataCell>
                 <Table.DataCell>{oppdrag.kodeStatus}</Table.DataCell>
               </Table.Row>

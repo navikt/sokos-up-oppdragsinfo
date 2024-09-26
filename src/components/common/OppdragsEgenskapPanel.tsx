@@ -36,7 +36,7 @@ export default function OppdragsEgenskapPanel(
         )}
       </div>
       <div className={styles.oppdragslinjer__column}>
-        <LabelText label={"Fagområde"} text={props.oppdrag.navnFagOmraade} />
+        <LabelText label={"Fagområde"} text={props.oppdrag.navnFagomraade} />
       </div>
     </div>
   );

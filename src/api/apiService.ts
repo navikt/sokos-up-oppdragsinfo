@@ -1,7 +1,7 @@
 import useSWRImmutable from "swr/immutable";
 import { Attestanter } from "../types/Attestant";
 import { Enhetshistorikk } from "../types/Enhetshistorikk";
-import { FagGrupper } from "../types/FagGruppe";
+import { Faggrupper } from "../types/Faggruppe";
 import { GjelderNavn } from "../types/GjelderNavn";
 import { Grader } from "../types/Grad";
 import { KidListe } from "../types/Kid";
@@ -9,11 +9,11 @@ import { Kravhavere } from "../types/Kravhaver";
 import { Linjeenheter } from "../types/LinjeEnhet";
 import { Maksdatoer } from "../types/Maksdato";
 import { Omposteringer } from "../types/Ompostering";
-import { OppdragsEnhet } from "../types/OppdragsEnhet";
-import { OppdragsLinjeDetaljer } from "../types/OppdragsLinjeDetaljer";
 import { OppdragsListe } from "../types/OppdragsListe";
-import { OppdragsStatuser } from "../types/OppdragsStatus";
+import { Oppdragsenhet } from "../types/Oppdragsenhet";
 import { OppdragsLinjer } from "../types/Oppdragslinje";
+import { OppdragslinjeDetaljer } from "../types/OppdragslinjeDetaljer";
+import { Oppdragsstatuser } from "../types/Oppdragsstatus";
 import { Ovrige } from "../types/Ovrig";
 import { Skyldnere } from "../types/Skyldner";
 import { Statuser } from "../types/Status";
@@ -47,7 +47,7 @@ async function useHentNavn(request: GjelderIdRequest) {
 }
 
 function useFetchHentFaggrupper() {
-  return useSWRImmutable<FagGrupper>(`/faggrupper`, {
+  return useSWRImmutable<Faggrupper>(`/faggrupper`, {
     ...swrConfig,
     fallbackData: [],
     revalidateOnMount: true,
@@ -62,7 +62,7 @@ function useFetchHentOppdragsLinjer(oppdragsId?: string) {
 }
 
 function useFetchHentOppdragsEnheter(oppdragsId: string) {
-  return useSWRImmutable<OppdragsEnhet>(
+  return useSWRImmutable<Oppdragsenhet>(
     oppdragsId ? `/${oppdragsId}/enheter` : null,
     swrConfig,
   );
@@ -94,7 +94,7 @@ function useFetchHentOppdragsStatushistorikk(
   oppdragsId: string,
   call: boolean,
 ) {
-  return useSWRImmutable<OppdragsStatuser>(
+  return useSWRImmutable<Oppdragsstatuser>(
     call ? `/${oppdragsId}/statushistorikk` : null,
     swrConfig,
   );
@@ -118,7 +118,7 @@ function useFetchOppdragslinjeDetaljer(
   oppdragsId: string,
   oppdragsLinjeId: string,
 ) {
-  return useSWRImmutable<OppdragsLinjeDetaljer>(
+  return useSWRImmutable<OppdragslinjeDetaljer>(
     oppdragsId ? `/${oppdragsId}/${oppdragsLinjeId}/detaljer` : null,
     swrConfig,
   );
@@ -181,7 +181,6 @@ function useFetchGrad(oppdragsId: string, linjeId: string) {
 const apiService = {
   useHentOppdrag,
   useHentNavn,
-
   useFetchHentFaggrupper,
   useFetchHentOppdragsLinjer,
   useFetchHentAttestanter,
