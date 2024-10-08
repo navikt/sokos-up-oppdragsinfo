@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const _OppdragSchema = z.object({
-  fagsystemId: z.string(),
+  fagSystemId: z.string(),
   oppdragsId: z.string(),
   navnFagGruppe: z.string(),
   navnFagOmraade: z.string(),

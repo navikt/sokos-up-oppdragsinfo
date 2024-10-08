@@ -57,7 +57,7 @@ export default function OppdragTable({
         <Table zebraStripes sort={sort} onSortChange={oppdragSort}>
           <Table.Header>
             <Table.Row>
-              <Table.ColumnHeader sortKey={"fagsystemId"} sortable>
+              <Table.ColumnHeader sortKey={"fagSystemId"} sortable>
                 Fagsystem ID
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"navnFagGruppe"} sortable>
@@ -79,7 +79,7 @@ export default function OppdragTable({
               <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                 <Table.DataCell>
                   <Link to={`/${oppdrag.oppdragsId}`} state={oppdrag}>
-                    {oppdrag.fagsystemId}
+                    {oppdrag.fagSystemId}
                   </Link>
                 </Table.DataCell>
                 <Table.DataCell>{oppdrag.navnFagGruppe}</Table.DataCell>
