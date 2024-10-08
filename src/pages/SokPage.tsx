@@ -7,11 +7,11 @@ import {
   Alert,
   Button,
   Heading,
+  Loader,
   TextField,
   UNSAFE_Combobox,
 } from "@navikt/ds-react";
 import apiService from "../api/apiService";
-import ContentLoader from "../components/common/ContentLoader";
 import SokHelp from "../components/sok/SokHelp";
 import { useAppState } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
@@ -152,30 +152,33 @@ export default function SokPage() {
           <div className={styles.sok__knapperad}>
             <div className={styles.sok__buttonwrapper}>
               <Button
-                size="small"
-                title={"tøm"}
+                title="Søk"
                 iconPosition="right"
-                icon={<MagnifyingGlassIcon />}
+                icon={
+                  isLoading ? (
+                    <Loader title={"Søker"} />
+                  ) : (
+                    <MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />
+                  )
+                }
                 onClick={() => trigger()}
               >
-                Søk
+                {isLoading ? "Søker..." : "Søk"}
               </Button>
             </div>
             <div>
               <Button
-                size="small"
-                variant="tertiary"
+                variant="secondary"
                 iconPosition="right"
                 icon={<EraserIcon title="reset søk" fontSize="1.5rem" />}
                 onClick={handleReset}
               >
-                Nullstill søk
+                Nullstill
               </Button>
             </div>
           </div>
         </form>
       </div>
-      {!!sokParameter.gjelderId && isLoading && <ContentLoader />}
       {!isLoading && isSubmit && (
         <div className={styles.sok__feil}>
           <Alert variant="info">
