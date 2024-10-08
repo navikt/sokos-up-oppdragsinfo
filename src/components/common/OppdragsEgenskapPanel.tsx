@@ -21,7 +21,7 @@ export default function OppdragsEgenskapPanel(
     <div className={styles.oppdragslinjer__columns}>
       <div className={styles.oppdragslinjer__column}>
         <LabelText label={"Gjelder ID"} text={gjelderId} />
-        <LabelText label={"Fagsystem ID"} text={props.oppdrag.fagsystemId} />
+        <LabelText label={"Fagsystem ID"} text={props.oppdrag.fagSystemId} />
         <LabelText label={"Status"} text={props.oppdrag.kodeStatus} />
         {oppdragsEnhet && oppdragsEnhet.behandlendeEnhet && (
           <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
