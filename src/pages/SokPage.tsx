@@ -24,7 +24,7 @@ export default function SokPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
-  const { gjelderId, fagGruppeVisningText, resetState } =
+  const { gjelderId, fagGruppeVisningText, resetState, setGjelderNavn } =
     useAppState.getState();
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
   const [sokParameter, setSokParameter] = useState<SokParameter>({
@@ -62,6 +62,7 @@ export default function SokPage() {
   function handleSokSubmit(parameter: SokParameter) {
     setIsSubmit(true);
     setIsLoading(true);
+    setGjelderNavn("");
 
     const gjelderId = parameter.gjelderId?.replaceAll(/[\s.]/g, "") ?? "";
     const fagGruppeKode = faggruppeOptions.find(
