@@ -1,5 +1,5 @@
-import LabelText from "../common/LabelText";
-import styles from "./OppdragEgenskaper.module.css";
+import LabelText from "../../components/LabelText";
+import styles from "./OppdragEgenskapPanel.module.css";
 
 type SokekriterierProps = {
   gjelderId?: string;
@@ -7,7 +7,7 @@ type SokekriterierProps = {
   faggruppe?: string;
 };
 
-export default function OppdragsEgenskapPanel({
+export default function OppdragEgenskapPanel({
   gjelderId,
   navn,
   faggruppe,

@@ -1,35 +1,39 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Accordion, Heading } from "@navikt/ds-react";
-import apiService from "../api/apiService";
-import Breadcrumbs from "../components/common/Breadcrumbs";
-import OppdragsEgenskapPanel from "../components/common/OppdragsEgenskapPanel";
-import EnheterTable from "../components/oppdragslinjedetaljer/EnheterTable";
-import GraderTable from "../components/oppdragslinjedetaljer/GraderTable";
-import KidTable from "../components/oppdragslinjedetaljer/KidTable";
-import KravhaverTable from "../components/oppdragslinjedetaljer/KravhaverTable";
-import LinjeDetaljerAccordion from "../components/oppdragslinjedetaljer/LinjeDetaljerAccordion";
-import MaksdatoerTable from "../components/oppdragslinjedetaljer/MaksdatoerTable";
-import OppdragsLinjeDetaljerTable from "../components/oppdragslinjedetaljer/OppdragLinjeDetaljerTable";
-import OvrigTable from "../components/oppdragslinjedetaljer/OvrigTable";
-import SkyldnereTable from "../components/oppdragslinjedetaljer/SkyldnereTable";
-import TeksterTable from "../components/oppdragslinjedetaljer/TeksterTable";
-import ValutaerTable from "../components/oppdragslinjedetaljer/ValutaerTable";
-import { useAppState } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
-import { BASENAME } from "../util/constant";
+import apiService from "../../api/apiService";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import OppdragsEgenskapPanel from "../../components/OppdragsEgenskapPanel";
+import { useStore } from "../../store/AppState";
+import commonstyles from "../../styles/common-styles.module.css";
+import { ROOT } from "../../util/constant";
+import EnheterTable from "./EnheterTable";
+import GraderTable from "./GraderTable";
+import KidTable from "./KidTable";
+import KravhaverTable from "./KravhaverTable";
+import LinjeDetaljerAccordion from "./LinjeDetaljerAccordion";
+import MaksdatoerTable from "./MaksdatoerTable";
+import OppdragsLinjeDetaljerTable from "./OppdragLinjeDetaljerTable";
 import styles from "./OppdragsLinjeDetaljerPage.module.css";
+import OvrigTable from "./OvrigTable";
+import SkyldnereTable from "./SkyldnereTable";
+import TeksterTable from "./TeksterTable";
+import ValutaerTable from "./ValutaerTable";
 
-const OppdragsLinjeDetaljerPage = () => {
+export default function OppdragsLinjeDetaljerPage() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const oppdragsId = location.state.oppdragsId;
   const linjeId = location.state.linjeId;
-  const { gjelderId, oppdrag } = useAppState.getState();
+  const { gjelderId, oppdrag } = useStore.getState();
   const oppdragsLinjeDetajer = apiService.useFetchOppdragslinjeDetaljer(
     oppdragsId,
     linjeId,
   ).data;
 
-  if (!gjelderId) window.location.replace(BASENAME);
+  if (!gjelderId) {
+    navigate(ROOT);
+  }
 
   return (
     <>
@@ -112,5 +116,4 @@ const OppdragsLinjeDetaljerPage = () => {
       </div>
     </>
   );
-};
-export default OppdragsLinjeDetaljerPage;
+}

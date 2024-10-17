@@ -1,20 +1,20 @@
 import { useEffect } from "react";
 import { redirect } from "react-router-dom";
 import { Heading } from "@navikt/ds-react";
-import apiService from "../api/apiService";
-import Breadcrumbs from "../components/common/Breadcrumbs";
-import OppdragTable from "../components/oppdrag/OppdragTable";
-import OppdragsEgenskapPanel from "../components/oppdrag/OppdragsEgenskapPanel";
-import { useAppState } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
-import { isEmpty } from "../util/commonUtil";
-import { BASENAME } from "../util/constant";
+import apiService from "../../api/apiService";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import { useStore } from "../../store/AppState";
+import commonstyles from "../../styles/common-styles.module.css";
+import { isEmpty } from "../../util/commonUtil";
+import { BASENAME } from "../../util/constant";
+import OppdragEgenskapPanel from "./OppdragEgenskapPanel";
 import styles from "./OppdragPage.module.css";
+import OppdragTable from "./OppdragTable";
 
 export default function OppdragPage() {
   const { gjelderId, fagGruppeVisningText, oppdragsListe } =
-    useAppState.getState();
-  const { gjelderNavn, setGjelderNavn } = useAppState((state) => ({
+    useStore.getState();
+  const { gjelderNavn, setGjelderNavn } = useStore((state) => ({
     gjelderNavn: state.gjelderNavn,
     setGjelderNavn: state.setGjelderNavn,
   }));
@@ -44,7 +44,7 @@ export default function OppdragPage() {
           <Breadcrumbs searchLink treffliste />
 
           <div className={styles.oppdrag__top_info}>
-            <OppdragsEgenskapPanel
+            <OppdragEgenskapPanel
               gjelderId={gjelderId}
               navn={gjelderNavn}
               faggruppe={fagGruppeVisningText}

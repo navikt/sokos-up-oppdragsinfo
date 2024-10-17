@@ -1,22 +1,24 @@
 import { Suspense, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Heading, Loader } from "@navikt/ds-react";
-import apiService from "../api/apiService";
-import Breadcrumbs from "../components/common/Breadcrumbs";
-import OppdragsEgenskapPanel from "../components/common/OppdragsEgenskapPanel";
-import EnhetshistorikkModal from "../components/oppdragslinjer/EnhetshistorikkModal";
-import OmposteringModal from "../components/oppdragslinjer/OmposteringModal";
-import OppdragLinjerTable from "../components/oppdragslinjer/OppdragLinjerTable";
-import StatushistorikkModal from "../components/oppdragslinjer/StatushistorikkModal";
-import { useAppState } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
-import { BASENAME } from "../util/constant";
+import apiService from "../../api/apiService";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import OppdragsEgenskapPanel from "../../components/OppdragsEgenskapPanel";
+import { useStore } from "../../store/AppState";
+import commonstyles from "../../styles/common-styles.module.css";
+import { ROOT } from "../../util/constant";
+import EnhetshistorikkModal from "./EnhetshistorikkModal";
+import OmposteringModal from "./OmposteringModal";
+import OppdragLinjerTable from "./OppdragLinjerTable";
 import styles from "./OppdragsLinjePage.module.css";
+import StatushistorikkModal from "./StatushistorikkModal";
 
-const OppdragsLinjePage = () => {
+export default function OppdragsLinjePage() {
   const location = useLocation();
-  const { gjelderId } = useAppState.getState();
-  const { oppdrag, setOppdrag } = useAppState((state) => ({
+  const navigate = useNavigate();
+
+  const { gjelderId } = useStore.getState();
+  const { oppdrag, setOppdrag } = useStore((state) => ({
     oppdrag: state.oppdrag!,
     setOppdrag: state.setOppdrag,
   }));
@@ -26,8 +28,7 @@ const OppdragsLinjePage = () => {
 
   useEffect(() => {
     if (!gjelderId || (!location.state && oppdrag === undefined)) {
-      window.location.replace(BASENAME);
-      return;
+      navigate(ROOT);
     }
 
     if (
@@ -78,5 +79,4 @@ const OppdragsLinjePage = () => {
       )}
     </>
   );
-};
-export default OppdragsLinjePage;
+}

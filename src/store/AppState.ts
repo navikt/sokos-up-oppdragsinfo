@@ -16,8 +16,9 @@ type AppStateActions = {
   setGjelderId: (gjelderId: string) => void;
   setFagGruppeVisningText: (fagGruppeVisningText: string) => void;
   setFagGruppeKode: (fagGruppeKode: string) => void;
-  setOppdrag: (oppdrag: Oppdrag) => void;
   setGjelderNavn: (gjelerNavn: string) => void;
+  setOppdrag: (oppdrag: Oppdrag) => void;
+  setOppdragsListe: (oppdragsListe: OppdragsListe) => void;
 };
 
 const initAppState = {
@@ -25,11 +26,11 @@ const initAppState = {
   fagGruppeVisningText: undefined,
   fagGruppeKode: undefined,
   gjelderNavn: "",
-  oppdragsListe: undefined,
   oppdrag: undefined,
+  oppdragsListe: undefined,
 };
 
-export const useAppState = create<AppState & AppStateActions>()(
+export const useStore = create<AppState & AppStateActions>()(
   devtools(
     persist(
       (set) => ({
@@ -40,7 +41,9 @@ export const useAppState = create<AppState & AppStateActions>()(
           set({ fagGruppeVisningText }),
         setFagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode }),
         setGjelderNavn: (gjelderNavn: string) => set({ gjelderNavn }),
-        setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag: oppdrag }),
+        setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag }),
+        setOppdragsListe: (oppdragsListe: OppdragsListe) =>
+          set({ oppdragsListe }),
       }),
       {
         name: "app-state",

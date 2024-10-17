@@ -2,12 +2,12 @@ import { FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { EraserIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
-import { useAppState } from "../../store/AppState";
-import { BASENAME } from "../../util/constant";
+import { useStore } from "../store/AppState";
+import { BASENAME } from "../util/constant";
 
 export default function ResetButton() {
   const navigate = useNavigate();
-  const { resetState } = useAppState();
+  const { resetState } = useStore();
 
   function handleReset(e: FormEvent) {
     e.preventDefault();

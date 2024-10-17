@@ -11,13 +11,13 @@ import {
   TextField,
   UNSAFE_Combobox,
 } from "@navikt/ds-react";
-import apiService from "../api/apiService";
-import SokHelp from "../components/sok/SokHelp";
-import { useAppState } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
-import { FagGruppeVisning } from "../types/FagGruppe";
-import { SokParameter, SokParameterSchema } from "../types/SokParameter";
-import { isEmpty } from "../util/commonUtil";
+import apiService from "../../api/apiService";
+import { useStore } from "../../store/AppState";
+import commonstyles from "../../styles/common-styles.module.css";
+import { FagGruppeVisning } from "../../types/FagGruppe";
+import { SokParameter, SokParameterSchema } from "../../types/SokParameter";
+import { isEmpty } from "../../util/commonUtil";
+import SokHelp from "./SokHelp";
 import styles from "./SokPage.module.css";
 
 export default function SokPage() {
@@ -25,7 +25,7 @@ export default function SokPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isSubmit, setIsSubmit] = useState<boolean>(false);
   const { gjelderId, fagGruppeVisningText, resetState, setGjelderNavn } =
-    useAppState.getState();
+    useStore();
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
   const [sokParameter, setSokParameter] = useState<SokParameter>({
     gjelderId: gjelderId,
@@ -69,7 +69,7 @@ export default function SokPage() {
       (faggruppe) => faggruppe.comboboxText === sokParameter.fagGruppeKode,
     )?.type;
 
-    useAppState.setState({
+    useStore.setState({
       gjelderId: gjelderId,
       fagGruppeVisningText: sokParameter.fagGruppeKode,
       fagGruppeKode: fagGruppeKode,
@@ -80,7 +80,7 @@ export default function SokPage() {
       .then((response) => {
         setIsLoading(false);
         if (!isEmpty(response)) {
-          useAppState.setState({ oppdragsListe: response });
+          useStore.setState({ oppdragsListe: response });
           navigate("/oppdrag");
         }
       })

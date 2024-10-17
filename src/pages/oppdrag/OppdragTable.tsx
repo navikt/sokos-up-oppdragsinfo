@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Table } from "@navikt/ds-react";
+import RowsPerPageSelector from "../../components/RowsPerPageSelector";
+import styles from "../../components/sortable-table.module.css";
+import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { Oppdrag, OppdragsListe } from "../../types/OppdragsListe";
 import {
@@ -10,8 +13,6 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
-import RowsPerPageSelector from "../common/RowsPerPageSelector";
-import styles from "../common/sortable-table.module.css";
 
 export default function OppdragTable({
   oppdragsListe,
@@ -21,6 +22,7 @@ export default function OppdragTable({
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const { setOppdrag } = useStore();
 
   const sortedData: OppdragsListe = oppdragsListe
     .slice()
@@ -78,7 +80,10 @@ export default function OppdragTable({
             {pageData.map((oppdrag) => (
               <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                 <Table.DataCell>
-                  <Link to={`/${oppdrag.oppdragsId}`} state={oppdrag}>
+                  <Link
+                    to={`/${oppdrag.oppdragsId}`}
+                    onClick={() => setOppdrag(oppdrag)}
+                  >
                     {oppdrag.fagSystemId}
                   </Link>
                 </Table.DataCell>

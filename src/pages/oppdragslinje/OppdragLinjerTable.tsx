@@ -1,6 +1,8 @@
 import { Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { Loader, Pagination, Table } from "@navikt/ds-react";
+import RowsPerPageSelector from "../../components/RowsPerPageSelector";
+import styles from "../../components/sortable-table.module.css";
 import commonstyles from "../../styles/common-styles.module.css";
 import { OppdragsLinje, OppdragsLinjer } from "../../types/Oppdragslinje";
 import {
@@ -12,8 +14,6 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
-import RowsPerPageSelector from "../common/RowsPerPageSelector";
-import styles from "../common/sortable-table.module.css";
 import AttestantModal from "./AttestantModal";
 import StatusModal from "./StatusModal";
 
