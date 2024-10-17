@@ -1,8 +1,8 @@
-import apiService from "../../api/apiService";
-import styles from "../../pages/OppdragsLinjePage.module.css";
-import { useAppState } from "../../store/AppState";
-import { Oppdrag } from "../../types/OppdragsListe";
-import EnhetLabel from "../oppdragslinjer/EnhetLabel";
+import apiService from "../api/apiService";
+import EnhetLabel from "../pages/oppdragslinje/EnhetLabel";
+import styles from "../pages/oppdragslinje/OppdragsLinjePage.module.css";
+import { useStore } from "../store/AppState";
+import { Oppdrag } from "../types/OppdragsListe";
 import LabelText from "./LabelText";
 
 interface OppdragsEgenskapPanelProps {
@@ -15,7 +15,7 @@ export default function OppdragsEgenskapPanel(
   const oppdragsEnhet = apiService.useFetchHentOppdragsEnheter(
     props.oppdrag.oppdragsId,
   ).data;
-  const { gjelderId, gjelderNavn } = useAppState.getState();
+  const { gjelderId, gjelderNavn } = useStore.getState();
 
   return (
     <div className={styles.oppdragslinjer__columns}>

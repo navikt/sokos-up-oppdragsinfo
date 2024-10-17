@@ -1,5 +1,5 @@
 import { Loader } from "@navikt/ds-react";
-import commonstyles from "../../styles/common-styles.module.css";
+import commonstyles from "../styles/common-styles.module.css";
 
 interface ContentLoaderProps {
   width?: string;

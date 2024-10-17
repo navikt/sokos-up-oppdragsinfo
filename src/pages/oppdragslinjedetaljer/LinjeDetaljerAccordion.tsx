@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { Accordion } from "@navikt/ds-react";
 
 interface LinjeDetaljerAccordionProps {
@@ -8,7 +8,7 @@ interface LinjeDetaljerAccordionProps {
 }
 
 export default function LinjeDetaljerAccordion(
-  props: PropsWithChildren<LinjeDetaljerAccordionProps>,
+  props: LinjeDetaljerAccordionProps,
 ) {
   return (
     <Accordion.Item>
