@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ROOT } from "../util/constant";
 import styles from "./Breadcrumbs.module.css";
 import NullstillButton from "./ResetButton";
 
@@ -18,7 +19,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
         <div className={styles.breadcrumbs__contents}>
           {props.searchLink && (
             <div className={styles.breadcrumbs__crumb}>
-              <Link to={"/"}>Gjeldende Søk</Link>
+              <Link to={ROOT}>Gjeldende Søk</Link>
             </div>
           )}
           {props.treffliste && (

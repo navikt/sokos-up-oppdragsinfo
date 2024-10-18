@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Table } from "@navikt/ds-react";
+import RowsPerPageSelector from "../../components/RowsPerPageSelector";
+import styles from "../../components/sortable-table.module.css";
+import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { Oppdrag, OppdragsListe } from "../../types/OppdragsListe";
 import {
@@ -10,31 +13,30 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
-import RowsPerPageSelector from "../common/RowsPerPageSelector";
-import styles from "../common/sortable-table.module.css";
 
-export default function OppdragTable({
-  oppdragsListe,
-}: {
+type OppdragTableProps = {
   oppdragsListe: OppdragsListe;
-}) {
+};
+
+export default function OppdragTable(props: OppdragTableProps) {
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const { setOppdrag } = useStore();
 
-  const sortedData: OppdragsListe = oppdragsListe
+  const sortedData: OppdragsListe = props.oppdragsListe
     .slice()
     .sort(applySortDirection(sort));
   const pageData = sortedData.slice(
     (page - 1) * rowsPerPage,
     page * rowsPerPage,
   );
-  const pagecount = Math.ceil(oppdragsListe.length / rowsPerPage);
+  const pagecount = Math.ceil(props.oppdragsListe.length / rowsPerPage);
 
-  const antall = oppdragsListe?.length ?? 0;
+  const antall = props.oppdragsListe.length ?? 0;
 
   function oppdragSort(sortKey?: string) {
-    if (hasKey(firstOf(oppdragsListe), sortKey))
+    if (hasKey(firstOf(props.oppdragsListe), sortKey))
       handleSort<Oppdrag>(sortKey, setSort, sort);
   }
 
@@ -78,7 +80,10 @@ export default function OppdragTable({
             {pageData.map((oppdrag) => (
               <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                 <Table.DataCell>
-                  <Link to={`/${oppdrag.oppdragsId}`} state={oppdrag}>
+                  <Link
+                    to={`/${oppdrag.oppdragsId}`}
+                    onClick={() => setOppdrag(oppdrag)}
+                  >
                     {oppdrag.fagSystemId}
                   </Link>
                 </Table.DataCell>

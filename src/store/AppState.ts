@@ -9,6 +9,7 @@ type AppState = {
   gjelderNavn: string;
   oppdragsListe?: OppdragsListe;
   oppdrag?: Oppdrag;
+  linjeId: string;
 };
 
 type AppStateActions = {
@@ -16,8 +17,10 @@ type AppStateActions = {
   setGjelderId: (gjelderId: string) => void;
   setFagGruppeVisningText: (fagGruppeVisningText: string) => void;
   setFagGruppeKode: (fagGruppeKode: string) => void;
-  setOppdrag: (oppdrag: Oppdrag) => void;
   setGjelderNavn: (gjelerNavn: string) => void;
+  setOppdrag: (oppdrag: Oppdrag) => void;
+  setOppdragsListe: (oppdragsListe: OppdragsListe) => void;
+  setLinjeId: (linjeId: string) => void;
 };
 
 const initAppState = {
@@ -25,11 +28,12 @@ const initAppState = {
   fagGruppeVisningText: undefined,
   fagGruppeKode: undefined,
   gjelderNavn: "",
-  oppdragsListe: undefined,
   oppdrag: undefined,
+  oppdragsListe: undefined,
+  linjeId: "",
 };
 
-export const useAppState = create<AppState & AppStateActions>()(
+export const useStore = create<AppState & AppStateActions>()(
   devtools(
     persist(
       (set) => ({
@@ -40,7 +44,10 @@ export const useAppState = create<AppState & AppStateActions>()(
           set({ fagGruppeVisningText }),
         setFagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode }),
         setGjelderNavn: (gjelderNavn: string) => set({ gjelderNavn }),
-        setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag: oppdrag }),
+        setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag }),
+        setOppdragsListe: (oppdragsListe: OppdragsListe) =>
+          set({ oppdragsListe }),
+        setLinjeId: (linjeId: string) => set({ linjeId }),
       }),
       {
         name: "app-state",

@@ -27,19 +27,20 @@ export default defineConfig(({ mode }) => ({
       generateScopedName: "[name]__[local]___[hash:base64:5]",
     },
   },
-  server:
-    mode == "local-dev"
-      ? {
-          proxy: {
-            "/oppdrag-api/api/v1": {
-              target: "http://localhost:8080",
-              rewrite: (path: string) => path.replace(/^\/oppdrag-api/, ""),
-              changeOrigin: true,
-              secure: false,
-            },
+  server: /^local-dev.*$/.test(mode)
+    ? {
+        proxy: {
+          "/oppdrag-api/api/v1": {
+            target: /^.*-q1$/.test(mode)
+              ? "https://sokos-oppdrag.intern.dev.nav.no"
+              : "http://localhost:8080",
+            rewrite: (path: string) => path.replace(/^\/oppdrag-api/, ""),
+            changeOrigin: true,
+            secure: /^.*-q1$/.test(mode),
           },
-        }
-      : {},
+        },
+      }
+    : {},
   plugins: [
     react(),
     cssInjectedByJsPlugin(),
