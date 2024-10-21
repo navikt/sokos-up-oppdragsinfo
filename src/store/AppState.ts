@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
-import { Oppdrag, OppdragsListe } from "../types/OppdragsListe";
+import { Oppdrag, OppdragsListe } from "../types/Oppdrag";
 
 type AppState = {
   gjelderId: string;

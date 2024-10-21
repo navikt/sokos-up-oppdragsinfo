@@ -6,18 +6,18 @@
   @apply text-[--a-text-action-on-action-subtle];
 }
 
-.breadcrumbs__contents {
+.breadcrumbs-contents {
   @apply flex min-w-56 flex-row;
 }
 
-.breadcrumbs__left {
+.breadcrumbs-left {
   @apply absolute left-5 top-5;
 }
 
-.breadcrumbs__right {
+.breadcrumbs-right {
   @apply absolute right-5 top-5;
 }
 
-.breadcrumbs__crumb {
+.breadcrumbs-crumb {
   @apply ml-1;
 }

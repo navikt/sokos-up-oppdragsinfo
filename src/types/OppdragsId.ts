@@ -1,7 +1,4 @@
 import { z } from "zod";
+import { OppdragsIdSchema } from "./schema/OppdragsIdSchema";
 
-const _OppdragsIdSchema = z.object({
-  oppdragsId: z.string(),
-});
-
-export type OppdragsId = z.infer<typeof _OppdragsIdSchema>;
+export type OppdragsId = z.infer<typeof OppdragsIdSchema>;

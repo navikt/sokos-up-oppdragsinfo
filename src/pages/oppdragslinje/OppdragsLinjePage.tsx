@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Heading, Loader } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import OppdragsEgenskapPanel from "../../components/OppdragsEgenskapPanel";
+import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { ROOT } from "../../util/constant";
@@ -36,17 +36,17 @@ export default function OppdragsLinjePage() {
         </Heading>
       </div>
       {oppdragsLinjer && (
-        <div className={styles.oppdragslinjer}>
-          <div className={styles.oppdragslinjer__top}>
+        <div className={styles["oppdragslinjer"]}>
+          <div className={styles["oppdragslinjer-top"]}>
             <Breadcrumbs searchLink trefflistelink oppdrag />
-            <div className={styles.oppdragslinjer__toppinfo}>
-              <div className={styles.oppdragslinjer__column}>
+            <div className={styles["oppdragslinjer-toppinfo"]}>
+              <div className={styles["oppdragslinjer-column"]}>
                 {gjelderId && oppdrag && (
-                  <OppdragsEgenskapPanel oppdrag={oppdrag} />
+                  <OppdragEgenskapPanel oppdrag={oppdrag} />
                 )}
               </div>
             </div>
-            <div className={commonstyles.knapperad__left}>
+            <div className={commonstyles["knapperad-left"]}>
               <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
                 <OmposteringModal oppdragsId={oppdrag!.oppdragsId} />
               </Suspense>

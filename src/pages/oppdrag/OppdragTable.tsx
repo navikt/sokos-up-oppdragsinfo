@@ -2,10 +2,9 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
-import styles from "../../components/sortable-table.module.css";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
-import { Oppdrag, OppdragsListe } from "../../types/OppdragsListe";
+import { Oppdrag, OppdragsListe } from "../../types/Oppdrag";
 import {
   SortState,
   applySortDirection,
@@ -42,7 +41,7 @@ export default function OppdragTable(props: OppdragTableProps) {
 
   return (
     <>
-      <div className={styles["sortable-table__topinfo"]}>
+      <div className={commonstyles["sortable-table-topinfo"]}>
         <div className={commonstyles.nowrap}>
           <p>
             {`${antall} treff`}
@@ -55,7 +54,7 @@ export default function OppdragTable(props: OppdragTableProps) {
           setRowsPerPage={setRowsPerPage}
         />
       </div>
-      <div className={styles["sortable-table"]}>
+      <div className={commonstyles["sortable-table"]}>
         <Table zebraStripes sort={sort} onSortChange={oppdragSort}>
           <Table.Header>
             <Table.Row>
@@ -97,7 +96,7 @@ export default function OppdragTable(props: OppdragTableProps) {
         </Table>
       </div>
       {pagecount > 1 && (
-        <div className={styles["sortable-table__pagination"]}>
+        <div className={commonstyles["sortable-table-pagination"]}>
           <Pagination
             page={page}
             onPageChange={setPage}

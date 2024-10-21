@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { GjelderIdSchema } from "./GjelderId";
+import { GjelderIdSchema } from "./schema/GjelderIdSchema";
 
 export const SokParameterSchema = z.object({
   gjelderId: GjelderIdSchema,

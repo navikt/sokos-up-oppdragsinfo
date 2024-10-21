@@ -1,12 +1,6 @@
 import { z } from "zod";
+import { TekstSchema, TeksterSchema } from "./schema/TekstSchema";
 
-const _TekstSchema = z.object({
-  linjeId: z.string(),
-  tekst: z.string(),
-});
+export type Tekst = z.infer<typeof TekstSchema>;
 
-const _TeksterSchema = z.array(_TekstSchema);
-
-export type Tekst = z.infer<typeof _TekstSchema>;
-
-export type Tekster = z.infer<typeof _TeksterSchema>;
+export type Tekster = z.infer<typeof TeksterSchema>;

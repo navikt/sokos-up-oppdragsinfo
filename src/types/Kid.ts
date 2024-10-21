@@ -1,15 +1,6 @@
 import { z } from "zod";
+import { KidListeSchema, KidSchema } from "./schema/KidSchema";
 
-const _KidSchema = z.object({
-  linjeId: z.string(),
-  kid: z.string(),
-  datoFom: z.string(),
-  tidspktReg: z.string(),
-  brukerid: z.string(),
-});
+export type Kid = z.infer<typeof KidSchema>;
 
-const _KidListeSchema = z.array(_KidSchema);
-
-export type Kid = z.infer<typeof _KidSchema>;
-
-export type KidListe = z.infer<typeof _KidListeSchema>;
+export type KidListe = z.infer<typeof KidListeSchema>;

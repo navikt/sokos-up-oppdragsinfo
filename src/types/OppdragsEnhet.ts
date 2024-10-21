@@ -1,9 +1,4 @@
 import { z } from "zod";
-import { EnhetsTypeSchema } from "./EnhetsType";
+import { OppdragsEnhetSchema } from "./schema/OppdragsEnhetSchema";
 
-const _OppdragsEnhetSchema = z.object({
-  enhet: EnhetsTypeSchema,
-  behandlendeEnhet: EnhetsTypeSchema,
-});
-
-export type OppdragsEnhet = z.infer<typeof _OppdragsEnhetSchema>;
+export type OppdragsEnhet = z.infer<typeof OppdragsEnhetSchema>;

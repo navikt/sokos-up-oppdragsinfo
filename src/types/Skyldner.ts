@@ -1,15 +1,6 @@
 import { z } from "zod";
+import { SkyldnerSchema, SkyldnereSchema } from "./schema/SkyldnerSchema";
 
-const _SkyldnerSchema = z.object({
-  linjeId: z.string(),
-  skyldnerId: z.string(),
-  datoFom: z.string(),
-  tidspktReg: z.string(),
-  brukerid: z.string(),
-});
+export type Skyldner = z.infer<typeof SkyldnerSchema>;
 
-const _SkyldnereSchema = z.array(_SkyldnerSchema);
-
-export type Skyldner = z.infer<typeof _SkyldnerSchema>;
-
-export type Skyldnere = z.infer<typeof _SkyldnereSchema>;
+export type Skyldnere = z.infer<typeof SkyldnereSchema>;

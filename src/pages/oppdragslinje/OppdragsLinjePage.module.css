@@ -2,18 +2,18 @@
   @apply mx-auto my-3 mt-6 space-y-6;
 }
 
-.oppdragslinjer__top {
+.oppdragslinjer-top {
   @apply mx-auto min-w-1024 max-w-[1440px] space-y-5;
 }
 
-.oppdragslinjer__toppinfo {
+.oppdragslinjer-toppinfo {
   @apply relative min-w-1024 bg-[--a-surface-default] p-6;
 }
 
-.oppdragslinjer__columns {
+.oppdragslinjer-panel {
   @apply flex w-11/12 flex-row justify-between space-x-16;
 }
 
-.oppdragslinjer__column {
+.oppdragslinjer-column {
   @apply flex flex-col space-y-3;
 }

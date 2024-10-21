@@ -9,9 +9,9 @@ import { Kravhavere } from "../types/Kravhaver";
 import { Linjeenheter } from "../types/LinjeEnhet";
 import { Maksdatoer } from "../types/Maksdato";
 import { Omposteringer } from "../types/Ompostering";
+import { OppdragsListe } from "../types/Oppdrag";
 import { OppdragsEnhet } from "../types/OppdragsEnhet";
-import { OppdragsLinjeDetaljer } from "../types/OppdragsLinjeDetaljer";
-import { OppdragsListe } from "../types/OppdragsListe";
+import { OppdragsLinjeDetalje } from "../types/OppdragsLinjeDetalje";
 import { OppdragsStatuser } from "../types/OppdragsStatus";
 import { OppdragsLinjer } from "../types/Oppdragslinje";
 import { Ovrige } from "../types/Ovrig";
@@ -118,7 +118,7 @@ function useFetchOppdragslinjeDetaljer(
   oppdragsId: string,
   oppdragsLinjeId: string,
 ) {
-  return useSWRImmutable<OppdragsLinjeDetaljer>(
+  return useSWRImmutable<OppdragsLinjeDetalje>(
     oppdragsId ? `/${oppdragsId}/${oppdragsLinjeId}/detaljer` : null,
     swrConfig,
   );

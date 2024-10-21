@@ -1,8 +1,4 @@
 import { z } from "zod";
+import { OppdragsIdentSchema } from "./schema/OppdragsIdentSchema";
 
-const _OppdragsIdentSchema = z.object({
-  oppdragsId: z.string(),
-  linjeId: z.string(),
-});
-
-export type OppdragsIdent = z.infer<typeof _OppdragsIdentSchema>;
+export type OppdragsIdent = z.infer<typeof OppdragsIdentSchema>;

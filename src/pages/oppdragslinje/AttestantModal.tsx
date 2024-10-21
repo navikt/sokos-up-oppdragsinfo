@@ -35,16 +35,12 @@ export default function AttestantModal(props: AttestantModalProps) {
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell
-                  key={"attestantId"}
-                  scope="col"
-                  children={"Attestant-ID"}
-                />
-                <Table.HeaderCell
-                  key={"ugyldigFom"}
-                  scope="col"
-                  children={"Ugyldig Fom"}
-                />
+                <Table.HeaderCell key={"attestantId"} scope="col">
+                  Attestant-ID
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"ugyldigFom"} scope="col">
+                  Ugyldig Fom
+                </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
