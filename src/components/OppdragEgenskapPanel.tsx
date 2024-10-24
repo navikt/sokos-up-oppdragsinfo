@@ -31,7 +31,7 @@ export default function OppdragEgenskapPanel(
         <LabelText label={"Navn"} text={gjelderNavn} />
         <LabelText label={"Oppdrags ID"} text={props.oppdrag.oppdragsId} />
         <LabelText label={"Beregnes nå"} text={props.oppdrag.kjorIdag} />
-        {oppdragsEnhet && typeof oppdragsEnhet.enhet === "object" && (
+        {oppdragsEnhet && oppdragsEnhet.enhet && (
           <EnhetLabel enhet={oppdragsEnhet.enhet} />
         )}
       </div>
