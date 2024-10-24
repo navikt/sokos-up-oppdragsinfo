@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { TekstSchema, TeksterSchema } from "./schema/TekstSchema";
+import { TekstListSchema, TekstSchema } from "./schema/TekstSchema";
 
 export type Tekst = z.infer<typeof TekstSchema>;
 
-export type Tekster = z.infer<typeof TeksterSchema>;
+export type TekstList = z.infer<typeof TekstListSchema>;

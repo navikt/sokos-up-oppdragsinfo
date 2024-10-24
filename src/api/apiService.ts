@@ -1,27 +1,32 @@
 import useSWRImmutable from "swr/immutable";
-import { Attestanter } from "../types/Attestant";
+import { AttestantList } from "../types/Attestant";
 import { Enhetshistorikk } from "../types/Enhetshistorikk";
-import { FagGrupper } from "../types/FagGruppe";
+import { FagGruppeList } from "../types/FagGruppe";
 import { GjelderNavn } from "../types/GjelderNavn";
-import { Grader } from "../types/Grad";
-import { KidListe } from "../types/Kid";
-import { Kravhavere } from "../types/Kravhaver";
-import { Linjeenheter } from "../types/LinjeEnhet";
-import { Maksdatoer } from "../types/Maksdato";
-import { Omposteringer } from "../types/Ompostering";
-import { OppdragsListe } from "../types/Oppdrag";
+import { GradList } from "../types/Grad";
+import { KidList } from "../types/Kid";
+import { KravhaverList } from "../types/Kravhaver";
+import { LinjeenhetList } from "../types/LinjeEnhet";
+import { MaksdatoList } from "../types/Maksdato";
+import { OmposteringList } from "../types/Ompostering";
+import { OppdragsList } from "../types/Oppdrag";
 import { OppdragsEnhet } from "../types/OppdragsEnhet";
-import { OppdragsLinjeDetalje } from "../types/OppdragsLinjeDetalje";
-import { OppdragsStatuser } from "../types/OppdragsStatus";
-import { OppdragsLinjer } from "../types/Oppdragslinje";
-import { Ovrige } from "../types/Ovrig";
-import { Skyldnere } from "../types/Skyldner";
-import { Statuser } from "../types/Status";
-import { Tekster } from "../types/Tekst";
-import { Valutaer } from "../types/Valuta";
-import { BASE_URI, axiosFetcher, axiosPostFetcher } from "./apiConfig";
+import { OppdragsLinjeDetaljer } from "../types/OppdragsLinjeDetaljer";
+import { OppdragsStatusList } from "../types/OppdragsStatus";
+import { OppdragsLinjeList } from "../types/Oppdragslinje";
+import { OvrigList } from "../types/Ovrig";
+import { SkyldnerList } from "../types/Skyldner";
+import { StatusList } from "../types/Status";
+import { TekstList } from "../types/Tekst";
+import { ValutaList } from "../types/Valuta";
+import { axiosFetcher, axiosPostFetcher } from "./apiConfig";
 import { GjelderIdRequest } from "./models/GjelderIdRequest";
 import { OppdragsRequest } from "./models/OppdragsRequest";
+
+export const BASE_URI = {
+  OPPDRAGSINFO: "/oppdrag-api/api/v1/oppdragsinfo",
+  INTEGRATION: "/oppdrag-api/api/v1/integration",
+};
 
 const swrConfig = {
   fetcher: <T>(url: string) => axiosFetcher<T>(BASE_URI.OPPDRAGSINFO, url),
@@ -31,7 +36,7 @@ const swrConfig = {
 };
 
 async function useHentOppdrag(request: OppdragsRequest) {
-  return await axiosPostFetcher<OppdragsRequest, OppdragsListe>(
+  return await axiosPostFetcher<OppdragsRequest, OppdragsList>(
     BASE_URI.OPPDRAGSINFO,
     "/sok",
     request,
@@ -47,7 +52,7 @@ async function useHentNavn(request: GjelderIdRequest) {
 }
 
 function useFetchHentFaggrupper() {
-  return useSWRImmutable<FagGrupper>(`/faggrupper`, {
+  return useSWRImmutable<FagGruppeList>(`/faggrupper`, {
     ...swrConfig,
     fallbackData: [],
     revalidateOnMount: true,
@@ -55,7 +60,7 @@ function useFetchHentFaggrupper() {
 }
 
 function useFetchHentOppdragsLinjer(oppdragsId?: string) {
-  return useSWRImmutable<OppdragsLinjer>(
+  return useSWRImmutable<OppdragsLinjeList>(
     oppdragsId ? `/${oppdragsId}/oppdragslinjer` : null,
     swrConfig,
   );
@@ -73,7 +78,7 @@ function useFetchHentAttestanter(
   linjeId: string,
   call: boolean,
 ) {
-  return useSWRImmutable<Attestanter>(
+  return useSWRImmutable<AttestantList>(
     call ? `/${oppdragsId}/${linjeId}/attestanter` : null,
     swrConfig,
   );
@@ -84,7 +89,7 @@ function useFetchHentOppdragsLinjeStatuser(
   oppdragsLinjeId: string,
   call: boolean,
 ) {
-  return useSWRImmutable<Statuser>(
+  return useSWRImmutable<StatusList>(
     call ? `/${oppdragsId}/${oppdragsLinjeId}/statuser` : null,
     swrConfig,
   );
@@ -94,7 +99,7 @@ function useFetchHentOppdragsStatushistorikk(
   oppdragsId: string,
   call: boolean,
 ) {
-  return useSWRImmutable<OppdragsStatuser>(
+  return useSWRImmutable<OppdragsStatusList>(
     call ? `/${oppdragsId}/statushistorikk` : null,
     swrConfig,
   );
@@ -108,7 +113,7 @@ function useFetchHentOppdragsEnhethistorikk(oppdragsId: string, call: boolean) {
 }
 
 function useFetchHentOppdragsOmposteringer(oppdragsId: string, call: boolean) {
-  return useSWRImmutable<Omposteringer>(
+  return useSWRImmutable<OmposteringList>(
     call ? `/${oppdragsId}/omposteringer` : null,
     swrConfig,
   );
@@ -118,64 +123,70 @@ function useFetchOppdragslinjeDetaljer(
   oppdragsId: string,
   oppdragsLinjeId: string,
 ) {
-  return useSWRImmutable<OppdragsLinjeDetalje>(
+  return useSWRImmutable<OppdragsLinjeDetaljer>(
     oppdragsId ? `/${oppdragsId}/${oppdragsLinjeId}/detaljer` : null,
     swrConfig,
   );
 }
 
 function useFetchKravhaver(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Kravhavere>(
+  return useSWRImmutable<KravhaverList>(
     `/${oppdragsId}/${linjeId}/kravhavere`,
     swrConfig,
   );
 }
 
 function useFetchOvrig(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Ovrige>(`/${oppdragsId}/${linjeId}/ovrig`, swrConfig);
+  return useSWRImmutable<OvrigList>(
+    `/${oppdragsId}/${linjeId}/ovrig`,
+    swrConfig,
+  );
 }
 
 function useFetchValuta(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Valutaer>(
+  return useSWRImmutable<ValutaList>(
     `/${oppdragsId}/${linjeId}/valutaer`,
     swrConfig,
   );
 }
 
 function useFetchKid(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<KidListe>(`/${oppdragsId}/${linjeId}/kid`, swrConfig);
+  return useSWRImmutable<KidList>(`/${oppdragsId}/${linjeId}/kid`, swrConfig);
 }
 
 function useFetchTekster(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Tekster>(
+  return useSWRImmutable<TekstList>(
     `/${oppdragsId}/${linjeId}/tekster`,
     swrConfig,
   );
 }
 
 function useFetchSkyldnere(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Skyldnere>(
+  return useSWRImmutable<SkyldnerList>(
     `/${oppdragsId}/${linjeId}/skyldnere`,
     swrConfig,
   );
 }
 
 function useFetchMaksdato(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Maksdatoer>(
+  return useSWRImmutable<MaksdatoList>(
     `/${oppdragsId}/${linjeId}/maksdatoer`,
     swrConfig,
   );
 }
 
 function useFetchLinjeEnheter(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Linjeenheter>(
+  return useSWRImmutable<LinjeenhetList>(
     `/${oppdragsId}/${linjeId}/enheter`,
     swrConfig,
   );
 }
 
 function useFetchGrad(oppdragsId: string, linjeId: string) {
-  return useSWRImmutable<Grader>(`/${oppdragsId}/${linjeId}/grader`, swrConfig);
+  return useSWRImmutable<GradList>(
+    `/${oppdragsId}/${linjeId}/grader`,
+    swrConfig,
+  );
 }
 
 const apiService = {

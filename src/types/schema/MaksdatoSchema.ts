@@ -8,4 +8,4 @@ export const MaksdatoSchema = z.object({
   brukerid: z.string(),
 });
 
-export const MaksdatoerSchema = z.array(MaksdatoSchema);
+export const MaksdatoListSchema = z.array(MaksdatoSchema);

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { GradSchema, GraderSchema } from "./schema/GradSchema";
+import { GradListSchema, GradSchema } from "./schema/GradSchema";
 
 export type Grad = z.infer<typeof GradSchema>;
-export type Grader = z.infer<typeof GraderSchema>;
+export type GradList = z.infer<typeof GradListSchema>;

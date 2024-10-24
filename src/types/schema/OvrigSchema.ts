@@ -7,4 +7,4 @@ export const OvrigSchema = z.object({
   soknadsType: z.string(),
 });
 
-export const OvrigeSchema = z.array(OvrigSchema);
+export const OvrigListSchema = z.array(OvrigSchema);

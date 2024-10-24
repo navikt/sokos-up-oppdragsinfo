@@ -8,4 +8,4 @@ export const SkyldnerSchema = z.object({
   brukerid: z.string(),
 });
 
-export const SkyldnereSchema = z.array(SkyldnerSchema);
+export const SkyldnerListSchema = z.array(SkyldnerSchema);

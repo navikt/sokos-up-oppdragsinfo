@@ -1,4 +1,4 @@
 import { z } from "zod";
-import { EnhetshistorikkSchema } from "./schema/EnhetshistorikkSchema";
+import { EnhetListSchema } from "./schema/EnhetsTypeSchema";
 
-export type Enhetshistorikk = z.infer<typeof EnhetshistorikkSchema>;
+export type Enhetshistorikk = z.infer<typeof EnhetListSchema>;

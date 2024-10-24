@@ -6,4 +6,4 @@ export const OppdragsStatusSchema = z.object({
   brukerid: z.string(),
 });
 
-export const OppdragsStatuserSchema = z.array(OppdragsStatusSchema);
+export const OppdragsStatusListSchema = z.array(OppdragsStatusSchema);

@@ -6,4 +6,4 @@ export const AttestantSchema = z.object({
   ugyldigFom: DateSchema,
 });
 
-export const AttestanterSchema = z.array(AttestantSchema);
+export const AttestantListSchema = z.array(AttestantSchema);

@@ -8,4 +8,4 @@ export const KravhaverSchema = z.object({
   brukerid: z.string(),
 });
 
-export const KravhavereSchema = z.array(KravhaverSchema);
+export const KravhaverListSchema = z.array(KravhaverSchema);

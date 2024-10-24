@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { ValutaSchema, ValutaerSchema } from "./schema/ValutaSchema";
+import { ValutaListSchema, ValutaSchema } from "./schema/ValutaSchema";
 
 export type Valuta = z.infer<typeof ValutaSchema>;
 
-export type Valutaer = z.infer<typeof ValutaerSchema>;
+export type ValutaList = z.infer<typeof ValutaListSchema>;

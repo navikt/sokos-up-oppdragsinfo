@@ -8,4 +8,4 @@ export const GradSchema = z.object({
   brukerid: z.string(),
 });
 
-export const GraderSchema = z.array(GradSchema);
+export const GradListSchema = z.array(GradSchema);

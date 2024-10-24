@@ -4,7 +4,7 @@ import { Loader, Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
-import { OppdragsLinje, OppdragsLinjer } from "../../types/Oppdragslinje";
+import { OppdragsLinje, OppdragsLinjeList } from "../../types/Oppdragslinje";
 import {
   SortState,
   applySortDirection,
@@ -19,7 +19,7 @@ import StatusModal from "./StatusModal";
 
 interface OppdragLinjeTableProps {
   oppdragsId: string;
-  oppdragsLinjer: OppdragsLinjer;
+  oppdragsLinjer: OppdragsLinjeList;
 }
 
 export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {

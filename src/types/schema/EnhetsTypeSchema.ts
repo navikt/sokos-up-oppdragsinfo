@@ -8,3 +8,5 @@ export const EnhetSchema = z.object({
   datoFom: DateSchema,
   enhet: z.string().refine((enhetsnummer) => /^\d{4}$/.test(enhetsnummer)),
 });
+
+export const EnhetListSchema = z.array(EnhetSchema);

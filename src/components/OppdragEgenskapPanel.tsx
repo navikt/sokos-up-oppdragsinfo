@@ -23,10 +23,9 @@ export default function OppdragEgenskapPanel(
         <LabelText label={"Gjelder ID"} text={gjelderId} />
         <LabelText label={"Fagsystem ID"} text={props.oppdrag.fagSystemId} />
         <LabelText label={"Status"} text={props.oppdrag.kodeStatus} />
-        {oppdragsEnhet &&
-          typeof oppdragsEnhet.behandlendeEnhet === "object" && (
-            <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
-          )}
+        {oppdragsEnhet && oppdragsEnhet.behandlendeEnhet && (
+          <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
+        )}
       </div>
       <div className={styles["oppdragslinjer-column"]}>
         <LabelText label={"Navn"} text={gjelderNavn} />

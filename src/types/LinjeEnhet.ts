@@ -1,9 +1,9 @@
 import { z } from "zod";
 import {
+  LinjeEnhetListSchema,
   LinjeEnhetSchema,
-  LinjeEnheterSchema,
 } from "./schema/LinjeEnhetSchema";
 
 export type LinjeEnhet = z.infer<typeof LinjeEnhetSchema>;
 
-export type Linjeenheter = z.infer<typeof LinjeEnheterSchema>;
+export type LinjeenhetList = z.infer<typeof LinjeEnhetListSchema>;

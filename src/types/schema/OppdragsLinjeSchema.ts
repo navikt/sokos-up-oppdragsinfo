@@ -18,4 +18,4 @@ export const OppdragsLinjeSchema = z.object({
   tidspktReg: z.string(),
 });
 
-export const OppdragsLinjerSchema = z.array(OppdragsLinjeSchema);
+export const OppdragsLinjeListSchema = z.array(OppdragsLinjeSchema);

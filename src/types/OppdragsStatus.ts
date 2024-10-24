@@ -1,9 +1,9 @@
 import { z } from "zod";
 import {
+  OppdragsStatusListSchema,
   OppdragsStatusSchema,
-  OppdragsStatuserSchema,
 } from "./schema/OppdragsStatusSchema";
 
 export type OppdragsStatus = z.infer<typeof OppdragsStatusSchema>;
 
-export type OppdragsStatuser = z.infer<typeof OppdragsStatuserSchema>;
+export type OppdragsStatusList = z.infer<typeof OppdragsStatusListSchema>;

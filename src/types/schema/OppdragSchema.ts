@@ -10,4 +10,4 @@ export const OppdragSchema = z.object({
   kodeStatus: z.string(),
 });
 
-export const OppdragsListeSchema = z.array(OppdragSchema);
+export const OppdragsListSchema = z.array(OppdragSchema);

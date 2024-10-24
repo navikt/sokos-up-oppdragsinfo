@@ -1,15 +1,15 @@
 import LabelText from "../../components/LabelText";
 import commonstyles from "../../styles/common-styles.module.css";
-import { EnhetsType, EnhetsTypeEnum } from "../../types/EnhetsType";
+import { Enhet, EnhetsType } from "../../types/EnhetsType";
 import { formatDate } from "../../util/commonUtil";
 
-const enhetstypetekst: Record<EnhetsTypeEnum, string> = {
+const enhetstypetekst: Record<EnhetsType, string> = {
   BEH: "Ansvarssted",
   BOS: "Kostnadssted",
   ANKE: "Ankeenhet",
 };
 
-export default function EnhetLabel({ enhet }: { enhet: EnhetsType }) {
+export default function EnhetLabel({ enhet }: { enhet: Enhet }) {
   return (
     <div className={commonstyles.row}>
       <div className={commonstyles.bold}>{enhetstypetekst[enhet.type]}:</div>

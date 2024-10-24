@@ -4,10 +4,9 @@
   "description": "Oppdragsinfo i Utbetalingsportalen",
   "type": "module",
   "scripts": {
-    "postinstall": "cd server && pnpm install",
-    "dev": "vite --mode local-mock",
-    "dev:backend": "vite --mode local-dev",
-    "dev:backend-q1": "vite --mode local-dev-q1",
+    "dev:mock": "vite --mode mock",
+    "dev:backend": "vite --mode backend",
+    "dev:backend-q1": "vite --mode backend-q1",
     "build": "tsc && vite build",
     "test": "vitest",
     "lint": "eslint",
@@ -50,6 +49,7 @@
     "husky": "^9.1.6",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.10",
+    "msw": "^2.5.1",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
@@ -61,8 +61,12 @@
     "vite": "^5.4.9",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-environment": "^1.1.3",
-    "vite-plugin-mock": "^3.0.2",
     "vitest": "^2.1.3"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   },
   "browserslist": {
     "production": [

@@ -11,4 +11,4 @@ export const ValutaSchema = z.object({
   brukerid: z.string(),
 });
 
-export const ValutaerSchema = z.array(ValutaSchema);
+export const ValutaListSchema = z.array(ValutaSchema);

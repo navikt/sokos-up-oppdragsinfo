@@ -7,4 +7,4 @@ export const StatusSchema = z.object({
   brukerid: z.string(),
 });
 
-export const StatuserSchema = z.array(StatusSchema);
+export const StatusListSchema = z.array(StatusSchema);

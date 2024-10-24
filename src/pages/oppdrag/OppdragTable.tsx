@@ -4,7 +4,7 @@ import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
-import { Oppdrag, OppdragsListe } from "../../types/Oppdrag";
+import { Oppdrag, OppdragsList } from "../../types/Oppdrag";
 import {
   SortState,
   applySortDirection,
@@ -14,7 +14,7 @@ import {
 } from "../../util/commonUtil";
 
 type OppdragTableProps = {
-  oppdragsListe: OppdragsListe;
+  oppdragsListe: OppdragsList;
 };
 
 export default function OppdragTable(props: OppdragTableProps) {
@@ -23,7 +23,7 @@ export default function OppdragTable(props: OppdragTableProps) {
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const { setOppdrag } = useStore();
 
-  const sortedData: OppdragsListe = props.oppdragsListe
+  const sortedData: OppdragsList = props.oppdragsListe
     .slice()
     .sort(applySortDirection(sort));
   const pageData = sortedData.slice(

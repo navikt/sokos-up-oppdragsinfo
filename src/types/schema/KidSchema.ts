@@ -8,4 +8,4 @@ export const KidSchema = z.object({
   brukerid: z.string(),
 });
 
-export const KidListeSchema = z.array(KidSchema);
+export const KidListSchema = z.array(KidSchema);

@@ -10,4 +10,4 @@ export const LinjeEnhetSchema = z.object({
   brukerid: z.string(),
 });
 
-export const LinjeEnheterSchema = z.array(LinjeEnhetSchema);
+export const LinjeEnhetListSchema = z.array(LinjeEnhetSchema);

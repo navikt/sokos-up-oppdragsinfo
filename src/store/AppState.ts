@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
-import { Oppdrag, OppdragsListe } from "../types/Oppdrag";
+import { Oppdrag, OppdragsList } from "../types/Oppdrag";
 
 type AppState = {
   gjelderId: string;
   fagGruppeVisningText?: string;
   fagGruppeKode?: string;
   gjelderNavn: string;
-  oppdragsListe?: OppdragsListe;
+  oppdragsListe?: OppdragsList;
   oppdrag?: Oppdrag;
   linjeId: string;
 };
@@ -19,7 +19,7 @@ type AppStateActions = {
   setFagGruppeKode: (fagGruppeKode: string) => void;
   setGjelderNavn: (gjelerNavn: string) => void;
   setOppdrag: (oppdrag: Oppdrag) => void;
-  setOppdragsListe: (oppdragsListe: OppdragsListe) => void;
+  setOppdragsListe: (oppdragsListe: OppdragsList) => void;
   setLinjeId: (linjeId: string) => void;
 };
 
@@ -45,7 +45,7 @@ export const useStore = create<AppState & AppStateActions>()(
         setFagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode }),
         setGjelderNavn: (gjelderNavn: string) => set({ gjelderNavn }),
         setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag }),
-        setOppdragsListe: (oppdragsListe: OppdragsListe) =>
+        setOppdragsListe: (oppdragsListe: OppdragsList) =>
           set({ oppdragsListe }),
         setLinjeId: (linjeId: string) => set({ linjeId }),
       }),

@@ -5,4 +5,4 @@ export const TekstSchema = z.object({
   tekst: z.string(),
 });
 
-export const TeksterSchema = z.array(TekstSchema);
+export const TekstListSchema = z.array(TekstSchema);

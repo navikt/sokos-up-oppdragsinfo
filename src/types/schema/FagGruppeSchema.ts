@@ -5,4 +5,4 @@ export const FagGruppeSchema = z.object({
   type: z.string(),
 });
 
-export const FagGrupperSchema = z.array(FagGruppeSchema);
+export const FagGruppeListSchema = z.array(FagGruppeSchema);

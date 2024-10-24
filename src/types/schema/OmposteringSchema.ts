@@ -13,4 +13,4 @@ export const OmposteringSchema = z.object({
   tidspktReg: z.string(),
 });
 
-export const OmposteringerSchema = z.array(OmposteringSchema);
+export const OmposteringListSchema = z.array(OmposteringSchema);

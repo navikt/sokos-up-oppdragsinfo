@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import commonstyles from "../../styles/common-styles.module.css";
-import { OppdragsLinjeDetalje } from "../../types/OppdragsLinjeDetalje";
+import { OppdragsLinjeDetaljer } from "../../types/OppdragsLinjeDetaljer";
 import { OppdragsLinje } from "../../types/Oppdragslinje";
 import {
   SortState,
@@ -15,7 +15,7 @@ import {
 } from "../../util/commonUtil";
 
 interface OppdragsLinjeDetaljerTableProps {
-  oppdragsLinjeDetaljer: OppdragsLinjeDetalje;
+  oppdragsLinjeDetaljer: OppdragsLinjeDetaljer;
 }
 
 export default function OppdragsLinjeDetaljerTable(
