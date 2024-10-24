@@ -15,7 +15,8 @@ import apiService from "../../api/apiService";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { FagGruppeVisning } from "../../types/FagGruppe";
-import { SokParameter, SokParameterSchema } from "../../types/SokParameter";
+import { SokParameter } from "../../types/SokParameter";
+import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
 import { isEmpty } from "../../util/commonUtil";
 import SokHelp from "./SokHelp";
 import styles from "./SokPage.module.css";
@@ -96,8 +97,8 @@ export default function SokPage() {
           Oppdragsinfo
         </Heading>
       </div>
-      <div className={styles.sok__sok}>
-        <div className={styles.sok__help}>
+      <div className={styles["sok"]}>
+        <div className={styles["sok-help"]}>
           <SokHelp />
         </div>
         <form onSubmit={handleSubmit(handleSokSubmit)}>
@@ -105,8 +106,8 @@ export default function SokPage() {
             Søk
           </Heading>
 
-          <div className={styles.sok_inputfields}>
-            <div className={styles.sok__inputGjelderID}>
+          <div className={styles["sok-inputfields"]}>
+            <div className={styles["sok-input-gjelder-id"]}>
               <TextField
                 {...register("gjelderId")}
                 label="Gjelder-ID"
@@ -117,7 +118,7 @@ export default function SokPage() {
                 autoFocus
               />
             </div>
-            <div className={styles.combobox}>
+            <div className={styles["combobox"]}>
               <UNSAFE_Combobox
                 label={"Faggruppe"}
                 onToggleSelected={(comboboxText) => {
@@ -133,7 +134,7 @@ export default function SokPage() {
                   ),
                 ]}
               />
-              <div className={styles.combobox__clearbutton}>
+              <div className={styles["combobox-clearbutton"]}>
                 <Button
                   variant="secondary-neutral"
                   size={"small"}
@@ -150,8 +151,8 @@ export default function SokPage() {
               </div>
             </div>
           </div>
-          <div className={styles.sok__knapperad}>
-            <div className={styles.sok__buttonwrapper}>
+          <div className={styles["sok-knapperad"]}>
+            <div className={styles["sok-buttonwrapper"]}>
               <Button
                 title="Søk"
                 iconPosition="right"
@@ -181,7 +182,7 @@ export default function SokPage() {
         </form>
       </div>
       {!isLoading && isSubmit && (
-        <div className={styles.sok__feil}>
+        <div className={styles["sok-feil"]}>
           <Alert variant="info">
             Null treff. Denne IDen har ingen oppdrag
             {sokParameter.fagGruppeKode

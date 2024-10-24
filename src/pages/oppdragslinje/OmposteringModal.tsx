@@ -30,7 +30,9 @@ export default function OmposteringModal(props: OppdragsId) {
             <Table zebraStripes>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell key={"id"} scope="col" children={"ID"} />
+                  <Table.HeaderCell key={"id"} scope="col">
+                    ID
+                  </Table.HeaderCell>
                   <Table.HeaderCell scope="col">Faggruppe</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Løpenummer</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Ompostering</Table.HeaderCell>

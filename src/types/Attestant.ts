@@ -1,13 +1,6 @@
 import { z } from "zod";
-import { DateSchema } from "./Date";
+import { AttestantListSchema, AttestantSchema } from "./schema/AttestantSchema";
 
-const _AttestantSchema = z.object({
-  attestantId: z.string(),
-  ugyldigFom: DateSchema,
-});
+export type Attestant = z.infer<typeof AttestantSchema>;
 
-const _AttestanterSchema = z.array(_AttestantSchema);
-
-export type Attestant = z.infer<typeof _AttestantSchema>;
-
-export type Attestanter = z.infer<typeof _AttestanterSchema>;
+export type AttestantList = z.infer<typeof AttestantListSchema>;

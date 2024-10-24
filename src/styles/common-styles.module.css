@@ -2,7 +2,7 @@
   @apply flex flex-row space-x-3;
 }
 
-.knapperad__left {
+.knapperad-left {
   @apply knapperad justify-start;
 }
 
@@ -32,4 +32,16 @@
 
 .pageheading {
   @apply text-center;
+}
+
+.sortable-table {
+  @apply min-w-1400 bg-[--a-surface-default];
+}
+
+.sortable-table-topinfo {
+  @apply flex flex-row justify-between;
+}
+
+.sortable-table-pagination {
+  @apply flex flex-row place-content-center;
 }

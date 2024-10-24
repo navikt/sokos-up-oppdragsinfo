@@ -1,14 +1,6 @@
 import { z } from "zod";
+import { StatusListSchema, StatusSchema } from "./schema/StatusSchema";
 
-const _StatusSchema = z.object({
-  status: z.string(),
-  datoFom: z.optional(z.string()),
-  tidspktReg: z.string(),
-  brukerid: z.string(),
-});
+export type Status = z.infer<typeof StatusSchema>;
 
-const _StatuserSchema = z.array(_StatusSchema);
-
-export type Status = z.infer<typeof _StatusSchema>;
-
-export type Statuser = z.infer<typeof _StatuserSchema>;
+export type StatusList = z.infer<typeof StatusListSchema>;

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Alert, Button, Modal, Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
-import { EnhetsType } from "../../types/EnhetsType";
+import { Enhet } from "../../types/EnhetsType";
 import { OppdragsId } from "../../types/OppdragsId";
 import { isEmpty } from "../../util/commonUtil";
 
@@ -36,7 +36,7 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
                 </Table.Row>
               </Table.Header>
               <Table.Body>
-                {data.map((enhet: EnhetsType) => (
+                {data.map((enhet: Enhet) => (
                   <Table.Row key={btoa(JSON.stringify(enhet))}>
                     <Table.DataCell>{enhet.type}</Table.DataCell>
                     <Table.DataCell>{enhet.datoFom}</Table.DataCell>

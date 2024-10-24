@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Accordion, Heading } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
-import OppdragsEgenskapPanel from "../../components/OppdragsEgenskapPanel";
+import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { ROOT } from "../../util/constant";
@@ -43,18 +43,16 @@ export default function OppdragsLinjeDetaljerPage() {
           Oppdragsinfo
         </Heading>
       </div>
-      <div className={styles.oppdragslinjedetaljer}>
-        <div className={styles.oppdragslinjedetaljer__top}>
+      <div className={styles["oppdragslinjedetaljer"]}>
+        <div className={styles["oppdragslinjedetaljer-top"]}>
           <Breadcrumbs
             searchLink
             trefflistelink
             oppdraglink={oppdrag?.oppdragsId}
             oppdragsdetaljer
           />
-          <div className={styles.oppdragslinjedetaljer__toppinfo}>
-            {gjelderId && oppdrag && (
-              <OppdragsEgenskapPanel oppdrag={oppdrag} />
-            )}
+          <div className={styles["oppdragslinjedetaljer-toppinfo"]}>
+            {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
           </div>
         </div>
 

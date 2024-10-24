@@ -1,15 +1,6 @@
 import { z } from "zod";
+import { MaksdatoListSchema, MaksdatoSchema } from "./schema/MaksdatoSchema";
 
-const _MaksdatoSchema = z.object({
-  linjeId: z.string(),
-  maksdato: z.string(),
-  datoFom: z.string(),
-  tidspktReg: z.string(),
-  brukerid: z.string(),
-});
+export type Maksdato = z.infer<typeof MaksdatoSchema>;
 
-const _MaksdatoerSchema = z.array(_MaksdatoSchema);
-
-export type Maksdato = z.infer<typeof _MaksdatoSchema>;
-
-export type Maksdatoer = z.infer<typeof _MaksdatoerSchema>;
+export type MaksdatoList = z.infer<typeof MaksdatoListSchema>;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
-import styles from "../../components/sortable-table.module.css";
 import commonstyles from "../../styles/common-styles.module.css";
 import { OppdragsLinjeDetaljer } from "../../types/OppdragsLinjeDetaljer";
 import { OppdragsLinje } from "../../types/Oppdragslinje";
@@ -42,7 +41,7 @@ export default function OppdragsLinjeDetaljerTable(
 
   return (
     <>
-      <div className={styles["sortable-table__topinfo"]}>
+      <div className={commonstyles["sortable-table-topinfo"]}>
         <div className={commonstyles.nowrap}>
           <p>
             {`${antall} treff`}
@@ -55,7 +54,7 @@ export default function OppdragsLinjeDetaljerTable(
           setRowsPerPage={setRowsPerPage}
         />
       </div>
-      <div className={styles["sortable-table"]}>
+      <div className={commonstyles["sortable-table"]}>
         <Table zebraStripes sort={sort} onSortChange={linjeSort}>
           <Table.Header>
             <Table.Row>
@@ -112,7 +111,7 @@ export default function OppdragsLinjeDetaljerTable(
         </Table>
       </div>
       {pagecount > 1 && (
-        <div className={styles["sortable-table__pagination"]}>
+        <div className={commonstyles["sortable-table-pagination"]}>
           <Pagination
             page={currentPage}
             onPageChange={setCurrentPage}

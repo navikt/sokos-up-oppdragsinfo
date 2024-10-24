@@ -4,14 +4,14 @@
   "description": "Oppdragsinfo i Utbetalingsportalen",
   "type": "module",
   "scripts": {
-    "postinstall": "cd server && pnpm install",
-    "dev": "vite --mode local-mock",
-    "dev:backend": "vite --mode local-dev",
-    "dev:backend-q1": "vite --mode local-dev-q1",
+    "dev:mock": "vite --mode mock",
+    "dev:backend": "vite --mode backend",
+    "dev:backend-q1": "vite --mode backend-q1",
     "build": "tsc && vite build",
     "test": "vitest",
     "lint": "eslint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "stylelint": "stylelint '**/*.css'"
   },
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.11.0",
@@ -35,21 +35,21 @@
     "@navikt/aksel-stylelint": "7.3.1",
     "@rollup/plugin-terser": "^0.4.4",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "@types/eslint-config-prettier": "^6.11.3",
-    "@types/react": "^18.3.11",
+    "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "@typescript-eslint/eslint-plugin": "8.10.0",
     "@vitejs/plugin-react": "^4.3.3",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jsx-a11y": "^6.10.1",
-    "eslint-plugin-react": "^7.37.1",
-    "eslint-plugin-react-hooks": "5.0.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.13",
     "globals": "^15.11.0",
     "husky": "^9.1.6",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.10",
+    "msw": "^2.5.1",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
@@ -57,12 +57,16 @@
     "stylelint-config-standard": "^36.0.1",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.9.0",
-    "vite": "^5.4.9",
+    "typescript-eslint": "^8.11.0",
+    "vite": "^5.4.10",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-environment": "^1.1.3",
-    "vite-plugin-mock": "^3.0.2",
     "vitest": "^2.1.3"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   },
   "browserslist": {
     "production": [
@@ -82,9 +86,7 @@
       "stylelint-config-standard",
       "@navikt/aksel-stylelint/recommended"
     ],
-    "rules": {
-      "selector-class-pattern": null
-    }
+    "ignoreFiles": "dist/**/*"
   },
   "prettier": {
     "plugins": [
@@ -118,11 +120,11 @@
   "lint-staged": {
     "*.ts": "eslint",
     "*.tsx": "eslint",
-    "*.css": "stylelint",
+    "*.css": "stylelint --fix",
     "*": "prettier --write --ignore-unknown"
   },
   "engines": {
-    "node": ">=20.11.0",
-    "pnpm": ">=9"
+    "node": ">=20.18.0",
+    "pnpm": ">=9.12.2"
   }
 }

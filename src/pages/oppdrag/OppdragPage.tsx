@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { Heading } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
+import LabelText from "../../components/LabelText";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { isEmpty } from "../../util/commonUtil";
 import { ROOT } from "../../util/constant";
-import OppdragEgenskapPanel from "./OppdragEgenskapPanel";
 import styles from "./OppdragPage.module.css";
 import OppdragTable from "./OppdragTable";
 
@@ -27,7 +27,7 @@ export default function OppdragPage() {
     }
 
     if (gjelderNavn === "") {
-      apiService.useHentNavn({ gjelderId }).then((response) => {
+      apiService.useHentNavn(gjelderId).then((response) => {
         setGjelderNavn(response.navn);
       });
     }
@@ -35,21 +35,26 @@ export default function OppdragPage() {
 
   return (
     <>
-      <div className={commonstyles.pageheading}>
+      <div className={commonstyles["pageheading"]}>
         <Heading level="1" size="large">
           Oppdragsinfo
         </Heading>
       </div>
-      <div className={styles.oppdrag}>
-        <div className={styles.oppdrag__top}>
+      <div className={styles["oppdrag"]}>
+        <div className={styles["oppdrag-top"]}>
           <Breadcrumbs searchLink treffliste />
 
-          <div className={styles.oppdrag__top_info}>
-            <OppdragEgenskapPanel
-              gjelderId={gjelderId}
-              navn={gjelderNavn}
-              faggruppe={fagGruppeVisningText}
-            />
+          <div className={styles["oppdrag-top-info"]}>
+            <div className={styles["oppdrag-panel"]}>
+              <div className={styles["oppdrag-panel-content"]}>
+                <LabelText label={"Gjelder-ID"} text={gjelderId ?? ""} />
+                <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
+                <LabelText
+                  label={"Faggruppe"}
+                  text={fagGruppeVisningText ?? "Alle"}
+                />
+              </div>
+            </div>
           </div>
         </div>
         {!oppdragsListe ||

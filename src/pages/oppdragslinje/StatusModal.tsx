@@ -35,26 +35,18 @@ export default function StatusModal(props: StatusModalProps) {
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell
-                  key={"status"}
-                  scope="col"
-                  children={"Status"}
-                />
-                <Table.HeaderCell
-                  key={"datoFom"}
-                  scope="col"
-                  children={"Dato Fom"}
-                />
-                <Table.HeaderCell
-                  key={"tidspktReg"}
-                  scope="col"
-                  children={"Tidspkt Reg"}
-                />
-                <Table.HeaderCell
-                  key={"brukerid"}
-                  scope="col"
-                  children={"Bruker-ID"}
-                />
+                <Table.HeaderCell key={"status"} scope="col">
+                  Status
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"datoFom"} scope="col">
+                  Dato Fom
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"tidspktReg"} scope="col">
+                  Tidspkt Reg
+                </Table.HeaderCell>
+                <Table.HeaderCell key={"brukerid"} scope="col">
+                  Bruker-ID
+                </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
             <Table.Body>
