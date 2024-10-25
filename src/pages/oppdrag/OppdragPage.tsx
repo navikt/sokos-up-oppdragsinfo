@@ -27,7 +27,7 @@ export default function OppdragPage() {
     }
 
     if (gjelderNavn === "") {
-      apiService.useHentNavn(gjelderId).then((response) => {
+      apiService.useHentNavn({ gjelderId }).then((response) => {
         setGjelderNavn(response.navn);
       });
     }
