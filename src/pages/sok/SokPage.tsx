@@ -24,7 +24,7 @@ import styles from "./SokPage.module.css";
 export default function SokPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isSubmit, setIsSubmit] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const { gjelderId, fagGruppeVisningText, resetState, setGjelderNavn } =
     useStore();
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
@@ -56,12 +56,12 @@ export default function SokPage() {
   function handleReset(e: FormEvent) {
     e.preventDefault();
     setSokParameter({ gjelderId: "", fagGruppeKode: undefined });
+    setError("");
     reset();
     resetState();
   }
 
   function handleSokSubmit(parameter: SokParameter) {
-    setIsSubmit(true);
     setIsLoading(true);
     setGjelderNavn("");
 
@@ -80,12 +80,20 @@ export default function SokPage() {
       .useHentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppeKode })
       .then((response) => {
         setIsLoading(false);
+        setError("");
         if (!isEmpty(response)) {
           useStore.setState({ oppdragsListe: response });
           navigate("/oppdrag");
+        } else {
+          setError(
+            `Fant ingen oppdrag for ${gjelderId}${
+              fagGruppeKode ? ` med faggruppe ${fagGruppeKode}` : ""
+            }`,
+          );
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        setError(error.message);
         setIsLoading(false);
       });
   }
@@ -181,10 +189,10 @@ export default function SokPage() {
           </div>
         </form>
       </div>
-      {!isLoading && isSubmit && (
+      {error && (
         <div className={styles["sok-feil"]}>
           <Alert variant="info">
-            Null treff. Denne IDen har ingen oppdrag
+            {error}
             {sokParameter.fagGruppeKode
               ? ` med faggruppe ${sokParameter.fagGruppeKode}`
               : ""}
