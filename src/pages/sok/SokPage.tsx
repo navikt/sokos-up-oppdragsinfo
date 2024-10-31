@@ -24,7 +24,7 @@ import styles from "./SokPage.module.css";
 export default function SokPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
   const { gjelderId, fagGruppeVisningText, resetState, setGjelderNavn } =
     useStore();
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
@@ -56,7 +56,7 @@ export default function SokPage() {
   function handleReset(e: FormEvent) {
     e.preventDefault();
     setSokParameter({ gjelderId: "", fagGruppeKode: undefined });
-    setError("");
+    setError(null);
     reset();
     resetState();
   }
@@ -80,7 +80,7 @@ export default function SokPage() {
       .useHentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppeKode })
       .then((response) => {
         setIsLoading(false);
-        setError("");
+        setError(null);
         if (!isEmpty(response)) {
           useStore.setState({ oppdragsListe: response });
           navigate("/oppdrag");
