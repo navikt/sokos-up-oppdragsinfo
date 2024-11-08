@@ -107,4 +107,5 @@ dist
 .idea
 
 # Other stuff
-**/build/
+playwright-report/
+.tool-versions
