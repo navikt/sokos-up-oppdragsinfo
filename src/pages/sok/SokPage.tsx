@@ -110,7 +110,7 @@ export default function SokPage() {
     <>
       <div className={commonstyles.pageheading}>
         <Heading level="1" size="large" spacing>
-          Oppdragsinfo
+          Oppdragsinfo: Søk
         </Heading>
       </div>
       <div className={styles["sok"]}>

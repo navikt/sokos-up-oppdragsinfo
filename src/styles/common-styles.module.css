@@ -26,12 +26,8 @@
   @apply w-full py-16 text-center;
 }
 
-.nowrap {
-  @apply whitespace-nowrap;
-}
-
 .pageheading {
-  @apply text-center;
+  @apply whitespace-nowrap text-center;
 }
 
 .sortable-table {

@@ -1,13 +1,13 @@
 .sok {
-  @apply relative mx-auto max-w-[1440px] bg-[--a-surface-alt-1-subtle] p-5;
+  @apply relative mx-auto min-w-[780px] max-w-[1440px] rounded-[8px] bg-[--a-surface-alt-1-subtle] p-5;
+}
+
+.sok-heading {
+  @apply whitespace-nowrap;
 }
 
 .sok-inputfields {
-  @apply w-1/2 space-y-5 pb-6;
-}
-
-.sok-input-gjelder-id {
-  @apply min-w-128;
+  @apply w-36 space-y-5 pb-6;
 }
 
 .sok-knapperad {
