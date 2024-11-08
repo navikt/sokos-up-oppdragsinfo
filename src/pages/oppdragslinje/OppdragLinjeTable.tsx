@@ -1,6 +1,6 @@
 import { Suspense, useState } from "react";
 import { Link } from "react-router-dom";
-import { Loader, Pagination, Table } from "@navikt/ds-react";
+import { Button, Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
@@ -109,7 +109,11 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 <Table.DataCell>{linje.typeSats}</Table.DataCell>
                 <Table.DataCell>
                   <Suspense
-                    fallback={<Loader size="medium" title="Laster ..." />}
+                    fallback={
+                      <Button variant={"tertiary"} loading size="xsmall">
+                        {linje.kodeStatus}
+                      </Button>
+                    }
                   >
                     <StatusModal
                       text={linje.kodeStatus}
@@ -122,10 +126,14 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 <Table.DataCell>{linje.linjeIdKorr}</Table.DataCell>
                 <Table.DataCell>
                   <Suspense
-                    fallback={<Loader size="medium" title="Laster ..." />}
+                    fallback={
+                      <Button variant={"tertiary"} loading size="xsmall">
+                        {linje.attestert === "J" ? "Ja" : "Nei"}
+                      </Button>
+                    }
                   >
                     <AttestantModal
-                      text={linje.attestert}
+                      text={linje.attestert === "J" ? "Ja" : "Nei"}
                       oppdragsId={props.oppdragsId}
                       linjeId={linje.linjeId}
                     />

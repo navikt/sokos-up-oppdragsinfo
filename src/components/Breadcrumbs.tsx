@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { ROOT } from "../util/constant";
 import styles from "./Breadcrumbs.module.css";
 import NullstillButton from "./ResetButton";
@@ -24,25 +25,28 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           )}
           {props.treffliste && (
             <div className={styles["breadcrumbs-crumb"]}>
-              &gt; &gt; Treffliste
+              <ChevronRightIcon /> Treffliste
             </div>
           )}
           {props.trefflistelink && (
             <div className={styles["breadcrumbs-crumb"]}>
-              &gt; &gt; <Link to={"/oppdrag"}>Treffliste</Link>
+              <ChevronRightIcon /> <Link to={"/oppdrag"}>Treffliste</Link>
             </div>
           )}
           {props.oppdrag && (
-            <div className={styles["breadcrumbs-crumb"]}>&gt; &gt; Oppdrag</div>
+            <div className={styles["breadcrumbs-crumb"]}>
+              <ChevronRightIcon /> Oppdrag
+            </div>
           )}
           {props.oppdraglink && (
             <div className={styles["breadcrumbs-crumb"]}>
-              &gt; &gt; <Link to={`/${props.oppdraglink}`}>Oppdrag</Link>
+              <ChevronRightIcon />{" "}
+              <Link to={`/${props.oppdraglink}`}>Oppdrag</Link>
             </div>
           )}
           {props.oppdragsdetaljer && (
             <div className={styles["breadcrumbs-crumb"]}>
-              &gt; &gt; Detaljer
+              <ChevronRightIcon /> Detaljer
             </div>
           )}
         </div>

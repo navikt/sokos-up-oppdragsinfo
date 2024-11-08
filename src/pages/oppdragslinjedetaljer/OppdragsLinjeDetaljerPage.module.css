@@ -1,9 +1,9 @@
 .oppdragslinjedetaljer {
-  @apply mx-auto my-3 mt-6 space-y-6;
+  @apply mx-auto my-3 space-y-6;
 }
 
 .oppdragslinjedetaljer-top {
-  @apply mx-auto max-w-[1440px] space-y-4 p-6;
+  @apply mx-36 max-w-[1440px] space-y-5;
 }
 
 .oppdragslinjedetaljer-toppinfo {

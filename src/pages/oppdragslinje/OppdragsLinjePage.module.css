@@ -1,17 +1,17 @@
 .oppdragslinjer {
-  @apply mx-auto my-3 mt-6 space-y-6;
+  @apply mx-auto my-3 min-w-1024 max-w-[1440px] space-y-6;
 }
 
 .oppdragslinjer-top {
-  @apply mx-auto min-w-1024 max-w-[1440px] space-y-5;
+  @apply mx-24 min-w-1024 max-w-[1440px] space-y-5;
 }
 
 .oppdragslinjer-toppinfo {
-  @apply relative min-w-1024 bg-[--a-surface-default] p-6;
+  @apply relative min-w-1024 rounded-[8px] bg-[--a-surface-default] p-6;
 }
 
 .oppdragslinjer-panel {
-  @apply flex w-11/12 flex-row justify-between space-x-16;
+  @apply flex w-11/12 flex-row justify-between gap-10;
 }
 
 .oppdragslinjer-column {

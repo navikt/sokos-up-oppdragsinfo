@@ -3,7 +3,7 @@ import { Alert, Button, Modal, Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { Enhet } from "../../types/EnhetsType";
 import { OppdragsId } from "../../types/OppdragsId";
-import { isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtil";
 
 export default function EnhetshistorikkModal(props: OppdragsId) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
         Enhetshistorikk
       </Button>
 
-      <Modal ref={ref} header={{ heading: "Enhetshistorikk" }} width={"500px"}>
+      <Modal ref={ref} header={{ heading: "Enhetshistorikk" }}>
         <Modal.Body>
           {data && !isEmpty(data) && (
             <Table zebraStripes>
@@ -39,7 +39,7 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
                 {data.map((enhet: Enhet) => (
                   <Table.Row key={btoa(JSON.stringify(enhet))}>
                     <Table.DataCell>{enhet.type}</Table.DataCell>
-                    <Table.DataCell>{enhet.datoFom}</Table.DataCell>
+                    <Table.DataCell>{formatDate(enhet.datoFom)}</Table.DataCell>
                     <Table.DataCell>{enhet.enhet}</Table.DataCell>
                   </Table.Row>
                 ))}

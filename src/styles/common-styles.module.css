@@ -1,5 +1,5 @@
 .knapperad {
-  @apply flex flex-row space-x-3;
+  @apply flex flex-row gap-3;
 }
 
 .knapperad-left {
@@ -11,7 +11,7 @@
 }
 
 .row {
-  @apply flex flex-row space-x-1;
+  @apply flex flex-row gap-1;
 }
 
 .singlerow {
@@ -24,6 +24,10 @@
 
 .contentloader {
   @apply w-full py-16 text-center;
+}
+
+.nowrap {
+  @apply whitespace-nowrap;
 }
 
 .pageheading {

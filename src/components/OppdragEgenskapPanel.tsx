@@ -19,9 +19,9 @@ export default function OppdragEgenskapPanel(
 
   return (
     <div className={styles["oppdragslinjer-panel"]}>
-      <div className={styles.oppdragslinjerColumn}>
-        <LabelText label={"Gjelder ID"} text={gjelderId} />
-        <LabelText label={"Fagsystem ID"} text={props.oppdrag.fagSystemId} />
+      <div className={styles["oppdragslinjer-column"]}>
+        <LabelText label={"Gjelder"} text={gjelderId} />
+        <LabelText label={"Fagsystem id"} text={props.oppdrag.fagSystemId} />
         <LabelText label={"Status"} text={props.oppdrag.kodeStatus} />
         {oppdragsEnhet && oppdragsEnhet.behandlendeEnhet && (
           <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
@@ -29,14 +29,18 @@ export default function OppdragEgenskapPanel(
       </div>
       <div className={styles["oppdragslinjer-column"]}>
         <LabelText label={"Navn"} text={gjelderNavn} />
-        <LabelText label={"Oppdrags ID"} text={props.oppdrag.oppdragsId} />
+        <LabelText label={"Oppdrags id"} text={props.oppdrag.oppdragsId} />
         <LabelText label={"Beregnes nå"} text={props.oppdrag.kjorIdag} />
         {oppdragsEnhet && oppdragsEnhet.enhet && (
           <EnhetLabel enhet={oppdragsEnhet.enhet} />
         )}
       </div>
       <div className={styles["oppdragslinjer-column"]}>
-        <LabelText label={"Fagområde"} text={props.oppdrag.navnFagOmraade} />
+        <LabelText
+          nowrap
+          label={"Fagområde"}
+          text={props.oppdrag.navnFagOmraade}
+        />
       </div>
     </div>
   );

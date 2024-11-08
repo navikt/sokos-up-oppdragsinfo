@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 
 function isSymbol(x: unknown): x is symbol {
   return typeof x === "symbol";
@@ -55,11 +55,11 @@ export function hasKey<T extends object>(
 }
 
 export function formatDate(value: string) {
-  return moment(value).format("DD.MM.YYYY");
+  return dayjs(value).format("DD.MM.YYYY");
 }
 
 export function formatDateTime(value: string) {
-  return moment(value).format("DD.MM.YYYY hh:mm:ss");
+  return dayjs(value).format("DD.MM.YYYY hh:mm:ss");
 }
 
 export interface SortState<T> {
