@@ -106,6 +106,10 @@ dist
 # IntelliJ
 .idea
 
-# Other stuff
+# Playwright
 playwright-report/
+test-results/
+
+# Other stuff
+**/build/
 .tool-versions

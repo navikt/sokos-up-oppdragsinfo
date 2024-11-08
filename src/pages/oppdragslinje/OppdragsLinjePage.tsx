@@ -32,7 +32,7 @@ export default function OppdragsLinjePage() {
     <>
       <div className={commonstyles.pageheading}>
         <Heading level="1" size="large">
-          Oppdragsinfo
+          Oppdragsinfo: Oppdrag
         </Heading>
       </div>
       {oppdragsLinjer && (

@@ -30,7 +30,9 @@ test.describe("Axe a11y", () => {
 
     await page.goto("/oppdragsinfo/oppdrag");
 
-    await expect(page.getByRole("heading", { name: "Søk" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Treffliste" }),
+    ).toBeVisible();
     const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
     expect(accessibilityScanResults.violations).toEqual([]);

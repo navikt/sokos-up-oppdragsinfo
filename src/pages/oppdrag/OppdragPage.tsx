@@ -32,7 +32,7 @@ export default function OppdragPage() {
     <>
       <div className={commonstyles["pageheading"]}>
         <Heading level="1" size="large">
-          Oppdragsinfo
+          Oppdragsinfo: Treffliste
         </Heading>
       </div>
       <div className={styles["oppdrag"]}>
