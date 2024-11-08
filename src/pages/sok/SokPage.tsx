@@ -1,20 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormEvent, useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormEvent, useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import {
   Alert,
   Button,
   Heading,
-  Loader,
   TextField,
   UNSAFE_Combobox,
 } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
-import { FagGruppeVisning } from "../../types/FagGruppe";
+import { FagGruppe } from "../../types/FagGruppe";
 import { SokParameter } from "../../types/SokParameter";
 import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
 import { isEmpty } from "../../util/commonUtil";
@@ -25,59 +24,68 @@ export default function SokPage() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const { gjelderId, fagGruppeVisningText, resetState, setGjelderNavn } =
-    useStore();
+  const { gjelderId, fagGruppe, resetState, setGjelderNavn } = useStore();
   const faggrupper = apiService.useFetchHentFaggrupper().data!;
   const [sokParameter, setSokParameter] = useState<SokParameter>({
     gjelderId: gjelderId,
-    fagGruppeKode: fagGruppeVisningText,
+    fagGruppe: fagGruppe,
   });
 
   const {
     register,
     handleSubmit,
-    trigger,
     reset,
+    control,
+    setValue,
     formState: { errors },
   } = useForm<SokParameter>({
     resolver: zodResolver(SokParameterSchema),
   });
 
-  const faggruppeOptions: FagGruppeVisning[] = useMemo(
-    () =>
-      faggrupper.map((faggruppe) => ({
-        navn: faggruppe.navn,
-        type: faggruppe.type,
-        comboboxText: `${faggruppe.navn}(${faggruppe.type})`,
-      })),
-    [faggrupper],
-  );
+  const faggruppetypeLabelMap = faggrupper
+    ? faggrupper.reduce(
+        (map, faggruppe) => {
+          map[faggruppe.type] = faggruppe.navn;
+          return map;
+        },
+        {} as Record<string, string>,
+      )
+    : ({} as Record<string, string>);
+
+  useEffect(() => {
+    setValue("gjelderId", sokParameter.gjelderId);
+    setValue("fagGruppe", sokParameter.fagGruppe);
+  }, [setValue, sokParameter]);
 
   function handleReset(e: FormEvent) {
     e.preventDefault();
-    setSokParameter({ gjelderId: "", fagGruppeKode: undefined });
+    setSokParameter({ gjelderId: "", fagGruppe: undefined });
     setError(null);
     reset();
     resetState();
   }
 
-  function handleSokSubmit(parameter: SokParameter) {
+  function convertFaggruppeToComboboxValue(selectedFaggruppe: FagGruppe) {
+    return {
+      value: selectedFaggruppe.type,
+      label: `${selectedFaggruppe.navn}(${selectedFaggruppe.type})`,
+    };
+  }
+
+  function onSubmit(parameter: SokParameter) {
     setIsLoading(true);
     setGjelderNavn("");
 
     const gjelderId = parameter.gjelderId?.replaceAll(/[\s.]/g, "") ?? "";
-    const fagGruppeKode = faggruppeOptions.find(
-      (faggruppe) => faggruppe.comboboxText === sokParameter.fagGruppeKode,
-    )?.type;
+    const fagGruppe = parameter.fagGruppe;
 
     useStore.setState({
       gjelderId: gjelderId,
-      fagGruppeVisningText: sokParameter.fagGruppeKode,
-      fagGruppeKode: fagGruppeKode,
+      fagGruppe: fagGruppe,
     });
 
     apiService
-      .useHentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppeKode })
+      .useHentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppe?.type })
       .then((response) => {
         setIsLoading(false);
         setError(null);
@@ -87,7 +95,7 @@ export default function SokPage() {
         } else {
           setError(
             `Fant ingen oppdrag for ${gjelderId}${
-              fagGruppeKode ? ` med faggruppe ${fagGruppeKode}` : ""
+              fagGruppe ? ` med faggruppe ${fagGruppe.type}` : ""
             }`,
           );
         }
@@ -109,78 +117,75 @@ export default function SokPage() {
         <div className={styles["sok-help"]}>
           <SokHelp />
         </div>
-        <form onSubmit={handleSubmit(handleSokSubmit)}>
-          <Heading level="2" size="medium" spacing>
-            Søk
-          </Heading>
-
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles["sok-inputfields"]}>
-            <div className={styles["sok-input-gjelder-id"]}>
-              <TextField
-                {...register("gjelderId")}
-                label="Gjelder-ID"
-                defaultValue={sokParameter.gjelderId}
-                id="gjelderId"
-                error={errors.gjelderId?.message}
-                // eslint-disable-next-line jsx-a11y/no-autofocus
-                autoFocus
-              />
-            </div>
+            <TextField
+              label="Gjelder"
+              size={"small"}
+              error={errors.gjelderId?.message}
+              id="gjelderId"
+              {...register("gjelderId", {
+                setValueAs: (value: string) => value.trim(),
+              })}
+            />
             <div className={styles["combobox"]}>
-              <UNSAFE_Combobox
-                label={"Faggruppe"}
-                onToggleSelected={(comboboxText) => {
-                  setSokParameter({
-                    ...sokParameter,
-                    fagGruppeKode: comboboxText,
-                  });
-                }}
-                selectedOptions={[sokParameter.fagGruppeKode ?? ""]}
-                options={[
-                  ...faggruppeOptions.map(
-                    (faggruppe) => faggruppe.comboboxText,
-                  ),
-                ]}
+              <Controller
+                control={control}
+                name={"fagGruppe"}
+                render={({ field }) => (
+                  <UNSAFE_Combobox
+                    error={
+                      errors.fagGruppe?.message
+                        ? "Ikke gyldig verdi"
+                        : undefined
+                    }
+                    isMultiSelect={false}
+                    size={"small"}
+                    label={"Faggruppe"}
+                    onToggleSelected={(type, isSelected) => {
+                      if (isSelected) {
+                        field.onChange(faggrupper?.find((f) => f.type == type));
+                      } else {
+                        setValue("fagGruppe", undefined);
+                      }
+                    }}
+                    options={
+                      faggrupper?.map(convertFaggruppeToComboboxValue) ?? []
+                    }
+                    selectedOptions={[
+                      {
+                        label: field.value
+                          ? faggruppetypeLabelMap[field.value.type] +
+                            ` (${field.value.type})`
+                          : "",
+                        value: field.value?.type ?? "",
+                      },
+                    ]}
+                    shouldAutocomplete={true}
+                  ></UNSAFE_Combobox>
+                )}
               />
-              <div className={styles["combobox-clearbutton"]}>
-                <Button
-                  variant="secondary-neutral"
-                  size={"small"}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSokParameter({
-                      ...sokParameter,
-                      fagGruppeKode: undefined,
-                    });
-                  }}
-                >
-                  Tøm
-                </Button>
-              </div>
             </div>
           </div>
           <div className={styles["sok-knapperad"]}>
             <div className={styles["sok-buttonwrapper"]}>
               <Button
-                title="Søk"
+                size="small"
                 iconPosition="right"
+                loading={isLoading}
                 icon={
-                  isLoading ? (
-                    <Loader title={"Søker"} />
-                  ) : (
-                    <MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />
-                  )
+                  <MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />
                 }
-                onClick={() => trigger()}
               >
-                {isLoading ? "Søker..." : "Søk"}
+                Søk
               </Button>
             </div>
             <div>
               <Button
+                size="small"
                 variant="secondary"
                 iconPosition="right"
-                icon={<EraserIcon title="reset søk" fontSize="1.5rem" />}
+                icon={<EraserIcon title="Nullstill søk" />}
                 onClick={handleReset}
               >
                 Nullstill
@@ -193,8 +198,8 @@ export default function SokPage() {
         <div className={styles["sok-feil"]}>
           <Alert variant="info">
             {error}
-            {sokParameter.fagGruppeKode
-              ? ` med faggruppe ${sokParameter.fagGruppeKode}`
+            {sokParameter.fagGruppe
+              ? ` med faggruppe ${sokParameter.fagGruppe}`
               : ""}
           </Alert>
         </div>

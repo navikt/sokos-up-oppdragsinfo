@@ -13,13 +13,8 @@ import OppdragTable from "./OppdragTable";
 
 export default function OppdragPage() {
   const navigate = useNavigate();
-  const {
-    gjelderId,
-    fagGruppeVisningText,
-    oppdragsListe,
-    gjelderNavn,
-    setGjelderNavn,
-  } = useStore();
+  const { gjelderId, fagGruppe, oppdragsListe, gjelderNavn, setGjelderNavn } =
+    useStore();
 
   useEffect(() => {
     if (!gjelderId || oppdragsListe === undefined || isEmpty(oppdragsListe)) {
@@ -51,7 +46,9 @@ export default function OppdragPage() {
                 <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
                 <LabelText
                   label={"Faggruppe"}
-                  text={fagGruppeVisningText ?? "Alle"}
+                  text={
+                    fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"
+                  }
                 />
               </div>
             </div>
