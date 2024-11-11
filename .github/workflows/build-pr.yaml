@@ -5,8 +5,6 @@ on:
 
 jobs:
   build-pr:
-    name: Build and test
-    runs-on: ubuntu-latest
     if: >
       !contains(github.event.pull_request.changed_files, 'LICENSE') &&
       !contains(github.event.pull_request.changed_files, 'CODEOWNERS') &&
@@ -16,6 +14,4 @@ jobs:
       !contains(github.event.pull_request.changed_files, '.github/workflows/manual-deploy-dev.yaml') &&
       !contains(github.event.pull_request.changed_files, '.github/workflows/security.yaml') &&
       !contains(github.event.pull_request.changed_files, '.github/workflows/alerts.yaml')
-    steps:
-      - name: Build PR
-        uses: navikt/moby-gha-workflows/.github/workflows/node-build-pr.yaml@main
+    uses: navikt/moby-gha-workflows/.github/workflows/node-build-pr.yaml@main
