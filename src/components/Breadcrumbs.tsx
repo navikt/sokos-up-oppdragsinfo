@@ -25,28 +25,29 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           )}
           {props.treffliste && (
             <div className={styles["breadcrumbs-crumb"]}>
-              <ChevronRightIcon /> Treffliste
+              <ChevronRightIcon title="Pil høyre" /> Treffliste
             </div>
           )}
           {props.trefflistelink && (
             <div className={styles["breadcrumbs-crumb"]}>
-              <ChevronRightIcon /> <Link to={"/oppdrag"}>Treffliste</Link>
+              <ChevronRightIcon title="Pil høyre" />{" "}
+              <Link to={"/oppdrag"}>Treffliste</Link>
             </div>
           )}
           {props.oppdrag && (
             <div className={styles["breadcrumbs-crumb"]}>
-              <ChevronRightIcon /> Oppdrag
+              <ChevronRightIcon title="Pil høyre" /> Oppdrag
             </div>
           )}
           {props.oppdraglink && (
             <div className={styles["breadcrumbs-crumb"]}>
-              <ChevronRightIcon />{" "}
+              <ChevronRightIcon title="Pil høyre" />{" "}
               <Link to={`/${props.oppdraglink}`}>Oppdrag</Link>
             </div>
           )}
           {props.oppdragsdetaljer && (
             <div className={styles["breadcrumbs-crumb"]}>
-              <ChevronRightIcon /> Detaljer
+              <ChevronRightIcon title="Pil høyre" /> Detaljer
             </div>
           )}
         </div>

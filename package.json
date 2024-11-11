@@ -89,6 +89,14 @@
       "stylelint-config-standard",
       "@navikt/aksel-stylelint/recommended"
     ],
+    "rules": {
+      "aksel/design-token-no-global-override": [
+        true,
+        {
+          "severity": "warning"
+        }
+      ]
+    },
     "ignoreFiles": "dist/**/*"
   },
   "prettier": {
