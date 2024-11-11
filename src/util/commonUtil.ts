@@ -54,7 +54,7 @@ export function hasKey<T extends object>(
   return Object.keys(o).includes(key);
 }
 
-export function formatDate(value: string) {
+export function formatDate(value?: string) {
   return dayjs(value).format("DD.MM.YYYY");
 }
 

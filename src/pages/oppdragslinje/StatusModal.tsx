@@ -56,7 +56,7 @@ export default function StatusModal(props: StatusModalProps) {
                   <Table.Row key={btoa(status.status + status.tidspktReg)}>
                     <Table.DataCell>{status.status}</Table.DataCell>
                     <Table.DataCell>
-                      {status.datoFom ? formatDate(status.datoFom) : ""}
+                      {formatDate(status.datoFom)}
                     </Table.DataCell>
                     <Table.DataCell>
                       {formatDateTime(status.tidspktReg)}
