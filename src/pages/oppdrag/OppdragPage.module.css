@@ -7,7 +7,7 @@
 }
 
 .oppdrag-top-info {
-  @apply bg-white px-5 py-2;
+  @apply rounded-[8px] bg-white py-2;
 }
 
 .oppdrag-panel {
@@ -15,5 +15,5 @@
 }
 
 .oppdrag-panel-content {
-  @apply flex flex-row space-x-12 p-5;
+  @apply flex flex-row gap-12 p-5;
 }

@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Heading, Loader } from "@navikt/ds-react";
+import { Button, Heading } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
@@ -32,7 +32,7 @@ export default function OppdragsLinjePage() {
     <>
       <div className={commonstyles.pageheading}>
         <Heading level="1" size="large">
-          Oppdragsinfo
+          Oppdragsinfo: Oppdrag
         </Heading>
       </div>
       {oppdragsLinjer && (
@@ -47,13 +47,31 @@ export default function OppdragsLinjePage() {
               </div>
             </div>
             <div className={commonstyles["knapperad-left"]}>
-              <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+              <Suspense
+                fallback={
+                  <Button size="small" loading variant="secondary-neutral">
+                    Omposteringer
+                  </Button>
+                }
+              >
                 <OmposteringModal oppdragsId={oppdrag!.oppdragsId} />
               </Suspense>
-              <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+              <Suspense
+                fallback={
+                  <Button size="small" loading variant="secondary-neutral">
+                    Statushistorikk
+                  </Button>
+                }
+              >
                 <StatushistorikkModal oppdragsId={oppdrag!.oppdragsId} />
               </Suspense>
-              <Suspense fallback={<Loader size="medium" title="Laster ..." />}>
+              <Suspense
+                fallback={
+                  <Button size="small" loading variant="secondary-neutral">
+                    Enhetshistorikk
+                  </Button>
+                }
+              >
                 <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
               </Suspense>
             </div>

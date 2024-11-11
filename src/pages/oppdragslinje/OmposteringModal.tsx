@@ -3,7 +3,7 @@ import { Alert, Button, Modal, Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { Ompostering } from "../../types/Ompostering";
 import { OppdragsId } from "../../types/OppdragsId";
-import { isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function OmposteringModal(props: OppdragsId) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export default function OmposteringModal(props: OppdragsId) {
         Omposteringer
       </Button>
 
-      <Modal ref={ref} header={{ heading: "Omposteringer" }} width={"2000px"}>
+      <Modal ref={ref} header={{ heading: "Omposteringer" }} width="1280px">
         <Modal.Body>
           {data && !isEmpty(data) && (
             <Table zebraStripes>
@@ -58,13 +58,15 @@ export default function OmposteringModal(props: OppdragsId) {
                     <Table.DataCell>{ompostering.lopenr}</Table.DataCell>
                     <Table.DataCell>{ompostering.ompostering}</Table.DataCell>
                     <Table.DataCell>
-                      {ompostering.omposteringFom}
+                      {formatDate(ompostering.omposteringFom)}
                     </Table.DataCell>
                     <Table.DataCell>{ompostering.feilReg}</Table.DataCell>
                     <Table.DataCell>{ompostering.beregningsId}</Table.DataCell>
                     <Table.DataCell>{ompostering.utfort}</Table.DataCell>
                     <Table.DataCell>{ompostering.brukerid}</Table.DataCell>
-                    <Table.DataCell>{ompostering.tidspktReg}</Table.DataCell>
+                    <Table.DataCell>
+                      {formatDateTime(ompostering.tidspktReg)}
+                    </Table.DataCell>
                   </Table.Row>
                 ))}
               </Table.Body>

@@ -19,5 +19,5 @@
 }
 
 .breadcrumbs-crumb {
-  @apply ml-1;
+  @apply ml-1 flex flex-row items-center;
 }

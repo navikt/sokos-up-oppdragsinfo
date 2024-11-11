@@ -2,6 +2,7 @@
 @import url("@navikt/ds-css");
 @import url("tailwindcss/components");
 @import url("tailwindcss/utilities");
+@import url("./design-system-overrides.css");
 
 html,
 body {

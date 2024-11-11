@@ -3,7 +3,7 @@ import { Alert, Button, Modal, Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { OppdragsId } from "../../types/OppdragsId";
 import { OppdragsStatus } from "../../types/OppdragsStatus";
-import { isEmpty } from "../../util/commonUtil";
+import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function StatushistorikkModal(props: OppdragsId) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -24,7 +24,7 @@ export default function StatushistorikkModal(props: OppdragsId) {
         Statushistorikk
       </Button>
 
-      <Modal ref={ref} header={{ heading: "Statushistorikk" }} width={"500px"}>
+      <Modal ref={ref} header={{ heading: "Statushistorikk" }}>
         <Modal.Body>
           {data && !isEmpty(data) && (
             <Table zebraStripes>
@@ -41,7 +41,9 @@ export default function StatushistorikkModal(props: OppdragsId) {
                 {data.map((status: OppdragsStatus) => (
                   <Table.Row key={btoa(status.kodeStatus)}>
                     <Table.DataCell>{status.kodeStatus}</Table.DataCell>
-                    <Table.DataCell>{status.tidspktReg}</Table.DataCell>
+                    <Table.DataCell>
+                      {formatDateTime(status.tidspktReg)}
+                    </Table.DataCell>
                     <Table.DataCell>{status.brukerid}</Table.DataCell>
                   </Table.Row>
                 ))}

@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { Status } from "../../types/Status";
-import { isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 interface StatusModalProps {
   oppdragsId: string;
@@ -55,8 +55,12 @@ export default function StatusModal(props: StatusModalProps) {
                 data?.map((status: Status) => (
                   <Table.Row key={btoa(status.status + status.tidspktReg)}>
                     <Table.DataCell>{status.status}</Table.DataCell>
-                    <Table.DataCell>{status.datoFom}</Table.DataCell>
-                    <Table.DataCell>{status.tidspktReg}</Table.DataCell>
+                    <Table.DataCell>
+                      {formatDate(status.datoFom)}
+                    </Table.DataCell>
+                    <Table.DataCell>
+                      {formatDateTime(status.tidspktReg)}
+                    </Table.DataCell>
                     <Table.DataCell>{status.brukerid}</Table.DataCell>
                   </Table.Row>
                 ))}

@@ -1,11 +1,11 @@
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
+import { FagGruppe } from "../types/FagGruppe";
 import { Oppdrag, OppdragsList } from "../types/Oppdrag";
 
 type AppState = {
   gjelderId: string;
-  fagGruppeVisningText?: string;
-  fagGruppeKode?: string;
+  fagGruppe?: FagGruppe;
   gjelderNavn: string;
   oppdragsListe?: OppdragsList;
   oppdrag?: Oppdrag;
@@ -15,9 +15,8 @@ type AppState = {
 type AppStateActions = {
   resetState: () => void;
   setGjelderId: (gjelderId: string) => void;
-  setFagGruppeVisningText: (fagGruppeVisningText: string) => void;
-  setFagGruppeKode: (fagGruppeKode: string) => void;
-  setGjelderNavn: (gjelerNavn: string) => void;
+  setFagGruppe: (fagGruppe: FagGruppe) => void;
+  setGjelderNavn: (gjelderNavn: string) => void;
   setOppdrag: (oppdrag: Oppdrag) => void;
   setOppdragsListe: (oppdragsListe: OppdragsList) => void;
   setLinjeId: (linjeId: string) => void;
@@ -25,8 +24,7 @@ type AppStateActions = {
 
 const initAppState = {
   gjelderId: "",
-  fagGruppeVisningText: undefined,
-  fagGruppeKode: undefined,
+  fagGruppe: undefined,
   gjelderNavn: "",
   oppdrag: undefined,
   oppdragsListe: undefined,
@@ -40,9 +38,7 @@ export const useStore = create<AppState & AppStateActions>()(
         ...initAppState,
         resetState: () => set({ ...initAppState }),
         setGjelderId: (gjelderId: string) => set({ gjelderId }),
-        setFagGruppeVisningText: (fagGruppeVisningText: string) =>
-          set({ fagGruppeVisningText }),
-        setFagGruppeKode: (fagGruppeKode: string) => set({ fagGruppeKode }),
+        setFagGruppe: (fagGruppe: FagGruppe) => set({ fagGruppe }),
         setGjelderNavn: (gjelderNavn: string) => set({ gjelderNavn }),
         setOppdrag: (oppdrag: Oppdrag) => set({ oppdrag }),
         setOppdragsListe: (oppdragsListe: OppdragsList) =>

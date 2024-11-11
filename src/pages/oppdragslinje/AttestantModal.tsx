@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { Attestant } from "../../types/Attestant";
-import { isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtil";
 
 interface AttestantModalProps {
   oppdragsId: string;
@@ -49,7 +49,9 @@ export default function AttestantModal(props: AttestantModalProps) {
                 data?.map((attestant: Attestant) => (
                   <Table.Row key={btoa(attestant.attestantId)}>
                     <Table.DataCell>{attestant.attestantId}</Table.DataCell>
-                    <Table.DataCell>{attestant.ugyldigFom}</Table.DataCell>
+                    <Table.DataCell>
+                      {formatDate(attestant.ugyldigFom)}
+                    </Table.DataCell>
                   </Table.Row>
                 ))}
             </Table.Body>
