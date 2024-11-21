@@ -6,9 +6,6 @@ metadata:
   labels:
     team: okonomi
 spec:
-  env:
-  - name: CORS_ALLOWED_ORIGIN
-    value: "https://utbetalingsportalen.intern.dev.nav.no"
   image: {{ image }}
   port: 8080
   liveness:

@@ -6,8 +6,11 @@ import path from "path";
 const basePath = "/sokos-up-oppdragsinfo";
 const buildPath = path.resolve(__dirname, "../dist");
 const server = express();
-const corsAllowedOrigin =
-  process.env.CORS_ALLOWED_ORIGIN || "http://localhost:5173";
+
+const corsAllowedOrigin = [
+  /https:\/\/utbetalingsportalen(-.*|\.dev)?\.intern(\.dev)?\.nav\.no/,
+  "http://localhost:5173",
+];
 
 server.use(cors({ origin: corsAllowedOrigin }));
 
