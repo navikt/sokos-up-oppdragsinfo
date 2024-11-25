@@ -24,7 +24,8 @@ spec:
     min: 2
     max: 4
   ingresses:
-    - "https://utbetalingsportalen.intern.dev.nav.no/sokos-up-oppdragsinfo"
+    - "https://utbetalingsportalen.intern.nav.no/sokos-up-oppdragsinfo"
+    - "https://utbetalingsportalen.ansatt.nav.no/sokos-up-oppdragsinfo"
   resources:
     limits:
       cpu: "3"
