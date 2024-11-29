@@ -8,7 +8,7 @@ const buildPath = path.resolve(__dirname, "../dist");
 const server = express();
 
 const corsAllowedOrigin = [
-  /https:\/\/utbetalingsportalen(-[a-z0-9]+)?\.(intern|ansatt)\.(dev\.)?nav\.no/,
+  /https:\/\/utbetalingsportalen(-[a-z][a-z0-9])?(.ansatt|.intern)(.dev)?.nav.no/,
   "http://localhost:5173",
 ];
 
