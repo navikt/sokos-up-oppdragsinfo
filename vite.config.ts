@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => ({
   },
   server: {
     proxy: {
-      ...(mode === "backend" && {
+      ...((mode === "backend" || /^.*-q1$/.test(mode)) && {
         "/oppdrag-api/api/v1": {
           target: /^.*-q1$/.test(mode)
             ? "https://sokos-oppdrag.intern.dev.nav.no"
