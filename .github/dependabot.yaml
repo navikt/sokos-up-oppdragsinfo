@@ -9,7 +9,7 @@ updates:
       timezone: "Europe/Oslo"
     open-pull-requests-limit: 10
     groups:
-      nav-designsystem:
+      aksel:
         patterns:
           - "@navikt/aksel-*"
           - "@navikt/ds-*"
