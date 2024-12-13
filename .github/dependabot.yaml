@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: weekly
+      interval: "weekly"
       day: "monday"
       time: "06:00"
       timezone: "Europe/Oslo"
@@ -27,10 +27,10 @@ updates:
           - "@navikt/aksel-*"
           - "@navikt/ds-*"
 
-  - package-ecosystem: npm
+  - package-ecosystem: "npm"
     directory: "/server"
     schedule:
-      interval: weekly
+      interval: "weekly"
       day: "monday"
       time: "06:00"
       timezone: "Europe/Oslo"
