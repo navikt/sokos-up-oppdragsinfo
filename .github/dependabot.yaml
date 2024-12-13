@@ -1,16 +1,31 @@
 version: 2
 updates:
-  - package-ecosystem: npm
+  - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: weekly
       day: "monday"
       time: "06:00"
       timezone: "Europe/Oslo"
+    open-pull-requests-limit: 10
     groups:
-      npm:
+      nav-designsystem:
         patterns:
-          - "*"
+          - "@navikt/aksel-*"
+          - "@navikt/ds-*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+      minor-and-patch:
+        update-types:
+          - "patch"
+          - "minor"
+        exclude-patterns:
+          - "react"
+          - "react-dom"
+          - "@navikt/aksel-*"
+          - "@navikt/ds-*"
 
   - package-ecosystem: npm
     directory: "/server"
@@ -23,3 +38,9 @@ updates:
       npm:
         patterns:
           - "*"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
