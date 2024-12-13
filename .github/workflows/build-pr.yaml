@@ -7,6 +7,9 @@ jobs:
   build-pr:
     name: Build and test
     if: >
+      !contains(github.event.pull_request.changed_files, 'LICENSE') &&
+      !contains(github.event.pull_request.changed_files, 'CODEOWNERS') &&
+      !contains(github.event.pull_request.changed_files, '.gitignore') &&
       !contains(github.event.pull_request.changed_files, '.nais/**') &&
       !contains(github.event.pull_request.changed_files, '.github/dependabot.yml') &&
       !contains(github.event.pull_request.changed_files, '.github/workflows/deploy.yaml') &&
