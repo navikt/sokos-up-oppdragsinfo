@@ -1,6 +1,31 @@
-# sokos-up-oppdragsinfo
+# Oppdragsinfo mikrofrontend
 
-## Dokumentasjon
+(Kort beskrivelse av applikasjonen)
+Mer dokumentasjon kan du finne under mappen [dokumentasjon](dokumentasjon)
+Backend til applikasjonen er [sokos-oppdrag](https://github.com/navikt/sokos-oppdrag)
+
+## Miljøer
+
+- [Q1-miljø](https://utbetalingsportalen.intern.dev.nav.no/oppdragsinfo)
+- [QX-miljø](https://utbetalingsportalen-qx.intern.nav.no/oppdragsinfo)
+
+## Tilganger
+
+### Hvordan få tilgang
+
+Mininum av AD-gruppe som kreves for å få tilgang til skjermbildet:
+
+- `0000-GA-SOKOS-MF-OPPDRAGSINFO-READ` (selve applikasjon i utbetalingsportalen)
+
+Tilgang fås ved ta kontakt med din identansvarlig. Det kan noen ganger være en strevsomt å få på plass tilganger
+i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon med dem (kolonne 1 nedenfor)
+
+### Beskrivelse av AD-grupper og hva de heter i identrutinen
+
+| Navn Identrutinen | AD-gruppe | Applikasjonstilgang | Beskrivelse   |
+| ----------------- | --------- | ------------------- | ------------- |
+| Navn              | Navn      | X                   | Lesetilgang   |
+| Navn              | Navn      | X                   | Skrivetilgang |
 
 ## Kom i gang
 
