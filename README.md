@@ -13,19 +13,24 @@ Backend til applikasjonen er [sokos-oppdrag](https://github.com/navikt/sokos-opp
 
 ### Hvordan få tilgang
 
-Mininum av AD-gruppe som kreves for å få tilgang til skjermbildet:
+For å få tilgang til selve skjermbildet (basistilgang):
 
-- `0000-GA-SOKOS-MF-OPPDRAGSINFO-READ` (selve applikasjon i utbetalingsportalen)
+- `0000-GA-SOKOS-MF-OPPDRAGSINFO` (selve applikasjon i Utbetalingsportalen)
 
 Tilgang fås ved ta kontakt med din identansvarlig. Det kan noen ganger være en strevsomt å få på plass tilganger
-i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon med dem (kolonne 1 nedenfor)
+i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon med dem.
 
 ### Beskrivelse av AD-grupper og hva de heter i identrutinen
 
-| Navn Identrutinen | AD-gruppe | Applikasjonstilgang | Beskrivelse   |
-| ----------------- | --------- | ------------------- | ------------- |
-| Navn              | Navn      | X                   | Lesetilgang   |
-| Navn              | Navn      | X                   | Skrivetilgang |
+| Navn Identrutinen                                            | AD-gruppe                                    | Beskrivelse                                                             |
+| ------------------------------------------------------------ | -------------------------------------------- | ----------------------------------------------------------------------- |
+| Utbetalingsportalen - oppdragsinfo - Applikasjonstilgang     | 0000-GA-SOKOS-MF-Oppdragsinfo                | Basis tilgang                                                           |
+| Utbetalingsportalen – oppdragsinfo - lesetilgang - NØS       | 0000-GA-SOKOS-MF-OppdragsInfo-NØS-READ       | Lese tilgang for NØS                                                    |
+| Utbetalingsportalen – oppdragsinfo - lesetilgang - NØP       | 0000-GA-SOKOS-MF-OppdragsInfo-NØP-READ       | Lese tilgang for NØP                                                    |
+| Utbetalingsportalen – oppdragsinfo - lesetilgang – nasjonalt | 0000-GA-SOKOS-MF-OppdragsInfo-nasjonalt-READ | Lese tilgang for landekkende                                            |
+| Økonomiportalen - Egne ansatte                               | 0000-GA-okonomi-egne_ansatte                 | Tilgang for å se egne ansatte                                           |
+| Økonomiportalen - Fortrolig                                  | 0000-GA-okonomi-fortrolig                    | Tilgang for å se fortrolig, kode 6 (Adressebeskyttede personer)         |
+| Økonomiportalen - Strengt fortrolig                          | 0000-GA-okonomi-strengt_fortrolig            | Tilgang for å se strengt fortrolig, kode 7 (Adressebeskyttede personer) |
 
 ## Kom i gang
 
