@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { JSX, Suspense, useEffect } from "react";
 import {
   Route,
   RouterProvider,
