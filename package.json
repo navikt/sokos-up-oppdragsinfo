@@ -4,7 +4,7 @@
   "description": "Oppdragsinfo i Utbetalingsportalen",
   "type": "module",
   "scripts": {
-    "dev:mock": "vite --mode mock",
+    "dev": "vite --mode mock",
     "dev:backend": "vite --mode backend",
     "dev:backend-q1": "vite --mode backend-q1",
     "build": "tsc && vite build",
