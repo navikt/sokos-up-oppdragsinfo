@@ -14,8 +14,6 @@ const corsAllowedOrigin = [
 
 server.use(cors({ origin: corsAllowedOrigin }));
 
-server.use(cors({ origin: corsAllowedOrigin }));
-
 server.use(
   basePath,
   expressStaticGzip(buildPath, {
