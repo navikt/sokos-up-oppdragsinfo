@@ -7,7 +7,7 @@
 }
 
 .sok-inputfields {
-  @apply w-36 space-y-5 pb-6;
+  @apply relative w-36 space-y-5 pb-6;
 }
 
 .sok-knapperad {
@@ -24,6 +24,10 @@
 
 .sok-feil {
   @apply pt-5;
+}
+
+.sok-error-message-nowrap {
+  @apply absolute left-2 ml-3 whitespace-nowrap;
 }
 
 .combobox {

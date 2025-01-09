@@ -122,7 +122,13 @@ export default function SokPage() {
             <TextField
               label="Gjelder"
               size={"small"}
-              error={errors.gjelderId?.message}
+              error={
+                errors.gjelderId?.message && (
+                  <span className={styles["sok-error-message-nowrap"]}>
+                    {errors.gjelderId?.message}
+                  </span>
+                )
+              }
               id="gjelderId"
               {...register("gjelderId", {
                 setValueAs: (value: string) => value.trim(),
