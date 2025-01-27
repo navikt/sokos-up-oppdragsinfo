@@ -25,13 +25,13 @@ permissions:
 jobs:
   build:
     name: Build/test & push image
-    uses: navikt/monster-gha-workflows/.github/workflows/node-build-push-image.yaml@main
+    uses: navikt/mob-gha-workflows/.github/workflows/node-build-push-image.yaml@main
     secrets: inherit
 
   deploy-dev:
     needs: build
     name: Deploy to dev-gcp
-    uses: navikt/monster-gha-workflows/.github/workflows/nais-app-deploy.yaml@main
+    uses: navikt/mob-gha-workflows/.github/workflows/nais-app-deploy.yaml@main
     with:
       cluster: dev-gcp
       resource: .nais/naiserator-dev.yaml
@@ -39,7 +39,7 @@ jobs:
 #  deploy-prod:
 #    needs: [build, deploy-dev]
 #    name: Deploy to prod-gcp
-#    uses: navikt/monster-gha-workflows/.github/workflows/nais-app-deploy.yaml@main
+#    uses: navikt/mob-gha-workflows/.github/workflows/nais-app-deploy.yaml@main
 #    with:
 #      cluster: prod-gcp
 #      resource: .nais/naiserator-prod.yaml
