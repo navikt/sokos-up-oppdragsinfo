@@ -81,6 +81,7 @@ export default function OppdragTable(props: OppdragTableProps) {
                 <Table.DataCell>
                   <Link
                     to={`/${oppdrag.oppdragsId}`}
+                    replace
                     onClick={() => setOppdrag(oppdrag)}
                   >
                     {oppdrag.fagSystemId}
