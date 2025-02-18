@@ -1,23 +1,37 @@
 .breadcrumbs {
-  @apply relative h-16 max-w-[1440px] rounded-lg bg-[--a-surface-alt-1-subtle];
+  position: relative;
+  height: 4rem;
+  min-width: 1024px;
+  max-width: 1440px;
+  border-radius: 0.5rem;
+  background-color: var(--a-surface-alt-1-subtle);
 }
 
 .breadcrumbs a {
-  @apply text-[--a-text-action-on-action-subtle];
+  color: var(--a-text-action-on-action-subtle);
 }
 
 .breadcrumbs-contents {
-  @apply flex min-w-56 flex-row;
+  display: flex;
+  min-width: 14rem;
+  flex-direction: row;
 }
 
 .breadcrumbs-left {
-  @apply absolute left-5 top-5;
+  position: absolute;
+  left: 1.25rem;
+  top: 1.25rem;
 }
 
 .breadcrumbs-right {
-  @apply absolute right-5 top-5;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
 }
 
 .breadcrumbs-crumb {
-  @apply ml-1 flex flex-row items-center;
+  margin-left: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

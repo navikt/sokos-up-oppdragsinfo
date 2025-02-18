@@ -1,47 +1,65 @@
 .knapperad {
-  @apply flex flex-row gap-3;
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
 }
 
 .knapperad-left {
-  @apply knapperad justify-start;
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  justify-content: flex-start;
 }
 
 .bold {
-  @apply whitespace-nowrap font-bold;
+  white-space: nowrap;
+  font-weight: bold;
 }
 
 .row {
-  @apply flex flex-row gap-1;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
 }
 
 .singlerow {
-  @apply flex flex-row;
+  display: flex;
+  flex-direction: row;
 }
 
 .spacing {
-  @apply h-16;
+  height: 4rem;
 }
 
 .contentloader {
-  @apply w-full py-16 text-center;
+  width: 100%;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  text-align: center;
 }
 
 .nowrap {
-  @apply whitespace-nowrap;
+  white-space: nowrap;
 }
 
 .pageheading {
-  @apply whitespace-nowrap text-center;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .sortable-table {
-  @apply min-w-1400 bg-[--a-surface-default];
+  min-width: 1400px;
+  background-color: var(--a-surface-default);
 }
 
 .sortable-table-topinfo {
-  @apply flex flex-row justify-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .sortable-table-pagination {
-  @apply flex flex-row place-content-center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
