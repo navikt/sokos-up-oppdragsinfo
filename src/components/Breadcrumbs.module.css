@@ -1,6 +1,7 @@
 .breadcrumbs {
   position: relative;
   height: 4rem;
+  min-width: 1024px;
   max-width: 1440px;
   border-radius: 0.5rem;
   background-color: var(--a-surface-alt-1-subtle);
