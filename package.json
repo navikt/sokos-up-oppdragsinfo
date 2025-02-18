@@ -56,7 +56,6 @@
     "postcss": "^8.5.2",
     "postcss-import": "^16.1.0",
     "prettier": "^3.5.0",
-    "prettier-plugin-tailwindcss": "^0.6.11",
     "stylelint": "^16.14.1",
     "stylelint-config-standard": "^37.0.0",
     "typescript": "^5.7.3",
@@ -107,10 +106,8 @@
       {
         "files": "**/*.module.css",
         "options": {
-          "tailwindConfig": "tailwind.config.cjs",
           "plugins": [
-            "@trivago/prettier-plugin-sort-imports",
-            "prettier-plugin-tailwindcss"
+            "@trivago/prettier-plugin-sort-imports"
           ]
         }
       },

@@ -6,12 +6,12 @@
 }
 
 .oppdragslinjedetaljer-top {
-  margin-left: 9rem;
-  margin-right: 9rem;
   max-width: 1440px;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  min-width: 1048px;
+  margin: auto;
 }
 
 .oppdragslinjedetaljer-toppinfo {
