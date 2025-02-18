@@ -1,11 +1,21 @@
 .oppdragslinjedetaljer {
-  @apply mx-auto my-3 space-y-6;
+  margin: 0.75rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .oppdragslinjedetaljer-top {
-  @apply mx-36 max-w-[1440px] space-y-5;
+  margin-left: 9rem;
+  margin-right: 9rem;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .oppdragslinjedetaljer-toppinfo {
-  @apply relative bg-[--a-surface-default] p-6;
+  position: relative;
+  background-color: var(--a-surface-default);
+  padding: 1.5rem;
 }

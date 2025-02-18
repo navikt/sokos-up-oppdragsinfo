@@ -1,39 +1,61 @@
 .sok {
-  @apply relative mx-auto min-w-[780px] max-w-[1440px] rounded-[8px] bg-[--a-surface-alt-1-subtle] p-5;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 780px;
+  max-width: 1440px;
+  border-radius: 8px;
+  background-color: var(--a-surface-alt-1-subtle);
+  padding: 1.25rem;
 }
 
 .sok-heading {
-  @apply whitespace-nowrap;
+  white-space: nowrap;
 }
 
 .sok-inputfields {
-  @apply relative w-36 space-y-5 pb-6;
+  position: relative;
+  width: 9rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .sok-knapperad {
-  @apply flex min-w-64 flex-row-reverse;
+  display: flex;
+  min-width: 16rem;
+  flex-direction: row-reverse;
 }
 
 .sok-buttonwrapper {
-  @apply pl-7;
+  padding-left: 1.75rem;
 }
 
 .sok-help {
-  @apply absolute right-5 top-5;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
 }
 
 .sok-feil {
-  @apply pt-5;
+  padding-top: 1.25rem;
 }
 
 .sok-error-message-nowrap {
-  @apply absolute left-2 ml-3 whitespace-nowrap;
+  position: absolute;
+  left: 0.5rem;
+  margin-left: 0.75rem;
+  white-space: nowrap;
 }
 
 .combobox {
-  @apply relative min-w-128;
+  position: relative;
+  min-width: 32rem;
 }
 
 .combobox-clearbutton {
-  @apply absolute right-9 top-10;
+  position: absolute;
+  right: 2.25rem;
+  top: 2.5rem;
 }

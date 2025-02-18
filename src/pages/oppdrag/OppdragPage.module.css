@@ -1,19 +1,36 @@
 .oppdrag {
-  @apply mx-auto my-3 min-w-1024 max-w-[1440px] space-y-6;
+  margin: 0.75rem auto;
+  min-width: 1024px;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .oppdrag-top {
-  @apply mx-36 min-w-1024 space-y-5;
+  margin-left: 9rem;
+  margin-right: 9rem;
+  min-width: 1024px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .oppdrag-top-info {
-  @apply rounded-[8px] bg-white py-2;
+  border-radius: 8px;
+  background-color: white;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .oppdrag-panel {
-  @apply rounded-xl bg-white;
+  border-radius: 1rem;
+  background-color: white;
 }
 
 .oppdrag-panel-content {
-  @apply flex flex-row gap-12 p-5;
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  padding: 1.25rem;
 }
