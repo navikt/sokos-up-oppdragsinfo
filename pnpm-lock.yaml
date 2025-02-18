@@ -122,6 +122,9 @@ importers:
       postcss:
         specifier: ^8.5.2
         version: 8.5.2
+      postcss-import:
+        specifier: ^16.1.0
+        version: 16.1.0(postcss@8.5.2)
       prettier:
         specifier: ^3.5.0
         version: 3.5.1
@@ -3772,6 +3775,13 @@ packages:
     engines: { node: ">=0.10" }
     hasBin: true
 
+  pify@2.3.0:
+    resolution:
+      {
+        integrity: sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==,
+      }
+    engines: { node: ">=0.10.0" }
+
   playwright-core@1.50.1:
     resolution:
       {
@@ -3794,6 +3804,15 @@ packages:
         integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==,
       }
     engines: { node: ">= 0.4" }
+
+  postcss-import@16.1.0:
+    resolution:
+      {
+        integrity: sha512-7hsAZ4xGXl4MW+OKEWCnF6T5jqBw80/EE9aXg1r2yyn1RsVEU8EtKXbijEODa+rg7iih4bKf7vlvTGYR4CnPNg==,
+      }
+    engines: { node: ">=18.0.0" }
+    peerDependencies:
+      postcss: ^8.0.0
 
   postcss-resolve-nested-selector@0.1.6:
     resolution:
@@ -4022,6 +4041,12 @@ packages:
       }
     engines: { node: ">=0.10.0" }
 
+  read-cache@1.0.0:
+    resolution:
+      {
+        integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==,
+      }
+
   reflect.getprototypeof@1.0.10:
     resolution:
       {
@@ -4069,6 +4094,14 @@ packages:
         integrity: sha512-qYg9KP24dD5qka9J47d0aVky0N+b4fTU89LN9iDnjB5waksiC49rvMB0PrUJQGoTmH50XPiqOvAjDfaijGxYZw==,
       }
     engines: { node: ">=8" }
+
+  resolve@1.22.10:
+    resolution:
+      {
+        integrity: sha512-NPRy+/ncIMeDlTAsuqwKIiferiawhefFJtkNSW0qZJEqMEb+qBt/77B/jGeeek+F0uOeN05CDa6HXbbIgtVX4w==,
+      }
+    engines: { node: ">= 0.4" }
+    hasBin: true
 
   resolve@2.0.0-next.5:
     resolution:
@@ -7317,6 +7350,8 @@ snapshots:
 
   pidtree@0.6.0: {}
 
+  pify@2.3.0: {}
+
   playwright-core@1.50.1: {}
 
   playwright@1.50.1:
@@ -7326,6 +7361,13 @@ snapshots:
       fsevents: 2.3.2
 
   possible-typed-array-names@1.1.0: {}
+
+  postcss-import@16.1.0(postcss@8.5.2):
+    dependencies:
+      postcss: 8.5.2
+      postcss-value-parser: 4.2.0
+      read-cache: 1.0.0
+      resolve: 1.22.10
 
   postcss-resolve-nested-selector@0.1.6: {}
 
@@ -7432,6 +7474,10 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
+  read-cache@1.0.0:
+    dependencies:
+      pify: 2.3.0
+
   reflect.getprototypeof@1.0.10:
     dependencies:
       call-bind: 1.0.8
@@ -7461,6 +7507,12 @@ snapshots:
   resolve-from@4.0.0: {}
 
   resolve-from@5.0.0: {}
+
+  resolve@1.22.10:
+    dependencies:
+      is-core-module: 2.16.1
+      path-parse: 1.0.7
+      supports-preserve-symlinks-flag: 1.0.0
 
   resolve@2.0.0-next.5:
     dependencies:
