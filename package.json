@@ -137,12 +137,5 @@
   "engines": {
     "node": ">=22.12.0",
     "pnpm": ">=9.15"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "msw",
-      "protobufjs"
-    ]
   }
 }
