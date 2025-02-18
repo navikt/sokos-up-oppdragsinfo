@@ -81,3 +81,11 @@ export function applySortDirection<T>(sort?: SortState<T>) {
     return 1;
   };
 }
+
+export function formaterTilNorskTall(sats?: number) {
+  if (!sats) return "";
+  return new Intl.NumberFormat("no-NO", {
+    style: "decimal",
+    minimumFractionDigits: 2,
+  }).format(sats);
+}

@@ -10,7 +10,7 @@ import {
   applySortDirection,
   firstOf,
   formatDate,
-  formatDateTime,
+  formaterTilNorskTall,
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
@@ -88,9 +88,6 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
               </Table.ColumnHeader>
               <Table.HeaderCell scope="col">Linje Id ref</Table.HeaderCell>
               <Table.HeaderCell scope="col">Attestert</Table.HeaderCell>
-              <Table.ColumnHeader sortKey={"tidspktReg"} sortable>
-                Tidspunkt registrert
-              </Table.ColumnHeader>
               <Table.HeaderCell scope="col" />
             </Table.Row>
           </Table.Header>
@@ -105,7 +102,9 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 <Table.DataCell>
                   {formatDate(linje.datoVedtakTom)}
                 </Table.DataCell>
-                <Table.DataCell>{linje.sats}</Table.DataCell>
+                <Table.DataCell>
+                  {formaterTilNorskTall(linje.sats)}
+                </Table.DataCell>
                 <Table.DataCell>{linje.typeSats}</Table.DataCell>
                 <Table.DataCell>
                   <Suspense
@@ -138,9 +137,6 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                       linjeId={linje.linjeId}
                     />
                   </Suspense>
-                </Table.DataCell>
-                <Table.DataCell>
-                  {formatDateTime(linje.tidspktReg)}
                 </Table.DataCell>
                 <Table.DataCell>
                   <Link

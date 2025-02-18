@@ -10,6 +10,7 @@ import {
   firstOf,
   formatDate,
   formatDateTime,
+  formaterTilNorskTall,
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
@@ -79,6 +80,9 @@ export default function OppdragsLinjeDetaljerTable(
               <Table.ColumnHeader sortKey={"refunderesOrgnr"}>
                 Refund ID
               </Table.ColumnHeader>
+              <Table.ColumnHeader sortKey={"vedtakssats"}>
+                Vedtakssats
+              </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"tidspktReg"}>
                 Tidspunkt registrert
               </Table.ColumnHeader>
@@ -92,7 +96,9 @@ export default function OppdragsLinjeDetaljerTable(
               <Table.Row key={btoa("" + linje.linjeId)}>
                 <Table.DataCell>{linje.linjeId}</Table.DataCell>
                 <Table.DataCell>{linje.delytelseId}</Table.DataCell>
-                <Table.DataCell>{linje.sats}</Table.DataCell>
+                <Table.DataCell>
+                  {formaterTilNorskTall(linje.sats)}
+                </Table.DataCell>
                 <Table.DataCell>
                   {formatDate(linje.datoVedtakFom)}
                 </Table.DataCell>
@@ -101,6 +107,9 @@ export default function OppdragsLinjeDetaljerTable(
                 </Table.DataCell>
                 <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
                 <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
+                <Table.DataCell>
+                  {formaterTilNorskTall(linje.vedtakssats)}
+                </Table.DataCell>
                 <Table.DataCell>
                   {formatDateTime(linje.tidspktReg)}
                 </Table.DataCell>
