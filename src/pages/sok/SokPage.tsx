@@ -91,7 +91,7 @@ export default function SokPage() {
         setError(null);
         if (!isEmpty(response)) {
           useStore.setState({ oppdragsListe: response });
-          navigate("/oppdrag");
+          navigate("/oppdrag", { replace: false });
         } else {
           setError(
             `Fant ingen oppdrag for ${gjelderId}${
