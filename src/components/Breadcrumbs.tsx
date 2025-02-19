@@ -20,7 +20,9 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
         <div className={styles["breadcrumbs-contents"]}>
           {props.searchLink && (
             <div className={styles["breadcrumbs-crumb"]}>
-              <Link to={ROOT}>Gjeldende Søk</Link>
+              <Link to={ROOT} replace>
+                Gjeldende Søk
+              </Link>
             </div>
           )}
           {props.treffliste && (
@@ -31,7 +33,9 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           {props.trefflistelink && (
             <div className={styles["breadcrumbs-crumb"]}>
               <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={"/oppdrag"}>Treffliste</Link>
+              <Link to={"/oppdrag"} replace>
+                Treffliste
+              </Link>
             </div>
           )}
           {props.oppdrag && (
@@ -42,7 +46,9 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           {props.oppdraglink && (
             <div className={styles["breadcrumbs-crumb"]}>
               <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={`/${props.oppdraglink}`}>Oppdrag</Link>
+              <Link to={`/${props.oppdraglink}`} replace>
+                Oppdrag
+              </Link>
             </div>
           )}
           {props.oppdragsdetaljer && (

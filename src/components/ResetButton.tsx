@@ -12,7 +12,7 @@ export default function ResetButton() {
   function handleReset(e: FormEvent) {
     e.preventDefault();
     resetState();
-    navigate(BASENAME);
+    navigate(BASENAME, { replace: true });
   }
 
   return (

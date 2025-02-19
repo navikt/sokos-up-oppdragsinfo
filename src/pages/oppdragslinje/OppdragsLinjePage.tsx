@@ -24,7 +24,7 @@ export default function OppdragsLinjePage() {
 
   useEffect(() => {
     if (!gjelderId || oppdrag === undefined) {
-      navigate(ROOT);
+      navigate(ROOT, { replace: true });
     }
   }, [gjelderId, oppdrag, navigate]);
 
