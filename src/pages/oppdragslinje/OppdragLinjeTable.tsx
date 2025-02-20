@@ -141,6 +141,7 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 <Table.DataCell>
                   <Link
                     to={`/${props.oppdragsId}/${linje.linjeId}`}
+                    replace
                     onClick={() => setLinjeId(linje.linjeId)}
                   >
                     Detaljer...

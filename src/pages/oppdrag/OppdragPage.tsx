@@ -18,7 +18,7 @@ export default function OppdragPage() {
 
   useEffect(() => {
     if (!gjelderId || oppdragsListe === undefined || isEmpty(oppdragsListe)) {
-      navigate(ROOT);
+      navigate(ROOT, { replace: true });
     }
 
     if (gjelderNavn === "") {

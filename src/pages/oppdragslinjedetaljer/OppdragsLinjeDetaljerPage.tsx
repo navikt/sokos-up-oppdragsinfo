@@ -32,7 +32,7 @@ export default function OppdragsLinjeDetaljerPage() {
 
   useEffect(() => {
     if (!gjelderId || !oppdrag) {
-      navigate(ROOT);
+      navigate(ROOT, { replace: true });
     }
   }, [gjelderId, oppdrag, navigate]);
 
