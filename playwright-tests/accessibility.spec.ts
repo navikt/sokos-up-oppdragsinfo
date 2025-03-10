@@ -21,14 +21,14 @@ test.describe("Axe a11y", () => {
     await expect(page.getByRole("heading", { name: "Søk" })).toBeVisible();
     expect(accessibilityScanResults.violations).toEqual([]);
   });
-  test(`/oppdragsinfo/oppdrag should not have any automatically detectable accessibility issues`, async ({
+  test(`/oppdragsinfo/treffliste should not have any automatically detectable accessibility issues`, async ({
     page,
   }) => {
     await page.context().addInitScript((appState) => {
       window.sessionStorage.setItem("app-state", JSON.stringify(appState));
     }, aTrefflisteAppState);
 
-    await page.goto("/oppdragsinfo/oppdrag");
+    await page.goto("/oppdragsinfo/treffliste");
 
     await expect(
       page.getByRole("heading", { name: "Treffliste" }),

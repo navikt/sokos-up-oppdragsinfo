@@ -80,7 +80,7 @@ export default function OppdragTable(props: OppdragTableProps) {
               <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                 <Table.DataCell>
                   <Link
-                    to={`/${oppdrag.oppdragsId}`}
+                    to={"/oppdrag"}
                     replace
                     onClick={() => setOppdrag(oppdrag)}
                   >
