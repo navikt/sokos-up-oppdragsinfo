@@ -1,6 +1,6 @@
 import apiService from "../api/apiService";
 import EnhetLabel from "../pages/oppdrag/EnhetLabel";
-import styles from "../pages/oppdrag/OppdragsLinjePage.module.css";
+import styles from "../pages/oppdrag/OppdragPage.module.css";
 import { useStore } from "../store/AppState";
 import { Oppdrag } from "../types/Oppdrag";
 import LabelText from "./LabelText";
