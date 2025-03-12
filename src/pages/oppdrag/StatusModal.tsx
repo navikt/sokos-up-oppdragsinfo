@@ -39,13 +39,13 @@ export default function StatusModal(props: StatusModalProps) {
                   Status
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"datoFom"} scope="col">
-                  Dato Fom
+                  Dato fom
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"tidspktReg"} scope="col">
-                  Tidspkt Reg
+                  Registert i Oppdragssystemet
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"brukerid"} scope="col">
-                  Bruker-ID
+                  Brukerid
                 </Table.HeaderCell>
               </Table.Row>
             </Table.Header>

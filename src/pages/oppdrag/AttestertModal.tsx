@@ -4,13 +4,13 @@ import apiService from "../../api/apiService";
 import { Attestant } from "../../types/Attestant";
 import { formatDate, isEmpty } from "../../util/commonUtil";
 
-interface AttestantModalProps {
+interface AttestertModalProps {
   oppdragsId: string;
   linjeId: string;
   text: string;
 }
 
-export default function AttestantModal(props: AttestantModalProps) {
+export default function AttestertModal(props: AttestertModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
   const { data } = apiService.useFetchHentAttestanter(
@@ -30,16 +30,16 @@ export default function AttestantModal(props: AttestantModalProps) {
         {props.text}
       </Button>
 
-      <Modal ref={ref} header={{ heading: "Attestant" }}>
+      <Modal ref={ref} header={{ heading: "Attestert" }}>
         <Modal.Body>
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell key={"attestantId"} scope="col">
-                  Attestant-ID
+                  Attestert av
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"ugyldigFom"} scope="col">
-                  Ugyldig Fom
+                  Gyldig tom
                 </Table.HeaderCell>
               </Table.Row>
             </Table.Header>

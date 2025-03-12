@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import commonstyles from "../../styles/common-styles.module.css";
-import { OppdragsLinjeDetaljer } from "../../types/OppdragsLinjeDetaljer";
+import { KorrigertLinje } from "../../types/KorrigertLinje";
 import { OppdragsLinje } from "../../types/Oppdragslinje";
 import {
   SortState,
@@ -15,30 +15,30 @@ import {
   hasKey,
 } from "../../util/commonUtil";
 
-interface OppdragsLinjeDetaljerTableProps {
-  oppdragsLinjeDetaljer: OppdragsLinjeDetaljer;
+interface KorrigerteLinjerTableProps {
+  oppdragsLinjeDetaljer: KorrigertLinje;
 }
 
-export default function OppdragsLinjeDetaljerTable(
-  props: OppdragsLinjeDetaljerTableProps,
+export default function KorrigerteLinjerTable(
+  props: KorrigerteLinjerTableProps,
 ) {
   const [sort, setSort] = useState<SortState<OppdragsLinje> | undefined>();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const oppdragsLinjer = props.oppdragsLinjeDetaljer.korrigerteLinjeIder;
+  const korrigertLinjeIder = props.oppdragsLinjeDetaljer.korrigerteLinjeIder;
 
   const linjeSort = (sortKey?: string) => {
-    if (hasKey(firstOf(oppdragsLinjer), sortKey))
+    if (hasKey(firstOf(korrigertLinjeIder), sortKey))
       handleSort<OppdragsLinje>(sortKey, setSort, sort);
   };
 
-  const sortedData = oppdragsLinjer.slice().sort(applySortDirection(sort));
+  const sortedData = korrigertLinjeIder.slice().sort(applySortDirection(sort));
   const pageData = sortedData.slice(
     (currentPage - 1) * rowsPerPage,
     currentPage * rowsPerPage,
   );
-  const pagecount = Math.ceil(oppdragsLinjer.length / rowsPerPage);
-  const antall = oppdragsLinjer?.length ?? 0;
+  const pagecount = Math.ceil(korrigertLinjeIder.length / rowsPerPage);
+  const antall = korrigertLinjeIder?.length ?? 0;
 
   return (
     <>
@@ -60,34 +60,34 @@ export default function OppdragsLinjeDetaljerTable(
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"linjeId"} sortable>
-                Linje-ID
+                Linje
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"delytelseId"} sortable>
-                Delytelse ID
+                Delytelse
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"sats"} sortable>
                 Sats
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakFom"} sortable>
-                Vedtak FOM
+                Vedtak fom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakTom"} sortable>
-                Vedtak TOM
+                Vedtak tom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"utbetalesTilId"}>
                 Utbetales til
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"refunderesOrgnr"}>
-                Refund ID
+                Refunderes
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"vedtakssats"}>
                 Vedtakssats
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"tidspktReg"}>
-                Tidspunkt registrert
+                Registrert i Oppdragssystemet
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"brukerId"}>
-                Bruker ID
+                Brukerid
               </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>

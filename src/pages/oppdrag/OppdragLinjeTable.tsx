@@ -14,7 +14,7 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
-import AttestantModal from "./AttestantModal";
+import AttestertModal from "./AttestertModal";
 import StatusModal from "./StatusModal";
 
 interface OppdragLinjeTableProps {
@@ -63,16 +63,16 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"linjeId"} sortable>
-                Linje-ID
+                Linje
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"kodeKlasse"} sortable>
                 Klassekode
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakFom"} sortable>
-                Vedtak FOM
+                Vedtak fom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakTom"} sortable>
-                Vedtak TOM
+                Vedtak tom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"sats"} sortable>
                 Sats
@@ -84,9 +84,9 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 Status
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoFom"} sortable>
-                Status FOM
+                Status fom
               </Table.ColumnHeader>
-              <Table.HeaderCell scope="col">Linje Id ref</Table.HeaderCell>
+              <Table.HeaderCell scope="col">Linje ref</Table.HeaderCell>
               <Table.HeaderCell scope="col">Attestert</Table.HeaderCell>
               <Table.HeaderCell scope="col" />
             </Table.Row>
@@ -131,7 +131,7 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                       </Button>
                     }
                   >
-                    <AttestantModal
+                    <AttestertModal
                       text={linje.attestert === "J" ? "Ja" : "Nei"}
                       oppdragsId={props.oppdragsId}
                       linjeId={linje.linjeId}

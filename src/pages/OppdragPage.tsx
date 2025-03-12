@@ -1,19 +1,19 @@
 import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Heading } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
-import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/common-styles.module.css";
-import { ROOT } from "../../util/constant";
-import EnhetshistorikkModal from "./EnhetshistorikkModal";
-import OmposteringModal from "./OmposteringModal";
-import OppdragLinjeTable from "./OppdragLinjeTable";
-import styles from "./OppdragsLinjePage.module.css";
-import StatushistorikkModal from "./StatushistorikkModal";
+import apiService from "../api/apiService";
+import Breadcrumbs from "../components/Breadcrumbs";
+import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
+import { useStore } from "../store/AppState";
+import commonstyles from "../styles/common-styles.module.css";
+import { ROOT } from "../util/constant";
+import EnhetshistorikkModal from "./oppdrag/EnhetshistorikkModal";
+import OmposteringModal from "./oppdrag/OmposteringModal";
+import OppdragLinjeTable from "./oppdrag/OppdragLinjeTable";
+import styles from "./oppdrag/OppdragPage.module.css";
+import StatushistorikkModal from "./oppdrag/StatushistorikkModal";
 
-export default function OppdragsLinjePage() {
+export default function OppdragPage() {
   const navigate = useNavigate();
 
   const { gjelderId } = useStore.getState();
@@ -59,7 +59,7 @@ export default function OppdragsLinjePage() {
               <Suspense
                 fallback={
                   <Button size="small" loading variant="secondary-neutral">
-                    Statushistorikk
+                    Status historikk
                   </Button>
                 }
               >
