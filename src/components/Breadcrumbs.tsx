@@ -9,8 +9,8 @@ interface BreadcrumbsProps {
   treffliste?: boolean;
   trefflistelink?: boolean;
   oppdrag?: boolean;
-  oppdraglink?: string;
-  oppdragsdetaljer?: boolean;
+  oppdraglink?: boolean;
+  linje?: boolean;
 }
 
 export default function Breadcrumbs(props: BreadcrumbsProps) {
@@ -33,7 +33,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           {props.trefflistelink && (
             <div className={styles["breadcrumbs-crumb"]}>
               <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={"/oppdrag"} replace>
+              <Link to={"/treffliste"} replace>
                 Treffliste
               </Link>
             </div>
@@ -46,14 +46,14 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           {props.oppdraglink && (
             <div className={styles["breadcrumbs-crumb"]}>
               <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={`/${props.oppdraglink}`} replace>
+              <Link to={"/oppdrag"} replace>
                 Oppdrag
               </Link>
             </div>
           )}
-          {props.oppdragsdetaljer && (
+          {props.linje && (
             <div className={styles["breadcrumbs-crumb"]}>
-              <ChevronRightIcon title="Pil høyre" /> Detaljer
+              <ChevronRightIcon title="Pil høyre" /> Linje
             </div>
           )}
         </div>

@@ -32,10 +32,10 @@ export default function App() {
           createRoutesFromElements(
             <Route path={ROOT} ErrorBoundary={ErrorBoundary}>
               <Route path={ROOT} element={<SokPage />} />
-              <Route path={"/oppdrag"} element={<OppdragPage />} />
-              <Route path={"/:oppdragsID"} element={<OppdragsLinjePage />} />
+              <Route path={"/treffliste"} element={<OppdragPage />} />
+              <Route path={"/oppdrag"} element={<OppdragsLinjePage />} />
               <Route
-                path={"/:oppdragsId/:linjeId"}
+                path={"/oppdrag/linje"}
                 element={<OppdragsLinjeDetaljerPage />}
               />
             </Route>,

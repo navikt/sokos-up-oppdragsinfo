@@ -40,17 +40,12 @@ export default function OppdragsLinjeDetaljerPage() {
     <>
       <div className={commonstyles.pageheading}>
         <Heading level="1" size="large">
-          Oppdragsinfo
+          Oppdragsinfo: Linje
         </Heading>
       </div>
       <div className={styles["oppdragslinjedetaljer"]}>
         <div className={styles["oppdragslinjedetaljer-top"]}>
-          <Breadcrumbs
-            searchLink
-            trefflistelink
-            oppdraglink={oppdrag?.oppdragsId}
-            oppdragsdetaljer
-          />
+          <Breadcrumbs searchLink trefflistelink oppdraglink linje />
           <div className={styles["oppdragslinjedetaljer-toppinfo"]}>
             {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
           </div>
