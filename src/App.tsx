@@ -8,10 +8,10 @@ import {
 } from "react-router-dom";
 import "./App.module.css";
 import ContentLoader from "./components/ContentLoader";
-import OppdragPage from "./pages/oppdrag/OppdragPage";
-import OppdragsLinjePage from "./pages/oppdragslinje/OppdragsLinjePage";
-import OppdragsLinjeDetaljerPage from "./pages/oppdragslinjedetaljer/OppdragsLinjeDetaljerPage";
-import SokPage from "./pages/sok/SokPage";
+import LinjePage from "./pages/LinjePage";
+import OppdragPage from "./pages/OppdragPage";
+import SokPage from "./pages/SokPage";
+import TrefflistePage from "./pages/TrefflistePage";
 import { BASENAME, ROOT } from "./util/constant";
 import { initGrafanaFaro } from "./util/grafanaFaro";
 
@@ -32,12 +32,9 @@ export default function App() {
           createRoutesFromElements(
             <Route path={ROOT} ErrorBoundary={ErrorBoundary}>
               <Route path={ROOT} element={<SokPage />} />
-              <Route path={"/treffliste"} element={<OppdragPage />} />
-              <Route path={"/oppdrag"} element={<OppdragsLinjePage />} />
-              <Route
-                path={"/oppdrag/linje"}
-                element={<OppdragsLinjeDetaljerPage />}
-              />
+              <Route path={"/treffliste"} element={<TrefflistePage />} />
+              <Route path={"/oppdrag"} element={<OppdragPage />} />
+              <Route path={"/oppdrag/linje"} element={<LinjePage />} />
             </Route>,
           ),
           { basename: BASENAME },

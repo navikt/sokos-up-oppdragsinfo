@@ -10,15 +10,15 @@ import {
   TextField,
   UNSAFE_Combobox,
 } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
-import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/common-styles.module.css";
-import { FagGruppe } from "../../types/FagGruppe";
-import { SokParameter } from "../../types/SokParameter";
-import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
-import { isEmpty } from "../../util/commonUtil";
-import SokHelp from "./SokHelp";
-import styles from "./SokPage.module.css";
+import apiService from "../api/apiService";
+import { useStore } from "../store/AppState";
+import commonstyles from "../styles/common-styles.module.css";
+import { FagGruppe } from "../types/FagGruppe";
+import { SokParameter } from "../types/SokParameter";
+import { SokParameterSchema } from "../types/schema/SokParameterSchema";
+import { isEmpty } from "../util/commonUtil";
+import SokHelp from "./sok/SokHelp";
+import styles from "./sok/SokPage.module.css";
 
 export default function SokPage() {
   const navigate = useNavigate();

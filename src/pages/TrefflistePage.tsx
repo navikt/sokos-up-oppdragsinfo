@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heading } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import LabelText from "../../components/LabelText";
-import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/common-styles.module.css";
-import { isEmpty } from "../../util/commonUtil";
-import { ROOT } from "../../util/constant";
-import styles from "./OppdragPage.module.css";
-import OppdragTable from "./OppdragTable";
+import apiService from "../api/apiService";
+import Breadcrumbs from "../components/Breadcrumbs";
+import LabelText from "../components/LabelText";
+import { useStore } from "../store/AppState";
+import commonstyles from "../styles/common-styles.module.css";
+import { isEmpty } from "../util/commonUtil";
+import { ROOT } from "../util/constant";
+import styles from "./treffliste/TrefflistePage.module.css";
+import TrefflisteTable from "./treffliste/TrefflisteTable";
 
-export default function OppdragPage() {
+export default function TrefflistePage() {
   const navigate = useNavigate();
   const { gjelderId, fagGruppe, oppdragsListe, gjelderNavn, setGjelderNavn } =
     useStore();
@@ -56,7 +56,7 @@ export default function OppdragPage() {
         </div>
         {!oppdragsListe ||
           (!isEmpty(oppdragsListe) && (
-            <OppdragTable oppdragsListe={oppdragsListe} />
+            <TrefflisteTable oppdragsListe={oppdragsListe} />
           ))}
       </div>
     </>

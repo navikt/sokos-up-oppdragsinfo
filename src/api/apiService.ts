@@ -5,13 +5,13 @@ import { FagGruppeList } from "../types/FagGruppe";
 import { GjelderNavn } from "../types/GjelderNavn";
 import { GradList } from "../types/Grad";
 import { KidList } from "../types/Kid";
+import { KorrigertLinje } from "../types/KorrigertLinje";
 import { KravhaverList } from "../types/Kravhaver";
 import { LinjeenhetList } from "../types/LinjeEnhet";
 import { MaksdatoList } from "../types/Maksdato";
 import { OmposteringList } from "../types/Ompostering";
 import { OppdragsList } from "../types/Oppdrag";
 import { OppdragsEnhet } from "../types/OppdragsEnhet";
-import { OppdragsLinjeDetaljer } from "../types/OppdragsLinjeDetaljer";
 import { OppdragsStatusList } from "../types/OppdragsStatus";
 import { OppdragsLinjeList } from "../types/Oppdragslinje";
 import { OvrigList } from "../types/Ovrig";
@@ -123,7 +123,7 @@ function useFetchOppdragslinjeDetaljer(
   oppdragsId: string,
   oppdragsLinjeId: string,
 ) {
-  return useSWRImmutable<OppdragsLinjeDetaljer>(
+  return useSWRImmutable<KorrigertLinje>(
     oppdragsId ? `/${oppdragsId}/${oppdragsLinjeId}/detaljer` : null,
     swrConfig,
   );

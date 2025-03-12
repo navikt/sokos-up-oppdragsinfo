@@ -1,26 +1,26 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Accordion, Heading } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
-import Breadcrumbs from "../../components/Breadcrumbs";
-import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
-import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/common-styles.module.css";
-import { ROOT } from "../../util/constant";
-import EnheterTable from "./EnheterTable";
-import GraderTable from "./GraderTable";
-import KidTable from "./KidTable";
-import KravhaverTable from "./KravhaverTable";
-import LinjeDetaljerAccordion from "./LinjeDetaljerAccordion";
-import MaksdatoerTable from "./MaksdatoerTable";
-import OppdragsLinjeDetaljerTable from "./OppdragLinjeDetaljerTable";
-import styles from "./OppdragsLinjeDetaljerPage.module.css";
-import OvrigTable from "./OvrigTable";
-import SkyldnereTable from "./SkyldnereTable";
-import TeksterTable from "./TeksterTable";
-import ValutaerTable from "./ValutaerTable";
+import apiService from "../api/apiService";
+import Breadcrumbs from "../components/Breadcrumbs";
+import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
+import { useStore } from "../store/AppState";
+import commonstyles from "../styles/common-styles.module.css";
+import { ROOT } from "../util/constant";
+import EnheterTable from "./linje/EnheterTable";
+import GraderTable from "./linje/GraderTable";
+import KidTable from "./linje/KidTable";
+import KorrigerteLinjerTable from "./linje/KorrigerteLinjerTable";
+import KravhaverTable from "./linje/KravhaverTable";
+import LinjeDetaljerAccordion from "./linje/LinjeDetaljerAccordion";
+import styles from "./linje/LinjePage.module.css";
+import MaksdatoerTable from "./linje/MaksdatoerTable";
+import OvrigTable from "./linje/OvrigTable";
+import SkyldnereTable from "./linje/SkyldnereTable";
+import TeksterTable from "./linje/TeksterTable";
+import ValutaerTable from "./linje/ValutaerTable";
 
-export default function OppdragsLinjeDetaljerPage() {
+export default function LinjePage() {
   const navigate = useNavigate();
 
   const { gjelderId, oppdrag, linjeId } = useStore.getState();
@@ -52,7 +52,7 @@ export default function OppdragsLinjeDetaljerPage() {
         </div>
 
         {oppdragsLinjeDetaljer && (
-          <OppdragsLinjeDetaljerTable
+          <KorrigerteLinjerTable
             oppdragsLinjeDetaljer={oppdragsLinjeDetaljer}
           />
         )}

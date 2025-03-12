@@ -13,11 +13,11 @@ import {
   hasKey,
 } from "../../util/commonUtil";
 
-type OppdragTableProps = {
+type TrefflisteTableProps = {
   oppdragsListe: OppdragsList;
 };
 
-export default function OppdragTable(props: OppdragTableProps) {
+export default function TrefflisteTable(props: TrefflisteTableProps) {
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);

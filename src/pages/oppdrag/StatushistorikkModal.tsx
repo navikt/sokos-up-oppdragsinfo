@@ -32,7 +32,7 @@ export default function StatushistorikkModal(props: OppdragsId) {
                 <Table.Row>
                   <Table.HeaderCell scope="col">Status</Table.HeaderCell>
                   <Table.HeaderCell scope="col">
-                    Registrert i Oppdragssytemet
+                    Registrert i Oppdragssystemet
                   </Table.HeaderCell>
                   <Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
                 </Table.Row>
