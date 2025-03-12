@@ -25,6 +25,7 @@ spec:
     - "https://utbetalingsportalen.ansatt.dev.nav.no/sokos-up-oppdragsinfo"
     - "https://utbetalingsportalen-qx.intern.dev.nav.no/sokos-up-oppdragsinfo"
     - "https://utbetalingsportalen-qx.ansatt.dev.nav.no/sokos-up-oppdragsinfo"
+    - "https://sokos-utbetalingsportalen-astro.intern.dev.nav.no/sokos-up-oppdragsinfo"
   resources:
     limits:
       cpu: "3"
