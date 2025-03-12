@@ -36,15 +36,15 @@ export default function OmposteringModal(props: OppdragsId) {
                   <Table.HeaderCell scope="col">Faggruppe</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Løpenummer</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Ompostering</Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Dato FOM</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
                   <Table.HeaderCell scope="col">
                     Feil registrert
                   </Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Beregning ID</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Beregning id</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Utført</Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Bruker ID</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Bruker id</Table.HeaderCell>
                   <Table.HeaderCell scope="col">
-                    Tidspunkt registrert
+                    Registrert i Oppdragssystemet
                   </Table.HeaderCell>
                 </Table.Row>
               </Table.Header>

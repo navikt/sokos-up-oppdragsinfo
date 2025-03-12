@@ -31,7 +31,7 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell scope="col">Type</Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Dato FOM</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Enhet</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>

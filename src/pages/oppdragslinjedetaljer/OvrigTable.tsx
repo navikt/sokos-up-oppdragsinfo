@@ -11,8 +11,8 @@ export default function OvrigTable(props: OppdragsIdent) {
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Vedtak ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Linje</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Vedtak id</Table.HeaderCell>
           <Table.HeaderCell scope="col">Henvisning</Table.HeaderCell>
           <Table.HeaderCell scope="col">Søknadstype</Table.HeaderCell>
         </Table.Row>

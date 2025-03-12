@@ -14,13 +14,15 @@ export default function EnheterTable(props: OppdragsIdent) {
     <Table zebraStripes>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell scope="col">Linje-ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Linje</Table.HeaderCell>
           <Table.HeaderCell scope="col">Enhetstype</Table.HeaderCell>
           <Table.HeaderCell scope="col">Enhet</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Dato FOM</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Nøkkel ID</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Tidspunkt registrert</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Bruker ID</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Nøkkelid</Table.HeaderCell>
+          <Table.HeaderCell scope="col">
+            Registrert i Oppdragssystemet
+          </Table.HeaderCell>
+          <Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>

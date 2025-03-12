@@ -42,7 +42,7 @@ export default function OppdragPage() {
           <div className={styles["oppdrag-top-info"]}>
             <div className={styles["oppdrag-panel"]}>
               <div className={styles["oppdrag-panel-content"]}>
-                <LabelText label={"Gjelder-ID"} text={gjelderId ?? ""} />
+                <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
                 <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
                 <LabelText
                   label={"Faggruppe"}

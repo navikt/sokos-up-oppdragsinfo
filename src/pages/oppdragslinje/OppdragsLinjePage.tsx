@@ -59,7 +59,7 @@ export default function OppdragsLinjePage() {
               <Suspense
                 fallback={
                   <Button size="small" loading variant="secondary-neutral">
-                    Statushistorikk
+                    Status historikk
                   </Button>
                 }
               >

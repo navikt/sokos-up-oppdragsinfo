@@ -60,34 +60,34 @@ export default function OppdragsLinjeDetaljerTable(
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"linjeId"} sortable>
-                Linje-ID
+                Linje
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"delytelseId"} sortable>
-                Delytelse ID
+                Delytelse
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"sats"} sortable>
                 Sats
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakFom"} sortable>
-                Vedtak FOM
+                Vedtak fom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakTom"} sortable>
-                Vedtak TOM
+                Vedtak tom
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"utbetalesTilId"}>
                 Utbetales til
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"refunderesOrgnr"}>
-                Refund ID
+                Refunderes
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"vedtakssats"}>
                 Vedtakssats
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"tidspktReg"}>
-                Tidspunkt registrert
+                Registrert i Oppdragssystemet
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"brukerId"}>
-                Bruker ID
+                Brukerid
               </Table.ColumnHeader>
             </Table.Row>
           </Table.Header>

@@ -59,7 +59,7 @@ export default function OppdragTable(props: OppdragTableProps) {
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeader sortKey={"fagSystemId"} sortable>
-                Fagsystem ID
+                Fagsystem id
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"navnFagGruppe"} sortable>
                 Faggruppe

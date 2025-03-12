@@ -21,7 +21,7 @@ export default function StatushistorikkModal(props: OppdragsId) {
   return (
     <div>
       <Button size="small" variant="secondary-neutral" onClick={handleClick}>
-        Statushistorikk
+        Status historikk
       </Button>
 
       <Modal ref={ref} header={{ heading: "Statushistorikk" }}>
@@ -32,9 +32,9 @@ export default function StatushistorikkModal(props: OppdragsId) {
                 <Table.Row>
                   <Table.HeaderCell scope="col">Status</Table.HeaderCell>
                   <Table.HeaderCell scope="col">
-                    Tidspunkt registrert
+                    Registrert i Oppdragssytemet
                   </Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Bruker ID</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
