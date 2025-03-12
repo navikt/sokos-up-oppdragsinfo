@@ -18,7 +18,7 @@ export default function EnheterTable(props: OppdragsIdent) {
           <Table.HeaderCell scope="col">Enhetstype</Table.HeaderCell>
           <Table.HeaderCell scope="col">Enhet</Table.HeaderCell>
           <Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
-          <Table.HeaderCell scope="col">Nøkkelid</Table.HeaderCell>
+          <Table.HeaderCell scope="col">Nøkkel id</Table.HeaderCell>
           <Table.HeaderCell scope="col">
             Registrert i Oppdragssystemet
           </Table.HeaderCell>
