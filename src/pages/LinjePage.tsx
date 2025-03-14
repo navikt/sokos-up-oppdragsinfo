@@ -13,7 +13,6 @@ import KidTable from "./linje/KidTable";
 import KorrigerteLinjerTable from "./linje/KorrigerteLinjerTable";
 import KravhaverTable from "./linje/KravhaverTable";
 import LinjeDetaljerAccordion from "./linje/LinjeDetaljerAccordion";
-import styles from "./linje/LinjePage.module.css";
 import MaksdatoerTable from "./linje/MaksdatoerTable";
 import OvrigTable from "./linje/OvrigTable";
 import SkyldnereTable from "./linje/SkyldnereTable";
@@ -43,10 +42,10 @@ export default function LinjePage() {
           Oppdragsinfo: Linje
         </Heading>
       </div>
-      <div className={styles["oppdragslinjedetaljer"]}>
-        <div className={styles["oppdragslinjedetaljer-top"]}>
+      <div className={commonstyles.container}>
+        <div className={commonstyles.header}>
           <Breadcrumbs searchLink trefflistelink oppdraglink linje />
-          <div className={styles["oppdragslinjedetaljer-toppinfo"]}>
+          <div className={commonstyles.headerInfo}>
             {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
           </div>
         </div>

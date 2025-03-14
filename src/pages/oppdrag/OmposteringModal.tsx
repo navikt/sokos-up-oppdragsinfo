@@ -18,13 +18,15 @@ export default function OmposteringModal(props: OppdragsId) {
     ref.current?.showModal();
   };
 
+  const modalWidth = data && !isEmpty(data) ? "1280px" : "600px";
+
   return (
     <div>
       <Button size="small" variant="secondary-neutral" onClick={handleClick}>
         Omposteringer
       </Button>
 
-      <Modal ref={ref} header={{ heading: "Omposteringer" }} width="1280px">
+      <Modal ref={ref} header={{ heading: "Omposteringer" }} width={modalWidth}>
         <Modal.Body>
           {data && !isEmpty(data) && (
             <Table zebraStripes>

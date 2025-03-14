@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { EraserIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { useStore } from "../store/AppState";
-import { BASENAME } from "../util/constant";
+import { ROOT } from "../util/constant";
 
 export default function ResetButton() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function ResetButton() {
   function handleReset(e: FormEvent) {
     e.preventDefault();
     resetState();
-    navigate(BASENAME, { replace: true });
+    navigate(ROOT, { replace: true });
   }
 
   return (
