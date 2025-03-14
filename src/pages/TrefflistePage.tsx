@@ -40,17 +40,15 @@ export default function TrefflistePage() {
           <Breadcrumbs searchLink treffliste />
 
           <div className={commonstyles.headerInfo}>
-            <div className={styles.panel}>
-              <div className={styles.panelContent}>
-                <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
-                <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
-                <LabelText
-                  label={"Faggruppe"}
-                  text={
-                    fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"
-                  }
-                />
-              </div>
+            <div className={styles.panelContent}>
+              <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
+              <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
+              <LabelText
+                label={"Faggruppe"}
+                text={
+                  fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"
+                }
+              />
             </div>
           </div>
         </div>

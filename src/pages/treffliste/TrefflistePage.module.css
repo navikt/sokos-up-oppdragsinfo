@@ -1,11 +1,5 @@
-.panel {
-  border-radius: 1rem;
-  background-color: white;
-}
-
 .panelContent {
   display: flex;
   flex-direction: row;
   gap: 3rem;
-  padding: 1.25rem;
 }
