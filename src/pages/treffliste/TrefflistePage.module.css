@@ -1,36 +1,5 @@
-.oppdrag {
-  margin: 0.75rem auto;
-  min-width: 1024px;
-  max-width: 1440px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.oppdrag-top {
-  margin-left: 9rem;
-  margin-right: 9rem;
-  min-width: 1024px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.oppdrag-top-info {
-  border-radius: 8px;
-  background-color: white;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.oppdrag-panel {
-  border-radius: 1rem;
-  background-color: white;
-}
-
-.oppdrag-panel-content {
+.panelContent {
   display: flex;
   flex-direction: row;
   gap: 3rem;
-  padding: 1.25rem;
 }

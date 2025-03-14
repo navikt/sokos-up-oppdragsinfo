@@ -10,7 +10,6 @@ import { ROOT } from "../util/constant";
 import EnhetshistorikkModal from "./oppdrag/EnhetshistorikkModal";
 import OmposteringModal from "./oppdrag/OmposteringModal";
 import OppdragLinjeTable from "./oppdrag/OppdragLinjeTable";
-import styles from "./oppdrag/OppdragPage.module.css";
 import StatushistorikkModal from "./oppdrag/StatushistorikkModal";
 
 export default function OppdragPage() {
@@ -36,17 +35,17 @@ export default function OppdragPage() {
         </Heading>
       </div>
       {oppdragsLinjer && (
-        <div className={styles["oppdragslinjer"]}>
-          <div className={styles["oppdragslinjer-top"]}>
+        <div className={commonstyles.container}>
+          <div className={commonstyles.header}>
             <Breadcrumbs searchLink trefflistelink oppdrag />
-            <div className={styles["oppdragslinjer-toppinfo"]}>
-              <div className={styles["oppdragslinjer-column"]}>
+            <div className={commonstyles.headerInfo}>
+              <div className={commonstyles.headerInfoColumn}>
                 {gjelderId && oppdrag && (
                   <OppdragEgenskapPanel oppdrag={oppdrag} />
                 )}
               </div>
             </div>
-            <div className={commonstyles["knapperad-left"]}>
+            <div className={commonstyles.buttonrowLeft}>
               <Suspense
                 fallback={
                   <Button size="small" loading variant="secondary-neutral">
