@@ -1,9 +1,9 @@
 import apiService from "../api/apiService";
 import EnhetLabel from "../pages/oppdrag/EnhetLabel";
-import styles from "../pages/oppdrag/OppdragPage.module.css";
 import { useStore } from "../store/AppState";
 import { Oppdrag } from "../types/Oppdrag";
 import LabelText from "./LabelText";
+import styles from "./OppdragEgenskapPanel.module.css";
 
 interface OppdragsEgenskapPanelProps {
   oppdrag: Oppdrag;
@@ -18,8 +18,8 @@ export default function OppdragEgenskapPanel(
   const { gjelderId, gjelderNavn } = useStore.getState();
 
   return (
-    <div className={styles["oppdragslinjer-panel"]}>
-      <div className={styles["oppdragslinjer-column"]}>
+    <div className={styles.panel}>
+      <div className={styles.column}>
         <LabelText label={"Gjelder"} text={gjelderId} />
         <LabelText label={"Fagsystem id"} text={props.oppdrag.fagSystemId} />
         <LabelText label={"Status"} text={props.oppdrag.kodeStatus} />
@@ -27,7 +27,7 @@ export default function OppdragEgenskapPanel(
           <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
         )}
       </div>
-      <div className={styles["oppdragslinjer-column"]}>
+      <div className={styles.column}>
         <LabelText label={"Navn"} text={gjelderNavn} />
         <LabelText label={"Oppdrags id"} text={props.oppdrag.oppdragsId} />
         <LabelText label={"Beregnes nå"} text={props.oppdrag.kjorIdag} />
@@ -35,7 +35,7 @@ export default function OppdragEgenskapPanel(
           <EnhetLabel enhet={oppdragsEnhet.enhet} />
         )}
       </div>
-      <div className={styles["oppdragslinjer-column"]}>
+      <div className={styles.column}>
         <LabelText
           nowrap
           label={"Fagområde"}

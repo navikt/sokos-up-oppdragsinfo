@@ -30,27 +30,25 @@ export default function TrefflistePage() {
 
   return (
     <>
-      <div className={commonstyles["pageheading"]}>
+      <div className={commonstyles.pageheading}>
         <Heading level="1" size="large">
           Oppdragsinfo: Treffliste
         </Heading>
       </div>
-      <div className={styles["oppdrag"]}>
-        <div className={styles["oppdrag-top"]}>
+      <div className={commonstyles.container}>
+        <div className={commonstyles.header}>
           <Breadcrumbs searchLink treffliste />
 
-          <div className={styles["oppdrag-top-info"]}>
-            <div className={styles["oppdrag-panel"]}>
-              <div className={styles["oppdrag-panel-content"]}>
-                <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
-                <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
-                <LabelText
-                  label={"Faggruppe"}
-                  text={
-                    fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"
-                  }
-                />
-              </div>
+          <div className={commonstyles.headerInfo}>
+            <div className={styles.panelContent}>
+              <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
+              <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
+              <LabelText
+                label={"Faggruppe"}
+                text={
+                  fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"
+                }
+              />
             </div>
           </div>
         </div>
