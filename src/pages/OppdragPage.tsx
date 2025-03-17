@@ -46,53 +46,53 @@ export default function OppdragPage() {
                   <OppdragEgenskapPanel oppdrag={oppdrag} />
                 )}
               </div>
-            </div>
-            <div className={commonstyles.leftandrightbuttons}>
-              <div className={commonstyles.buttonrowLeft}>
-                <Suspense
-                  fallback={
-                    <Button size="small" loading variant="secondary-neutral">
-                      Omposteringer
-                    </Button>
-                  }
-                >
-                  <OmposteringModal oppdragsId={oppdrag!.oppdragsId} />
-                </Suspense>
-                <Suspense
-                  fallback={
-                    <Button size="small" loading variant="secondary-neutral">
-                      Status historikk
-                    </Button>
-                  }
-                >
-                  <StatushistorikkModal oppdragsId={oppdrag!.oppdragsId} />
-                </Suspense>
-                <Suspense
-                  fallback={
-                    <Button size="small" loading variant="secondary-neutral">
-                      Enhetshistorikk
-                    </Button>
-                  }
-                >
-                  <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
-                </Suspense>
-              </div>
-              <div className={commonstyles.knapperad}>
-                <Button
-                  size={"small"}
-                  variant={"secondary-neutral"}
-                  icon={<FileCsvIcon title="a11y-title" fontSize="1,5rem" />}
-                  iconPosition={"right"}
-                  onClick={() =>
-                    downloadAsCsv(
-                      gjelderId,
-                      oppdrag!.navnFagOmraade,
-                      oppdragsLinjer,
-                    )
-                  }
-                >
-                  Til Excel
-                </Button>
+              <div className={commonstyles.leftandrightbuttons}>
+                <div className={commonstyles.buttonrowLeft}>
+                  <Suspense
+                    fallback={
+                      <Button size="small" loading variant="secondary-neutral">
+                        Omposteringer
+                      </Button>
+                    }
+                  >
+                    <OmposteringModal oppdragsId={oppdrag!.oppdragsId} />
+                  </Suspense>
+                  <Suspense
+                    fallback={
+                      <Button size="small" loading variant="secondary-neutral">
+                        Status historikk
+                      </Button>
+                    }
+                  >
+                    <StatushistorikkModal oppdragsId={oppdrag!.oppdragsId} />
+                  </Suspense>
+                  <Suspense
+                    fallback={
+                      <Button size="small" loading variant="secondary-neutral">
+                        Enhetshistorikk
+                      </Button>
+                    }
+                  >
+                    <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
+                  </Suspense>
+                </div>
+                <div className={commonstyles.knapperad}>
+                  <Button
+                    size={"small"}
+                    variant={"secondary-neutral"}
+                    icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
+                    iconPosition={"right"}
+                    onClick={() =>
+                      downloadAsCsv(
+                        gjelderId,
+                        oppdrag!.navnFagOmraade,
+                        oppdragsLinjer,
+                      )
+                    }
+                  >
+                    Til Excel
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
