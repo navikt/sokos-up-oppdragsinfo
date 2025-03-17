@@ -47,7 +47,7 @@ export default function OppdragPage() {
                 )}
               </div>
             </div>
-            <div className={commonstyles["leftandrightbuttons"]}>
+            <div className={commonstyles.leftandrightbuttons}>
               <div className={commonstyles.buttonrowLeft}>
                 <Suspense
                   fallback={
@@ -94,6 +94,7 @@ export default function OppdragPage() {
               </div>
             </div>
           </div>
+
           <OppdragLinjeTable
             oppdragsId={oppdrag!.oppdragsId}
             oppdragsLinjer={oppdragsLinjer}
