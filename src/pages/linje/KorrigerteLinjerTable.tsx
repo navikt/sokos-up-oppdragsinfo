@@ -24,7 +24,7 @@ export default function KorrigerteLinjerTable(
 ) {
   const [sort, setSort] = useState<SortState<OppdragsLinje> | undefined>();
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(25);
   const korrigertLinjeIder = props.oppdragsLinjeDetaljer.korrigerteLinjeIder;
 
   const linjeSort = (sortKey?: string) => {

@@ -25,7 +25,7 @@ interface OppdragLinjeTableProps {
 export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
   const [sort, setSort] = useState<SortState<OppdragsLinje> | undefined>();
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(25);
   const { setLinjeId } = useStore();
 
   const linjeSort = (sortKey?: string) => {

@@ -20,7 +20,7 @@ type TrefflisteTableProps = {
 export default function TrefflisteTable(props: TrefflisteTableProps) {
   const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
   const [page, setPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(25);
   const { setOppdrag } = useStore();
 
   const sortedData: OppdragsList = props.oppdragsListe
