@@ -81,6 +81,8 @@ export default function OppdragPage() {
                 <Button
                   size={"small"}
                   variant={"secondary-neutral"}
+                  icon={<FileCsvIcon title="a11y-title" fontSize="1,5rem" />}
+                  iconPosition={"right"}
                   onClick={() =>
                     downloadAsCsv(
                       gjelderId,
@@ -89,7 +91,7 @@ export default function OppdragPage() {
                     )
                   }
                 >
-                  Til Excel <FileCsvIcon title="a11y-title" fontSize="1rem" />
+                  Til Excel
                 </Button>
               </div>
             </div>
