@@ -38,3 +38,11 @@
   flex-direction: column;
   gap: 0.75rem;
 }
+
+.oppdragslinjer-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  padding-top: 1rem;
+  justify-content: space-between;
+}
