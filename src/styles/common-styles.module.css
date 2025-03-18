@@ -96,3 +96,11 @@
   flex-direction: row;
   justify-content: center;
 }
+
+.leftandrightbuttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  padding-top: 1rem;
+  justify-content: space-between;
+}
