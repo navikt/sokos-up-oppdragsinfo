@@ -15,7 +15,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN080",
     "tidspktReg": "2014-10-04 17:40:10.35806",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   },
   {
     "linjeId": 2,
@@ -32,7 +34,9 @@
     "utbetalesTilId": "06518006337",
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
-    "tidspktReg": "2015-05-23 19:50:40.750754"
+    "tidspktReg": "2015-05-23 19:50:40.750754",
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   },
   {
     "linjeId": 3,
@@ -49,7 +53,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2016-05-21 18:53:24.093975",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   },
   {
     "linjeId": 4,
@@ -67,7 +73,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN093",
     "tidspktReg": "2016-07-16 12:39:26.692035",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   },
   {
     "linjeId": 5,
@@ -84,7 +92,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2017-05-20 22:38:41.093135",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   },
   {
     "linjeId": 6,
@@ -101,7 +111,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2018-05-26 07:45:45.239796",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   },
   {
     "linjeId": 7,
@@ -117,7 +129,9 @@
     "utbetalesTilId": "06518006337",
     "brukerId": "BPEN093",
     "tidspktReg": "2019-05-01 09:38:44.436203",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   },
   {
     "linjeId": 8,
@@ -134,7 +148,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2019-05-25 06:40:32.685179",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 9,
@@ -151,7 +167,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN093",
     "tidspktReg": "2020-01-12 06:02:14.649229",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 10,
@@ -168,7 +186,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2020-09-19 10:40:30.468605",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 11,
@@ -184,7 +204,9 @@
     "utbetalesTilId": "06518006337",
     "brukerId": "BPEN093",
     "tidspktReg": "2020-12-20 10:19:51.450707",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 12,
@@ -201,7 +223,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2021-05-22 05:14:03.966316",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 13,
@@ -218,7 +242,9 @@
     "utbetalesTilId": "06518006337",
     "brukerId": "BPEN093",
     "tidspktReg": "2021-12-23 22:54:43.768624",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 14,
@@ -235,7 +261,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2022-05-21 05:40:59.343553",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 15,
@@ -251,7 +279,9 @@
     "utbetalesTilId": "06518006337",
     "brukerId": "BPEN093",
     "tidspktReg": "2022-12-15 23:37:43.468548",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 16,
@@ -269,7 +299,9 @@
     "refunderesOrgnr": "",
     "brukerId": "BPEN068",
     "tidspktReg": "2023-05-27 12:27:14.363942",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "063",
+    "underkontonr": "0998"
   },
   {
     "linjeId": 17,
@@ -285,6 +317,8 @@
     "utbetalesTilId": "06518006337",
     "brukerId": "BPEN093",
     "tidspktReg": "2023-12-19 23:39:22.37",
-    "vedtakssats": 1500.0
+    "vedtakssats": 1500.0,
+    "hovedkontonr": "406",
+    "underkontonr": "1000"
   }
 ]

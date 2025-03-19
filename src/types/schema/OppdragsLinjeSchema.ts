@@ -7,6 +7,7 @@ export const OppdragsLinjeSchema = z.object({
   datoVedtakFom: z.string(),
   datoVedtakTom: z.string(),
   delytelseId: z.string(),
+  hovedkontonr: z.string().optional(),
   kodeKlasse: z.string(),
   kodeStatus: z.string(),
   linjeId: z.string(),
@@ -15,6 +16,7 @@ export const OppdragsLinjeSchema = z.object({
   sats: z.number(),
   tidspktReg: z.string(),
   typeSats: z.string(),
+  underkontonr: z.string().optional(),
   utbetalesTilId: z.string(),
   vedtakssats: z.number().optional(),
 });
