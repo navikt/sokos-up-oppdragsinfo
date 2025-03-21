@@ -68,6 +68,7 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
               <Table.ColumnHeader sortKey={"kodeKlasse"} sortable>
                 Klassekode
               </Table.ColumnHeader>
+              <Table.ColumnHeader>Kontonr</Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"datoVedtakFom"} sortable>
                 Vedtak fom
               </Table.ColumnHeader>
@@ -96,6 +97,7 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
               <Table.Row key={btoa("" + linje.linjeId)}>
                 <Table.DataCell>{linje.linjeId}</Table.DataCell>
                 <Table.DataCell>{linje.kodeKlasse}</Table.DataCell>
+                <Table.DataCell>{`${linje.hovedkontonr ?? ""}${linje.underkontonr ?? ""}`}</Table.DataCell>
                 <Table.DataCell>
                   {formatDate(linje.datoVedtakFom)}
                 </Table.DataCell>
