@@ -25,6 +25,7 @@ import { OppdragsRequest } from "./models/OppdragsRequest";
 
 export const BASE_URI = {
   OPPDRAGSINFO: "/oppdrag-api/api/v1/oppdragsinfo",
+  KODEVERK: "/oppdrag-api/api/v1/kodeverk",
   INTEGRATION: "/oppdrag-api/api/v1/integration",
 };
 
@@ -54,6 +55,7 @@ async function useHentNavn(request: GjelderIdRequest) {
 function useFetchHentFaggrupper() {
   return useSWRImmutable<FagGruppeList>(`/faggrupper`, {
     ...swrConfig,
+    fetcher: <T>(url: string) => axiosFetcher<T>(BASE_URI.KODEVERK, url),
     fallbackData: [],
     revalidateOnMount: true,
   });
