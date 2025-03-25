@@ -10,7 +10,7 @@ const server = express();
 const corsAllowedOrigin = [
   /https:\/\/utbetalingsportalen(-[a-z][a-z0-9])?(.ansatt|.intern)(.dev)?.nav.no/,
   "https://sokos-utbetalingsportalen-astro.intern.dev.nav.no",
-  "https://sokos-utbetalingsportalen-astro-qx.intern.dev.nav.no"
+  "https://sokos-utbetalingsportalen-astro-qx.intern.dev.nav.no",
   "http://localhost:5173",
 ];
 
