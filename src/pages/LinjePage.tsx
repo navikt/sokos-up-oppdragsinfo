@@ -66,7 +66,7 @@ export default function LinjePage() {
             </LinjeDetaljerAccordion>
             <LinjeDetaljerAccordion
               title={"Grader"}
-              enabled={oppdragsLinjeDetaljer.harEnheter}
+              enabled={oppdragsLinjeDetaljer.harGrader}
             >
               <GraderTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
