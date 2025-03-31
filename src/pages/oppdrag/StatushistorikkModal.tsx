@@ -24,7 +24,7 @@ export default function StatushistorikkModal(props: OppdragsId) {
         Status historikk
       </Button>
 
-      <Modal ref={ref} header={{ heading: "Statushistorikk" }}>
+      <Modal ref={ref} header={{ heading: "Status historikk" }}>
         <Modal.Body>
           {data && !isEmpty(data) && (
             <Table zebraStripes>
