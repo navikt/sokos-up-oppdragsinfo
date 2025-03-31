@@ -22,9 +22,10 @@ export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
   ].join(";");
 
   const csvData = oppdragslinjer.map((oppdragslinje) => {
-    if (/\.\d{6}$/.test(tidspktRegFormatted)) {
-      tidspktRegFormatted = tidspktRegFormatted.slice(0, -2);
-    }
+    const tidspktRegFormatted =
+      new Date(oppdragslinje.tidspktReg).toLocaleDateString("no-NO") +
+      " " +
+      new Date(oppdragslinje.tidspktReg).toLocaleTimeString("no-NO");
     return [
       oppdragslinje.linjeId,
       oppdragslinje.kodeKlasse,
@@ -40,7 +41,7 @@ export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
       oppdragslinje.utbetalesTilId,
       oppdragslinje.refunderesOrgnr,
       oppdragslinje.vedtakssats,
-      oppdragslinje.tidspktReg,
+      tidspktRegFormatted,
       oppdragslinje.brukerId,
     ].join(";");
   });
