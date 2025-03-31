@@ -59,7 +59,7 @@ export function formatDate(value?: string) {
 }
 
 export function formatDateTime(value: string) {
-  return dayjs(value).format("DD.MM.YYYY hh:mm:ss");
+  return dayjs(value).format("DD.MM.YYYY HH:mm:ss");
 }
 
 export interface SortState<T> {
