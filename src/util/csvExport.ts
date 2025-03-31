@@ -1,5 +1,5 @@
 import { OppdragsLinje } from "../types/Oppdragslinje";
-import { formatDate } from "./commonUtil";
+import { formatDate, formatDateTime } from "./commonUtil";
 
 export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
   const csvHeaders = [
@@ -22,10 +22,6 @@ export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
   ].join(";");
 
   const csvData = oppdragslinjer.map((oppdragslinje) => {
-    const tidspktRegFormatted =
-      new Date(oppdragslinje.tidspktReg).toLocaleDateString("no-NO") +
-      " " +
-      new Date(oppdragslinje.tidspktReg).toLocaleTimeString("no-NO");
     return [
       oppdragslinje.linjeId,
       oppdragslinje.kodeKlasse,
@@ -41,7 +37,7 @@ export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
       oppdragslinje.utbetalesTilId,
       oppdragslinje.refunderesOrgnr,
       oppdragslinje.vedtakssats,
-      tidspktRegFormatted,
+      formatDateTime(oppdragslinje.tidspktReg),
       oppdragslinje.brukerId,
     ].join(";");
   });
