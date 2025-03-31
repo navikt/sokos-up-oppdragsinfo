@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import apiService from "../../api/apiService";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { Skyldner } from "../../types/Skyldner";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function SkyldnereTable(props: OppdragsIdent) {
   const { data } = apiService.useFetchSkyldnere(
@@ -31,7 +31,7 @@ export default function SkyldnereTable(props: OppdragsIdent) {
             <Table.Row key={btoa(skyldner.linjeId)}>
               <Table.DataCell>{skyldner.linjeId}</Table.DataCell>
               <Table.DataCell>{skyldner.skyldnerId}</Table.DataCell>
-              <Table.DataCell>{skyldner.datoFom}</Table.DataCell>
+              <Table.DataCell>{formatDate(skyldner.datoFom)}</Table.DataCell>
               <Table.DataCell>
                 {formatDateTime(skyldner.tidspktReg)}
               </Table.DataCell>
