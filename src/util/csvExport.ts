@@ -1,5 +1,5 @@
 import { OppdragsLinje } from "../types/Oppdragslinje";
-import { formatDate } from "./commonUtil";
+import { formatDate, formatDateTime } from "./commonUtil";
 
 export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
   const csvHeaders = [
@@ -37,7 +37,7 @@ export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
       oppdragslinje.utbetalesTilId,
       oppdragslinje.refunderesOrgnr,
       oppdragslinje.vedtakssats,
-      oppdragslinje.tidspktReg,
+      formatDateTime(oppdragslinje.tidspktReg),
       oppdragslinje.brukerId,
     ].join(";");
   });
