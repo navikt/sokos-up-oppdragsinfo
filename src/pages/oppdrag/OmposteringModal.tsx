@@ -33,7 +33,7 @@ export default function OmposteringModal(props: OppdragsId) {
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell key={"id"} scope="col">
-                    ID
+                    Gjelder
                   </Table.HeaderCell>
                   <Table.HeaderCell scope="col">Faggruppe</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Løpenummer</Table.HeaderCell>
@@ -42,9 +42,9 @@ export default function OmposteringModal(props: OppdragsId) {
                   <Table.HeaderCell scope="col">
                     Feil registrert
                   </Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Beregning id</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Beregning</Table.HeaderCell>
                   <Table.HeaderCell scope="col">Utført</Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Bruker id</Table.HeaderCell>
+                  <Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
                   <Table.HeaderCell scope="col">
                     Registrert i Oppdragssystemet
                   </Table.HeaderCell>
