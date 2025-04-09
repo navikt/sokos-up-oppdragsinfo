@@ -58,13 +58,13 @@ export default function TrefflisteTable(props: TrefflisteTableProps) {
         <Table zebraStripes sort={sort} onSortChange={oppdragSort}>
           <Table.Header>
             <Table.Row>
-              <Table.ColumnHeader sortKey={"fagSystemId"} sortable>
+              <Table.ColumnHeader sortKey={"fagsystemId"} sortable>
                 Fagsystem id
               </Table.ColumnHeader>
-              <Table.ColumnHeader sortKey={"navnFagGruppe"} sortable>
+              <Table.ColumnHeader sortKey={"navnFaggruppe"} sortable>
                 Faggruppe
               </Table.ColumnHeader>
-              <Table.ColumnHeader sortKey={"navnFagOmraade"} sortable>
+              <Table.ColumnHeader sortKey={"navnFagomraade"} sortable>
                 Fagområde
               </Table.ColumnHeader>
               <Table.ColumnHeader sortKey={"typeBilag"} sortable>
@@ -84,11 +84,11 @@ export default function TrefflisteTable(props: TrefflisteTableProps) {
                     replace
                     onClick={() => setOppdrag(oppdrag)}
                   >
-                    {oppdrag.fagSystemId}
+                    {oppdrag.fagsystemId}
                   </Link>
                 </Table.DataCell>
-                <Table.DataCell>{oppdrag.navnFagGruppe}</Table.DataCell>
-                <Table.DataCell>{oppdrag.navnFagOmraade}</Table.DataCell>
+                <Table.DataCell>{oppdrag.navnFaggruppe}</Table.DataCell>
+                <Table.DataCell>{oppdrag.navnFagomraade}</Table.DataCell>
                 <Table.DataCell>{oppdrag.typeBilag}</Table.DataCell>
                 <Table.DataCell>{oppdrag.kodeStatus}</Table.DataCell>
               </Table.Row>

@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
-import { Status } from "../../types/Status";
+import { useFetchHentOppdragsLinjeStatuser } from "../../api/apiService";
+import { LinjeStatus } from "../../types/LinjeStatus";
 import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 interface StatusModalProps {
@@ -13,7 +13,7 @@ interface StatusModalProps {
 export default function StatusModal(props: StatusModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = apiService.useFetchHentOppdragsLinjeStatuser(
+  const { data } = useFetchHentOppdragsLinjeStatuser(
     props.oppdragsId,
     props.linjeId,
     isOpen,
@@ -52,7 +52,7 @@ export default function StatusModal(props: StatusModalProps) {
             <Table.Body>
               {data &&
                 !isEmpty(data) &&
-                data?.map((status: Status) => (
+                data?.map((status: LinjeStatus) => (
                   <Table.Row key={btoa(status.status + status.tidspktReg)}>
                     <Table.DataCell>{status.status}</Table.DataCell>
                     <Table.DataCell>

@@ -1,14 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchKravhaver } from "../../api/apiService";
 import { Kravhaver } from "../../types/Kravhaver";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function KravhaverTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchKravhaver(
-    props.oppdragsId,
-    props.linjeId,
-  );
+  const { data } = useFetchKravhaver(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>

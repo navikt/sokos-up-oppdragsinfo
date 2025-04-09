@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Accordion, Heading } from "@navikt/ds-react";
-import apiService from "../api/apiService";
+import { useFetchOppdragslinjeDetaljer } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
 import { useStore } from "../store/AppState";
@@ -24,7 +24,7 @@ export default function LinjePage() {
 
   const { gjelderId, oppdrag, linjeId } = useStore.getState();
   const oppdragsId = oppdrag?.oppdragsId || "";
-  const oppdragsLinjeDetaljer = apiService.useFetchOppdragslinjeDetaljer(
+  const oppdragsLinjeDetaljer = useFetchOppdragslinjeDetaljer(
     oppdragsId,
     linjeId,
   ).data;

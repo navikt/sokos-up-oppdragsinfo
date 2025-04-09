@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Alert, Button, Modal, Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchHentOppdragsEnhethistorikk } from "../../api/apiService";
 import { Enhet } from "../../types/EnhetsType";
 import { OppdragsId } from "../../types/OppdragsId";
 import { formatDate, isEmpty } from "../../util/commonUtil";
@@ -8,10 +8,7 @@ import { formatDate, isEmpty } from "../../util/commonUtil";
 export default function EnhetshistorikkModal(props: OppdragsId) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = apiService.useFetchHentOppdragsEnhethistorikk(
-    props.oppdragsId,
-    isOpen,
-  );
+  const { data } = useFetchHentOppdragsEnhethistorikk(props.oppdragsId, isOpen);
 
   const handleClick = () => {
     setIsOpen(true);

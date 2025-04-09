@@ -2,7 +2,7 @@ import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
-import apiService from "../api/apiService";
+import { useFetchHentOppdragsLinjer } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
 import { useStore } from "../store/AppState";
@@ -19,7 +19,7 @@ export default function OppdragPage() {
 
   const { gjelderId } = useStore.getState();
   const { oppdrag } = useStore();
-  const { data: oppdragsLinjer } = apiService.useFetchHentOppdragsLinjer(
+  const { data: oppdragsLinjer } = useFetchHentOppdragsLinjer(
     oppdrag?.oppdragsId,
   );
 
@@ -85,7 +85,7 @@ export default function OppdragPage() {
                     onClick={() =>
                       downloadAsCsv(
                         gjelderId,
-                        oppdrag!.navnFagOmraade,
+                        oppdrag!.navnFagomraade,
                         oppdragsLinjer,
                       )
                     }

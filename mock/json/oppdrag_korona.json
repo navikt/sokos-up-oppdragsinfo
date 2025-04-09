@@ -3,7 +3,7 @@
     "gjelderId": "00814261492",
     "oppdragsListe": [
       {
-        "fagSystemId": "AG00814261492_1",
+        "fagsystemId": "AG00814261492_1",
         "oppdragsId": 51034941,
         "navnFagGruppe": "Korona",
         "navnFagOmraade": "Lønnskomp arbeidsgiver, permitterte",
@@ -12,7 +12,7 @@
         "kodeStatus": "PASS"
       },
       {
-        "fagSystemId": "000342670",
+        "fagsystemId": "000342670",
         "oppdragsId": 63756560,
         "navnFagGruppe": "Tilbakekrevingskrav",
         "navnFagOmraade": "Tilbakekrevingskrav",
@@ -21,7 +21,7 @@
         "kodeStatus": "PASS"
       },
       {
-        "fagSystemId": "000342670",
+        "fagsystemId": "000342670",
         "oppdragsId": 63756561,
         "navnFagGruppe": "Tilbakekreving",
         "navnFagOmraade": "AGPERM til innkreving",
@@ -30,7 +30,7 @@
         "kodeStatus": "PASS"
       },
       {
-        "fagSystemId": "000342670MK23.01.20.534356",
+        "fagsystemId": "000342670MK23.01.20.534356",
         "oppdragsId": 63775121,
         "navnFagGruppe": "Tilbakekreving, betalt",
         "navnFagOmraade": "Nedbetalt Lønnskomp. arbeidsgiver",

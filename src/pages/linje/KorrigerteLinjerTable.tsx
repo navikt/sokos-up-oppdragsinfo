@@ -106,7 +106,7 @@ export default function KorrigerteLinjerTable(
                   {formatDate(linje.datoVedtakTom)}
                 </Table.DataCell>
                 <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
-                <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
+                <Table.DataCell>{linje.refunderesId}</Table.DataCell>
                 <Table.DataCell>
                   {formaterTilNorskTall(linje.vedtakssats)}
                 </Table.DataCell>

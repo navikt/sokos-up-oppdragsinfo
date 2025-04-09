@@ -1,11 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchTekster } from "../../api/apiService";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { Tekst } from "../../types/Tekst";
 import { isEmpty } from "../../util/commonUtil";
 
 export default function TeksterTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchTekster(props.oppdragsId, props.linjeId);
+  const { data } = useFetchTekster(props.oppdragsId, props.linjeId);
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Accordion } from "@navikt/ds-react";
 
 interface LinjeDetaljerAccordionProps {

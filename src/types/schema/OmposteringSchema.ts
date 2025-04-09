@@ -5,7 +5,7 @@ export const OmposteringSchema = z.object({
   kodeFaggruppe: z.string(),
   lopenr: z.string(),
   ompostering: z.string(),
-  omposteringFom: z.string(),
+  datoOmposterFom: z.string(),
   feilReg: z.string(),
   beregningsId: z.string(),
   utfort: z.string(),

@@ -12,7 +12,7 @@ export const OppdragsLinjeSchema = z.object({
   kodeStatus: z.string(),
   linjeId: z.string(),
   linjeIdKorr: z.number().int(),
-  refunderesOrgnr: z.string(),
+  refunderesId: z.string(),
   sats: z.number(),
   tidspktReg: z.string(),
   typeSats: z.string(),

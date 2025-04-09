@@ -1,11 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchKid } from "../../api/apiService";
 import { Kid } from "../../types/Kid";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function KidTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchKid(props.oppdragsId, props.linjeId);
+  const { data } = useFetchKid(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>
