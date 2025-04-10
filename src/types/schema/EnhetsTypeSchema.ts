@@ -4,7 +4,7 @@ import { DateSchema } from "./DateSchema";
 export const EnhetsTypeSchema = z.enum(["BEH", "BOS", "ANKE"]);
 
 export const EnhetSchema = z.object({
-  type: EnhetsTypeSchema,
+  typeEnhet: EnhetsTypeSchema,
   datoFom: DateSchema,
   enhet: z.string().refine((enhetsnummer) => /^\d{4}$/.test(enhetsnummer)),
 });

@@ -1,25 +1,25 @@
 /* eslint-disable no-console */
 import { HttpResponse, http } from "msw";
-import faggrupper from "./json/faggrupper.json";
-import gjelderNavn from "./json/gjelderNavn.json";
-import oppdrag from "./json/oppdrag.json";
-import oppdragsEnheter from "./json/oppdrag_enheter.json";
-import oppdragsLinjer from "./json/oppdragslinjer.json";
-import enhetshistorikk from "./json/popups/enhetshistorikk.json";
-import attestant from "./json/popups/linje/attestant.json";
-import detaljer from "./json/popups/linje/detaljer.json";
-import enhet from "./json/popups/linje/enhet.json";
-import grad from "./json/popups/linje/grad.json";
-import kid from "./json/popups/linje/kidliste.json";
-import kravhaver from "./json/popups/linje/kravhaver.json";
-import maksdato from "./json/popups/linje/maksdato.json";
-import ovrig from "./json/popups/linje/ovrig.json";
-import skyldner from "./json/popups/linje/skyldner.json";
-import status from "./json/popups/linje/status.json";
-import tekst from "./json/popups/linje/tekst.json";
-import valuta from "./json/popups/linje/valuta.json";
-import omposteringer from "./json/popups/omposteringer.json";
-import statushistorikk from "./json/popups/statushistorikk.json";
+import { fagGruppeList } from "./data/faggruppeList";
+import { gjelderNavn } from "./data/gjelderNavn";
+import { oppdragsEnhetDto } from "./data/oppdragsEnhetDto";
+import { oppdragsList } from "./data/oppdragsList";
+import { oppdragsLinjeList } from "./data/oppdragslinjeList";
+import { enhetsHistorikkList } from "./data/popups/enhetshistorikk";
+import { attestant } from "./data/popups/linje/attestant";
+import detaljer from "./data/popups/linje/detaljer.json";
+import enhet from "./data/popups/linje/enhet.json";
+import grad from "./data/popups/linje/grad.json";
+import kid from "./data/popups/linje/kidliste.json";
+import kravhaver from "./data/popups/linje/kravhaver.json";
+import maksdato from "./data/popups/linje/maksdato.json";
+import ovrig from "./data/popups/linje/ovrig.json";
+import skyldner from "./data/popups/linje/skyldner.json";
+import status from "./data/popups/linje/status.json";
+import tekst from "./data/popups/linje/tekst.json";
+import valuta from "./data/popups/linje/valuta.json";
+import { omposteringList } from "./data/popups/omposteringList";
+import { oppdragsStatusList } from "./data/popups/oppdragsStatusList";
 
 export const handlers = [
   http.post("/oppdrag-api/api/v1/integration/hentnavn", async ({ request }) => {
@@ -29,33 +29,36 @@ export const handlers = [
   }),
 
   http.get("/oppdrag-api/api/v1/kodeverk/faggrupper", () => {
-    return HttpResponse.json(faggrupper, { status: 200 });
+    return HttpResponse.json(fagGruppeList, { status: 200 });
   }),
 
   http.post("/oppdrag-api/api/v1/oppdragsinfo/sok", async ({ request }) => {
     const sokeParameter = await request.json();
     console.log("Hent parameter navn:", sokeParameter);
-    return HttpResponse.json({ data: oppdrag }, { status: 200 });
+    return HttpResponse.json(
+      { data: oppdragsList, errorMessage: "" },
+      { status: 200 },
+    );
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/oppdragsLinjer", () => {
-    return HttpResponse.json(oppdragsLinjer, { status: 200 });
+    return HttpResponse.json(oppdragsLinjeList, { status: 200 });
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/enheter", () => {
-    return HttpResponse.json(oppdragsEnheter, { status: 200 });
+    return HttpResponse.json(oppdragsEnhetDto, { status: 200 });
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/enhetshistorikk", () => {
-    return HttpResponse.json(enhetshistorikk, { status: 200 });
+    return HttpResponse.json(enhetsHistorikkList, { status: 200 });
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/omposteringer", () => {
-    return HttpResponse.json(omposteringer, { status: 200 });
+    return HttpResponse.json(omposteringList, { status: 200 });
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/statushistorikk", () => {
-    return HttpResponse.json(statushistorikk, { status: 200 });
+    return HttpResponse.json(oppdragsStatusList, { status: 200 });
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestanter", () => {

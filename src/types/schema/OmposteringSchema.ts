@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const OmposteringSchema = z.object({
-  id: z.number().int(),
+  gjelderId: z.string(),
   kodeFaggruppe: z.string(),
   lopenr: z.string(),
   ompostering: z.string(),

@@ -5,7 +5,7 @@ import { Attestant } from "../../types/Attestant";
 import { formatDate, isEmpty } from "../../util/commonUtil";
 
 interface AttestertModalProps {
-  oppdragsId: string;
+  oppdragsId: number;
   linjeId: string;
   text: string;
 }

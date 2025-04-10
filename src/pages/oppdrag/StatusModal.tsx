@@ -5,7 +5,7 @@ import { LinjeStatus } from "../../types/LinjeStatus";
 import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 interface StatusModalProps {
-  oppdragsId: string;
+  oppdragsId: number;
   linjeId: string;
   text: string;
 }

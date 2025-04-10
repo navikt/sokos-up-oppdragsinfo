@@ -18,7 +18,7 @@ import AttestertModal from "./AttestertModal";
 import StatusModal from "./StatusModal";
 
 interface OppdragLinjeTableProps {
-  oppdragsId: string;
+  oppdragsId: number;
   oppdragsLinjer: OppdragsLinjeList;
 }
 

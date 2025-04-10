@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { OppdragSchema } from "./OppdragSchema";
+import { OppdragsListSchema } from "./OppdragSchema";
 
 export const WrappedResponseWithErrorDTOSchema = z.object({
-  data: z.array(OppdragSchema),
+  data: OppdragsListSchema,
   errorMessage: z.string(),
 });

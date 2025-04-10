@@ -35,7 +35,7 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
               <Table.Body>
                 {data.map((enhet: Enhet) => (
                   <Table.Row key={btoa(JSON.stringify(enhet))}>
-                    <Table.DataCell>{enhet.type}</Table.DataCell>
+                    <Table.DataCell>{enhet.typeEnhet}</Table.DataCell>
                     <Table.DataCell>{formatDate(enhet.datoFom)}</Table.DataCell>
                     <Table.DataCell>{enhet.enhet}</Table.DataCell>
                   </Table.Row>

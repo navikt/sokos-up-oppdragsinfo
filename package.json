@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite --mode mock",
     "dev:backend": "vite --mode backend",
-    "dev:backend-q1": "vite --mode backend-q1",
     "build": "tsc && vite build",
     "test": "vitest",
     "lint": "eslint",

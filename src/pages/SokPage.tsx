@@ -26,7 +26,8 @@ export default function SokPage() {
   const [error, setError] = useState<ErrorMessage | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { gjelderId, fagGruppe, resetState, setGjelderNavn } = useStore();
+  const { gjelderId, fagGruppe, setOppdragsListe, resetState, setGjelderNavn } =
+    useStore();
   const [sokParameter, setSokParameter] = useState<SokParameter>({
     gjelderId: gjelderId,
     fagGruppe: fagGruppe,
@@ -92,7 +93,7 @@ export default function SokPage() {
         setIsLoading(false);
         setError(null);
         if (!isEmpty(response)) {
-          useStore.setState({ oppdragsListe: response });
+          setOppdragsListe(response);
           navigate("/treffliste", { replace: false });
         } else {
           setError({

@@ -50,9 +50,9 @@ export default function OmposteringModal(props: OppdragsId) {
               <Table.Body>
                 {data.map((ompostering: Ompostering) => (
                   <Table.Row
-                    key={btoa(ompostering.id + ompostering.ompostering)}
+                    key={btoa(ompostering.gjelderId + ompostering.ompostering)}
                   >
-                    <Table.DataCell>{ompostering.id}</Table.DataCell>
+                    <Table.DataCell>{ompostering.gjelderId}</Table.DataCell>
                     <Table.DataCell>{ompostering.kodeFaggruppe}</Table.DataCell>
                     <Table.DataCell>{ompostering.lopenr}</Table.DataCell>
                     <Table.DataCell>{ompostering.ompostering}</Table.DataCell>
