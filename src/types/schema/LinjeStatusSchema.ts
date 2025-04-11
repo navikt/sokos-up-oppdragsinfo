@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const LinjeStatusSchema = z.object({
-  status: z.string(),
+  kodeStatus: z.string(),
   datoFom: z.optional(z.string()),
   tidspktReg: z.string(),
   brukerid: z.string(),

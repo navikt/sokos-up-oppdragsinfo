@@ -1,6 +1,5 @@
 import useSWRImmutable from "swr/immutable";
 import { AttestantList } from "../types/Attestant";
-import { EnhetshistorikkList } from "../types/Enhetshistorikk";
 import { FagGruppeList } from "../types/FagGruppe";
 import { GjelderNavn } from "../types/GjelderNavn";
 import { GradList } from "../types/Grad";
@@ -11,6 +10,7 @@ import { LinjeenhetList } from "../types/LinjeEnhet";
 import { LinjeStatusList } from "../types/LinjeStatus";
 import { MaksdatoList } from "../types/Maksdato";
 import { OmposteringList } from "../types/Ompostering";
+import { OppdragsEnhetList } from "../types/OppdragsEnhet";
 import { OppdragsEnhetDTO } from "../types/OppdragsEnhetDTO";
 import { OppdragsStatusList } from "../types/OppdragsStatus";
 import { OppdragsLinjeList } from "../types/Oppdragslinje";
@@ -75,7 +75,7 @@ export async function hentNavn(request: GjelderIdRequest) {
   );
 }
 
-export function useFetchHentOppdragsLinjer(oppdragsId?: number) {
+export function useFetchHentOppdragsLinjer(oppdragsId?: string) {
   return useSWRImmutable<OppdragsLinjeList>(
     oppdragsId ? `/${oppdragsId}/oppdragslinjer` : null,
     swrConfig<OppdragsLinjeList>((url) =>
@@ -84,7 +84,7 @@ export function useFetchHentOppdragsLinjer(oppdragsId?: number) {
   );
 }
 
-export function useFetchHentOppdragsEnheter(oppdragsId: number) {
+export function useFetchHentOppdragsEnheter(oppdragsId: string) {
   return useSWRImmutable<OppdragsEnhetDTO>(
     oppdragsId ? `/${oppdragsId}/enheter` : null,
     swrConfig<OppdragsEnhetDTO>((url) =>
@@ -94,7 +94,7 @@ export function useFetchHentOppdragsEnheter(oppdragsId: number) {
 }
 
 export function useFetchHentAttestanter(
-  oppdragsId: number,
+  oppdragsId: string,
   linjeId: string,
   call: boolean,
 ) {
@@ -107,7 +107,7 @@ export function useFetchHentAttestanter(
 }
 
 export function useFetchHentOppdragsLinjeStatuser(
-  oppdragsId: number,
+  oppdragsId: string,
   oppdragsLinjeId: string,
   call: boolean,
 ) {
@@ -120,7 +120,7 @@ export function useFetchHentOppdragsLinjeStatuser(
 }
 
 export function useFetchHentOppdragsStatushistorikk(
-  oppdragsId: number,
+  oppdragsId: string,
   call: boolean,
 ) {
   return useSWRImmutable<OppdragsStatusList>(
@@ -132,19 +132,19 @@ export function useFetchHentOppdragsStatushistorikk(
 }
 
 export function useFetchHentOppdragsEnhethistorikk(
-  oppdragsId: number,
+  oppdragsId: string,
   call: boolean,
 ) {
-  return useSWRImmutable<EnhetshistorikkList>(
+  return useSWRImmutable<OppdragsEnhetList>(
     call ? `/${oppdragsId}/enhetshistorikk` : null,
-    swrConfig<EnhetshistorikkList>((url) =>
-      axiosFetcher<EnhetshistorikkList>(BASE_URI.OPPDRAGSINFO_API, url),
+    swrConfig<OppdragsEnhetList>((url) =>
+      axiosFetcher<OppdragsEnhetList>(BASE_URI.OPPDRAGSINFO_API, url),
     ),
   );
 }
 
 export function useFetchHentOppdragsOmposteringer(
-  oppdragsId: number,
+  oppdragsId: string,
   call: boolean,
 ) {
   return useSWRImmutable<OmposteringList>(
@@ -156,8 +156,8 @@ export function useFetchHentOppdragsOmposteringer(
 }
 
 export function useFetchOppdragslinjeDetaljer(
+  oppdragsId: string,
   oppdragsLinjeId: string,
-  oppdragsId?: number,
 ) {
   return useSWRImmutable<KorrigertLinje>(
     oppdragsId ? `/${oppdragsId}/${oppdragsLinjeId}/detaljer` : null,
@@ -167,7 +167,7 @@ export function useFetchOppdragslinjeDetaljer(
   );
 }
 
-export function useFetchKravhaver(oppdragsId: number, linjeId: string) {
+export function useFetchKravhaver(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<KravhaverList>(
     `/${oppdragsId}/${linjeId}/kravhavere`,
     swrConfig<KravhaverList>((url) =>
@@ -176,7 +176,7 @@ export function useFetchKravhaver(oppdragsId: number, linjeId: string) {
   );
 }
 
-export function useFetchOvrig(oppdragsId: number, linjeId: string) {
+export function useFetchOvrig(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<OvrigList>(
     `/${oppdragsId}/${linjeId}/ovrig`,
     swrConfig<OvrigList>((url) =>
@@ -185,7 +185,7 @@ export function useFetchOvrig(oppdragsId: number, linjeId: string) {
   );
 }
 
-export function useFetchValuta(oppdragsId: number, linjeId: string) {
+export function useFetchValuta(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<ValutaList>(
     `/${oppdragsId}/${linjeId}/valutaer`,
     swrConfig<ValutaList>((url) =>
@@ -194,13 +194,13 @@ export function useFetchValuta(oppdragsId: number, linjeId: string) {
   );
 }
 
-export function useFetchKid(oppdragsId: number, linjeId: string) {
+export function useFetchKid(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<KidList>(`/${oppdragsId}/${linjeId}/kid`, {
     ...swrConfig,
   });
 }
 
-export function useFetchTekster(oppdragsId: number, linjeId: string) {
+export function useFetchTekster(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<TekstList>(
     `/${oppdragsId}/${linjeId}/tekster`,
     swrConfig<TekstList>((url) =>
@@ -209,7 +209,7 @@ export function useFetchTekster(oppdragsId: number, linjeId: string) {
   );
 }
 
-export function useFetchSkyldnere(oppdragsId: number, linjeId: string) {
+export function useFetchSkyldnere(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<SkyldnerList>(
     `/${oppdragsId}/${linjeId}/skyldnere`,
     swrConfig<SkyldnerList>((url) =>
@@ -218,7 +218,7 @@ export function useFetchSkyldnere(oppdragsId: number, linjeId: string) {
   );
 }
 
-export function useFetchMaksdato(oppdragsId: number, linjeId: string) {
+export function useFetchMaksdato(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<MaksdatoList>(
     `/${oppdragsId}/${linjeId}/maksdatoer`,
     swrConfig<MaksdatoList>((url) =>
@@ -227,7 +227,7 @@ export function useFetchMaksdato(oppdragsId: number, linjeId: string) {
   );
 }
 
-export function useFetchLinjeEnheter(oppdragsId: number, linjeId: string) {
+export function useFetchLinjeEnheter(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<LinjeenhetList>(
     `/${oppdragsId}/${linjeId}/enheter`,
     swrConfig<LinjeenhetList>((url) =>
@@ -236,7 +236,7 @@ export function useFetchLinjeEnheter(oppdragsId: number, linjeId: string) {
   );
 }
 
-export function useFetchGrad(oppdragsId: number, linjeId: string) {
+export function useFetchGrad(oppdragsId: string, linjeId: string) {
   return useSWRImmutable<GradList>(
     `/${oppdragsId}/${linjeId}/grader`,
     swrConfig<GradList>((url) =>

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const OppdragSchema = z.object({
   fagsystemId: z.string(),
-  oppdragsId: z.number(),
+  oppdragsId: z.string(),
   navnFaggruppe: z.string(),
   navnFagomraade: z.string(),
   kjorIdag: z.string(),

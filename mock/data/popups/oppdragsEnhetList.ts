@@ -1,6 +1,6 @@
-import { EnhetshistorikkList } from "../../../src/types/Enhetshistorikk";
+import { OppdragsEnhetList } from "../../../src/types/OppdragsEnhet";
 
-export const enhetsHistorikkList: EnhetshistorikkList = [
+export const oppdragsEnhetList: OppdragsEnhetList = [
   {
     typeEnhet: "BOS",
     datoFom: "2014-03-23",

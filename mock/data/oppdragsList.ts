@@ -3,7 +3,7 @@ import { OppdragsList } from "../../src/types/Oppdrag";
 export const oppdragsList: OppdragsList = [
   {
     fagsystemId: "000448656NS419.22.41.067353",
-    oppdragsId: 70445294,
+    oppdragsId: "70445294",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "Uføretrygd til innkreving",
     kjorIdag: "N",
@@ -12,7 +12,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "000448633NS419.22.45.323821",
-    oppdragsId: 70445297,
+    oppdragsId: "70445297",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "Uføretrygd til innkreving",
     kjorIdag: "N",
@@ -21,7 +21,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "000448718NS419.22.48.136913",
-    oppdragsId: 70445300,
+    oppdragsId: "70445300",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "Uføretrygd til innkreving",
     kjorIdag: "N",
@@ -30,7 +30,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "0000004270AR403.19.42.492689",
-    oppdragsId: 70045723,
+    oppdragsId: "70045723",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "AAP til innkreving",
     kjorIdag: "N",
@@ -39,7 +39,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "0000004271AR403.19.42.729406",
-    oppdragsId: 70045726,
+    oppdragsId: "70045726",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "AAP til innkreving",
     kjorIdag: "N",
@@ -48,7 +48,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "11077531914-20210472044001-K",
-    oppdragsId: 70046401,
+    oppdragsId: "70046401",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "AAP til innkreving",
     kjorIdag: "N",
@@ -57,7 +57,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "02085648473-20230407750001-K",
-    oppdragsId: 70046699,
+    oppdragsId: "70046699",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "AAP til innkreving",
     kjorIdag: "N",
@@ -66,7 +66,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "000443938NS423.58.05.122935",
-    oppdragsId: 70138929,
+    oppdragsId: "70138929",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "Uføretrygd til innkreving",
     kjorIdag: "N",
@@ -75,7 +75,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "000443989NS423.58.06.568967",
-    oppdragsId: 70138933,
+    oppdragsId: "70138933",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "Uføretrygd til innkreving",
     kjorIdag: "N",
@@ -84,7 +84,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "061223-80000839778-27670",
-    oppdragsId: 70126774,
+    oppdragsId: "70126774",
     navnFaggruppe: "Skatteoppgjør - manuelle posteringer",
     navnFagomraade: "Manuell opprydding skatt",
     kjorIdag: "N",
@@ -93,7 +93,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "061223-80000839778-27671",
-    oppdragsId: 70127337,
+    oppdragsId: "70127337",
     navnFaggruppe: "Skatteoppgjør - manuelle posteringer",
     navnFagomraade: "Manuell opprydding skatt",
     kjorIdag: "N",
@@ -102,7 +102,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "12086925433-20230388263001-K",
-    oppdragsId: 70129632,
+    oppdragsId: "70129632",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "AAP til innkreving",
     kjorIdag: "N",
@@ -111,7 +111,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "26026045710-20230412948001-K",
-    oppdragsId: 70130125,
+    oppdragsId: "70130125",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "AAP til innkreving",
     kjorIdag: "N",
@@ -120,7 +120,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "0000001449AR400.23.44.205080",
-    oppdragsId: 68216924,
+    oppdragsId: "68216924",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "AAP til innkreving",
     kjorIdag: "N",
@@ -129,7 +129,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "0001484462",
-    oppdragsId: 70459870,
+    oppdragsId: "70459870",
     navnFaggruppe: "Skatteoppgjør",
     navnFagomraade: "Skatteoppgjør",
     kjorIdag: "N",
@@ -138,7 +138,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "0001484463",
-    oppdragsId: 70459871,
+    oppdragsId: "70459871",
     navnFaggruppe: "Skatteoppgjør",
     navnFagomraade: "Skatteoppgjør",
     kjorIdag: "N",
@@ -147,7 +147,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "0001484464",
-    oppdragsId: 70459872,
+    oppdragsId: "70459872",
     navnFaggruppe: "Svalbardskatt",
     navnFagomraade: "Svalbardskatt",
     kjorIdag: "N",
@@ -156,7 +156,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "0001484465",
-    oppdragsId: 70459873,
+    oppdragsId: "70459873",
     navnFaggruppe: "Svalbardskatt",
     navnFagomraade: "Svalbardskatt",
     kjorIdag: "N",
@@ -165,7 +165,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "000313129NS423.33.02.279348",
-    oppdragsId: 60010067,
+    oppdragsId: "60010067",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "Uføretrygd til innkreving",
     kjorIdag: "N",
@@ -174,7 +174,7 @@ export const oppdragsList: OppdragsList = [
   },
   {
     fagsystemId: "000428484NS401.19.17.221833",
-    oppdragsId: 69991645,
+    oppdragsId: "69991645",
     navnFaggruppe: "Tilbakekreving",
     navnFagomraade: "Uføretrygd til innkreving",
     kjorIdag: "N",

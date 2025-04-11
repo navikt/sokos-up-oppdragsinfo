@@ -5,7 +5,6 @@ import { gjelderNavn } from "./data/gjelderNavn";
 import { oppdragsEnhetDto } from "./data/oppdragsEnhetDto";
 import { oppdragsList } from "./data/oppdragsList";
 import { oppdragsLinjeList } from "./data/oppdragslinjeList";
-import { enhetsHistorikkList } from "./data/popups/enhetshistorikk";
 import { attestant } from "./data/popups/linje/attestant";
 import detaljer from "./data/popups/linje/detaljer.json";
 import enhet from "./data/popups/linje/enhet.json";
@@ -19,6 +18,7 @@ import status from "./data/popups/linje/status.json";
 import tekst from "./data/popups/linje/tekst.json";
 import valuta from "./data/popups/linje/valuta.json";
 import { omposteringList } from "./data/popups/omposteringList";
+import { oppdragsEnhetList } from "./data/popups/oppdragsEnhetList";
 import { oppdragsStatusList } from "./data/popups/oppdragsStatusList";
 
 export const handlers = [
@@ -50,7 +50,7 @@ export const handlers = [
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/enhetshistorikk", () => {
-    return HttpResponse.json(enhetsHistorikkList, { status: 200 });
+    return HttpResponse.json(oppdragsEnhetList, { status: 200 });
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/omposteringer", () => {

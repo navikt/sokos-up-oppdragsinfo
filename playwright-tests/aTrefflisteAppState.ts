@@ -7,7 +7,7 @@ const aTrefflisteAppState: { state: AppState; version: number } = {
     oppdragsListe: [
       {
         fagsystemId: "2960-2024-xtest",
-        oppdragsId: 73418649,
+        oppdragsId: "73418649",
         navnFaggruppe: "Memoposteringer pensjon",
         navnFagomraade: "Balansekonti",
         kjorIdag: "N",
@@ -16,7 +16,7 @@ const aTrefflisteAppState: { state: AppState; version: number } = {
       },
       {
         fagsystemId: "1",
-        oppdragsId: 73418656,
+        oppdragsId: "73418656",
         navnFaggruppe: "Inntektsytelser",
         navnFagomraade: "Uføretrygd nødutbetaling",
         kjorIdag: "J",
@@ -25,7 +25,7 @@ const aTrefflisteAppState: { state: AppState; version: number } = {
       },
       {
         fagsystemId: "2960-test1-th",
-        oppdragsId: 73418731,
+        oppdragsId: "73418731",
         navnFaggruppe: "Memoposteringer sentralisert regnskap",
         navnFagomraade: "Balansekonti sentralisering regnskap",
         kjorIdag: "N",

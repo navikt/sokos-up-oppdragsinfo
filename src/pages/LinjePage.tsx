@@ -23,8 +23,8 @@ export default function LinjePage() {
   const navigate = useNavigate();
 
   const { gjelderId, oppdrag, linjeId } = useStore.getState();
-  const oppdragsId = oppdrag?.oppdragsId || undefined;
-  const { data } = useFetchOppdragslinjeDetaljer(linjeId, oppdragsId);
+  const oppdragsId = oppdrag?.oppdragsId || "";
+  const { data } = useFetchOppdragslinjeDetaljer(oppdragsId, linjeId);
 
   useEffect(() => {
     if (!gjelderId || !oppdrag) {

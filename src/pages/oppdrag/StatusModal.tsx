@@ -5,7 +5,7 @@ import { LinjeStatus } from "../../types/LinjeStatus";
 import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 interface StatusModalProps {
-  oppdragsId: number;
+  oppdragsId: string;
   linjeId: string;
   text: string;
 }
@@ -53,8 +53,8 @@ export default function StatusModal(props: StatusModalProps) {
               {data &&
                 !isEmpty(data) &&
                 data?.map((status: LinjeStatus) => (
-                  <Table.Row key={btoa(status.status + status.tidspktReg)}>
-                    <Table.DataCell>{status.status}</Table.DataCell>
+                  <Table.Row key={btoa(status.kodeStatus + status.tidspktReg)}>
+                    <Table.DataCell>{status.kodeStatus}</Table.DataCell>
                     <Table.DataCell>
                       {formatDate(status.datoFom)}
                     </Table.DataCell>
