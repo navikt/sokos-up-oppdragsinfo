@@ -36,7 +36,7 @@ export default function ValutaerTable(props: OppdragsIdent) {
               <Table.DataCell>{valuta.typeValuta}</Table.DataCell>
               <Table.DataCell>{valuta.feilreg}</Table.DataCell>
               <Table.DataCell>
-                {formatDateTime(valuta.tidspktReg)}
+                {formatDateTime(valuta.tidspktReg ? valuta.tidspktReg : "")}
               </Table.DataCell>
               <Table.DataCell>{valuta.brukerid}</Table.DataCell>
             </Table.Row>
