@@ -6,12 +6,12 @@ import { oppdragsEnhetDto } from "./data/oppdragsEnhetDto";
 import { oppdragsList } from "./data/oppdragsList";
 import { oppdragsLinjeList } from "./data/oppdragslinjeList";
 import { attestant } from "./data/popups/linje/attestant";
-import detaljer from "./data/popups/linje/detaljer.json";
 import enhet from "./data/popups/linje/enhet.json";
 import grad from "./data/popups/linje/grad.json";
 import kid from "./data/popups/linje/kidliste.json";
 import kravhaver from "./data/popups/linje/kravhaver.json";
 import maksdato from "./data/popups/linje/maksdato.json";
+import { oppdragsLinjeDetaljer } from "./data/popups/linje/oppdragsLinjerDetaljerDto";
 import ovrig from "./data/popups/linje/ovrig.json";
 import skyldner from "./data/popups/linje/skyldner.json";
 import status from "./data/popups/linje/status.json";
@@ -66,7 +66,7 @@ export const handlers = [
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/detaljer", () => {
-    return HttpResponse.json(detaljer, { status: 200 });
+    return HttpResponse.json(oppdragsLinjeDetaljer, { status: 200 });
   }),
 
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/enheter", () => {

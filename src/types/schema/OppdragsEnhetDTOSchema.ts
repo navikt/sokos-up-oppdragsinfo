@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { EnhetSchema } from "./OppdragsEnhet";
+import { OppdragsEnhetSchema } from "./OppdragsEnhet";
 
 export const OppdragsEnhetDTOSchema = z.object({
-  enhet: EnhetSchema,
-  behandlendeEnhet: EnhetSchema,
+  enhet: OppdragsEnhetSchema,
+  behandlendeEnhet: OppdragsEnhetSchema,
 });

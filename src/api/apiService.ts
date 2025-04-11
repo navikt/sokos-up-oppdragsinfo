@@ -4,7 +4,6 @@ import { FagGruppeList } from "../types/FagGruppe";
 import { GjelderNavn } from "../types/GjelderNavn";
 import { GradList } from "../types/Grad";
 import { KidList } from "../types/Kid";
-import { KorrigertLinje } from "../types/KorrigertLinje";
 import { KravhaverList } from "../types/Kravhaver";
 import { LinjeenhetList } from "../types/LinjeEnhet";
 import { LinjeStatusList } from "../types/LinjeStatus";
@@ -12,6 +11,7 @@ import { MaksdatoList } from "../types/Maksdato";
 import { OmposteringList } from "../types/Ompostering";
 import { OppdragsEnhetList } from "../types/OppdragsEnhet";
 import { OppdragsEnhetDTO } from "../types/OppdragsEnhetDTO";
+import { OppdragsLinjeDetaljerDTO } from "../types/OppdragsLinjeDetaljerDTO";
 import { OppdragsStatusList } from "../types/OppdragsStatus";
 import { OppdragsLinjeList } from "../types/Oppdragslinje";
 import { OvrigList } from "../types/Ovrig";
@@ -159,10 +159,10 @@ export function useFetchOppdragslinjeDetaljer(
   oppdragsId: string,
   oppdragsLinjeId: string,
 ) {
-  return useSWRImmutable<KorrigertLinje>(
+  return useSWRImmutable<OppdragsLinjeDetaljerDTO>(
     oppdragsId ? `/${oppdragsId}/${oppdragsLinjeId}/detaljer` : null,
-    swrConfig<KorrigertLinje>((url) =>
-      axiosFetcher<KorrigertLinje>(BASE_URI.OPPDRAGSINFO_API, url),
+    swrConfig<OppdragsLinjeDetaljerDTO>((url) =>
+      axiosFetcher<OppdragsLinjeDetaljerDTO>(BASE_URI.OPPDRAGSINFO_API, url),
     ),
   );
 }

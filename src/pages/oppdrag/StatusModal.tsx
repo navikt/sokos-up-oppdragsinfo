@@ -35,7 +35,7 @@ export default function StatusModal(props: StatusModalProps) {
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell key={"status"} scope="col">
+                <Table.HeaderCell key={"kodeStatus"} scope="col">
                   Status
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"datoFom"} scope="col">
