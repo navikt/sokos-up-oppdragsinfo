@@ -1,11 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchMaksdato } from "../../api/apiService";
 import { Maksdato } from "../../types/Maksdato";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function MaksdatoerTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchMaksdato(props.oppdragsId, props.linjeId);
+  const { data } = useFetchMaksdato(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>

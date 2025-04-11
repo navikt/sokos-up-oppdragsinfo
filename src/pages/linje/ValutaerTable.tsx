@@ -1,11 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchValuta } from "../../api/apiService";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { Valuta } from "../../types/Valuta";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function ValutaerTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchValuta(props.oppdragsId, props.linjeId);
+  const { data } = useFetchValuta(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>
@@ -33,10 +33,10 @@ export default function ValutaerTable(props: OppdragsIdent) {
               <Table.DataCell>{valuta.type}</Table.DataCell>
               <Table.DataCell>{valuta.datoFom}</Table.DataCell>
               <Table.DataCell>{valuta.nokkelId}</Table.DataCell>
-              <Table.DataCell>{valuta.valuta}</Table.DataCell>
+              <Table.DataCell>{valuta.typeValuta}</Table.DataCell>
               <Table.DataCell>{valuta.feilreg}</Table.DataCell>
               <Table.DataCell>
-                {formatDateTime(valuta.tidspktReg)}
+                {formatDateTime(valuta.tidspktReg ? valuta.tidspktReg : "")}
               </Table.DataCell>
               <Table.DataCell>{valuta.brukerid}</Table.DataCell>
             </Table.Row>

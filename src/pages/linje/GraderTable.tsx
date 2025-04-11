@@ -1,11 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchGrad } from "../../api/apiService";
 import { Grad } from "../../types/Grad";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function GraderTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchGrad(props.oppdragsId, props.linjeId);
+  const { data } = useFetchGrad(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>

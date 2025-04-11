@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Alert, Button, Modal, Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchHentOppdragsOmposteringer } from "../../api/apiService";
 import { Ompostering } from "../../types/Ompostering";
 import { OppdragsId } from "../../types/OppdragsId";
 import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
@@ -8,10 +8,7 @@ import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 export default function OmposteringModal(props: OppdragsId) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = apiService.useFetchHentOppdragsOmposteringer(
-    props.oppdragsId,
-    isOpen,
-  );
+  const { data } = useFetchHentOppdragsOmposteringer(props.oppdragsId, isOpen);
 
   const handleClick = () => {
     setIsOpen(true);
@@ -53,14 +50,14 @@ export default function OmposteringModal(props: OppdragsId) {
               <Table.Body>
                 {data.map((ompostering: Ompostering) => (
                   <Table.Row
-                    key={btoa(ompostering.id + ompostering.ompostering)}
+                    key={btoa(ompostering.gjelderId + ompostering.ompostering)}
                   >
-                    <Table.DataCell>{ompostering.id}</Table.DataCell>
+                    <Table.DataCell>{ompostering.gjelderId}</Table.DataCell>
                     <Table.DataCell>{ompostering.kodeFaggruppe}</Table.DataCell>
                     <Table.DataCell>{ompostering.lopenr}</Table.DataCell>
                     <Table.DataCell>{ompostering.ompostering}</Table.DataCell>
                     <Table.DataCell>
-                      {formatDate(ompostering.omposteringFom)}
+                      {formatDate(ompostering.datoOmposterFom)}
                     </Table.DataCell>
                     <Table.DataCell>{ompostering.feilReg}</Table.DataCell>
                     <Table.DataCell>{ompostering.beregningsId}</Table.DataCell>

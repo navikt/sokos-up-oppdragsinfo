@@ -5,9 +5,9 @@ export const ValutaSchema = z.object({
   type: z.string(),
   datoFom: z.string(),
   nokkelId: z.string(),
-  valuta: z.string(),
+  typeValuta: z.string(),
   feilreg: z.string(),
-  tidspktReg: z.string(),
+  tidspktReg: z.string().optional(),
   brukerid: z.string(),
 });
 

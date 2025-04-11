@@ -1,14 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchSkyldnere } from "../../api/apiService";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { Skyldner } from "../../types/Skyldner";
 import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function SkyldnereTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchSkyldnere(
-    props.oppdragsId,
-    props.linjeId,
-  );
+  const { data } = useFetchSkyldnere(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>
