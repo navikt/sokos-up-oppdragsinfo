@@ -18,6 +18,7 @@ export const OppdragsLinjeSchema = z.object({
   typeSats: z.string(),
   underkontonr: z.string().optional(),
   utbetalesTilId: z.string(),
+  vedtakId: z.string(),
   vedtakssats: z.number().optional(),
 });
 

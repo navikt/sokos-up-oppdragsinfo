@@ -13,6 +13,7 @@ import EnhetshistorikkModal from "./oppdrag/EnhetshistorikkModal";
 import OmposteringModal from "./oppdrag/OmposteringModal";
 import OppdragLinjeTable from "./oppdrag/OppdragLinjeTable";
 import StatushistorikkModal from "./oppdrag/StatushistorikkModal";
+import Tidslinjevisning from "./oppdrag/Tidslinjevisning";
 
 export default function OppdragPage() {
   const navigate = useNavigate();
@@ -97,6 +98,7 @@ export default function OppdragPage() {
             </div>
           </div>
 
+          <Tidslinjevisning oppdragslinjer={oppdragsLinjer} />
           <OppdragLinjeTable
             oppdragsId={oppdrag!.oppdragsId}
             oppdragsLinjer={oppdragsLinjer}
