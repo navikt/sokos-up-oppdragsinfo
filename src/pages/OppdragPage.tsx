@@ -7,6 +7,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
 import { useStore } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
+import { OPPDRAG } from "../umami/umami";
 import { ROOT } from "../util/constant";
 import { downloadAsCsv } from "../util/csvExport";
 import EnhetshistorikkModal from "./oppdrag/EnhetshistorikkModal";
@@ -50,7 +51,12 @@ export default function OppdragPage() {
                 <div className={commonstyles.buttonrowLeft}>
                   <Suspense
                     fallback={
-                      <Button size="small" loading variant="secondary-neutral">
+                      <Button
+                        data-umami-event={OPPDRAG.OMPOSTERINGER}
+                        size="small"
+                        loading
+                        variant="secondary-neutral"
+                      >
                         Omposteringer
                       </Button>
                     }
@@ -59,7 +65,12 @@ export default function OppdragPage() {
                   </Suspense>
                   <Suspense
                     fallback={
-                      <Button size="small" loading variant="secondary-neutral">
+                      <Button
+                        data-umami-event={OPPDRAG.STATUS_HISTORIKK}
+                        size="small"
+                        loading
+                        variant="secondary-neutral"
+                      >
                         Status historikk
                       </Button>
                     }
@@ -68,7 +79,12 @@ export default function OppdragPage() {
                   </Suspense>
                   <Suspense
                     fallback={
-                      <Button size="small" loading variant="secondary-neutral">
+                      <Button
+                        data-umami-event={OPPDRAG.ENHETSHISTORIKK}
+                        size="small"
+                        loading
+                        variant="secondary-neutral"
+                      >
                         Enhetshistorikk
                       </Button>
                     }
@@ -78,6 +94,7 @@ export default function OppdragPage() {
                 </div>
                 <div className={commonstyles.knapperad}>
                   <Button
+                    data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
                     size={"small"}
                     variant={"secondary-neutral"}
                     icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
