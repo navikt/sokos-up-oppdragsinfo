@@ -16,6 +16,9 @@ on:
       - ".github/dependabot.yaml"
       - ".github/workflows/dependabot-automerge.yaml"
 
+  repository_dispatch:
+    types: [dependabot-deploy]
+
 env:
   TZ: Europe/Oslo
 
