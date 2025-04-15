@@ -12,7 +12,9 @@ const enhetstypetekst: Record<EnhetsType, string> = {
 export default function EnhetLabel({ enhet }: { enhet: Enhet }) {
   return (
     <div className={commonstyles.row}>
-      <div className={commonstyles.bold}>{enhetstypetekst[enhet.type]}:</div>
+      <div className={commonstyles.bold}>
+        {enhetstypetekst[enhet.typeEnhet]}:
+      </div>
       <div>{enhet.enhet}</div>
       <LabelText label={"Dato fom"} text={formatDate(enhet.datoFom)} />
     </div>

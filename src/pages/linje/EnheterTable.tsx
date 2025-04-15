@@ -1,14 +1,11 @@
 import { Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchLinjeEnheter } from "../../api/apiService";
 import { LinjeEnhet } from "../../types/LinjeEnhet";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function EnheterTable(props: OppdragsIdent) {
-  const { data } = apiService.useFetchLinjeEnheter(
-    props.oppdragsId,
-    props.linjeId,
-  );
+  const { data } = useFetchLinjeEnheter(props.oppdragsId, props.linjeId);
 
   return (
     <Table zebraStripes>

@@ -1,18 +1,14 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import aTrefflisteAppState from "./aTrefflisteAppState";
-import faggrupper from "./faggrupper";
-import fagomraader from "./fagomraader";
+import { faggruppeList } from "./stubs/faggrupper";
 
 test.describe("Axe a11y", () => {
   test(`/oppdragsinfo should not have any automatically detectable accessibility issues`, async ({
     page,
   }) => {
     await page.route("*/**/faggrupper", async (route) => {
-      await route.fulfill({ json: faggrupper });
-    });
-    await page.route("*/**/fagomraader", async (route) => {
-      await route.fulfill({ json: fagomraader });
+      await route.fulfill({ json: faggruppeList });
     });
 
     await page.goto("/oppdragsinfo");

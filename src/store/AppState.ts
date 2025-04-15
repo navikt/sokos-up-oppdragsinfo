@@ -3,7 +3,7 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import { FagGruppe } from "../types/FagGruppe";
 import { Oppdrag, OppdragsList } from "../types/Oppdrag";
 
-type AppState = {
+export type AppState = {
   gjelderId: string;
   fagGruppe?: FagGruppe;
   gjelderNavn: string;

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchHentAttestanter } from "../../api/apiService";
 import { Attestant } from "../../types/Attestant";
 import { formatDate, isEmpty } from "../../util/commonUtil";
 
@@ -13,7 +13,7 @@ interface AttestertModalProps {
 export default function AttestertModal(props: AttestertModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = apiService.useFetchHentAttestanter(
+  const { data } = useFetchHentAttestanter(
     props.oppdragsId,
     props.linjeId,
     isOpen,

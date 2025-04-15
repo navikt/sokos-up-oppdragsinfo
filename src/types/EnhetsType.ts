@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { EnhetSchema, EnhetsTypeSchema } from "./schema/EnhetsTypeSchema";
+import {
+  OppdragsEnhetSchema,
+  OppdragsEnhetTypeSchema,
+} from "./schema/OppdragsEnhet";
 
-export type EnhetsType = z.infer<typeof EnhetsTypeSchema>;
-export type Enhet = z.infer<typeof EnhetSchema>;
+export type EnhetsType = z.infer<typeof OppdragsEnhetTypeSchema>;
+export type Enhet = z.infer<typeof OppdragsEnhetSchema>;

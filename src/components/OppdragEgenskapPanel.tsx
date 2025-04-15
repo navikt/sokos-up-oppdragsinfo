@@ -1,4 +1,4 @@
-import apiService from "../api/apiService";
+import { useFetchHentOppdragsEnheter } from "../api/apiService";
 import EnhetLabel from "../pages/oppdrag/EnhetLabel";
 import { useStore } from "../store/AppState";
 import { Oppdrag } from "../types/Oppdrag";
@@ -12,7 +12,7 @@ interface OppdragsEgenskapPanelProps {
 export default function OppdragEgenskapPanel(
   props: OppdragsEgenskapPanelProps,
 ) {
-  const { data: oppdragsEnhet } = apiService.useFetchHentOppdragsEnheter(
+  const { data: oppdragsEnhet } = useFetchHentOppdragsEnheter(
     props.oppdrag.oppdragsId,
   );
   const { gjelderId, gjelderNavn } = useStore.getState();
@@ -21,7 +21,7 @@ export default function OppdragEgenskapPanel(
     <div className={styles.panel}>
       <div className={styles.column}>
         <LabelText label={"Gjelder"} text={gjelderId} />
-        <LabelText label={"Fagsystem id"} text={props.oppdrag.fagSystemId} />
+        <LabelText label={"Fagsystem id"} text={props.oppdrag.fagsystemId} />
         <LabelText label={"Status"} text={props.oppdrag.kodeStatus} />
         {oppdragsEnhet && oppdragsEnhet.behandlendeEnhet && (
           <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
@@ -39,7 +39,7 @@ export default function OppdragEgenskapPanel(
         <LabelText
           nowrap
           label={"Fagområde"}
-          text={props.oppdrag.navnFagOmraade}
+          text={props.oppdrag.navnFagomraade}
         />
       </div>
     </div>

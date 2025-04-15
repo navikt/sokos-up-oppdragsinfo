@@ -1,8 +1,8 @@
 # Oppdragsinfo mikrofrontend
 
 (Kort beskrivelse av applikasjonen)
-Mer dokumentasjon kan du finne under mappen [dokumentasjon](dokumentasjon)
-Backend til applikasjonen er [sokos-oppdrag](https://github.com/navikt/sokos-oppdrag)
+</br>Mer dokumentasjon kan du finne under mappen [dokumentasjon](dokumentasjon)
+</br>Backend til applikasjonen er [sokos-oppdrag](https://github.com/navikt/sokos-oppdrag)
 
 ## Miljøer
 

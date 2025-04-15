@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heading } from "@navikt/ds-react";
-import apiService from "../api/apiService";
+import { hentNavn } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";
 import LabelText from "../components/LabelText";
 import { useStore } from "../store/AppState";
@@ -22,7 +22,7 @@ export default function TrefflistePage() {
     }
 
     if (gjelderNavn === "") {
-      apiService.useHentNavn({ gjelderId }).then((response) => {
+      hentNavn({ gjelderId }).then((response) => {
         setGjelderNavn(response.navn);
       });
     }

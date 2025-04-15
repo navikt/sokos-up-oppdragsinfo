@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Accordion, Heading } from "@navikt/ds-react";
-import apiService from "../api/apiService";
+import { useFetchOppdragslinjeDetaljer } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
 import { useStore } from "../store/AppState";
@@ -24,10 +24,7 @@ export default function LinjePage() {
 
   const { gjelderId, oppdrag, linjeId } = useStore.getState();
   const oppdragsId = oppdrag?.oppdragsId || "";
-  const oppdragsLinjeDetaljer = apiService.useFetchOppdragslinjeDetaljer(
-    oppdragsId,
-    linjeId,
-  ).data;
+  const { data } = useFetchOppdragslinjeDetaljer(oppdragsId, linjeId);
 
   useEffect(() => {
     if (!gjelderId || !oppdrag) {
@@ -50,59 +47,43 @@ export default function LinjePage() {
           </div>
         </div>
 
-        {oppdragsLinjeDetaljer && (
-          <KorrigerteLinjerTable
-            oppdragsLinjeDetaljer={oppdragsLinjeDetaljer}
-          />
-        )}
+        {data && <KorrigerteLinjerTable oppdragsLinjeDetaljer={data} />}
 
-        {oppdragsLinjeDetaljer && (
+        {data && (
           <Accordion>
-            <LinjeDetaljerAccordion
-              title={"Enheter"}
-              enabled={oppdragsLinjeDetaljer.harEnheter}
-            >
+            <LinjeDetaljerAccordion title={"Enheter"} enabled={data.harEnheter}>
               <EnheterTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion
-              title={"Grader"}
-              enabled={oppdragsLinjeDetaljer.harGrader}
-            >
+            <LinjeDetaljerAccordion title={"Grader"} enabled={data.harGrader}>
               <GraderTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
             <LinjeDetaljerAccordion
               title={"Kravhavere"}
-              enabled={oppdragsLinjeDetaljer.harKravhavere}
+              enabled={data.harKravhavere}
             >
               <KravhaverTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
             <LinjeDetaljerAccordion
               title={"Valutaer"}
-              enabled={oppdragsLinjeDetaljer.harValutaer}
+              enabled={data.harValutaer}
             >
               <ValutaerTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion
-              title={"Tekster"}
-              enabled={oppdragsLinjeDetaljer.harTekster}
-            >
+            <LinjeDetaljerAccordion title={"Tekster"} enabled={data.harTekster}>
               <TeksterTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion
-              title={"Kid"}
-              enabled={oppdragsLinjeDetaljer.harKidliste}
-            >
+            <LinjeDetaljerAccordion title={"Kid"} enabled={data.harKidliste}>
               <KidTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
             <LinjeDetaljerAccordion
               title="Skyldnere"
-              enabled={oppdragsLinjeDetaljer.harSkyldnere}
+              enabled={data.harSkyldnere}
             >
               <SkyldnereTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>
             <LinjeDetaljerAccordion
               title={"Maksdato"}
-              enabled={oppdragsLinjeDetaljer.harMaksdatoer}
+              enabled={data.harMaksdatoer}
             >
               <MaksdatoerTable oppdragsId={oppdragsId} linjeId={linjeId} />
             </LinjeDetaljerAccordion>

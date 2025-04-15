@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { Button, Modal, Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
-import { Status } from "../../types/Status";
+import { useFetchHentOppdragsLinjeStatuser } from "../../api/apiService";
+import { LinjeStatus } from "../../types/LinjeStatus";
 import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 interface StatusModalProps {
@@ -13,7 +13,7 @@ interface StatusModalProps {
 export default function StatusModal(props: StatusModalProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = apiService.useFetchHentOppdragsLinjeStatuser(
+  const { data } = useFetchHentOppdragsLinjeStatuser(
     props.oppdragsId,
     props.linjeId,
     isOpen,
@@ -35,7 +35,7 @@ export default function StatusModal(props: StatusModalProps) {
           <Table zebraStripes>
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell key={"status"} scope="col">
+                <Table.HeaderCell key={"kodeStatus"} scope="col">
                   Status
                 </Table.HeaderCell>
                 <Table.HeaderCell key={"datoFom"} scope="col">
@@ -52,9 +52,9 @@ export default function StatusModal(props: StatusModalProps) {
             <Table.Body>
               {data &&
                 !isEmpty(data) &&
-                data?.map((status: Status) => (
-                  <Table.Row key={btoa(status.status + status.tidspktReg)}>
-                    <Table.DataCell>{status.status}</Table.DataCell>
+                data?.map((status: LinjeStatus) => (
+                  <Table.Row key={btoa(status.kodeStatus + status.tidspktReg)}>
+                    <Table.DataCell>{status.kodeStatus}</Table.DataCell>
                     <Table.DataCell>
                       {formatDate(status.datoFom)}
                     </Table.DataCell>

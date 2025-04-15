@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Alert, Button, Modal, Table } from "@navikt/ds-react";
-import apiService from "../../api/apiService";
+import { useFetchHentOppdragsStatushistorikk } from "../../api/apiService";
 import { OppdragsId } from "../../types/OppdragsId";
 import { OppdragsStatus } from "../../types/OppdragsStatus";
 import { formatDateTime, isEmpty } from "../../util/commonUtil";
@@ -8,7 +8,7 @@ import { formatDateTime, isEmpty } from "../../util/commonUtil";
 export default function StatushistorikkModal(props: OppdragsId) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const ref = useRef<HTMLDialogElement>(null);
-  const { data } = apiService.useFetchHentOppdragsStatushistorikk(
+  const { data } = useFetchHentOppdragsStatushistorikk(
     props.oppdragsId,
     isOpen,
   );

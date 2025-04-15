@@ -35,8 +35,8 @@ function api(baseUri: string) {
 }
 
 export async function axiosFetcher<T>(baseUri: string, url: string) {
-  const res = await api(baseUri).get<T>(url);
-  return res.data;
+  const response = await api(baseUri).get<T>(url);
+  return response.data;
 }
 
 export async function axiosPostFetcher<T, U>(

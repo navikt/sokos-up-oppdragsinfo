@@ -10,9 +10,10 @@ import {
   TextField,
   UNSAFE_Combobox,
 } from "@navikt/ds-react";
-import apiService from "../api/apiService";
+import { hentOppdrag, useFetchHentFaggrupper } from "../api/apiService";
 import { useStore } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
+import { ErrorMessage } from "../types/ErrorMessage";
 import { FagGruppe } from "../types/FagGruppe";
 import { SokParameter } from "../types/SokParameter";
 import { SokParameterSchema } from "../types/schema/SokParameterSchema";
@@ -22,14 +23,17 @@ import styles from "./sok/SokPage.module.css";
 
 export default function SokPage() {
   const navigate = useNavigate();
+  const [error, setError] = useState<ErrorMessage | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const { gjelderId, fagGruppe, resetState, setGjelderNavn } = useStore();
-  const faggrupper = apiService.useFetchHentFaggrupper().data!;
+
+  const { gjelderId, fagGruppe, setOppdragsListe, resetState, setGjelderNavn } =
+    useStore();
   const [sokParameter, setSokParameter] = useState<SokParameter>({
     gjelderId: gjelderId,
     fagGruppe: fagGruppe,
   });
+
+  const { data: faggrupper } = useFetchHentFaggrupper();
 
   const {
     register,
@@ -84,24 +88,28 @@ export default function SokPage() {
       fagGruppe: fagGruppe,
     });
 
-    apiService
-      .useHentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppe?.type })
+    hentOppdrag({ gjelderId: gjelderId, fagGruppeKode: fagGruppe?.type })
       .then((response) => {
         setIsLoading(false);
         setError(null);
         if (!isEmpty(response)) {
-          useStore.setState({ oppdragsListe: response });
+          setOppdragsListe(response);
           navigate("/treffliste", { replace: false });
         } else {
-          setError(
-            `Fant ingen oppdrag for ${gjelderId}${
-              fagGruppe ? ` med faggruppe ${fagGruppe.type}` : ""
-            }`,
-          );
+          setError({
+            variant: "info",
+            message:
+              "Fant ingen oppdrag for " +
+              gjelderId +
+              (fagGruppe ? " med faggruppe " + fagGruppe.type : ""),
+          });
         }
       })
       .catch((error) => {
-        setError(error.message);
+        setError({
+          variant: error.statusCode == 400 ? "warning" : "error",
+          message: error.message,
+        });
         setIsLoading(false);
       });
   }
@@ -202,8 +210,8 @@ export default function SokPage() {
       </div>
       {error && (
         <div className={styles["sok-feil"]}>
-          <Alert variant="info">
-            {error}
+          <Alert variant={error.variant} role="status">
+            {error.message}
             {sokParameter.fagGruppe
               ? ` med faggruppe ${sokParameter.fagGruppe}`
               : ""}

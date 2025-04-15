@@ -35,7 +35,7 @@ export function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
       oppdragslinje.attestert == "J" ? "Ja" : "Nei",
       oppdragslinje.delytelseId,
       oppdragslinje.utbetalesTilId,
-      oppdragslinje.refunderesOrgnr,
+      oppdragslinje.refunderesId,
       oppdragslinje.vedtakssats,
       formatDateTime(oppdragslinje.tidspktReg),
       oppdragslinje.brukerId,

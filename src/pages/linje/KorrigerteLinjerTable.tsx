@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import commonstyles from "../../styles/common-styles.module.css";
-import { KorrigertLinje } from "../../types/KorrigertLinje";
+import { OppdragsLinjeDetaljerDTO } from "../../types/OppdragsLinjeDetaljerDTO";
 import { OppdragsLinje } from "../../types/Oppdragslinje";
 import {
   SortState,
@@ -16,7 +16,7 @@ import {
 } from "../../util/commonUtil";
 
 interface KorrigerteLinjerTableProps {
-  oppdragsLinjeDetaljer: KorrigertLinje;
+  oppdragsLinjeDetaljer: OppdragsLinjeDetaljerDTO;
 }
 
 export default function KorrigerteLinjerTable(
@@ -106,7 +106,7 @@ export default function KorrigerteLinjerTable(
                   {formatDate(linje.datoVedtakTom)}
                 </Table.DataCell>
                 <Table.DataCell>{linje.utbetalesTilId}</Table.DataCell>
-                <Table.DataCell>{linje.refunderesOrgnr}</Table.DataCell>
+                <Table.DataCell>{linje.refunderesId}</Table.DataCell>
                 <Table.DataCell>
                   {formaterTilNorskTall(linje.vedtakssats)}
                 </Table.DataCell>

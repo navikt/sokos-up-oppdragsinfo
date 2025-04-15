@@ -1,0 +1,26 @@
+name: Dependabot Auto-merge
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "LICENCE"
+      - "CODEOWNERS"
+      - ".gitignore"
+      - ".github/workflows/deploy.yaml"
+      - ".github/workflows/manual-deploy-dev.yaml"
+      - ".github/workflows/playwright.yaml"
+      - ".github/workflows/security.yaml"
+      - ".github/dependabot.yaml"
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: read
+
+jobs:
+  dependabot-automerge:
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    uses: navikt/mob-gha-workflows/.github/workflows/dependabot-automerge.yaml@main
+    secrets: inherit
