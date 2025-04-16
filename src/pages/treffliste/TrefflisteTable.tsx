@@ -5,6 +5,7 @@ import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { Oppdrag, OppdragsList } from "../../types/Oppdrag";
+import { TABLE, logUserEvent } from "../../umami/umami";
 import {
   SortState,
   applySortDirection,
@@ -35,6 +36,7 @@ export default function TrefflisteTable(props: TrefflisteTableProps) {
   const antall = props.oppdragsListe.length ?? 0;
 
   function oppdragSort(sortKey?: string) {
+    logUserEvent(TABLE.SORTER, { sortKey });
     if (hasKey(firstOf(props.oppdragsListe), sortKey))
       handleSort<Oppdrag>(sortKey, setSort, sort);
   }
