@@ -223,9 +223,6 @@ export default function SokPage() {
         <div className={styles["sok-feil"]}>
           <Alert variant={error.variant} role="status">
             {error.message}
-            {sokParameter.fagGruppe
-              ? ` med faggruppe ${sokParameter.fagGruppe}`
-              : ""}
           </Alert>
         </div>
       )}
