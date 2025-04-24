@@ -11,36 +11,23 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "06:00"
+      time: "08:00"
       timezone: "Europe/Oslo"
-    open-pull-requests-limit: 20
     groups:
-      aksel:
-        patterns:
-          - "@navikt/aksel-*"
-          - "@navikt/ds-*"
-      react:
-        patterns:
-          - "react"
-          - "react-dom"
-      minor-and-patch:
+      all-minor-updates:
         update-types:
-          - "patch"
           - "minor"
-        exclude-patterns:
-          - "react"
-          - "react-dom"
-          - "@navikt/aksel-*"
-          - "@navikt/ds-*"
+          - "patch"
 
   - package-ecosystem: "npm"
     directory: "/server"
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "06:00"
+      time: "08:00"
       timezone: "Europe/Oslo"
     groups:
-      npm:
-        patterns:
-          - "*"
+      all-minor-updates:
+        update-types:
+          - "minor"
+          - "patch"
