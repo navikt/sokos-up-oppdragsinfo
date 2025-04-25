@@ -1,6 +1,9 @@
-import { BodyShort, Box, Heading, Link, List } from "@navikt/ds-react";
+import { Link, useNavigate } from "react-router-dom";
+import { BodyShort, Box, Heading, List } from "@navikt/ds-react";
 
 export default function NotFound() {
+  const navigate = useNavigate();
+
   return (
     <Box paddingBlock="20 16" data-aksel-template="404-v2">
       <div>
@@ -14,7 +17,9 @@ export default function NotFound() {
         <List>
           <List.Item>Bruk gjerne søket eller menyen</List.Item>
           <List.Item>
-            <Link href="/">Gå til forsiden</Link>
+            <Link to="" onClick={() => navigate(-1)}>
+              Gå tilbake til forrige side
+            </Link>
           </List.Item>
         </List>
       </div>
