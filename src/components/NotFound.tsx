@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { BodyShort, Box, Heading, List } from "@navikt/ds-react";
 
 export default function NotFound() {

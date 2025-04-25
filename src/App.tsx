@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   useRouteError,
-} from "react-router-dom";
+} from "react-router";
 import "./App.module.css";
 import ContentLoader from "./components/ContentLoader";
 import NotFound from "./components/NotFound";

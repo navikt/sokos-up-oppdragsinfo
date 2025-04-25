@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
 import { useFetchHentOppdragsLinjer } from "../api/apiService";
