@@ -16,7 +16,11 @@ function dagerMellom(dato1: string, dato2: string) {
 
 function utbetalt(linje: OppdragsLinje) {
   return linje.typeSats == "DAG"
-    ? linje.sats * dagerMellom(linje.datoVedtakFom, linje.datoVedtakTom)
+    ? linje.sats *
+        dagerMellom(
+          linje.datoVedtakFom,
+          linje.datoVedtakTom ?? linje.datoVedtakFom,
+        )
     : linje.sats;
 }
 
@@ -54,6 +58,10 @@ function groupByKlassekode(oppdragslinjer: OppdragsLinje[]) {
     {} as Record<string, OppdragsLinje[]>,
   );
 
+  if (Object.values(groupedByKlassekode)[0][0].typeSats != "DAG") {
+    return groupedByKlassekode;
+  }
+
   return Object.entries(groupedByKlassekode).reduce(
     (acc, [klasse, linjer]) => {
       acc[klasse] = groupByVedtak(linjer);
@@ -65,7 +73,6 @@ function groupByKlassekode(oppdragslinjer: OppdragsLinje[]) {
 
 const Tidslinjevisning = ({ oppdragslinjer }: TidslinjevisningProps) => {
   const groupedLinjer = groupByKlassekode(oppdragslinjer);
-
   return (
     <div className="min-w-[800px]">
       <Timeline>
@@ -79,7 +86,11 @@ const Tidslinjevisning = ({ oppdragslinjer }: TidslinjevisningProps) => {
               <Timeline.Period
                 key={i}
                 start={dayjs(linje.datoVedtakFom).toDate()}
-                end={dayjs(linje.datoVedtakTom).toDate()}
+                end={
+                  linje.datoVedtakTom
+                    ? dayjs(linje.datoVedtakTom).toDate()
+                    : dayjs(new Date()).toDate()
+                }
                 status={linje.kodeStatus == "KORR" ? "info" : "success"}
                 icon={
                   linje.typeSats == "DAG"
