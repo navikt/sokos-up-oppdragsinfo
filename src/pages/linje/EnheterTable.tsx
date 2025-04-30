@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchLinjeEnheter } from "../../api/apiService";
 import { LinjeEnhet } from "../../types/LinjeEnhet";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function EnheterTable(props: OppdragsIdent) {
   const { data } = useFetchLinjeEnheter(props.oppdragsId, props.linjeId);
@@ -31,7 +31,7 @@ export default function EnheterTable(props: OppdragsIdent) {
               <Table.DataCell>{linjeenhet.linjeId}</Table.DataCell>
               <Table.DataCell>{linjeenhet.typeEnhet}</Table.DataCell>
               <Table.DataCell>{linjeenhet.enhet}</Table.DataCell>
-              <Table.DataCell>{linjeenhet.datoFom}</Table.DataCell>
+              <Table.DataCell>{formatDate(linjeenhet.datoFom)}</Table.DataCell>
               <Table.DataCell>{linjeenhet.nokkelId}</Table.DataCell>
               <Table.DataCell>
                 {formatDateTime(linjeenhet.tidspktReg)}

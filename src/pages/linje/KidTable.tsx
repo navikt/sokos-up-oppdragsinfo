@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchKid } from "../../api/apiService";
 import { Kid } from "../../types/Kid";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function KidTable(props: OppdragsIdent) {
   const { data } = useFetchKid(props.oppdragsId, props.linjeId);
@@ -28,7 +28,7 @@ export default function KidTable(props: OppdragsIdent) {
             <Table.Row key={btoa(kid.linjeId)}>
               <Table.DataCell>{kid.linjeId}</Table.DataCell>
               <Table.DataCell>{kid.kid}</Table.DataCell>
-              <Table.DataCell>{kid.datoFom}</Table.DataCell>
+              <Table.DataCell>{formatDate(kid.datoFom)}</Table.DataCell>
               <Table.DataCell>{formatDateTime(kid.tidspktReg)}</Table.DataCell>
               <Table.DataCell>{kid.brukerid}</Table.DataCell>
             </Table.Row>

@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchValuta } from "../../api/apiService";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
 import { Valuta } from "../../types/Valuta";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function ValutaerTable(props: OppdragsIdent) {
   const { data } = useFetchValuta(props.oppdragsId, props.linjeId);
@@ -31,7 +31,7 @@ export default function ValutaerTable(props: OppdragsIdent) {
             <Table.Row key={btoa(valuta.linjeId + valuta.nokkelId)}>
               <Table.DataCell>{valuta.linjeId}</Table.DataCell>
               <Table.DataCell>{valuta.type}</Table.DataCell>
-              <Table.DataCell>{valuta.datoFom}</Table.DataCell>
+              <Table.DataCell>{formatDate(valuta.datoFom)}</Table.DataCell>
               <Table.DataCell>{valuta.nokkelId}</Table.DataCell>
               <Table.DataCell>{valuta.typeValuta}</Table.DataCell>
               <Table.DataCell>{valuta.feilreg}</Table.DataCell>

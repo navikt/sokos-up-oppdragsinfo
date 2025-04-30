@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchMaksdato } from "../../api/apiService";
 import { Maksdato } from "../../types/Maksdato";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 
 export default function MaksdatoerTable(props: OppdragsIdent) {
   const { data } = useFetchMaksdato(props.oppdragsId, props.linjeId);
@@ -27,8 +27,8 @@ export default function MaksdatoerTable(props: OppdragsIdent) {
           data?.map((maksdato: Maksdato) => (
             <Table.Row key={btoa(JSON.stringify(maksdato))}>
               <Table.DataCell>{maksdato.linjeId}</Table.DataCell>
-              <Table.DataCell>{maksdato.maksdato}</Table.DataCell>
-              <Table.DataCell>{maksdato.datoFom}</Table.DataCell>
+              <Table.DataCell>{formatDate(maksdato.maksdato)}</Table.DataCell>
+              <Table.DataCell>{formatDate(maksdato.datoFom)}</Table.DataCell>
               <Table.DataCell>
                 {formatDateTime(maksdato.tidspktReg)}
               </Table.DataCell>

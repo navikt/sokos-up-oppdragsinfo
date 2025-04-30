@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchKravhaver } from "../../api/apiService";
 import { Kravhaver } from "../../types/Kravhaver";
 import { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtil";
 
 export default function KravhaverTable(props: OppdragsIdent) {
   const { data } = useFetchKravhaver(props.oppdragsId, props.linjeId);
@@ -28,9 +28,9 @@ export default function KravhaverTable(props: OppdragsIdent) {
             <Table.Row key={btoa(kravhaver.linjeId)}>
               <Table.DataCell>{kravhaver.linjeId}</Table.DataCell>
               <Table.DataCell>{kravhaver.kravhaverId}</Table.DataCell>
-              <Table.DataCell>{kravhaver.datoFom}</Table.DataCell>
+              <Table.DataCell>{formatDate(kravhaver.datoFom)}</Table.DataCell>
               <Table.DataCell>
-                {formatDateTime(kravhaver.tidspktReg)}
+                {formatDate(kravhaver.tidspktReg)}
               </Table.DataCell>
               <Table.DataCell>{kravhaver.brukerid}</Table.DataCell>
             </Table.Row>
