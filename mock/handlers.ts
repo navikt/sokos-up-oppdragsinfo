@@ -4,7 +4,6 @@ import { fagGruppeList } from "./data/faggruppeList";
 import { gjelderNavn } from "./data/gjelderNavn";
 import { oppdragsEnhetDto } from "./data/oppdragsEnhetDto";
 import { oppdragsList } from "./data/oppdragsList";
-import { oppdragsLinjeList } from "./data/oppdragslinjeList";
 import { attestant } from "./data/popups/linje/attestant";
 import { gradList } from "./data/popups/linje/grad";
 import { kidList } from "./data/popups/linje/kid";
@@ -20,6 +19,7 @@ import { valutaList } from "./data/popups/linje/valuta";
 import { omposteringList } from "./data/popups/omposteringList";
 import { oppdragsEnhetList } from "./data/popups/oppdragsEnhetList";
 import { oppdragsStatusList } from "./data/popups/oppdragsStatusList";
+import oppdragsLinjeList from "./json/oppdragslinjer2.json";
 
 export const handlers = [
   http.post("/oppdrag-api/api/v1/integration/hentnavn", async ({ request }) => {
