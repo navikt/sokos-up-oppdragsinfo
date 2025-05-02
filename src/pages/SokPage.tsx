@@ -17,6 +17,7 @@ import { ErrorMessage } from "../types/ErrorMessage";
 import { FagGruppe } from "../types/FagGruppe";
 import { SokParameter } from "../types/SokParameter";
 import { SokParameterSchema } from "../types/schema/SokParameterSchema";
+import { SOK, logUserEvent } from "../umami/umami";
 import { isEmpty } from "../util/commonUtil";
 import SokHelp from "./sok/SokHelp";
 import styles from "./sok/SokPage.module.css";
@@ -80,8 +81,17 @@ export default function SokPage() {
     setIsLoading(true);
     setGjelderNavn("");
 
-    const gjelderId = parameter.gjelderId?.replaceAll(/[\s.]/g, "") ?? "";
+    const gjelderId = parameter.gjelderId ?? "";
     const fagGruppe = parameter.fagGruppe;
+
+    const isFnr = !!gjelderId && /^(?!00)\d{11}$/.test(gjelderId);
+    const isOrgnr = !!gjelderId && /^(00\d{9}|\d{9})$/.test(gjelderId);
+
+    logUserEvent(SOK.SUBMIT, {
+      fnr: isFnr,
+      orgnr: isOrgnr,
+      faggruppe: parameter.fagGruppe?.type,
+    });
 
     useStore.setState({
       gjelderId: gjelderId,
@@ -196,6 +206,7 @@ export default function SokPage() {
             </div>
             <div>
               <Button
+                data-umami-event={SOK.RESET}
                 size="small"
                 variant="secondary"
                 iconPosition="right"
@@ -212,9 +223,6 @@ export default function SokPage() {
         <div className={styles["sok-feil"]}>
           <Alert variant={error.variant} role="status">
             {error.message}
-            {sokParameter.fagGruppe
-              ? ` med faggruppe ${sokParameter.fagGruppe}`
-              : ""}
           </Alert>
         </div>
       )}
