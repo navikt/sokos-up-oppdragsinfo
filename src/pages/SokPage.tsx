@@ -8,7 +8,6 @@ import { ErrorMessage } from "../types/ErrorMessage";
 import { SokParameter } from "../types/SokParameter";
 import { isEmpty } from "../util/commonUtil";
 import SokForm from "./sok/SokForm";
-import SokHelp from "./sok/SokHelp";
 import styles from "./sok/SokPage.module.css";
 
 export default function SokPage() {
@@ -51,12 +50,7 @@ export default function SokPage() {
           Oppdragsinfo: Søk
         </Heading>
       </div>
-      <div className={styles["sok"]}>
-        <div className={styles["sok-help"]}>
-          <SokHelp />
-        </div>
-        <SokForm fetchOppdragList={fetchOppdragList} />
-      </div>
+      <SokForm fetchOppdragList={fetchOppdragList} />
       {error && (
         <div className={styles["sok-feil"]}>
           <Alert variant={error.variant} role="status">

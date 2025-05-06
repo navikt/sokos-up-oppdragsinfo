@@ -1,15 +1,14 @@
 import { useFormikContext } from "formik";
 import { UNSAFE_Combobox } from "@navikt/ds-react";
-import { FagGruppe, FagGruppeList } from "../../types/FagGruppe";
+import { useFetchHentFaggrupper } from "../../api/apiService";
+import { FagGruppe } from "../../types/FagGruppe";
 import { SokParameter } from "../../types/SokParameter";
+import styles from "./SokPage.module.css";
 
-export default function FaggruppeCombobox({
-  faggrupper,
-}: {
-  faggrupper: FagGruppeList;
-}) {
+export default function FaggruppeCombobox() {
   const { values, setFieldError, setFieldValue } =
     useFormikContext<SokParameter>();
+  const { data: faggrupper } = useFetchHentFaggrupper();
 
   const faggruppetypeLabelMap = faggrupper
     ? faggrupper.reduce(
@@ -28,37 +27,43 @@ export default function FaggruppeCombobox({
     };
   }
 
+  const valgtFaggruppeType = values.fagGruppe?.type ?? "";
+  const valgtFaggruppe = faggruppetypeLabelMap[valgtFaggruppeType];
+
   return (
-    <>
-      <UNSAFE_Combobox
-        isMultiSelect={false}
-        size={"small"}
-        error={""}
-        label={"Faggruppe"}
-        onToggleSelected={(type, isSelected) => {
-          if (isSelected) {
-            const found = faggrupper?.find((f) => f.type == type);
-            if (!found)
-              setFieldError("fagGruppe", "Satte faggruppe som ikke finnes(?)");
-            setFieldValue("fagGruppe", found);
-          } else {
-            setFieldValue("fagGruppe", undefined);
-          }
-        }}
-        options={faggrupper?.map(convertFaggruppeToComboboxValue) ?? []}
-        selectedOptions={[
-          {
-            label:
-              values?.fagGruppe && faggruppetypeLabelMap[values.fagGruppe.type]
-                ? `${faggruppetypeLabelMap[values.fagGruppe.type]} (${values.fagGruppe.type})`
-                : "",
-            value: values?.fagGruppe?.type ?? "",
-          },
-        ]}
-        shouldAutocomplete={true}
-      ></UNSAFE_Combobox>
-      <div>Antall: {faggrupper.length}</div>
-      <div>Valgte verdier i form: {JSON.stringify(values)}</div>
-    </>
+    <div className={styles["sok-inputfields"]}>
+      <div className={styles["combobox"]}>
+        <UNSAFE_Combobox
+          isMultiSelect={false}
+          size={"small"}
+          error={""}
+          label={"Faggruppe"}
+          onToggleSelected={(type, isSelected) => {
+            if (isSelected) {
+              const found = faggrupper?.find((f) => f.type == type);
+              if (!found)
+                setFieldError(
+                  "fagGruppe",
+                  "Satte faggruppe som ikke finnes(?)",
+                );
+              setFieldValue("fagGruppe", found);
+            } else {
+              setFieldValue("fagGruppe", undefined);
+            }
+          }}
+          options={faggrupper?.map(convertFaggruppeToComboboxValue) ?? []}
+          selectedOptions={[
+            {
+              label:
+                values?.fagGruppe && valgtFaggruppe
+                  ? `${valgtFaggruppe} (${values.fagGruppe.type})`
+                  : "",
+              value: values?.fagGruppe?.type ?? "",
+            },
+          ]}
+          shouldAutocomplete={true}
+        ></UNSAFE_Combobox>
+      </div>
+    </div>
   );
 }

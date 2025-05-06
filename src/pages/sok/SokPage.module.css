@@ -7,6 +7,9 @@
   border-radius: 8px;
   background-color: var(--a-surface-alt-1-subtle);
   padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
 }
 
 .sok-heading {
@@ -14,12 +17,9 @@
 }
 
 .sok-inputfields {
-  position: relative;
   width: 9rem;
-  padding-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
 }
 
 .sok-knapperad {
@@ -45,7 +45,7 @@
 .sok-error-message-nowrap {
   position: absolute;
   left: 0.5rem;
-  margin-left: 0.75rem;
+  margin-left: 1.75rem;
   white-space: nowrap;
 }
 
