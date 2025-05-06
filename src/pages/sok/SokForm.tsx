@@ -1,11 +1,12 @@
-import { Form, Formik } from "formik";
+import { Form, Formik, useFormikContext } from "formik";
 import React from "react";
 import { toFormikValidationSchema } from "zod-formik-adapter";
+import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { Button } from "@navikt/ds-react";
 import { useStore } from "../../store/AppState";
 import { SokParameter } from "../../types/SokParameter";
 import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
 import FaggruppeCombobox from "./FaggruppeCombobox";
-import FormButton from "./FormButton";
 import GjelderInput from "./GjelderInput";
 import SokHelp from "./SokHelp";
 import styles from "./SokPage.module.css";
@@ -15,7 +16,7 @@ const SokForm = ({
 }: {
   fetchOppdragList: (s: SokParameter) => void;
 }) => {
-  const { setGjelderNavn, gjelderId, fagGruppe } = useStore();
+  const { setGjelderNavn, gjelderId, fagGruppe, resetState } = useStore();
 
   async function onSubmit(parameter: SokParameter) {
     // setIsLoading(true);
@@ -28,6 +29,45 @@ const SokForm = ({
     });
 
     fetchOppdragList(parameter);
+  }
+
+  function SokButton() {
+    return (
+      <div className={styles["sok-buttonwrapper"]}>
+        <Button
+          size="small"
+          variant="primary"
+          type="submit"
+          iconPosition="right"
+          icon={
+            <MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />
+          }
+        >
+          Søk
+        </Button>
+      </div>
+    );
+  }
+
+  function ResetButton() {
+    const { handleReset } = useFormikContext();
+    return (
+      <div className={styles["sok-buttonwrapper"]}>
+        <Button
+          size="small"
+          variant="secondary"
+          type="reset"
+          iconPosition="right"
+          icon={<EraserIcon title="Nullstill søk" />}
+          onClick={() => {
+            handleReset();
+            resetState();
+          }}
+        >
+          Nullstill
+        </Button>
+      </div>
+    );
   }
 
   return (
@@ -46,11 +86,9 @@ const SokForm = ({
           </div>
           <GjelderInput />
           <FaggruppeCombobox />
-          <div>
-            <div className={styles["sok-knapperad"]}>
-              <FormButton submit />
-              <FormButton reset />
-            </div>
+          <div className={styles["sok-knapperad"]}>
+            <SokButton />
+            <ResetButton />
           </div>
         </div>
       </Form>

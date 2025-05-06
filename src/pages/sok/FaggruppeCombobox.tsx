@@ -10,25 +10,12 @@ export default function FaggruppeCombobox() {
     useFormikContext<SokParameter>();
   const { data: faggrupper } = useFetchHentFaggrupper();
 
-  const faggruppetypeLabelMap = faggrupper
-    ? faggrupper.reduce(
-        (map, faggruppe) => {
-          map[faggruppe.type] = faggruppe.navn;
-          return map;
-        },
-        {} as Record<string, string>,
-      )
-    : ({} as Record<string, string>);
-
   function convertFaggruppeToComboboxValue(selectedFaggruppe: FagGruppe) {
     return {
       value: selectedFaggruppe.type,
       label: `${selectedFaggruppe.navn}(${selectedFaggruppe.type})`,
     };
   }
-
-  const valgtFaggruppeType = values.fagGruppe?.type ?? "";
-  const valgtFaggruppe = faggruppetypeLabelMap[valgtFaggruppeType];
 
   return (
     <div className={styles["sok-inputfields"]}>
@@ -52,15 +39,16 @@ export default function FaggruppeCombobox() {
             }
           }}
           options={faggrupper?.map(convertFaggruppeToComboboxValue) ?? []}
-          selectedOptions={[
-            {
-              label:
-                values?.fagGruppe && valgtFaggruppe
-                  ? `${valgtFaggruppe} (${values.fagGruppe.type})`
-                  : "",
-              value: values?.fagGruppe?.type ?? "",
-            },
-          ]}
+          selectedOptions={
+            values?.fagGruppe
+              ? [
+                  {
+                    label: `${values.fagGruppe.navn} (${values.fagGruppe.type})`,
+                    value: values.fagGruppe?.type ?? "",
+                  },
+                ]
+              : []
+          }
           shouldAutocomplete={true}
         ></UNSAFE_Combobox>
       </div>
