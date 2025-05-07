@@ -15,7 +15,7 @@
 
 For å få tilgang til selve skjermbildet (basistilgang):
 
-- `0000-GA-SOKOS-MF-OPPDRAGSINFO` (selve applikasjon i Utbetalingsportalen)
+- `0000-CA-SOKOS-MF-OPPDRAGSINFO` (selve applikasjon i Utbetalingsportalen)
 
 Tilgang fås ved ta kontakt med din identansvarlig. Det kan noen ganger være en strevsomt å få på plass tilganger
 i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon med dem.
