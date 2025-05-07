@@ -15,7 +15,15 @@ export default function SokPage() {
   const [error, setError] = useState<ErrorMessage | null>(null);
   const { setOppdragsListe } = useStore();
 
-  const fetchOppdragList = (sokParameter: SokParameter) =>
+  const fetchOppdragList = (sokParameter: SokParameter) => {
+    if (!sokParameter.gjelderId) {
+      setError({
+        variant: "warning",
+        message: "GjelderId må fylles ut",
+      });
+      return;
+    }
+
     hentOppdrag({
       gjelderId: sokParameter.gjelderId,
       fagGruppeKode: sokParameter.fagGruppe?.type,
@@ -42,7 +50,7 @@ export default function SokPage() {
           message: error.message,
         });
       });
-
+  };
   return (
     <>
       <div className={commonstyles.pageheading}>
