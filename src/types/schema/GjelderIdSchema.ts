@@ -4,7 +4,7 @@ export const GjelderIdSchema = z
   .string()
   .optional()
   .superRefine((val, ctx) => {
-    if (!val || val == "") {
+    if (!val || val.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Søkefeltet kan ikke være blankt",
@@ -15,7 +15,7 @@ export const GjelderIdSchema = z
         message: "Dette søkefeltet kan bare inneholde tall",
       });
     } else {
-      const length = val.replace(/[\s.]/g, "").length;
+      const length = val.length;
       if (![9, 11].includes(length)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,

@@ -5,6 +5,7 @@ import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { OppdragsLinje, OppdragsLinjeList } from "../../types/Oppdragslinje";
+import { OPPDRAG, TABLE, logUserEvent } from "../../umami/umami";
 import {
   SortState,
   applySortDirection,
@@ -29,8 +30,10 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
   const { setLinjeId } = useStore();
 
   const linjeSort = (sortKey?: string) => {
-    if (hasKey(firstOf(props.oppdragsLinjer), sortKey))
+    if (hasKey(firstOf(props.oppdragsLinjer), sortKey)) {
+      logUserEvent(TABLE.SORTER, { sortKey });
       handleSort<OppdragsLinje>(sortKey, setSort, sort);
+    }
   };
 
   const sortedData = props.oppdragsLinjer
@@ -111,7 +114,12 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 <Table.DataCell>
                   <Suspense
                     fallback={
-                      <Button variant={"tertiary"} loading size="xsmall">
+                      <Button
+                        data-umami-event={OPPDRAG.STATUS_MODAL_OPENED}
+                        variant={"tertiary"}
+                        loading
+                        size="xsmall"
+                      >
                         {linje.kodeStatus}
                       </Button>
                     }
@@ -128,7 +136,12 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 <Table.DataCell>
                   <Suspense
                     fallback={
-                      <Button variant={"tertiary"} loading size="xsmall">
+                      <Button
+                        data-umami-event={OPPDRAG.ATTESTERT_MODAL_OPENED}
+                        variant={"tertiary"}
+                        loading
+                        size="xsmall"
+                      >
                         {linje.attestert === "J" ? "Ja" : "Nei"}
                       </Button>
                     }
