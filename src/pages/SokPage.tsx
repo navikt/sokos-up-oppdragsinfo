@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Alert, Heading } from "@navikt/ds-react";
 import { hentOppdrag } from "../api/apiService";
 import { useStore } from "../store/AppState";
