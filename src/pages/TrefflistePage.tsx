@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { Heading } from "@navikt/ds-react";
 import { hentNavn } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";

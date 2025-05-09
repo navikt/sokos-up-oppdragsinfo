@@ -5,9 +5,10 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   useRouteError,
-} from "react-router-dom";
+} from "react-router";
 import "./App.module.css";
 import ContentLoader from "./components/ContentLoader";
+import NotFound from "./components/NotFound";
 import LinjePage from "./pages/LinjePage";
 import OppdragPage from "./pages/OppdragPage";
 import SokPage from "./pages/SokPage";
@@ -35,6 +36,7 @@ export default function App() {
               <Route path={"/treffliste"} element={<TrefflistePage />} />
               <Route path={"/oppdrag"} element={<OppdragPage />} />
               <Route path={"/oppdrag/linje"} element={<LinjePage />} />
+              <Route path={"*"} element={<NotFound />} />,
             </Route>,
           ),
           { basename: BASENAME },

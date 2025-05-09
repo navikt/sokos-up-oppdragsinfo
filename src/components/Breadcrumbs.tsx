@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
 import { ROOT } from "../util/constant";
 import styles from "./Breadcrumbs.module.css";
