@@ -7,7 +7,7 @@ import commonstyles from "../styles/common-styles.module.css";
 import { ErrorMessage } from "../types/ErrorMessage";
 import { SokParameter } from "../types/SokParameter";
 import { isEmpty } from "../util/commonUtil";
-import { TREFFLISTE } from "../util/constant";
+import { TREFFLISTE } from "../util/routenames";
 import SokForm from "./sok/SokForm";
 import styles from "./sok/SokPage.module.css";
 

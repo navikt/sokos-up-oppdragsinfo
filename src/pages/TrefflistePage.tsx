@@ -7,7 +7,7 @@ import LabelText from "../components/LabelText";
 import { useStore } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
 import { isEmpty } from "../util/commonUtil";
-import { ROOT } from "../util/constant";
+import { ROOT } from "../util/routenames";
 import styles from "./treffliste/TrefflistePage.module.css";
 import TrefflisteTable from "./treffliste/TrefflisteTable";
 

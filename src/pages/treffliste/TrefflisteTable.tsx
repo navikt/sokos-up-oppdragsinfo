@@ -13,7 +13,7 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
-import { OPPDRAG } from "../../util/constant";
+import { OPPDRAG } from "../../util/routenames";
 
 type TrefflisteTableProps = {
   oppdragsListe: OppdragsList;

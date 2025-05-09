@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { OPPDRAG, ROOT, TREFFLISTE } from "../util/constant";
+import { OPPDRAG, ROOT, TREFFLISTE } from "../util/routenames";
 import styles from "./Breadcrumbs.module.css";
 import NullstillButton from "./ResetButton";
 

@@ -15,7 +15,7 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
-import { LINJE } from "../../util/constant";
+import { LINJE } from "../../util/routenames";
 import AttestertModal from "./AttestertModal";
 import StatusModal from "./StatusModal";
 

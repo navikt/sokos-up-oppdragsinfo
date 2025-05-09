@@ -6,8 +6,8 @@ import LinjePage from "./pages/LinjePage";
 import OppdragPage from "./pages/OppdragPage";
 import SokPage from "./pages/SokPage";
 import TrefflistePage from "./pages/TrefflistePage";
-import { BASENAME, LINJE, OPPDRAG, ROOT, TREFFLISTE } from "./util/constant";
 import { initGrafanaFaro } from "./util/grafanaFaro";
+import { BASENAME, LINJE, OPPDRAG, ROOT, TREFFLISTE } from "./util/routenames";
 
 export default function App() {
   useEffect(() => {
