@@ -15,7 +15,7 @@
 
 For å få tilgang til selve skjermbildet (basistilgang):
 
-- `0000-GA-SOKOS-MF-OPPDRAGSINFO` (selve applikasjon i Utbetalingsportalen)
+- `0000-CA-SOKOS-MF-OPPDRAGSINFO` (selve applikasjon i Utbetalingsportalen)
 
 Tilgang fås ved ta kontakt med din identansvarlig. Det kan noen ganger være en strevsomt å få på plass tilganger
 i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon med dem.
@@ -24,13 +24,13 @@ i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon m
 
 | Navn Identrutinen                                            | AD-gruppe                                    | Beskrivelse                                                             |
 | ------------------------------------------------------------ | -------------------------------------------- | ----------------------------------------------------------------------- |
-| Utbetalingsportalen - oppdragsinfo - Applikasjonstilgang     | 0000-GA-SOKOS-MF-Oppdragsinfo                | Basis tilgang                                                           |
-| Utbetalingsportalen – oppdragsinfo - lesetilgang - NØS       | 0000-GA-SOKOS-MF-OppdragsInfo-NØS-READ       | Lese tilgang for NØS                                                    |
-| Utbetalingsportalen – oppdragsinfo - lesetilgang - NØP       | 0000-GA-SOKOS-MF-OppdragsInfo-NØP-READ       | Lese tilgang for NØP                                                    |
-| Utbetalingsportalen – oppdragsinfo - lesetilgang – nasjonalt | 0000-GA-SOKOS-MF-OppdragsInfo-nasjonalt-READ | Lese tilgang for landekkende                                            |
-| Økonomiportalen - Egne ansatte                               | 0000-GA-okonomi-egne_ansatte                 | Tilgang for å se egne ansatte                                           |
-| Økonomiportalen - Fortrolig                                  | 0000-GA-okonomi-fortrolig                    | Tilgang for å se fortrolig, kode 6 (Adressebeskyttede personer)         |
-| Økonomiportalen - Strengt fortrolig                          | 0000-GA-okonomi-strengt_fortrolig            | Tilgang for å se strengt fortrolig, kode 7 (Adressebeskyttede personer) |
+| Utbetalingsportalen - oppdragsinfo - Applikasjonstilgang     | 0000-CA-SOKOS-MF-Oppdragsinfo                | Basis tilgang                                                           |
+| Utbetalingsportalen – oppdragsinfo - lesetilgang - NØS       | 0000-CA-SOKOS-MF-OppdragsInfo-NØS-READ       | Lese tilgang for NØS                                                    |
+| Utbetalingsportalen – oppdragsinfo - lesetilgang - NØP       | 0000-CA-SOKOS-MF-OppdragsInfo-NØP-READ       | Lese tilgang for NØP                                                    |
+| Utbetalingsportalen – oppdragsinfo - lesetilgang – nasjonalt | 0000-CA-SOKOS-MF-OppdragsInfo-nasjonalt-READ | Lese tilgang for landekkende                                            |
+| Økonomiportalen - Egne ansatte                               | 0000-CA-okonomi-egne_ansatte                 | Tilgang for å se egne ansatte                                           |
+| Økonomiportalen - Fortrolig                                  | 0000-CA-okonomi-fortrolig                    | Tilgang for å se fortrolig, kode 6 (Adressebeskyttede personer)         |
+| Økonomiportalen - Strengt fortrolig                          | 0000-CA-okonomi-strengt_fortrolig            | Tilgang for å se strengt fortrolig, kode 7 (Adressebeskyttede personer) |
 
 ## Kom i gang
 
@@ -41,8 +41,3 @@ i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon m
 5. Appen nås på <http://localhost:5173/oppdragsinfo>
 
 NB! Anbefaler sette opp [ModHeader](https://modheader.com/) extension på Chrome for å sende med Obo-token i `Authorization` header når du kjører mot backend lokalt da den krever at token inneholder NavIdent.
-
-# Henvendelser
-
-Spørsmål knyttet til koden eller prosjektet kan stilles som issues her på Github.
-Interne henvendelser kan sendes via Slack i kanalen #po-utbetaling.

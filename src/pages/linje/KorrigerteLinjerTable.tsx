@@ -4,6 +4,7 @@ import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import commonstyles from "../../styles/common-styles.module.css";
 import { OppdragsLinjeDetaljerDTO } from "../../types/OppdragsLinjeDetaljerDTO";
 import { OppdragsLinje } from "../../types/Oppdragslinje";
+import { TABLE, logUserEvent } from "../../umami/umami";
 import {
   SortState,
   applySortDirection,
@@ -28,6 +29,7 @@ export default function KorrigerteLinjerTable(
   const korrigertLinjeIder = props.oppdragsLinjeDetaljer.korrigerteLinjeIder;
 
   const linjeSort = (sortKey?: string) => {
+    logUserEvent(TABLE.SORTER, { sortKey });
     if (hasKey(firstOf(korrigertLinjeIder), sortKey))
       handleSort<OppdragsLinje>(sortKey, setSort, sort);
   };
