@@ -13,6 +13,7 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
+import { OPPDRAG } from "../../util/constant";
 
 type TrefflisteTableProps = {
   oppdragsListe: OppdragsList;
@@ -82,7 +83,7 @@ export default function TrefflisteTable(props: TrefflisteTableProps) {
               <Table.Row key={btoa("" + oppdrag.oppdragsId)}>
                 <Table.DataCell>
                   <Link
-                    to={"/oppdrag"}
+                    to={OPPDRAG}
                     replace
                     onClick={() => setOppdrag(oppdrag)}
                   >

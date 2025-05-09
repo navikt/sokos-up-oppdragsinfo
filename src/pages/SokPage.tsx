@@ -7,6 +7,7 @@ import commonstyles from "../styles/common-styles.module.css";
 import { ErrorMessage } from "../types/ErrorMessage";
 import { SokParameter } from "../types/SokParameter";
 import { isEmpty } from "../util/commonUtil";
+import { TREFFLISTE } from "../util/constant";
 import SokForm from "./sok/SokForm";
 import styles from "./sok/SokPage.module.css";
 
@@ -31,7 +32,7 @@ export default function SokPage() {
       .then((response) => {
         if (!isEmpty(response)) {
           setOppdragsListe(response);
-          navigate("/treffliste", { replace: false });
+          navigate(TREFFLISTE, { replace: false });
         } else {
           setError({
             variant: "info",

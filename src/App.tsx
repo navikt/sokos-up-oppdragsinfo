@@ -6,7 +6,7 @@ import LinjePage from "./pages/LinjePage";
 import OppdragPage from "./pages/OppdragPage";
 import SokPage from "./pages/SokPage";
 import TrefflistePage from "./pages/TrefflistePage";
-import { BASENAME, ROOT } from "./util/constant";
+import { BASENAME, LINJE, OPPDRAG, ROOT, TREFFLISTE } from "./util/constant";
 import { initGrafanaFaro } from "./util/grafanaFaro";
 
 export default function App() {
@@ -23,9 +23,9 @@ export default function App() {
     <BrowserRouter basename={BASENAME}>
       <Routes>
         <Route path={ROOT} element={<SokPage />} />
-        <Route path={"/treffliste"} element={<TrefflistePage />} />
-        <Route path={"/oppdrag"} element={<OppdragPage />} />
-        <Route path={"/oppdrag/linje"} element={<LinjePage />} />
+        <Route path={TREFFLISTE} element={<TrefflistePage />} />
+        <Route path={OPPDRAG} element={<OppdragPage />} />
+        <Route path={LINJE} element={<LinjePage />} />
         <Route path={"*"} element={<NotFound />} />
       </Routes>
     </BrowserRouter>

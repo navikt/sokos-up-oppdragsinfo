@@ -15,6 +15,7 @@ import {
   handleSort,
   hasKey,
 } from "../../util/commonUtil";
+import { LINJE } from "../../util/constant";
 import AttestertModal from "./AttestertModal";
 import StatusModal from "./StatusModal";
 
@@ -155,7 +156,7 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
                 </Table.DataCell>
                 <Table.DataCell>
                   <Link
-                    to={"/oppdrag/linje"}
+                    to={LINJE}
                     replace
                     onClick={() => setLinjeId(linje.linjeId)}
                   >
