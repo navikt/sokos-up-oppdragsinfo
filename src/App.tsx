@@ -1,13 +1,6 @@
-import { Suspense, useEffect } from "react";
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-  useRouteError,
-} from "react-router";
+import { useEffect } from "react";
+import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.module.css";
-import ContentLoader from "./components/ContentLoader";
 import NotFound from "./components/NotFound";
 import LinjePage from "./pages/LinjePage";
 import OppdragPage from "./pages/OppdragPage";
@@ -27,26 +20,14 @@ export default function App() {
   }, []);
 
   return (
-    <Suspense fallback={<ContentLoader />}>
-      <RouterProvider
-        router={createBrowserRouter(
-          createRoutesFromElements(
-            <Route path={ROOT} ErrorBoundary={ErrorBoundary}>
-              <Route path={ROOT} element={<SokPage />} />
-              <Route path={"/treffliste"} element={<TrefflistePage />} />
-              <Route path={"/oppdrag"} element={<OppdragPage />} />
-              <Route path={"/oppdrag/linje"} element={<LinjePage />} />
-              <Route path={"*"} element={<NotFound />} />,
-            </Route>,
-          ),
-          { basename: BASENAME },
-        )}
-      />
-    </Suspense>
+    <BrowserRouter basename={BASENAME}>
+      <Routes>
+        <Route path={ROOT} element={<SokPage />} />
+        <Route path={"/treffliste"} element={<TrefflistePage />} />
+        <Route path={"/oppdrag"} element={<OppdragPage />} />
+        <Route path={"/oppdrag/linje"} element={<LinjePage />} />
+        <Route path={"*"} element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
-}
-
-function ErrorBoundary(): JSX.Element {
-  const error = useRouteError();
-  throw error;
 }
