@@ -6,7 +6,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
 import { useStore } from "../store/AppState";
 import commonstyles from "../styles/common-styles.module.css";
-import { ROOT } from "../util/constant";
+import { ROOT } from "../util/routenames";
 import EnheterTable from "./linje/EnheterTable";
 import GraderTable from "./linje/GraderTable";
 import KidTable from "./linje/KidTable";

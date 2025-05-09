@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { ChevronRightIcon } from "@navikt/aksel-icons";
-import { ROOT } from "../util/constant";
+import { OPPDRAG, ROOT, TREFFLISTE } from "../util/routenames";
 import styles from "./Breadcrumbs.module.css";
 import NullstillButton from "./ResetButton";
 
@@ -33,7 +33,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           {props.trefflistelink && (
             <div className={styles["breadcrumbs-crumb"]}>
               <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={"/treffliste"} replace>
+              <Link to={TREFFLISTE} replace>
                 Treffliste
               </Link>
             </div>
@@ -46,7 +46,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           {props.oppdraglink && (
             <div className={styles["breadcrumbs-crumb"]}>
               <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={"/oppdrag"} replace>
+              <Link to={OPPDRAG} replace>
                 Oppdrag
               </Link>
             </div>

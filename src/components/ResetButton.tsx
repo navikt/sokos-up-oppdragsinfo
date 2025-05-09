@@ -4,7 +4,7 @@ import { EraserIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { useStore } from "../store/AppState";
 import { BREADCRUMBS } from "../umami/umami";
-import { ROOT } from "../util/constant";
+import { ROOT } from "../util/routenames";
 
 export default function ResetButton() {
   const navigate = useNavigate();
