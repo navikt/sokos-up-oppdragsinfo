@@ -35,7 +35,7 @@ const SokForm = ({
     logUserEvent(SOK.SUBMIT, {
       fnr: isFnr,
       orgnr: isOrgnr,
-      fagGruppe: fagGruppe,
+      fagGruppe: fagGruppe?.type,
     });
 
     fetchOppdragList(parameter);
