@@ -1,5 +1,6 @@
 export const SOK = {
-  SUBMIT: "søkeknapp trykket",
+  VALIDATE: "søkeknapp trykket",
+  SUBMIT: "søk utført",
   RESET: "søk resatt",
   HELP: "hjelp trykket",
 };
