@@ -12,7 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "express-static-gzip": "^2.2.0"
+    "express-static-gzip": "^3.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.18",
