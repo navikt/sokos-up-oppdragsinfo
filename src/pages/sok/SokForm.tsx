@@ -4,6 +4,7 @@ import { toFormikValidationSchema } from "zod-formik-adapter";
 import { useStore } from "../../store/AppState";
 import { SokParameter } from "../../types/SokParameter";
 import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
+import { SOK, logUserEvent } from "../../umami/umami";
 import FaggruppeCombobox from "./FaggruppeCombobox";
 import GjelderInput from "./GjelderInput";
 import ResetButton from "./ResetButton";
@@ -25,6 +26,15 @@ const SokForm = ({
     const fagGruppe = parameter.fagGruppe;
     useStore.setState({
       gjelderId: gjelderId,
+      fagGruppe: fagGruppe,
+    });
+
+    const isFnr = /^(?!00)\d{11}$/.test(gjelderId);
+    const isOrgnr = /^(00\d{9}|\d{9})$/.test(gjelderId);
+
+    logUserEvent(SOK.SUBMIT, {
+      fnr: isFnr,
+      orgnr: isOrgnr,
       fagGruppe: fagGruppe,
     });
 
