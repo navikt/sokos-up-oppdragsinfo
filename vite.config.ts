@@ -1,5 +1,4 @@
 /// <reference types="vitest" />
-import importMapPlugin from "@eik/rollup-plugin";
 import terser from "@rollup/plugin-terser";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
@@ -7,18 +6,17 @@ import { defineConfig } from "vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import EnvironmentPlugin from "vite-plugin-environment";
 
-const reactUrl = "https://www.nav.no/tms-min-side-assets/react/18/esm/index.js";
-const reactDomUrl =
-  "https://www.nav.no/tms-min-side-assets/react-dom/18/esm/index.js";
-
 export default defineConfig(({ mode }) => ({
   base: "/oppdragsinfo",
   build: {
-    lib: {
-      entry: resolve(__dirname, "src/App.tsx"),
-      name: "sokos-up-oppdragsinfo",
-      formats: ["es"],
-      fileName: () => "bundle.js",
+    rollupOptions: {
+      input: resolve(__dirname, "src/App.tsx"),
+      preserveEntrySignatures: "exports-only",
+      external: ["react", "react-dom"],
+      output: {
+        entryFileNames: "bundle.js",
+        format: "esm",
+      },
     },
   },
   css: {
@@ -52,20 +50,6 @@ export default defineConfig(({ mode }) => ({
     EnvironmentPlugin({
       NODE_ENV: process.env.NODE_ENV || "development",
     }),
-    {
-      ...importMapPlugin({
-        maps: [
-          {
-            imports: {
-              react: reactUrl,
-              "react-dom": reactDomUrl,
-            },
-          },
-        ],
-      }),
-      enforce: "pre",
-      apply: "build",
-    },
     terser(),
   ],
 }));
