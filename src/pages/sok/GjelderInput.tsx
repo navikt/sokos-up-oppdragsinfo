@@ -23,7 +23,7 @@ export default function GjelderInput() {
         size={"small"}
         error={touched.gjelderId && errors.gjelderId && errortext()}
         id="gjelderId"
-        value={values.gjelderId ? values.gjelderId.trim() : ""}
+        value={values.gjelderId ?? ""}
         onChange={handleChange}
         onBlur={handleBlur}
       />
