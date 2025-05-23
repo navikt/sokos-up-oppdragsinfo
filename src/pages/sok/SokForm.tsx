@@ -1,5 +1,4 @@
 import { Form, Formik } from "formik";
-import React from "react";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import { useStore } from "../../store/AppState";
 import { SokParameter } from "../../types/SokParameter";
@@ -20,17 +19,16 @@ const SokForm = ({
   const { setGjelderNavn, gjelderId, fagGruppe } = useStore();
 
   async function onSubmit(parameter: SokParameter) {
-    // setIsLoading(true);
     setGjelderNavn("");
-    const gjelderId = parameter.gjelderId ?? "";
+    const trimmedGjelderId = parameter.gjelderId?.trim() ?? "";
     const fagGruppe = parameter.fagGruppe;
     useStore.setState({
-      gjelderId: gjelderId,
+      gjelderId: trimmedGjelderId,
       fagGruppe: fagGruppe,
     });
 
-    const isFnr = /^(?!00)\d{11}$/.test(gjelderId);
-    const isOrgnr = /^(00\d{9}|\d{9})$/.test(gjelderId);
+    const isFnr = /^(?!00)\d{11}$/.test(trimmedGjelderId);
+    const isOrgnr = /^(00\d{9}|\d{9})$/.test(trimmedGjelderId);
 
     logUserEvent(SOK.SUBMIT, {
       fnr: isFnr,
@@ -38,7 +36,7 @@ const SokForm = ({
       fagGruppe: fagGruppe?.type,
     });
 
-    fetchOppdragList(parameter);
+    fetchOppdragList({ ...parameter, gjelderId: trimmedGjelderId });
   }
 
   return (
