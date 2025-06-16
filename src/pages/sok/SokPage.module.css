@@ -1,4 +1,4 @@
-.sok {
+.search {
   position: relative;
   margin-left: auto;
   margin-right: auto;
@@ -12,49 +12,49 @@
   gap: 1.75rem;
 }
 
-.sok-heading {
+.search__heading {
   white-space: nowrap;
 }
 
-.sok-inputfields {
+.search__input-fields {
   width: 9rem;
   display: flex;
   flex-direction: column;
 }
 
-.sok-knapperad {
+.search__button-row {
   display: flex;
   min-width: 16rem;
   flex-direction: row-reverse;
 }
 
-.sok-buttonwrapper {
+.search__button-wrapper {
   padding-left: 1.75rem;
 }
 
-.sok-help {
+.search__help {
   position: absolute;
   right: 1.25rem;
   top: 1.25rem;
 }
 
-.sok-feil {
+.search__error {
   padding-top: 1.25rem;
 }
 
-.sok-error-message-nowrap {
+.search__error-message--nowrap {
   position: absolute;
   left: 0.5rem;
   margin-left: 1.75rem;
   white-space: nowrap;
 }
 
-.combobox {
+.search__combobox {
   position: relative;
   min-width: 32rem;
 }
 
-.combobox-clearbutton {
+.search__combobox-clear-button {
   position: absolute;
   right: 2.25rem;
   top: 2.5rem;

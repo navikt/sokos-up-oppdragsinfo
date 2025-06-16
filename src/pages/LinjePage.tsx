@@ -5,7 +5,7 @@ import { useFetchOppdragslinjeDetaljer } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
 import { useStore } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
+import commonstyles from "../styles/bem-common.module.css";
 import { ROOT } from "../util/routenames";
 import EnheterTable from "./linje/EnheterTable";
 import GraderTable from "./linje/GraderTable";
@@ -34,7 +34,7 @@ export default function LinjePage() {
 
   return (
     <>
-      <div className={commonstyles.pageheading}>
+      <div className={commonstyles["page__heading"]}>
         <Heading level="1" size="large">
           Oppdragsinfo: Linje
         </Heading>
@@ -42,7 +42,7 @@ export default function LinjePage() {
       <div className={commonstyles.container}>
         <div className={commonstyles.header}>
           <Breadcrumbs searchLink trefflistelink oppdraglink linje />
-          <div className={commonstyles.headerInfo}>
+          <div className={commonstyles["header__info"]}>
             {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
           </div>
         </div>

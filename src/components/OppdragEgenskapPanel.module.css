@@ -1,4 +1,4 @@
-.panel {
+.oppdrag-panel {
   display: flex;
   width: 91.67%;
   flex-direction: row;
@@ -6,7 +6,7 @@
   gap: 2.5rem;
 }
 
-.column {
+.oppdrag-panel__column {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

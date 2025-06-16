@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
-import "./App.module.css";
+import styles from "./App.module.css";
 import NotFound from "./components/NotFound";
 import LinjePage from "./pages/LinjePage";
 import OppdragPage from "./pages/OppdragPage";
@@ -20,14 +20,16 @@ export default function App() {
   }, []);
 
   return (
-    <BrowserRouter basename={BASENAME}>
-      <Routes>
-        <Route path={ROOT} element={<SokPage />} />
-        <Route path={TREFFLISTE} element={<TrefflistePage />} />
-        <Route path={OPPDRAG} element={<OppdragPage />} />
-        <Route path={LINJE} element={<LinjePage />} />
-        <Route path={"*"} element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <div className={styles.app}>
+      <BrowserRouter basename={BASENAME}>
+        <Routes>
+          <Route path={ROOT} element={<SokPage />} />
+          <Route path={TREFFLISTE} element={<TrefflistePage />} />
+          <Route path={OPPDRAG} element={<OppdragPage />} />
+          <Route path={LINJE} element={<LinjePage />} />
+          <Route path={"*"} element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }

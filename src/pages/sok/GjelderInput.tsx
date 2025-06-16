@@ -10,14 +10,14 @@ export default function GjelderInput() {
 
   function errortext() {
     return (
-      <span className={styles["sok-error-message-nowrap"]}>
+      <span className={styles["search__error-message--nowrap"]}>
         {errors.gjelderId}
       </span>
     );
   }
 
   return (
-    <div className={styles["sok-inputfields"]}>
+    <div className={styles["search__input-fields"]}>
       <TextField
         label="Gjelder"
         size={"small"}

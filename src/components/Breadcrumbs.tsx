@@ -15,23 +15,23 @@ interface BreadcrumbsProps {
 
 export default function Breadcrumbs(props: BreadcrumbsProps) {
   return (
-    <div className={styles["breadcrumbs"]}>
-      <div className={styles["breadcrumbs-left"]}>
-        <div className={styles["breadcrumbs-contents"]}>
+    <div className={styles.breadcrumbs}>
+      <div className={styles["breadcrumbs__section--left"]}>
+        <div className={styles.breadcrumbs__contents}>
           {props.searchLink && (
-            <div className={styles["breadcrumbs-crumb"]}>
+            <div className={styles.breadcrumbs__crumb}>
               <Link to={ROOT} replace>
                 Gjeldende Søk
               </Link>
             </div>
           )}
           {props.treffliste && (
-            <div className={styles["breadcrumbs-crumb"]}>
+            <div className={styles.breadcrumbs__crumb}>
               <ChevronRightIcon title="Pil høyre" /> Treffliste
             </div>
           )}
           {props.trefflistelink && (
-            <div className={styles["breadcrumbs-crumb"]}>
+            <div className={styles.breadcrumbs__crumb}>
               <ChevronRightIcon title="Pil høyre" />{" "}
               <Link to={TREFFLISTE} replace>
                 Treffliste
@@ -39,12 +39,12 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
             </div>
           )}
           {props.oppdrag && (
-            <div className={styles["breadcrumbs-crumb"]}>
+            <div className={styles.breadcrumbs__crumb}>
               <ChevronRightIcon title="Pil høyre" /> Oppdrag
             </div>
           )}
           {props.oppdraglink && (
-            <div className={styles["breadcrumbs-crumb"]}>
+            <div className={styles.breadcrumbs__crumb}>
               <ChevronRightIcon title="Pil høyre" />{" "}
               <Link to={OPPDRAG} replace>
                 Oppdrag
@@ -52,13 +52,13 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
             </div>
           )}
           {props.linje && (
-            <div className={styles["breadcrumbs-crumb"]}>
+            <div className={styles.breadcrumbs__crumb}>
               <ChevronRightIcon title="Pil høyre" /> Linje
             </div>
           )}
         </div>
       </div>
-      <div className={styles["breadcrumbs-right"]}>
+      <div className={styles["breadcrumbs__section--right"]}>
         <NullstillButton />
       </div>
     </div>

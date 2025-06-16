@@ -11,25 +11,25 @@
   color: var(--a-text-action-on-action-subtle);
 }
 
-.breadcrumbs-contents {
+.breadcrumbs__contents {
   display: flex;
   min-width: 14rem;
   flex-direction: row;
 }
 
-.breadcrumbs-left {
+.breadcrumbs__section--left {
   position: absolute;
   left: 1.25rem;
   top: 1.25rem;
 }
 
-.breadcrumbs-right {
+.breadcrumbs__section--right {
   position: absolute;
   right: 1.25rem;
   top: 1.25rem;
 }
 
-.breadcrumbs-crumb {
+.breadcrumbs__crumb {
   margin-left: 0.25rem;
   display: flex;
   flex-direction: row;

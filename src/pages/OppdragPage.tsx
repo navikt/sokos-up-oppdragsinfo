@@ -6,7 +6,7 @@ import { useFetchHentOppdragsLinjer } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../components/OppdragEgenskapPanel";
 import { useStore } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
+import commonstyles from "../styles/bem-common.module.css";
 import { OPPDRAG } from "../umami/umami";
 import { downloadAsCsv } from "../util/csvExport";
 import { ROOT } from "../util/routenames";
@@ -32,7 +32,7 @@ export default function OppdragPage() {
 
   return (
     <>
-      <div className={commonstyles.pageheading}>
+      <div className={commonstyles["page__heading"]}>
         <Heading level="1" size="large">
           Oppdragsinfo: Oppdrag
         </Heading>
@@ -41,14 +41,14 @@ export default function OppdragPage() {
         <div className={commonstyles.container}>
           <div className={commonstyles.header}>
             <Breadcrumbs searchLink trefflistelink oppdrag />
-            <div className={commonstyles.headerInfo}>
-              <div className={commonstyles.headerInfoColumn}>
+            <div className={commonstyles["header__info"]}>
+              <div className={commonstyles["header__info-column"]}>
                 {gjelderId && oppdrag && (
                   <OppdragEgenskapPanel oppdrag={oppdrag} />
                 )}
               </div>
-              <div className={commonstyles.leftandrightbuttons}>
-                <div className={commonstyles.buttonrowLeft}>
+              <div className={commonstyles["button-row"]}>
+                <div className={commonstyles["button-row--left"]}>
                   <Suspense
                     fallback={
                       <Button
@@ -92,7 +92,7 @@ export default function OppdragPage() {
                     <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
                   </Suspense>
                 </div>
-                <div className={commonstyles.knapperad}>
+                <div className={commonstyles["button-row--right"]}>
                   <Button
                     data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
                     size={"small"}

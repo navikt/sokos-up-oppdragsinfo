@@ -5,7 +5,7 @@ import styles from "./SokPage.module.css";
 
 export default function SokButton() {
   return (
-    <div className={styles["sok-buttonwrapper"]}>
+    <div className={styles["search__button-wrapper"]}>
       <Button
         data-umami-event={SOK.VALIDATE}
         size="small"

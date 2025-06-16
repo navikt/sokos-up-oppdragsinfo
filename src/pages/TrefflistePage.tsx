@@ -5,7 +5,7 @@ import { hentNavn } from "../api/apiService";
 import Breadcrumbs from "../components/Breadcrumbs";
 import LabelText from "../components/LabelText";
 import { useStore } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
+import commonstyles from "../styles/bem-common.module.css";
 import { isEmpty } from "../util/commonUtil";
 import { ROOT } from "../util/routenames";
 import styles from "./treffliste/TrefflistePage.module.css";
@@ -30,7 +30,7 @@ export default function TrefflistePage() {
 
   return (
     <>
-      <div className={commonstyles.pageheading}>
+      <div className={commonstyles["page__heading"]}>
         <Heading level="1" size="large">
           Oppdragsinfo: Treffliste
         </Heading>
@@ -39,8 +39,8 @@ export default function TrefflistePage() {
         <div className={commonstyles.header}>
           <Breadcrumbs searchLink treffliste />
 
-          <div className={commonstyles.headerInfo}>
-            <div className={styles.panelContent}>
+          <div className={commonstyles["header__info"]}>
+            <div className={styles["treffliste-page__content"]}>
               <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
               <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
               <LabelText

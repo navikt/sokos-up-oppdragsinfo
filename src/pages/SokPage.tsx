@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Alert, Heading } from "@navikt/ds-react";
 import { hentOppdrag } from "../api/apiService";
 import { useStore } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
+import commonstyles from "../styles/bem-common.module.css";
 import { ErrorMessage } from "../types/ErrorMessage";
 import { SokParameter } from "../types/SokParameter";
 import { isEmpty } from "../util/commonUtil";
@@ -54,14 +54,14 @@ export default function SokPage() {
   };
   return (
     <>
-      <div className={commonstyles.pageheading}>
+      <div className={commonstyles["page__heading"]}>
         <Heading level="1" size="large" spacing>
           Oppdragsinfo: Søk
         </Heading>
       </div>
       <SokForm fetchOppdragList={fetchOppdragList} />
       {error && (
-        <div className={styles["sok-feil"]}>
+        <div className={styles["search__error"]}>
           <Alert variant={error.variant} role="status">
             {error.message}
           </Alert>

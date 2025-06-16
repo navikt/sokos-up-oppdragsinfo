@@ -18,8 +18,8 @@ export default function FaggruppeCombobox() {
   }
 
   return (
-    <div className={styles["sok-inputfields"]}>
-      <div className={styles["combobox"]}>
+    <div className={styles["search__input-fields"]}>
+      <div className={styles["search__combobox"]}>
         <UNSAFE_Combobox
           isMultiSelect={false}
           size={"small"}

@@ -1,0 +1,139 @@
+.container {
+  margin: 0.75rem auto;
+  min-width: 1024px;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.header {
+  margin-left: 6rem;
+  margin-right: 6rem;
+  min-width: 1024px;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.header__info {
+  position: relative;
+  min-width: 1024px;
+  border-radius: 8px;
+  background-color: var(--a-surface-default);
+  padding: 1.5rem;
+}
+
+.header__info-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.button-row--left {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.button-row--right {
+  display: flex;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex--row {
+  flex-direction: row;
+}
+
+.flex--column {
+  flex-direction: column;
+}
+
+.flex--row-gap-sm {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+.flex--column-gap-sm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.flex--column-gap-md {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.flex--row-gap-lg {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.table {
+  background-color: var(--a-surface-default);
+  min-width: 1400px;
+  border-radius: 0.5rem;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.table__pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.panel__content {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.panel__column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.text--bold {
+  font-weight: bold;
+}
+
+.text--nowrap {
+  white-space: nowrap;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.page__heading {
+  white-space: nowrap;
+  text-align: center;
+}
