@@ -20,9 +20,7 @@ export default function OppdragPage() {
 
   const { gjelderId } = useStore.getState();
   const { oppdrag } = useStore();
-  const { data: oppdragsLinjer } = useFetchHentOppdragsLinjer(
-    oppdrag?.oppdragsId,
-  );
+  const { data } = useFetchHentOppdragsLinjer(oppdrag?.oppdragsId);
 
   useEffect(() => {
     if (!gjelderId || oppdrag === undefined) {
@@ -31,95 +29,83 @@ export default function OppdragPage() {
   }, [gjelderId, oppdrag, navigate]);
 
   return (
-    <>
-      <div className={commonstyles["page__heading"]}>
+    <div className={commonstyles["page-container"]}>
+      <div className={commonstyles["page-container__header"]}>
         <Heading level="1" size="large">
           Oppdragsinfo: Oppdrag
         </Heading>
-      </div>
-      {oppdragsLinjer && (
-        <div className={commonstyles.container}>
-          <div className={commonstyles.header}>
-            <Breadcrumbs searchLink trefflistelink oppdrag />
-            <div className={commonstyles["header__info"]}>
-              <div className={commonstyles["header__info-column"]}>
-                {gjelderId && oppdrag && (
-                  <OppdragEgenskapPanel oppdrag={oppdrag} />
-                )}
-              </div>
-              <div className={commonstyles["button-row"]}>
-                <div className={commonstyles["button-row--left"]}>
-                  <Suspense
-                    fallback={
-                      <Button
-                        data-umami-event={OPPDRAG.OMPOSTERINGER}
-                        size="small"
-                        loading
-                        variant="secondary-neutral"
-                      >
-                        Omposteringer
-                      </Button>
-                    }
-                  >
-                    <OmposteringModal oppdragsId={oppdrag!.oppdragsId} />
-                  </Suspense>
-                  <Suspense
-                    fallback={
-                      <Button
-                        data-umami-event={OPPDRAG.STATUS_HISTORIKK}
-                        size="small"
-                        loading
-                        variant="secondary-neutral"
-                      >
-                        Status historikk
-                      </Button>
-                    }
-                  >
-                    <StatushistorikkModal oppdragsId={oppdrag!.oppdragsId} />
-                  </Suspense>
-                  <Suspense
-                    fallback={
-                      <Button
-                        data-umami-event={OPPDRAG.ENHETSHISTORIKK}
-                        size="small"
-                        loading
-                        variant="secondary-neutral"
-                      >
-                        Enhetshistorikk
-                      </Button>
-                    }
-                  >
-                    <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
-                  </Suspense>
-                </div>
-                <div className={commonstyles["button-row--right"]}>
+        <Breadcrumbs searchLink trefflistelink oppdrag />
+        <div className={commonstyles["page-container__header-info"]}>
+          {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
+          <div className={commonstyles["button-row"]}>
+            <div className={commonstyles["button-row--left"]}>
+              <Suspense
+                fallback={
                   <Button
-                    data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
-                    size={"small"}
-                    variant={"secondary-neutral"}
-                    icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
-                    iconPosition={"right"}
-                    onClick={() =>
-                      downloadAsCsv(
-                        gjelderId,
-                        oppdrag!.navnFagomraade,
-                        oppdragsLinjer,
-                      )
-                    }
+                    data-umami-event={OPPDRAG.OMPOSTERINGER}
+                    size="small"
+                    loading
+                    variant="secondary-neutral"
                   >
-                    Til Excel
+                    Omposteringer
                   </Button>
-                </div>
-              </div>
+                }
+              >
+                <OmposteringModal oppdragsId={oppdrag!.oppdragsId} />
+              </Suspense>
+              <Suspense
+                fallback={
+                  <Button
+                    data-umami-event={OPPDRAG.STATUS_HISTORIKK}
+                    size="small"
+                    loading
+                    variant="secondary-neutral"
+                  >
+                    Status historikk
+                  </Button>
+                }
+              >
+                <StatushistorikkModal oppdragsId={oppdrag!.oppdragsId} />
+              </Suspense>
+              <Suspense
+                fallback={
+                  <Button
+                    data-umami-event={OPPDRAG.ENHETSHISTORIKK}
+                    size="small"
+                    loading
+                    variant="secondary-neutral"
+                  >
+                    Enhetshistorikk
+                  </Button>
+                }
+              >
+                <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
+              </Suspense>
+            </div>
+            <div className={commonstyles["button-row--right"]}>
+              <Button
+                data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
+                size={"small"}
+                variant={"secondary-neutral"}
+                icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
+                iconPosition={"right"}
+                onClick={() =>
+                  downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
+                }
+              >
+                Til Excel
+              </Button>
             </div>
           </div>
-
-          <OppdragLinjeTable
-            oppdragsId={oppdrag!.oppdragsId}
-            oppdragsLinjer={oppdragsLinjer}
-          />
         </div>
+      </div>
+
+      {data && (
+        <OppdragLinjeTable
+          oppdragsId={oppdrag!.oppdragsId}
+          oppdragsLinjer={data}
+        />
       )}
-    </>
+    </div>
   );
 }

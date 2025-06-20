@@ -1,34 +1,30 @@
-.container {
-  margin: 0.75rem auto;
-  min-width: 1024px;
-  max-width: 1440px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+:root {
+  --table-min-width: 1440px;
 }
 
-.header {
-  margin-left: 6rem;
-  margin-right: 6rem;
-  min-width: 1024px;
-  max-width: 1440px;
+.page-container {
   display: flex;
   flex-direction: column;
+  margin: 0.75rem auto;
+  gap: 1rem;
+  max-width: 1600px;
+}
+
+.page-container__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 500px;
+  width: 100%;
   gap: 1.25rem;
 }
 
-.header__info {
-  position: relative;
-  min-width: 1024px;
+.page-container__header-info {
   border-radius: 8px;
   background-color: var(--a-surface-default);
   padding: 1.5rem;
-}
-
-.header__info-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  width: 100%;
 }
 
 .button-row {
@@ -49,16 +45,12 @@
   display: flex;
 }
 
-.flex {
-  display: flex;
+.link {
+  text-decoration: underline;
 }
 
-.flex--row {
-  flex-direction: row;
-}
-
-.flex--column {
-  flex-direction: column;
+.link:hover {
+  text-decoration: none;
 }
 
 .flex--row-gap-sm {
@@ -67,27 +59,9 @@
   gap: 0.25rem;
 }
 
-.flex--column-gap-sm {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.flex--column-gap-md {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-.flex--row-gap-lg {
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-}
-
 .table {
   background-color: var(--a-surface-default);
-  min-width: 1400px;
+  min-width: var(--table-min-width);
   border-radius: 0.5rem;
 }
 

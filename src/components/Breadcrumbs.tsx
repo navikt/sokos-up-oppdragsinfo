@@ -1,5 +1,7 @@
 import { Link } from "react-router";
-import { ChevronRightIcon } from "@navikt/aksel-icons";
+import { ChevronRightDoubleIcon } from "@navikt/aksel-icons";
+import { BodyShort } from "@navikt/ds-react";
+import commonstyles from "../styles/bem-common.module.css";
 import { OPPDRAG, ROOT, TREFFLISTE } from "../util/routenames";
 import styles from "./Breadcrumbs.module.css";
 import NullstillButton from "./ResetButton";
@@ -15,50 +17,59 @@ interface BreadcrumbsProps {
 
 export default function Breadcrumbs(props: BreadcrumbsProps) {
   return (
-    <div className={styles.breadcrumbs}>
-      <div className={styles["breadcrumbs__section--left"]}>
-        <div className={styles.breadcrumbs__contents}>
+    <div role="navigation" className={styles["breadcrumbs"]}>
+      <div className={styles["breadcrumbs__left"]}>
+        <div className={styles["breadcrumbs__contents"]}>
           {props.searchLink && (
-            <div className={styles.breadcrumbs__crumb}>
-              <Link to={ROOT} replace>
-                Gjeldende Søk
-              </Link>
-            </div>
+            <>
+              <BodyShort size="large">
+                <Link to={ROOT} replace className={commonstyles.link}>
+                  Gjeldende Søk
+                </Link>
+              </BodyShort>
+            </>
           )}
           {props.treffliste && (
-            <div className={styles.breadcrumbs__crumb}>
-              <ChevronRightIcon title="Pil høyre" /> Treffliste
-            </div>
+            <>
+              <ChevronRightDoubleIcon focusable={"false"} title="Pil høyre" />
+              <BodyShort size="large">Treffliste</BodyShort>
+            </>
           )}
           {props.trefflistelink && (
-            <div className={styles.breadcrumbs__crumb}>
-              <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={TREFFLISTE} replace>
-                Treffliste
-              </Link>
-            </div>
+            <>
+              <ChevronRightDoubleIcon focusable={"false"} title="Pil høyre" />
+              <BodyShort size="large">
+                <Link to={TREFFLISTE} replace className={commonstyles.link}>
+                  Treffliste
+                </Link>
+              </BodyShort>
+            </>
           )}
           {props.oppdrag && (
-            <div className={styles.breadcrumbs__crumb}>
-              <ChevronRightIcon title="Pil høyre" /> Oppdrag
-            </div>
+            <>
+              <ChevronRightDoubleIcon title="Chevron ikon" />
+              <BodyShort size="large">Oppdrag</BodyShort>
+            </>
           )}
           {props.oppdraglink && (
-            <div className={styles.breadcrumbs__crumb}>
-              <ChevronRightIcon title="Pil høyre" />{" "}
-              <Link to={OPPDRAG} replace>
-                Oppdrag
-              </Link>
-            </div>
+            <>
+              <ChevronRightDoubleIcon title="Pil høyre" />
+              <BodyShort size="large">
+                <Link to={OPPDRAG} replace className={commonstyles.link}>
+                  Oppdrag
+                </Link>
+              </BodyShort>
+            </>
           )}
           {props.linje && (
-            <div className={styles.breadcrumbs__crumb}>
-              <ChevronRightIcon title="Pil høyre" /> Linje
-            </div>
+            <>
+              <ChevronRightDoubleIcon title="Pil høyre" />
+              Linje
+            </>
           )}
         </div>
       </div>
-      <div className={styles["breadcrumbs__section--right"]}>
+      <div className={styles["breadcrumbs__right"]}>
         <NullstillButton />
       </div>
     </div>

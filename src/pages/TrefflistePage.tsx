@@ -8,7 +8,6 @@ import { useStore } from "../store/AppState";
 import commonstyles from "../styles/bem-common.module.css";
 import { isEmpty } from "../util/commonUtil";
 import { ROOT } from "../util/routenames";
-import styles from "./treffliste/TrefflistePage.module.css";
 import TrefflisteTable from "./treffliste/TrefflisteTable";
 
 export default function TrefflistePage() {
@@ -29,34 +28,26 @@ export default function TrefflistePage() {
   }, [navigate, gjelderId, gjelderNavn, oppdragsListe, setGjelderNavn]);
 
   return (
-    <>
-      <div className={commonstyles["page__heading"]}>
+    <div className={commonstyles["page-container"]}>
+      <div className={commonstyles["page-container__header"]}>
         <Heading level="1" size="large">
           Oppdragsinfo: Treffliste
         </Heading>
-      </div>
-      <div className={commonstyles.container}>
-        <div className={commonstyles.header}>
-          <Breadcrumbs searchLink treffliste />
+        <Breadcrumbs searchLink treffliste />
 
-          <div className={commonstyles["header__info"]}>
-            <div className={styles["treffliste-page__content"]}>
-              <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
-              <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
-              <LabelText
-                label={"Faggruppe"}
-                text={
-                  fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"
-                }
-              />
-            </div>
-          </div>
+        <div className={commonstyles["page-container__header-info"]}>
+          <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
+          <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
+          <LabelText
+            label={"Faggruppe"}
+            text={fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"}
+          />
         </div>
-        {!oppdragsListe ||
-          (!isEmpty(oppdragsListe) && (
-            <TrefflisteTable oppdragsListe={oppdragsListe} />
-          ))}
       </div>
-    </>
+      {!oppdragsListe ||
+        (!isEmpty(oppdragsListe) && (
+          <TrefflisteTable oppdragsListe={oppdragsListe} />
+        ))}
+    </div>
   );
 }

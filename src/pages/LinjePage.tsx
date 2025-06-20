@@ -33,66 +33,56 @@ export default function LinjePage() {
   }, [gjelderId, oppdrag, navigate]);
 
   return (
-    <>
-      <div className={commonstyles["page__heading"]}>
+    <div className={commonstyles["page-container"]}>
+      <div className={commonstyles["page-container__header"]}>
         <Heading level="1" size="large">
           Oppdragsinfo: Linje
         </Heading>
-      </div>
-      <div className={commonstyles.container}>
-        <div className={commonstyles.header}>
-          <Breadcrumbs searchLink trefflistelink oppdraglink linje />
-          <div className={commonstyles["header__info"]}>
-            {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
-          </div>
+        <Breadcrumbs searchLink trefflistelink oppdraglink linje />
+        <div className={commonstyles["page-container__header-info"]}>
+          {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
         </div>
-
-        {data && <KorrigerteLinjerTable oppdragsLinjeDetaljer={data} />}
-
-        {data && (
-          <Accordion>
-            <LinjeDetaljerAccordion title={"Enheter"} enabled={data.harEnheter}>
-              <EnheterTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion title={"Grader"} enabled={data.harGrader}>
-              <GraderTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion
-              title={"Kravhavere"}
-              enabled={data.harKravhavere}
-            >
-              <KravhaverTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion
-              title={"Valutaer"}
-              enabled={data.harValutaer}
-            >
-              <ValutaerTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion title={"Tekster"} enabled={data.harTekster}>
-              <TeksterTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion title={"Kid"} enabled={data.harKidliste}>
-              <KidTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion
-              title="Skyldnere"
-              enabled={data.harSkyldnere}
-            >
-              <SkyldnereTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion
-              title={"Maksdato"}
-              enabled={data.harMaksdatoer}
-            >
-              <MaksdatoerTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-            <LinjeDetaljerAccordion title={"Øvrig"} enabled={true}>
-              <OvrigTable oppdragsId={oppdragsId} linjeId={linjeId} />
-            </LinjeDetaljerAccordion>
-          </Accordion>
-        )}
       </div>
-    </>
+
+      {data && <KorrigerteLinjerTable oppdragsLinjeDetaljer={data} />}
+
+      {data && (
+        <Accordion>
+          <LinjeDetaljerAccordion title={"Enheter"} enabled={data.harEnheter}>
+            <EnheterTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion title={"Grader"} enabled={data.harGrader}>
+            <GraderTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion
+            title={"Kravhavere"}
+            enabled={data.harKravhavere}
+          >
+            <KravhaverTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion title={"Valutaer"} enabled={data.harValutaer}>
+            <ValutaerTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion title={"Tekster"} enabled={data.harTekster}>
+            <TeksterTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion title={"Kid"} enabled={data.harKidliste}>
+            <KidTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion title="Skyldnere" enabled={data.harSkyldnere}>
+            <SkyldnereTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion
+            title={"Maksdato"}
+            enabled={data.harMaksdatoer}
+          >
+            <MaksdatoerTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+          <LinjeDetaljerAccordion title={"Øvrig"} enabled={true}>
+            <OvrigTable oppdragsId={oppdragsId} linjeId={linjeId} />
+          </LinjeDetaljerAccordion>
+        </Accordion>
+      )}
+    </div>
   );
 }

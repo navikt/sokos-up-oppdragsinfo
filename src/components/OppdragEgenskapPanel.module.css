@@ -1,6 +1,5 @@
 .oppdrag-panel {
   display: flex;
-  width: 91.67%;
   flex-direction: row;
   justify-content: space-between;
   gap: 2.5rem;
