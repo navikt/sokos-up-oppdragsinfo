@@ -3,7 +3,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-.app__main {
-  max-width: none !important;
-}

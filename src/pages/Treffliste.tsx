@@ -8,9 +8,10 @@ import { useStore } from "../store/AppState";
 import commonstyles from "../styles/bem-common.module.css";
 import { isEmpty } from "../util/commonUtil";
 import { ROOT } from "../util/routenames";
+import styles from "./treffliste/Treffliste.module.css";
 import TrefflisteTable from "./treffliste/TrefflisteTable";
 
-export default function TrefflistePage() {
+export default function Treffliste() {
   const navigate = useNavigate();
   const { gjelderId, fagGruppe, oppdragsListe, gjelderNavn, setGjelderNavn } =
     useStore();
@@ -28,20 +29,25 @@ export default function TrefflistePage() {
   }, [navigate, gjelderId, gjelderNavn, oppdragsListe, setGjelderNavn]);
 
   return (
-    <div className={commonstyles["page-container"]}>
-      <div className={commonstyles["page-container__header"]}>
-        <Heading level="1" size="large">
+    <div className={commonstyles["container"]}>
+      <div className={commonstyles["container__header"]}>
+        <Heading level="1" size="large" align="center">
           Oppdragsinfo: Treffliste
         </Heading>
         <Breadcrumbs searchLink treffliste />
 
-        <div className={commonstyles["page-container__header-info"]}>
-          <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
-          <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
-          <LabelText
-            label={"Faggruppe"}
-            text={fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"}
-          />
+        <div className={styles["header-info"]}>
+          <Heading size="small" level="2">
+            Søkekriterier benyttet:
+          </Heading>
+          <div className={styles["header-info__content"]}>
+            <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
+            <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
+            <LabelText
+              label={"Faggruppe"}
+              text={fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"}
+            />
+          </div>
         </div>
       </div>
       {!oppdragsListe ||

@@ -8,8 +8,8 @@ import FaggruppeCombobox from "./FaggruppeCombobox";
 import GjelderInput from "./GjelderInput";
 import ResetButton from "./ResetButton";
 import SokButton from "./SokButton";
+import styles from "./SokForm.module.css";
 import SokHelp from "./SokHelp";
-import styles from "./SokPage.module.css";
 
 const SokForm = ({
   fetchOppdragList,

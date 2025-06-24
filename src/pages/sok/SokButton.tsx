@@ -1,7 +1,7 @@
 import { MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { SOK } from "../../umami/umami";
-import styles from "./SokPage.module.css";
+import styles from "./SokForm.module.css";
 
 export default function SokButton() {
   return (

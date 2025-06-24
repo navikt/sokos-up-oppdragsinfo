@@ -3,7 +3,7 @@ import { EraserIcon } from "@navikt/aksel-icons";
 import { Button } from "@navikt/ds-react";
 import { useStore } from "../../store/AppState";
 import { SOK } from "../../umami/umami";
-import styles from "./SokPage.module.css";
+import styles from "./SokForm.module.css";
 
 export default function ResetButton() {
   const { handleReset } = useFormikContext();

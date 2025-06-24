@@ -15,7 +15,7 @@ import OmposteringModal from "./oppdrag/OmposteringModal";
 import OppdragLinjeTable from "./oppdrag/OppdragLinjeTable";
 import StatushistorikkModal from "./oppdrag/StatushistorikkModal";
 
-export default function OppdragPage() {
+export default function Oppdrag() {
   const navigate = useNavigate();
 
   const { gjelderId } = useStore.getState();
@@ -29,13 +29,13 @@ export default function OppdragPage() {
   }, [gjelderId, oppdrag, navigate]);
 
   return (
-    <div className={commonstyles["page-container"]}>
-      <div className={commonstyles["page-container__header"]}>
-        <Heading level="1" size="large">
+    <div className={commonstyles["container"]}>
+      <div className={commonstyles["container__header"]}>
+        <Heading level="1" size="large" align="center">
           Oppdragsinfo: Oppdrag
         </Heading>
         <Breadcrumbs searchLink trefflistelink oppdrag />
-        <div className={commonstyles["page-container__header-info"]}>
+        <div className={commonstyles["container__header-info"]}>
           {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
           <div className={commonstyles["button-row"]}>
             <div className={commonstyles["button-row--left"]}>

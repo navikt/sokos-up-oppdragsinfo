@@ -38,10 +38,6 @@
   top: 1.25rem;
 }
 
-.search__error {
-  padding-top: 1.25rem;
-}
-
 .search__error-message--nowrap {
   position: absolute;
   left: 0.5rem;

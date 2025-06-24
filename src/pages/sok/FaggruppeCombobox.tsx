@@ -3,7 +3,7 @@ import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { useFetchHentFaggrupper } from "../../api/apiService";
 import { FagGruppe } from "../../types/FagGruppe";
 import { SokParameter } from "../../types/SokParameter";
-import styles from "./SokPage.module.css";
+import styles from "./SokForm.module.css";
 
 export default function FaggruppeCombobox() {
   const { values, setFieldError, setFieldValue } =

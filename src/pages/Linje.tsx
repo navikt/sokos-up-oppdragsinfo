@@ -19,7 +19,7 @@ import SkyldnereTable from "./linje/SkyldnereTable";
 import TeksterTable from "./linje/TeksterTable";
 import ValutaerTable from "./linje/ValutaerTable";
 
-export default function LinjePage() {
+export default function Linje() {
   const navigate = useNavigate();
 
   const { gjelderId, oppdrag, linjeId } = useStore.getState();
@@ -33,13 +33,13 @@ export default function LinjePage() {
   }, [gjelderId, oppdrag, navigate]);
 
   return (
-    <div className={commonstyles["page-container"]}>
-      <div className={commonstyles["page-container__header"]}>
-        <Heading level="1" size="large">
+    <div className={commonstyles["container"]}>
+      <div className={commonstyles["container__header"]}>
+        <Heading level="1" size="large" align="center">
           Oppdragsinfo: Linje
         </Heading>
         <Breadcrumbs searchLink trefflistelink oppdraglink linje />
-        <div className={commonstyles["page-container__header-info"]}>
+        <div className={commonstyles["container__header-info"]}>
           {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
         </div>
       </div>

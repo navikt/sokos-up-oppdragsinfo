@@ -64,7 +64,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
           {props.linje && (
             <>
               <ChevronRightDoubleIcon title="Pil høyre" />
-              Linje
+              <BodyShort size="large">Linje</BodyShort>
             </>
           )}
         </div>
