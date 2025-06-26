@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Alert, Heading } from "@navikt/ds-react";
-import { hentOppdrag } from "../api/apiService";
-import { useStore } from "../store/AppState";
-import { ErrorMessage } from "../types/ErrorMessage";
-import { SokParameter } from "../types/SokParameter";
-import { isEmpty } from "../util/commonUtil";
-import { TREFFLISTE } from "../util/routenames";
-import styles from "./sok/Sok.module.css";
-import SokForm from "./sok/SokForm";
+import { hentOppdrag } from "../../api/apiService";
+import { useStore } from "../../store/AppState";
+import { ErrorMessage } from "../../types/ErrorMessage";
+import { SokParameter } from "../../types/SokParameter";
+import { isEmpty } from "../../util/commonUtil";
+import { TREFFLISTE } from "../../util/routenames";
+import styles from "./Sok.module.css";
+import SokForm from "./SokForm";
 
 export default function Sok() {
   const navigate = useNavigate();

@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import styles from "./App.module.css";
 import NotFound from "./components/NotFound";
-import Linje from "./pages/Linje";
-import Oppdrag from "./pages/Oppdrag";
-import Sok from "./pages/Sok";
-import Treffliste from "./pages/Treffliste";
+import Linje from "./pages/linje/Linje";
+import Oppdrag from "./pages/oppdrag/Oppdrag";
+import Sok from "./pages/sok/Sok";
+import Treffliste from "./pages/treffliste/Treffliste";
 import { initGrafanaFaro } from "./util/grafanaFaro";
 import { BASENAME, LINJE, OPPDRAG, ROOT, TREFFLISTE } from "./util/routenames";
 

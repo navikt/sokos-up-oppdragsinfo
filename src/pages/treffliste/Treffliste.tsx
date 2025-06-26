@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Heading } from "@navikt/ds-react";
-import { hentNavn } from "../api/apiService";
-import Breadcrumbs from "../components/Breadcrumbs";
-import LabelText from "../components/LabelText";
-import { useStore } from "../store/AppState";
-import commonstyles from "../styles/bem-common.module.css";
-import { isEmpty } from "../util/commonUtil";
-import { ROOT } from "../util/routenames";
-import styles from "./treffliste/Treffliste.module.css";
-import TrefflisteTable from "./treffliste/TrefflisteTable";
+import { hentNavn } from "../../api/apiService";
+import Breadcrumbs from "../../components/Breadcrumbs";
+import LabelText from "../../components/LabelText";
+import { useStore } from "../../store/AppState";
+import commonstyles from "../../styles/bem-common.module.css";
+import { isEmpty } from "../../util/commonUtil";
+import { ROOT } from "../../util/routenames";
+import styles from "./Treffliste.module.css";
+import TrefflisteTable from "./TrefflisteTable";
 
 export default function Treffliste() {
   const navigate = useNavigate();
