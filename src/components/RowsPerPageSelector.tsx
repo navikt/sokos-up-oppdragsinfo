@@ -1,25 +1,45 @@
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Button, Dropdown } from "@navikt/ds-react";
-import commonstyles from "../styles/common-styles.module.css";
-import { ROWS_PER_PAGE, logUserEvent } from "../umami/umami";
+import commonstyles from "../styles/bem-common.module.css";
 import styles from "./RowsPerPageSelector.module.css";
 
 interface RowsPerPageSelectorProps {
   rowsPerPage: number;
-  setRowsPerPage: (n: number) => void;
+  updateRowsPerPage: (rows: number) => void;
+  totalCount: number;
+  currentPage?: number;
+  pageCount?: number;
 }
 
 export default function RowsPerPageSelector(props: RowsPerPageSelectorProps) {
+  const { totalCount, currentPage, pageCount, rowsPerPage } = props;
+
   return (
-    <>
-      <div className={styles.rowsperpageselector}>
+    <div className={styles["rows-per-page-selector"]}>
+      <div className={styles["u-nowrap"]}>
+        <p>
+          {`${totalCount} treff`}
+          {totalCount > rowsPerPage &&
+            currentPage &&
+            pageCount &&
+            `, ${currentPage} av ${pageCount} sider`}
+        </p>
+      </div>
+
+      <div className={styles["dropdown-section"]}>
+        <div className={commonstyles["text--nowrap"]}>
+          <p>Vis {rowsPerPage} per side</p>
+        </div>
         <Dropdown>
           <Button
             size={"xsmall"}
             variant={"tertiary-neutral"}
             as={Dropdown.Toggle}
           >
-            <ChevronDownIcon title="a11y-title" fontSize="1.5rem" />
+            <ChevronDownIcon
+              title="Vis flere eller mindre treff"
+              fontSize="1.5rem"
+            />
           </Button>
           <Dropdown.Menu>
             <Dropdown.Menu.GroupedList>
@@ -27,24 +47,18 @@ export default function RowsPerPageSelector(props: RowsPerPageSelectorProps) {
                 Hvor mange rader ønsker du å vise per side?
               </Dropdown.Menu.GroupedList.Heading>
               <Dropdown.Menu.Divider />
-              {[10, 50, 200, 1000].map((n) => (
+              {[5, 10, 25, 50].map((rows) => (
                 <Dropdown.Menu.GroupedList.Item
-                  key={n}
-                  onClick={() => {
-                    logUserEvent(ROWS_PER_PAGE.SELECT, { rowsperpage: n });
-                    props.setRowsPerPage(n);
-                  }}
+                  key={rows}
+                  onClick={() => props.updateRowsPerPage(rows)}
                 >
-                  {n}
+                  {rows}
                 </Dropdown.Menu.GroupedList.Item>
               ))}
             </Dropdown.Menu.GroupedList>
           </Dropdown.Menu>
         </Dropdown>
-        <div className={commonstyles.nowrap}>
-          <p>Vis {props.rowsPerPage} per side</p>
-        </div>
       </div>
-    </>
+    </div>
   );
 }

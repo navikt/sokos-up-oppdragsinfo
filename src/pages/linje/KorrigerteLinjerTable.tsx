@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
-import commonstyles from "../../styles/common-styles.module.css";
+import commonstyles from "../../styles/bem-common.module.css";
 import { OppdragsLinjeDetaljerDTO } from "../../types/OppdragsLinjeDetaljerDTO";
 import { OppdragsLinje } from "../../types/Oppdragslinje";
 import { TABLE, logUserEvent } from "../../umami/umami";
@@ -42,22 +42,21 @@ export default function KorrigerteLinjerTable(
   const pagecount = Math.ceil(korrigertLinjeIder.length / rowsPerPage);
   const antall = korrigertLinjeIder?.length ?? 0;
 
-  return (
-    <>
-      <div className={commonstyles["sortable-table-topinfo"]}>
-        <div className={commonstyles.nowrap}>
-          <p>
-            {`${antall} treff`}
-            {antall > rowsPerPage && `, ${currentPage} av ${pagecount} sider`}
-          </p>
-        </div>
+  function updateRowsPerPage(rows: number) {
+    setRowsPerPage(rows);
+    setCurrentPage(1);
+  }
 
-        <RowsPerPageSelector
-          rowsPerPage={rowsPerPage}
-          setRowsPerPage={setRowsPerPage}
-        />
-      </div>
-      <div className={commonstyles["sortable-table"]}>
+  return (
+    <div className={commonstyles["table-container"]}>
+      <RowsPerPageSelector
+        rowsPerPage={rowsPerPage}
+        updateRowsPerPage={updateRowsPerPage}
+        totalCount={antall}
+        currentPage={currentPage}
+        pageCount={pagecount}
+      />
+      <div className={commonstyles["table"]}>
         <Table zebraStripes sort={sort} onSortChange={linjeSort}>
           <Table.Header>
             <Table.Row>
@@ -122,7 +121,7 @@ export default function KorrigerteLinjerTable(
         </Table>
       </div>
       {pagecount > 1 && (
-        <div className={commonstyles["sortable-table-pagination"]}>
+        <div className={commonstyles["table__pagination"]}>
           <Pagination
             page={currentPage}
             onPageChange={setCurrentPage}
@@ -132,6 +131,6 @@ export default function KorrigerteLinjerTable(
           />
         </div>
       )}
-    </>
+    </div>
   );
 }

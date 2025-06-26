@@ -18,8 +18,8 @@ export default function OppdragEgenskapPanel(
   const { gjelderId, gjelderNavn } = useStore.getState();
 
   return (
-    <div className={styles.panel}>
-      <div className={styles.column}>
+    <div className={styles["oppdrag-panel"]}>
+      <div className={styles["oppdrag-panel__column"]}>
         <LabelText label={"Gjelder"} text={gjelderId} />
         <LabelText label={"Fagsystem id"} text={props.oppdrag.fagsystemId} />
         <LabelText label={"Status"} text={props.oppdrag.kodeStatus} />
@@ -27,7 +27,7 @@ export default function OppdragEgenskapPanel(
           <EnhetLabel enhet={oppdragsEnhet.behandlendeEnhet} />
         )}
       </div>
-      <div className={styles.column}>
+      <div className={styles["oppdrag-panel__column"]}>
         <LabelText label={"Navn"} text={gjelderNavn} />
         <LabelText label={"Oppdrags id"} text={props.oppdrag.oppdragsId} />
         <LabelText label={"Beregnes nå"} text={props.oppdrag.kjorIdag} />
@@ -35,7 +35,7 @@ export default function OppdragEgenskapPanel(
           <EnhetLabel enhet={oppdragsEnhet.enhet} />
         )}
       </div>
-      <div className={styles.column}>
+      <div className={styles["oppdrag-panel__column"]}>
         <LabelText
           nowrap
           label={"Fagområde"}

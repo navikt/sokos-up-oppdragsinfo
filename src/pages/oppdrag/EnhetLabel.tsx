@@ -1,5 +1,5 @@
 import LabelText from "../../components/LabelText";
-import commonstyles from "../../styles/common-styles.module.css";
+import commonstyles from "../../styles/bem-common.module.css";
 import { Enhet, EnhetsType } from "../../types/EnhetsType";
 import { formatDate } from "../../util/commonUtil";
 
@@ -11,8 +11,8 @@ const enhetstypetekst: Record<EnhetsType, string> = {
 
 export default function EnhetLabel({ enhet }: { enhet: Enhet }) {
   return (
-    <div className={commonstyles.row}>
-      <div className={commonstyles.bold}>
+    <div className={commonstyles["flex--row-gap-sm"]}>
+      <div className={commonstyles["text--bold"]}>
         {enhetstypetekst[enhet.typeEnhet]}:
       </div>
       <div>{enhet.enhet}</div>
