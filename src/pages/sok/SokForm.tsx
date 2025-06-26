@@ -49,13 +49,17 @@ const SokForm = ({
       onSubmit={onSubmit}
     >
       <Form>
-        <div className={styles.search}>
-          <div className={styles.search__help}>
+        <div className={styles["sok__form-container"]}>
+          <div className={styles["sok__help"]}>
             <SokHelp />
           </div>
-          <GjelderInput />
-          <FaggruppeCombobox />
-          <div className={styles["search__button-row"]}>
+          <div className={styles["sok__form"]}>
+            <div className={styles["sok__input-fields"]}>
+              <GjelderInput />
+              <FaggruppeCombobox />
+            </div>
+          </div>
+          <div className={styles["sok__buttons"]}>
             <SokButton />
             <ResetButton />
           </div>

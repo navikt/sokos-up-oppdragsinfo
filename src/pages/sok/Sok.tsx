@@ -53,17 +53,21 @@ export default function Sok() {
   };
   return (
     <>
-      <Heading level="1" size="large" spacing>
-        Oppdragsinfo: Søk
-      </Heading>
-      <SokForm fetchOppdragList={fetchOppdragList} />
-      {error && (
-        <div className={styles["search__error"]}>
-          <Alert variant={error.variant} role="status">
-            {error.message}
-          </Alert>
+      <div className={styles["sok"]}>
+        <Heading level="1" size="large" spacing align="center">
+          Oppdragsinfo: Søk
+        </Heading>
+        <div className={styles["sok__box"]}>
+          <SokForm fetchOppdragList={fetchOppdragList} />
         </div>
-      )}
+        {error && (
+          <div className={styles["sok__error"]}>
+            <Alert variant={error.variant} role="status">
+              {error.message}
+            </Alert>
+          </div>
+        )}
+      </div>
     </>
   );
 }
