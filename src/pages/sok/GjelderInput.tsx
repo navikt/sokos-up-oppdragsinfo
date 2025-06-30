@@ -1,5 +1,6 @@
 import { useFormikContext } from "formik";
 import { TextField } from "@navikt/ds-react";
+import commonstyles from "../../styles/bem-common.module.css";
 import { SokParameter } from "../../types/SokParameter";
 import styles from "./SokForm.module.css";
 
@@ -9,7 +10,7 @@ export default function GjelderInput() {
 
   function errortext() {
     return (
-      <span className={styles["sok__error--nowrap"]}>{errors.gjelderId}</span>
+      <span className={commonstyles["text--nowrap"]}>{errors.gjelderId}</span>
     );
   }
 

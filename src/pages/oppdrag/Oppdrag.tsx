@@ -12,6 +12,7 @@ import { downloadAsCsv } from "../../util/csvExport";
 import { ROOT } from "../../util/routenames";
 import EnhetshistorikkModal from "./EnhetshistorikkModal";
 import OmposteringModal from "./OmposteringModal";
+import styles from "./Oppdrag.module.css";
 import OppdragLinjeTable from "./OppdragTable";
 import StatushistorikkModal from "./StatushistorikkModal";
 
@@ -37,8 +38,8 @@ export default function Oppdrag() {
         <Breadcrumbs searchLink trefflistelink oppdrag />
         <div className={commonstyles["container__header-info"]}>
           {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
-          <div className={commonstyles["button-row"]}>
-            <div className={commonstyles["button-row--left"]}>
+          <div className={styles["button-row"]}>
+            <div className={styles["button-row--left"]}>
               <Suspense
                 fallback={
                   <Button
@@ -82,20 +83,18 @@ export default function Oppdrag() {
                 <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
               </Suspense>
             </div>
-            <div className={commonstyles["button-row--right"]}>
-              <Button
-                data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
-                size={"small"}
-                variant={"secondary-neutral"}
-                icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
-                iconPosition={"right"}
-                onClick={() =>
-                  downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
-                }
-              >
-                Til Excel
-              </Button>
-            </div>
+            <Button
+              data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
+              size={"small"}
+              variant={"secondary-neutral"}
+              icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
+              iconPosition={"right"}
+              onClick={() =>
+                downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
+              }
+            >
+              Til Excel
+            </Button>
           </div>
         </div>
       </div>

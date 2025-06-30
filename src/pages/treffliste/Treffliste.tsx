@@ -36,11 +36,11 @@ export default function Treffliste() {
         </Heading>
         <Breadcrumbs searchLink treffliste />
 
-        <div className={styles["header-info"]}>
+        <div className={styles["header__info"]}>
           <Heading size="small" level="2">
             Søkekriterier benyttet:
           </Heading>
-          <div className={styles["header-info__content"]}>
+          <div className={styles["header__info__content"]}>
             <LabelText label={"Gjelder"} text={gjelderId ?? ""} />
             <LabelText label={"Navn"} text={gjelderNavn ?? ""} />
             <LabelText

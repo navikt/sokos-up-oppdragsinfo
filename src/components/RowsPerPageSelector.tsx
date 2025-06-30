@@ -16,7 +16,7 @@ export default function RowsPerPageSelector(props: RowsPerPageSelectorProps) {
 
   return (
     <div className={styles["rows-per-page-selector"]}>
-      <div className={styles["u-nowrap"]}>
+      <div className={commonstyles["text--nowrap"]}>
         <p>
           {`${totalCount} treff`}
           {totalCount > rowsPerPage &&

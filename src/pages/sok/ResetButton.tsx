@@ -20,7 +20,7 @@ export default function ResetButton() {
         resetState();
       }}
     >
-      Nullstill
+      Nullstill søk
     </Button>
   );
 }
