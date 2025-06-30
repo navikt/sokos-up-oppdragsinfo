@@ -52,22 +52,20 @@ export default function Sok() {
       });
   };
   return (
-    <>
-      <div className={styles["sok"]}>
-        <Heading level="1" size="large" spacing align="center">
-          Oppdragsinfo: Søk
-        </Heading>
-        <div className={styles["sok__box"]}>
-          <SokForm fetchOppdragList={fetchOppdragList} />
-        </div>
-        {error && (
-          <div className={styles["sok__error"]}>
-            <Alert variant={error.variant} role="status">
-              {error.message}
-            </Alert>
-          </div>
-        )}
+    <div className={styles["sok"]}>
+      <Heading level="1" size="large" spacing align="center">
+        Oppdragsinfo: Søk
+      </Heading>
+      <div className={styles["sok__box"]}>
+        <SokForm fetchOppdragList={fetchOppdragList} />
       </div>
-    </>
+      {error && (
+        <div className={styles["sok__error"]}>
+          <Alert variant={error.variant} role="status">
+            {error.message}
+          </Alert>
+        </div>
+      )}
+    </div>
   );
 }

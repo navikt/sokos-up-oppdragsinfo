@@ -12,7 +12,7 @@ import { downloadAsCsv } from "../../util/csvExport";
 import { ROOT } from "../../util/routenames";
 import EnhetshistorikkModal from "./EnhetshistorikkModal";
 import OmposteringModal from "./OmposteringModal";
-import OppdragLinjeTable from "./OppdragLinjeTable";
+import OppdragLinjeTable from "./OppdragTable";
 import StatushistorikkModal from "./StatushistorikkModal";
 
 export default function Oppdrag() {

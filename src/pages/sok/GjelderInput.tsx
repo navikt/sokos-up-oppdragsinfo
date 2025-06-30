@@ -1,5 +1,4 @@
 import { useFormikContext } from "formik";
-import React from "react";
 import { TextField } from "@navikt/ds-react";
 import { SokParameter } from "../../types/SokParameter";
 import styles from "./SokForm.module.css";
