@@ -19,7 +19,8 @@
 }
 
 .sok__gjelder {
-  max-width: 150px;
+  max-width: 160px;
+  width: 100%;
 }
 
 .sok__faggruppe {
@@ -36,27 +37,7 @@
 }
 
 @media (width <= 768px) {
-  .sok__help {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-  }
-
-  .sok__form {
-    padding-top: 1.5rem;
-  }
-
-  .sok__gjelder {
-    max-width: 120px;
-  }
-
   .sok__faggruppe {
-    max-width: 300px;
-  }
-
-  .sok__buttons {
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-    align-items: flex-start;
+    max-width: 320px;
   }
 }

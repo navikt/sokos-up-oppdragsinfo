@@ -14,9 +14,3 @@
 .sok__error {
   padding-top: 1.25rem;
 }
-
-@media (width <= 768px) {
-  .sok {
-    padding: 1rem;
-  }
-}
