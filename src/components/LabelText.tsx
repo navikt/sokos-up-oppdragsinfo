@@ -8,10 +8,10 @@ interface LabelTextProps {
 
 export default function LabelText(props: LabelTextProps) {
   return (
-    <div className={commonstyles.row}>
-      <div className={commonstyles.bold}>{props.label}:</div>
+    <div className={commonstyles["flex--row-gap-sm"]}>
+      <div className={commonstyles["text--bold"]}>{props.label}:</div>
       {props.nowrap ? (
-        <div className={commonstyles.nowrap}>{props.text}</div>
+        <div className={commonstyles["text--nowrap"]}>{props.text}</div>
       ) : (
         props.text
       )}

@@ -8,8 +8,8 @@ import FaggruppeCombobox from "./FaggruppeCombobox";
 import GjelderInput from "./GjelderInput";
 import ResetButton from "./ResetButton";
 import SokButton from "./SokButton";
+import styles from "./SokForm.module.css";
 import SokHelp from "./SokHelp";
-import styles from "./SokPage.module.css";
 
 const SokForm = ({
   fetchOppdragList,
@@ -49,13 +49,17 @@ const SokForm = ({
       onSubmit={onSubmit}
     >
       <Form>
-        <div className={styles["sok"]}>
-          <div className={styles["sok-help"]}>
+        <div className={styles["sok__form-container"]}>
+          <div className={styles["sok__help"]}>
             <SokHelp />
           </div>
-          <GjelderInput />
-          <FaggruppeCombobox />
-          <div className={styles["sok-knapperad"]}>
+          <div className={styles["sok__form"]}>
+            <div className={styles["sok__input-fields"]}>
+              <GjelderInput />
+              <FaggruppeCombobox />
+            </div>
+          </div>
+          <div className={styles["sok__buttons"]}>
             <SokButton />
             <ResetButton />
           </div>

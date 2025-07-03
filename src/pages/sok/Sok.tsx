@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Alert, Heading } from "@navikt/ds-react";
-import { hentOppdrag } from "../api/apiService";
-import { useStore } from "../store/AppState";
-import commonstyles from "../styles/common-styles.module.css";
-import { ErrorMessage } from "../types/ErrorMessage";
-import { SokParameter } from "../types/SokParameter";
-import { isEmpty } from "../util/commonUtil";
-import { TREFFLISTE } from "../util/routenames";
-import SokForm from "./sok/SokForm";
-import styles from "./sok/SokPage.module.css";
+import { hentOppdrag } from "../../api/apiService";
+import { useStore } from "../../store/AppState";
+import { ErrorMessage } from "../../types/ErrorMessage";
+import { SokParameter } from "../../types/SokParameter";
+import { isEmpty } from "../../util/commonUtil";
+import { TREFFLISTE } from "../../util/routenames";
+import styles from "./Sok.module.css";
+import SokForm from "./SokForm";
 
-export default function SokPage() {
+export default function Sok() {
   const navigate = useNavigate();
   const [error, setError] = useState<ErrorMessage | null>(null);
   const { setOppdragsListe } = useStore();
@@ -53,20 +52,20 @@ export default function SokPage() {
       });
   };
   return (
-    <>
-      <div className={commonstyles.pageheading}>
-        <Heading level="1" size="large" spacing>
-          Oppdragsinfo: Søk
-        </Heading>
+    <div className={styles["sok"]}>
+      <Heading level="1" size="large" spacing align="center">
+        Oppdragsinfo: Søk
+      </Heading>
+      <div className={styles["sok__box"]}>
+        <SokForm fetchOppdragList={fetchOppdragList} />
       </div>
-      <SokForm fetchOppdragList={fetchOppdragList} />
       {error && (
-        <div className={styles["sok-feil"]}>
+        <div className={styles["sok__error"]}>
           <Alert variant={error.variant} role="status">
             {error.message}
           </Alert>
         </div>
       )}
-    </>
+    </div>
   );
 }

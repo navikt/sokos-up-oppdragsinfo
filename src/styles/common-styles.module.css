@@ -1,106 +1,72 @@
-.knapperad {
-  display: flex;
-  flex-direction: row;
-  gap: 0.75rem;
-}
-
-.buttonrowLeft {
-  display: flex;
-  flex-direction: row;
-  gap: 0.75rem;
-  justify-content: flex-start;
+:root {
+  --table-min-width: 1280px;
+  --page-max-width: 1920px;
 }
 
 .container {
-  margin: 0.75rem auto;
-  min-width: 1024px;
-  max-width: 1440px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  margin: 0.75rem auto;
+  gap: 1rem;
+  max-width: var(--page-max-width);
 }
 
-.header {
-  margin-left: 6rem;
-  margin-right: 6rem;
-  min-width: 1024px;
-  max-width: 1440px;
+.container__header {
   display: flex;
   flex-direction: column;
+  min-width: 500px;
+  max-width: var(--table-min-width);
+  width: 100%;
   gap: 1.25rem;
 }
 
-.headerInfo {
-  position: relative;
-  min-width: 1024px;
+.container__header-info {
   border-radius: 8px;
   background-color: var(--a-surface-default);
   padding: 1.5rem;
-}
-
-.headerInfoColumn {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.bold {
-  white-space: nowrap;
-  font-weight: bold;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 0.25rem;
-}
-
-.singlerow {
-  display: flex;
-  flex-direction: row;
-}
-
-.spacing {
-  height: 4rem;
-}
-
-.contentloader {
   width: 100%;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  text-align: center;
 }
 
-.nowrap {
-  white-space: nowrap;
-}
-
-.pageheading {
-  white-space: nowrap;
-  text-align: center;
-}
-
-.sortable-table {
-  min-width: 1400px;
-  background-color: var(--a-surface-default);
-}
-
-.sortable-table-topinfo {
+.table-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  min-width: var(--table-min-width);
+  max-width: var(--page-max-width);
+  flex-direction: column;
+  margin-top: 1rem;
+  width: 100%;
 }
 
-.sortable-table-pagination {
+.table {
+  background-color: var(--a-surface-default);
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.table__pagination {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  margin-top: 1rem;
 }
 
-.leftandrightbuttons {
+.link {
+  text-decoration: underline;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.flex--row-gap-sm {
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
-  padding-top: 1rem;
-  justify-content: space-between;
+}
+
+.text--bold {
+  font-weight: bold;
+}
+
+.text--nowrap {
+  white-space: nowrap;
 }

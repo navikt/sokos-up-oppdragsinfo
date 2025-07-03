@@ -1,8 +1,8 @@
 import { useFormikContext } from "formik";
-import React from "react";
 import { TextField } from "@navikt/ds-react";
+import commonstyles from "../../styles/common-styles.module.css";
 import { SokParameter } from "../../types/SokParameter";
-import styles from "./SokPage.module.css";
+import styles from "./SokForm.module.css";
 
 export default function GjelderInput() {
   const { values, errors, touched, handleChange, handleBlur } =
@@ -10,14 +10,12 @@ export default function GjelderInput() {
 
   function errortext() {
     return (
-      <span className={styles["sok-error-message-nowrap"]}>
-        {errors.gjelderId}
-      </span>
+      <span className={commonstyles["text--nowrap"]}>{errors.gjelderId}</span>
     );
   }
 
   return (
-    <div className={styles["sok-inputfields"]}>
+    <div className={styles["sok__gjelder"]}>
       <TextField
         label="Gjelder"
         size={"small"}

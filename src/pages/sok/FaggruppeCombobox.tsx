@@ -3,7 +3,7 @@ import { UNSAFE_Combobox } from "@navikt/ds-react";
 import { useFetchHentFaggrupper } from "../../api/apiService";
 import { FagGruppe } from "../../types/FagGruppe";
 import { SokParameter } from "../../types/SokParameter";
-import styles from "./SokPage.module.css";
+import styles from "./SokForm.module.css";
 
 export default function FaggruppeCombobox() {
   const { values, setFieldError, setFieldValue } =
@@ -18,40 +18,35 @@ export default function FaggruppeCombobox() {
   }
 
   return (
-    <div className={styles["sok-inputfields"]}>
-      <div className={styles["combobox"]}>
-        <UNSAFE_Combobox
-          isMultiSelect={false}
-          size={"small"}
-          error={""}
-          label={"Faggruppe"}
-          onToggleSelected={(type, isSelected) => {
-            if (isSelected) {
-              const found = faggrupper?.find((f) => f.type == type);
-              if (!found)
-                setFieldError(
-                  "fagGruppe",
-                  "Satte faggruppe som ikke finnes(?)",
-                );
-              setFieldValue("fagGruppe", found);
-            } else {
-              setFieldValue("fagGruppe", undefined);
-            }
-          }}
-          options={faggrupper?.map(convertFaggruppeToComboboxValue) ?? []}
-          selectedOptions={
-            values?.fagGruppe
-              ? [
-                  {
-                    label: `${values.fagGruppe.navn} (${values.fagGruppe.type})`,
-                    value: values.fagGruppe?.type ?? "",
-                  },
-                ]
-              : []
+    <div className={styles["sok__faggruppe"]}>
+      <UNSAFE_Combobox
+        isMultiSelect={false}
+        size={"small"}
+        error={""}
+        label={"Faggruppe"}
+        onToggleSelected={(type, isSelected) => {
+          if (isSelected) {
+            const found = faggrupper?.find((f) => f.type == type);
+            if (!found)
+              setFieldError("fagGruppe", "Satte faggruppe som ikke finnes(?)");
+            setFieldValue("fagGruppe", found);
+          } else {
+            setFieldValue("fagGruppe", undefined);
           }
-          shouldAutocomplete={true}
-        ></UNSAFE_Combobox>
-      </div>
+        }}
+        options={faggrupper?.map(convertFaggruppeToComboboxValue) ?? []}
+        selectedOptions={
+          values?.fagGruppe
+            ? [
+                {
+                  label: `${values.fagGruppe.navn} (${values.fagGruppe.type})`,
+                  value: values.fagGruppe?.type ?? "",
+                },
+              ]
+            : []
+        }
+        shouldAutocomplete={true}
+      ></UNSAFE_Combobox>
     </div>
   );
 }

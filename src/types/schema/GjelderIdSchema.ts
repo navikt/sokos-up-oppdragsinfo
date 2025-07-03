@@ -7,20 +7,19 @@ export const GjelderIdSchema = z
     if (!val || val.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Søkefeltet kan ikke være blankt",
+        message: "Må oppgis",
       });
     } else if (!/^[0-9\s.]*$/.test(val.trim())) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Dette søkefeltet kan bare inneholde tall",
+        message: "Kun tall",
       });
     } else {
       const length = val.trim().length;
       if (![9, 11].includes(length)) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message:
-            "Må enten gjelde en organisasjon (orgnummer 9 siffer) eller en person (fødselsnummer 11 siffer)",
+          message: "9 eller 11 siffer",
         });
       }
     }

@@ -11,8 +11,8 @@ const enhetstypetekst: Record<EnhetsType, string> = {
 
 export default function EnhetLabel({ enhet }: { enhet: Enhet }) {
   return (
-    <div className={commonstyles.row}>
-      <div className={commonstyles.bold}>
+    <div className={commonstyles["flex--row-gap-sm"]}>
+      <div className={commonstyles["text--bold"]}>
         {enhetstypetekst[enhet.typeEnhet]}:
       </div>
       <div>{enhet.enhet}</div>
