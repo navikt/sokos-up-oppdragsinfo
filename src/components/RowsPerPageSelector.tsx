@@ -1,6 +1,6 @@
 import { ChevronDownIcon } from "@navikt/aksel-icons";
 import { Button, Dropdown } from "@navikt/ds-react";
-import commonstyles from "../styles/bem-common.module.css";
+import commonstyles from "../styles/common-styles.module.css";
 import styles from "./RowsPerPageSelector.module.css";
 
 interface RowsPerPageSelectorProps {

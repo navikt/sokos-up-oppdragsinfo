@@ -1,6 +1,6 @@
 import { useFormikContext } from "formik";
 import { TextField } from "@navikt/ds-react";
-import commonstyles from "../../styles/bem-common.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 import { SokParameter } from "../../types/SokParameter";
 import styles from "./SokForm.module.css";
 

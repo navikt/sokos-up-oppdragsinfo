@@ -5,7 +5,7 @@ import { useFetchOppdragslinjeDetaljer } from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
 import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/bem-common.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 import { ROOT } from "../../util/routenames";
 import EnheterTable from "./EnheterTable";
 import GraderTable from "./GraderTable";

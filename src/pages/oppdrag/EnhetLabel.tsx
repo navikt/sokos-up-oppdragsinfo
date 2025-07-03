@@ -1,5 +1,5 @@
 import LabelText from "../../components/LabelText";
-import commonstyles from "../../styles/bem-common.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 import { Enhet, EnhetsType } from "../../types/EnhetsType";
 import { formatDate } from "../../util/commonUtil";
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { ChevronRightDoubleIcon } from "@navikt/aksel-icons";
 import { BodyShort } from "@navikt/ds-react";
-import commonstyles from "../styles/bem-common.module.css";
+import commonstyles from "../styles/common-styles.module.css";
 import { OPPDRAG, ROOT, TREFFLISTE } from "../util/routenames";
 import styles from "./Breadcrumbs.module.css";
 import NullstillButton from "./ResetButton";

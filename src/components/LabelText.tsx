@@ -1,4 +1,4 @@
-import commonstyles from "../styles/bem-common.module.css";
+import commonstyles from "../styles/common-styles.module.css";
 
 interface LabelTextProps {
   label: string;

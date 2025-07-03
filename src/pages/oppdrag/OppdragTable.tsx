@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Button, Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
 import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/bem-common.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 import { OppdragsLinje, OppdragsLinjeList } from "../../types/Oppdragslinje";
 import { OPPDRAG, TABLE, logUserEvent } from "../../umami/umami";
 import {

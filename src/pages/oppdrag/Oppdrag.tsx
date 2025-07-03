@@ -6,7 +6,7 @@ import { useFetchHentOppdragsLinjer } from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
 import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/bem-common.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 import { OPPDRAG } from "../../umami/umami";
 import { downloadAsCsv } from "../../util/csvExport";
 import { ROOT } from "../../util/routenames";

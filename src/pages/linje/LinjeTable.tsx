@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Pagination, Table } from "@navikt/ds-react";
 import RowsPerPageSelector from "../../components/RowsPerPageSelector";
-import commonstyles from "../../styles/bem-common.module.css";
+import commonstyles from "../../styles/common-styles.module.css";
 import { OppdragsLinjeDetaljerDTO } from "../../types/OppdragsLinjeDetaljerDTO";
 import { OppdragsLinje } from "../../types/Oppdragslinje";
 import { TABLE, logUserEvent } from "../../umami/umami";
