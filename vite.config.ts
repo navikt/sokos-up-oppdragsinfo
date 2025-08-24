@@ -41,7 +41,14 @@ export default defineConfig(({ mode }) => {
           },
         }),
         ...(mode === "mock" && {
+          // TODO: sjekke om man fjerne en eller slå disse sammen
           "^/mockServiceWorker\\.js$": {
+            target: `http://localhost:${serverPort}`,
+            rewrite: () => "/oppdragsinfo/mockServiceWorker.js",
+            changeOrigin: false,
+          },
+          // for å håndtere flere instanser på forskjellige porter
+          [`^/mockServiceWorker-${serverPort}\\.js$`]: {
             target: `http://localhost:${serverPort}`,
             rewrite: () => "/oppdragsinfo/mockServiceWorker.js",
             changeOrigin: false,
