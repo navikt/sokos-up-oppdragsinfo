@@ -9,7 +9,7 @@ const server = express();
 
 const corsAllowedOrigin = [
   /https:\/\/utbetalingsportalen(-[a-z][a-z0-9])?(.ansatt|.intern)(.dev)?.nav.no/,
-  "http://localhost:5173",
+  /http:\/\/localhost:(517[3-9]|518[0-9]|519[0-9]|3000)/,
 ];
 
 server.use(cors({ origin: corsAllowedOrigin }));

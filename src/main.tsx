@@ -7,8 +7,13 @@ const startMsw = async () => {
   if (import.meta.env.MODE === "mock") {
     try {
       const { worker } = await import("../mock/browser");
+
       await worker.start({
+        serviceWorker: {
+          url: "/mockServiceWorker.js",
+        },
         onUnhandledRequest: "bypass", // for assets o.l.
+        quiet: false,
       });
     } catch (error) {
       // eslint-disable-next-line no-console
