@@ -41,3 +41,18 @@ i identrutinene. Det er derfor viktig å benytte riktig begrep i kommunikasjon m
 5. Appen nås på <http://localhost:5173/oppdragsinfo>
 
 NB! Anbefaler sette opp [ModHeader](https://modheader.com/) extension på Chrome for å sende med Obo-token i `Authorization` header når du kjører mot backend lokalt da den krever at token inneholder NavIdent.
+
+### Flere instanser med msw samtidig
+
+```bash
+# Terminal 1
+pnpm run dev          # Default på port 5173
+
+# Terminal 2
+PORT=5174 pnpm run dev
+
+# Terminal 3
+PORT=5175 pnpm run dev
+```
+
+Dette gjør at hver instans har sin egen MSW worker og kan kjøre uavhengig av hverandre.

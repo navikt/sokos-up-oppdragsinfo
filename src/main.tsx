@@ -7,8 +7,17 @@ const startMsw = async () => {
   if (import.meta.env.MODE === "mock") {
     try {
       const { worker } = await import("../mock/browser");
+
+      // Unngår konflikt hvis man kjører flere lokale apper med msw samtidig
+      const port = window.location.port || "5173";
+      const serviceWorkerUrl = `/mockServiceWorker-${port}.js`;
+
       await worker.start({
+        serviceWorker: {
+          url: serviceWorkerUrl,
+        },
         onUnhandledRequest: "bypass", // for assets o.l.
+        quiet: false,
       });
     } catch (error) {
       // eslint-disable-next-line no-console
