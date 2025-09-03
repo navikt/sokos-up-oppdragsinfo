@@ -10,11 +10,11 @@ on:
       - "CODEOWNERS"
       - ".gitignore"
       - ".github/workflows/build-pr.yaml"
-      - ".github/workflows/manual-deploy-dev.yaml"
+      - ".github/workflows/dependabot-automerge.yaml"
+      - ".github/workflows/manual-deploy.yaml"
       - ".github/workflows/playwright.yaml"
       - ".github/workflows/security.yaml"
       - ".github/dependabot.yaml"
-      - ".github/workflows/dependabot-automerge.yaml"
 
   repository_dispatch:
     types: [dependabot-deploy]

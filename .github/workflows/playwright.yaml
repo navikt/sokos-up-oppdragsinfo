@@ -8,12 +8,12 @@ on:
       - "LICENCE"
       - "CODEOWNERS"
       - ".gitignore"
-      - ".github/workflows/deploy.yaml"
       - ".github/workflows/build-pr.yaml"
-      - ".github/workflows/manual-deploy-dev.yaml"
+      - ".github/workflows/dependabot-automerge.yaml"
+      - ".github/workflows/deploy.yaml"
+      - ".github/workflows/manual-deploy.yaml"
       - ".github/workflows/security.yaml"
       - ".github/dependabot.yaml"
-      - ".github/workflows/dependabot-automerge.yaml"
 
   pull_request:
     branches:
@@ -23,9 +23,10 @@ on:
       - "LICENCE"
       - "CODEOWNERS"
       - ".gitignore"
-      - ".github/workflows/deploy.yaml"
       - ".github/workflows/build-pr.yaml"
-      - ".github/workflows/manual-deploy-dev.yaml"
+      - ".github/workflows/dependabot-automerge.yaml"
+      - ".github/workflows/deploy.yaml"
+      - ".github/workflows/manual-deploy.yaml"
       - ".github/workflows/security.yaml"
       - ".github/dependabot.yaml"
 jobs:
