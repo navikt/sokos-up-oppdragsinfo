@@ -50,8 +50,8 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       zod-formik-adapter:
-        specifier: ^2.0.0
-        version: 2.0.0(formik@2.4.6(react@19.1.1))(zod@4.1.5)
+        specifier: ^1.3.0
+        version: 1.3.0(formik@2.4.6(react@19.1.1))(zod@4.1.5)
       zustand:
         specifier: ^5.0.8
         version: 5.0.8(@types/react@19.1.12)(react@19.1.1)(use-sync-external-store@1.5.0(react@19.1.1))
@@ -963,6 +963,9 @@ packages:
     peerDependencies:
       "@types/react": ">=17.0.30"
       react: ">=17.0.0 || >19.0.0-rc"
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
 
   "@navikt/ds-tokens@7.29.1":
     resolution:
@@ -5020,14 +5023,14 @@ packages:
       }
     engines: { node: ">=18" }
 
-  zod-formik-adapter@2.0.0:
+  zod-formik-adapter@1.3.0:
     resolution:
       {
-        integrity: sha512-cLykLmQgmCmhx8C/mwR+rUNKRw6kEukejGRrByB+56zV1XtHF+xmOiQ2Lp2w5R0BdN3z42QKFekOI0Vy39vR8Q==,
+        integrity: sha512-qWsVwRYqpRod5BL35pRXHD6UOugiyaEyLPO04rCN/uKTCFCR+VElPEG26+3wNrxGP7y5XmJM+4/0MrABnRYZrw==,
       }
     peerDependencies:
       formik: ^2.2.9
-      zod: 4.x
+      zod: ^3.22.4
 
   zod@4.1.5:
     resolution:
@@ -5516,11 +5519,12 @@ snapshots:
       "@floating-ui/react-dom": 2.1.5(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       "@navikt/aksel-icons": 7.29.1
       "@navikt/ds-tokens": 7.29.1
-      "@types/react": 19.1.12
       clsx: 2.1.1
       date-fns: 4.1.0
       react: 19.1.1
       react-day-picker: 9.7.0(react@19.1.1)
+    optionalDependencies:
+      "@types/react": 19.1.12
     transitivePeerDependencies:
       - react-dom
 
@@ -8114,7 +8118,7 @@ snapshots:
 
   yoctocolors-cjs@2.1.2: {}
 
-  zod-formik-adapter@2.0.0(formik@2.4.6(react@19.1.1))(zod@4.1.5):
+  zod-formik-adapter@1.3.0(formik@2.4.6(react@19.1.1))(zod@4.1.5):
     dependencies:
       formik: 2.4.6(react@19.1.1)
       zod: 4.1.5
