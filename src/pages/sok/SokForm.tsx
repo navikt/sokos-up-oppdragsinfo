@@ -1,5 +1,5 @@
 import { useActionState, useEffect, useState } from "react";
-import { EraserIcon } from "@navikt/aksel-icons";
+import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, TextField, UNSAFE_Combobox } from "@navikt/ds-react";
 import { useFetchHentFaggrupper } from "../../api/apiService";
 import { useStore } from "../../store/AppState";
@@ -9,7 +9,6 @@ import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
 import { SOK, logUserEvent } from "../../umami/umami";
 import styles from "./SokForm.module.css";
 import SokHelp from "./SokHelp";
-import SubmitButton from "./SubmitButton";
 
 type FormState = {
   errors?: {
@@ -26,8 +25,10 @@ type FormValues = {
 
 const SokForm = ({
   fetchOppdragList,
+  isLoading,
 }: {
-  fetchOppdragList: (s: SokParameter) => void;
+  fetchOppdragList: (s: SokParameter) => Promise<void>;
+  isLoading: boolean;
 }) => {
   const { setGjelderNavn, gjelderId, fagGruppe, resetState } = useStore();
   const { data: faggrupper } = useFetchHentFaggrupper();
@@ -191,7 +192,19 @@ const SokForm = ({
           </div>
         </div>
         <div className={styles["sok__buttons"]}>
-          <SubmitButton />
+          <Button
+            data-umami-event={SOK.VALIDATE}
+            size="small"
+            variant="primary"
+            type="submit"
+            loading={isLoading}
+            iconPosition="right"
+            icon={
+              <MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />
+            }
+          >
+            Søk
+          </Button>
           <Button
             data-umami-event={SOK.RESET}
             size="small"
