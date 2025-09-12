@@ -1,16 +1,15 @@
-import { useActionState, useEffect, useRef, useState } from "react";
-import { useFormStatus } from "react-dom";
-import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
+import { useActionState, useEffect, useState } from "react";
+import { EraserIcon } from "@navikt/aksel-icons";
 import { Button, TextField, UNSAFE_Combobox } from "@navikt/ds-react";
 import { useFetchHentFaggrupper } from "../../api/apiService";
 import { useStore } from "../../store/AppState";
-import commonstyles from "../../styles/common-styles.module.css";
 import { FagGruppe } from "../../types/FagGruppe";
 import { SokParameter } from "../../types/SokParameter";
 import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
 import { SOK, logUserEvent } from "../../umami/umami";
 import styles from "./SokForm.module.css";
 import SokHelp from "./SokHelp";
+import SubmitButton from "./SubmitButton";
 
 type FormState = {
   errors?: {
@@ -20,6 +19,11 @@ type FormState = {
   success?: boolean;
 };
 
+type FormValues = {
+  gjelderId: string;
+  selectedFaggruppe?: FagGruppe;
+};
+
 const SokForm = ({
   fetchOppdragList,
 }: {
@@ -27,19 +31,24 @@ const SokForm = ({
 }) => {
   const { setGjelderNavn, gjelderId, fagGruppe, resetState } = useStore();
   const { data: faggrupper } = useFetchHentFaggrupper();
-  const formRef = useRef<HTMLFormElement>(null);
-  const [selectedFaggruppe, setSelectedFaggruppe] = useState<
-    FagGruppe | undefined
-  >(fagGruppe);
+  const [state, formAction] = useActionState(submitAction, {});
+  const [formValues, setFormValues] = useState<FormValues>({
+    gjelderId: gjelderId || "",
+    selectedFaggruppe: fagGruppe,
+  });
 
+  // for å synke/populere verdier med zustand
   useEffect(() => {
-    setSelectedFaggruppe(fagGruppe);
-  }, [fagGruppe]);
+    setFormValues({
+      gjelderId: gjelderId || "",
+      selectedFaggruppe: fagGruppe,
+    });
+  }, [gjelderId, fagGruppe]);
 
-  async function submitAction(
-    prevState: FormState,
+  function validateAndCreateParameter(
     formData: FormData,
-  ): Promise<FormState> {
+    selectedFaggruppe?: FagGruppe,
+  ) {
     const gjelderIdValue = formData.get("gjelderId") as string;
 
     const parameter: SokParameter = {
@@ -49,21 +58,35 @@ const SokForm = ({
 
     const validation = SokParameterSchema.safeParse(parameter);
     if (!validation.success) {
-      const errors: Record<string, string> = {};
-      validation.error.issues.forEach((issue) => {
-        const path = issue.path[0] as string;
-        errors[path] = issue.message;
-      });
+      const errors = Object.fromEntries(
+        validation.error.issues.map((issue) => [issue.path[0], issue.message]),
+      );
+      return { errors, parameter: null };
+    }
+
+    return { errors: null, parameter };
+  }
+
+  async function submitAction(
+    _: FormState,
+    formData: FormData,
+  ): Promise<FormState> {
+    const { errors, parameter } = validateAndCreateParameter(
+      formData,
+      formValues.selectedFaggruppe,
+    );
+
+    if (errors) {
       return { errors };
     }
 
     try {
       setGjelderNavn("");
-      const trimmedGjelderId = parameter.gjelderId?.trim() ?? "";
+      const trimmedGjelderId = parameter!.gjelderId?.trim() ?? "";
 
       useStore.setState({
         gjelderId: trimmedGjelderId,
-        fagGruppe: parameter.fagGruppe,
+        fagGruppe: parameter!.fagGruppe,
       });
 
       const isFnr = /^(?!00)\d{11}$/.test(trimmedGjelderId);
@@ -72,10 +95,10 @@ const SokForm = ({
       logUserEvent(SOK.SUBMIT, {
         fnr: isFnr,
         orgnr: isOrgnr,
-        fagGruppe: parameter.fagGruppe?.type,
+        fagGruppe: parameter!.fagGruppe?.type,
       });
 
-      fetchOppdragList({ ...parameter, gjelderId: trimmedGjelderId });
+      fetchOppdragList({ ...parameter!, gjelderId: trimmedGjelderId });
 
       return { success: true };
     } catch {
@@ -87,33 +110,35 @@ const SokForm = ({
     }
   }
 
-  const [state, formAction] = useActionState(submitAction, {});
-  const { pending } = useFormStatus();
-
   function handleReset() {
     resetState();
-    setSelectedFaggruppe(undefined);
-    formRef.current?.reset();
+    setFormValues({
+      gjelderId: "",
+      selectedFaggruppe: undefined,
+    });
   }
 
   function handleFaggruppeToggle(type: string, isSelected: boolean) {
     if (isSelected) {
       const found = faggrupper?.find((f) => f.type === type);
-      setSelectedFaggruppe(found);
+      setFormValues((prev) => ({
+        ...prev,
+        selectedFaggruppe: found,
+      }));
     } else {
-      setSelectedFaggruppe(undefined);
+      setFormValues((prev) => ({
+        ...prev,
+        selectedFaggruppe: undefined,
+      }));
     }
   }
 
-  function convertFaggruppeToComboboxValue(selectedFaggruppe: FagGruppe) {
-    return {
-      value: selectedFaggruppe.type,
-      label: `${selectedFaggruppe.navn}(${selectedFaggruppe.type})`,
-    };
+  function formatFaggruppe(fg: FagGruppe) {
+    return `${fg.navn} (${fg.type})`;
   }
 
   return (
-    <form ref={formRef} action={formAction}>
+    <form action={formAction}>
       <div className={styles["sok__form-container"]}>
         <div className={styles["sok__help"]}>
           <SokHelp />
@@ -124,16 +149,16 @@ const SokForm = ({
               <TextField
                 label="Gjelder"
                 size="small"
-                error={
-                  state.errors?.gjelderId && (
-                    <span className={commonstyles["text--nowrap"]}>
-                      {state.errors.gjelderId}
-                    </span>
-                  )
-                }
+                error={state.errors?.gjelderId}
                 id="gjelderId"
                 name="gjelderId"
-                defaultValue={gjelderId || ""}
+                value={formValues.gjelderId}
+                onChange={(e) =>
+                  setFormValues((prev) => ({
+                    ...prev,
+                    gjelderId: e.target.value,
+                  }))
+                }
               />
             </div>
 
@@ -141,16 +166,21 @@ const SokForm = ({
               <UNSAFE_Combobox
                 isMultiSelect={false}
                 size="small"
-                error={state.errors?.fagGruppe || ""}
+                error={state.errors?.fagGruppe}
                 label="Faggruppe"
                 onToggleSelected={handleFaggruppeToggle}
-                options={faggrupper?.map(convertFaggruppeToComboboxValue) ?? []}
+                options={
+                  faggrupper?.map((fg) => ({
+                    value: fg.type,
+                    label: formatFaggruppe(fg),
+                  })) ?? []
+                }
                 selectedOptions={
-                  selectedFaggruppe
+                  formValues.selectedFaggruppe
                     ? [
                         {
-                          label: `${selectedFaggruppe.navn} (${selectedFaggruppe.type})`,
-                          value: selectedFaggruppe.type,
+                          value: formValues.selectedFaggruppe.type,
+                          label: formatFaggruppe(formValues.selectedFaggruppe),
                         },
                       ]
                     : []
@@ -161,19 +191,7 @@ const SokForm = ({
           </div>
         </div>
         <div className={styles["sok__buttons"]}>
-          <Button
-            data-umami-event={SOK.VALIDATE}
-            size="small"
-            variant="primary"
-            type="submit"
-            loading={pending}
-            iconPosition="right"
-            icon={
-              <MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />
-            }
-          >
-            {pending ? "Søker..." : "Søk"}
-          </Button>
+          <SubmitButton />
           <Button
             data-umami-event={SOK.RESET}
             size="small"
