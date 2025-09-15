@@ -38,7 +38,7 @@ const SokForm = ({
     selectedFaggruppe: fagGruppe,
   });
 
-  // for å synke/populere verdier med zustand
+  // synker med zustand
   useEffect(() => {
     setFormValues({
       gjelderId: gjelderId || "",
@@ -72,6 +72,10 @@ const SokForm = ({
     _: FormState,
     formData: FormData,
   ): Promise<FormState> {
+    if (formData.get("_reset") === "true") {
+      return {};
+    }
+
     const { errors, parameter } = validateAndCreateParameter(
       formData,
       formValues.selectedFaggruppe,
@@ -117,6 +121,9 @@ const SokForm = ({
       gjelderId: "",
       selectedFaggruppe: undefined,
     });
+    const resetFormData = new FormData();
+    resetFormData.append("_reset", "true");
+    formAction(resetFormData);
   }
 
   function handleFaggruppeToggle(type: string, isSelected: boolean) {
