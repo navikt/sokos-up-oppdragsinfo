@@ -1,4 +1,6 @@
-import { useActionState, useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, TextField, UNSAFE_Combobox } from "@navikt/ds-react";
 import { useFetchHentFaggrupper } from "../../api/apiService";
@@ -6,22 +8,10 @@ import { useStore } from "../../store/AppState";
 import { FagGruppe } from "../../types/FagGruppe";
 import { SokParameter } from "../../types/SokParameter";
 import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
-import { SOK, logUserEvent } from "../../umami/umami";
+import { SOK } from "../../umami/umami";
+import { logSearchEvent } from "../../utils/analytics";
 import styles from "./SokForm.module.css";
 import SokHelp from "./SokHelp";
-
-type FormState = {
-  errors?: {
-    gjelderId?: string;
-    fagGruppe?: string;
-  };
-  success?: boolean;
-};
-
-type FormValues = {
-  gjelderId: string;
-  selectedFaggruppe?: FagGruppe;
-};
 
 const SokForm = ({
   fetchOppdragList,
@@ -30,123 +20,69 @@ const SokForm = ({
   fetchOppdragList: (s: SokParameter) => Promise<void>;
   isLoading: boolean;
 }) => {
-  const { setGjelderNavn, gjelderId, fagGruppe, resetState } = useStore();
-  const { data: faggrupper } = useFetchHentFaggrupper();
-  const [state, formAction] = useActionState(submitAction, {});
-  const [formValues, setFormValues] = useState<FormValues>({
-    gjelderId: gjelderId || "",
-    selectedFaggruppe: fagGruppe,
+  const { data } = useFetchHentFaggrupper();
+  const { gjelderId, fagGruppe, setGjelderNavn, resetState } = useStore();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    setError,
+    clearErrors,
+    formState: { errors, isSubmitting },
+  } = useForm<SokParameter>({
+    resolver: zodResolver(SokParameterSchema),
+    defaultValues: {
+      gjelderId: gjelderId || "",
+      fagGruppe: fagGruppe,
+    },
   });
 
-  // synker med zustand
+  const watchedValues = watch();
+
   useEffect(() => {
-    setFormValues({
-      gjelderId: gjelderId || "",
-      selectedFaggruppe: fagGruppe,
-    });
-  }, [gjelderId, fagGruppe]);
+    setValue("gjelderId", gjelderId || "");
+    setValue("fagGruppe", fagGruppe);
+  }, [gjelderId, fagGruppe, setValue]);
 
-  function validateAndCreateParameter(
-    formData: FormData,
-    selectedFaggruppe?: FagGruppe,
-  ) {
-    const gjelderIdValue = formData.get("gjelderId") as string;
-
-    const parameter: SokParameter = {
-      gjelderId: gjelderIdValue?.trim(),
-      fagGruppe: selectedFaggruppe,
-    };
-
-    const validation = SokParameterSchema.safeParse(parameter);
-    if (!validation.success) {
-      const errors = Object.fromEntries(
-        validation.error.issues.map((issue) => [issue.path[0], issue.message]),
-      );
-      return { errors, parameter: null };
-    }
-
-    return { errors: null, parameter };
-  }
-
-  async function submitAction(
-    _: FormState,
-    formData: FormData,
-  ): Promise<FormState> {
-    if (formData.get("_reset") === "true") {
-      return {};
-    }
-
-    const { errors, parameter } = validateAndCreateParameter(
-      formData,
-      formValues.selectedFaggruppe,
-    );
-
-    if (errors) {
-      return { errors };
-    }
-
+  const onSubmit = async (data: SokParameter) => {
     try {
+      const trimmedGjelderId = data.gjelderId?.trim() ?? "";
+
       setGjelderNavn("");
-      const trimmedGjelderId = parameter!.gjelderId?.trim() ?? "";
+      clearErrors();
 
       useStore.setState({
         gjelderId: trimmedGjelderId,
-        fagGruppe: parameter!.fagGruppe,
+        fagGruppe: data.fagGruppe,
       });
 
-      const isFnr = /^(?!00)\d{11}$/.test(trimmedGjelderId);
-      const isOrgnr = /^(00\d{9}|\d{9})$/.test(trimmedGjelderId);
+      logSearchEvent(trimmedGjelderId, data.fagGruppe);
 
-      logUserEvent(SOK.SUBMIT, {
-        fnr: isFnr,
-        orgnr: isOrgnr,
-        fagGruppe: parameter!.fagGruppe?.type,
-      });
-
-      fetchOppdragList({ ...parameter!, gjelderId: trimmedGjelderId });
-
-      return { success: true };
+      await fetchOppdragList({ ...data, gjelderId: trimmedGjelderId });
     } catch {
-      return {
-        errors: {
-          gjelderId: "En feil oppstod under søket",
-        },
-      };
+      setError("gjelderId", { message: "En feil oppstod under søket" });
     }
-  }
+  };
 
-  function handleReset() {
+  const handleReset = () => {
     resetState();
-    setFormValues({
-      gjelderId: "",
-      selectedFaggruppe: undefined,
-    });
-    const resetFormData = new FormData();
-    resetFormData.append("_reset", "true");
-    formAction(resetFormData);
-  }
+    reset({ gjelderId: "", fagGruppe: undefined });
+  };
 
-  function handleFaggruppeToggle(type: string, isSelected: boolean) {
-    if (isSelected) {
-      const found = faggrupper?.find((f) => f.type === type);
-      setFormValues((prev) => ({
-        ...prev,
-        selectedFaggruppe: found,
-      }));
-    } else {
-      setFormValues((prev) => ({
-        ...prev,
-        selectedFaggruppe: undefined,
-      }));
-    }
-  }
+  const handleFaggruppeToggle = (type: string, isSelected: boolean) => {
+    const faggruppe = isSelected
+      ? data?.find((f) => f.type === type)
+      : undefined;
+    setValue("fagGruppe", faggruppe);
+  };
 
-  function formatFaggruppe(fg: FagGruppe) {
-    return `${fg.navn} (${fg.type})`;
-  }
+  const formatFaggruppe = (fg: FagGruppe) => `${fg.navn} (${fg.type})`;
 
   return (
-    <form action={formAction}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles["sok__form-container"]}>
         <div className={styles["sok__help"]}>
           <SokHelp />
@@ -157,16 +93,8 @@ const SokForm = ({
               <TextField
                 label="Gjelder"
                 size="small"
-                error={state.errors?.gjelderId}
-                id="gjelderId"
-                name="gjelderId"
-                value={formValues.gjelderId}
-                onChange={(e) =>
-                  setFormValues((prev) => ({
-                    ...prev,
-                    gjelderId: e.target.value,
-                  }))
-                }
+                error={errors?.gjelderId?.message}
+                {...register("gjelderId")}
               />
             </div>
 
@@ -174,21 +102,21 @@ const SokForm = ({
               <UNSAFE_Combobox
                 isMultiSelect={false}
                 size="small"
-                error={state.errors?.fagGruppe}
+                error={errors?.fagGruppe?.message}
                 label="Faggruppe"
                 onToggleSelected={handleFaggruppeToggle}
                 options={
-                  faggrupper?.map((fg) => ({
+                  data?.map((fg) => ({
                     value: fg.type,
                     label: formatFaggruppe(fg),
                   })) ?? []
                 }
                 selectedOptions={
-                  formValues.selectedFaggruppe
+                  watchedValues.fagGruppe
                     ? [
                         {
-                          value: formValues.selectedFaggruppe.type,
-                          label: formatFaggruppe(formValues.selectedFaggruppe),
+                          value: watchedValues.fagGruppe.type,
+                          label: formatFaggruppe(watchedValues.fagGruppe),
                         },
                       ]
                     : []
@@ -204,7 +132,7 @@ const SokForm = ({
             size="small"
             variant="primary"
             type="submit"
-            loading={isLoading}
+            loading={isLoading || isSubmitting}
             iconPosition="right"
             icon={
               <MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />

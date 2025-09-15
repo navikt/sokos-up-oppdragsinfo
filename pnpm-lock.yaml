@@ -15,7 +15,7 @@ importers:
         version: 1.19.0
       "@hookform/resolvers":
         specifier: ^5.2.1
-        version: 5.2.1(react-hook-form@7.56.1(react@19.1.1))
+        version: 5.2.1(react-hook-form@7.62.0(react@19.1.1))
       "@navikt/aksel-icons":
         specifier: 7.29.1
         version: 7.29.1
@@ -37,6 +37,9 @@ importers:
       react-dom:
         specifier: ^19.1.1
         version: 19.1.1(react@19.1.1)
+      react-hook-form:
+        specifier: ^7.62.0
+        version: 7.62.0(react@19.1.1)
       react-router:
         specifier: ^7.8.2
         version: 7.8.2(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -3903,10 +3906,10 @@ packages:
     peerDependencies:
       react: ^19.1.1
 
-  react-hook-form@7.56.1:
+  react-hook-form@7.62.0:
     resolution:
       {
-        integrity: sha512-qWAVokhSpshhcEuQDSANHx3jiAEFzu2HAaaQIzi/r9FNPm1ioAvuJSD4EuZzWd7Al7nTRKcKPnBKO7sRn+zavQ==,
+        integrity: sha512-7KWFejc98xqG/F4bAxpL41NB3o1nnvQO1RWZT3TqRZYL8RryQETGfEdVnJN2fy1crCiBLLjkRBVK05j24FxJGA==,
       }
     engines: { node: ">=18.0.0" }
     peerDependencies:
@@ -5367,10 +5370,10 @@ snapshots:
       ua-parser-js: 1.0.40
       web-vitals: 4.2.4
 
-  "@hookform/resolvers@5.2.1(react-hook-form@7.56.1(react@19.1.1))":
+  "@hookform/resolvers@5.2.1(react-hook-form@7.62.0(react@19.1.1))":
     dependencies:
       "@standard-schema/utils": 0.3.0
-      react-hook-form: 7.56.1(react@19.1.1)
+      react-hook-form: 7.62.0(react@19.1.1)
 
   "@humanfs/core@0.19.1": {}
 
@@ -7290,7 +7293,7 @@ snapshots:
       react: 19.1.1
       scheduler: 0.26.0
 
-  react-hook-form@7.56.1(react@19.1.1):
+  react-hook-form@7.62.0(react@19.1.1):
     dependencies:
       react: 19.1.1
 
