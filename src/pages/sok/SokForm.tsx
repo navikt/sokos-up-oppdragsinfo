@@ -8,8 +8,7 @@ import { useStore } from "../../store/AppState";
 import { FagGruppe } from "../../types/FagGruppe";
 import { SokParameter } from "../../types/SokParameter";
 import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
-import { SOK } from "../../umami/umami";
-import { logSearchEvent } from "../../utils/analytics";
+import { SOK, logSearchEvent } from "../../umami/umami";
 import styles from "./SokForm.module.css";
 import SokHelp from "./SokHelp";
 
