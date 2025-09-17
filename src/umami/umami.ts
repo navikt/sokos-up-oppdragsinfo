@@ -1,3 +1,5 @@
+import { FagGruppe } from "../types/FagGruppe";
+
 export const SOK = {
   VALIDATE: "søkeknapp trykket",
   SUBMIT: "søk utført",
@@ -33,4 +35,16 @@ export const ROWS_PER_PAGE = {
 
 export function logUserEvent(name: string, data?: object): void {
   window?.umami?.track(name, data);
+}
+
+export function logSearchEvent(gjelderId: string, fagGruppe?: FagGruppe) {
+  const trimmedId = gjelderId.trim();
+  const isFnr = /^(?!00)\d{11}$/.test(trimmedId);
+  const isOrgnr = /^(00\d{9}|\d{9})$/.test(trimmedId);
+
+  logUserEvent(SOK.SUBMIT, {
+    fnr: isFnr,
+    orgnr: isOrgnr,
+    fagGruppe: fagGruppe?.type,
+  });
 }

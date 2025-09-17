@@ -13,9 +13,10 @@ import SokForm from "./SokForm";
 export default function Sok() {
   const navigate = useNavigate();
   const [error, setError] = useState<ErrorMessage | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { setOppdragsListe } = useStore();
 
-  const fetchOppdragList = (sokParameter: SokParameter) => {
+  const fetchOppdragList = async (sokParameter: SokParameter) => {
     if (!sokParameter.gjelderId) {
       setError({
         variant: "warning",
@@ -24,32 +25,38 @@ export default function Sok() {
       return;
     }
 
-    hentOppdrag({
-      gjelderId: sokParameter.gjelderId,
-      fagGruppeKode: sokParameter.fagGruppe?.type,
-    })
-      .then((response) => {
-        if (!isEmpty(response)) {
-          setOppdragsListe(response);
-          navigate(TREFFLISTE, { replace: false });
-        } else {
-          setError({
-            variant: "info",
-            message:
-              "Fant ingen oppdrag for " +
-              sokParameter.gjelderId +
-              (sokParameter.fagGruppe
-                ? " med faggruppe " + sokParameter.fagGruppe.type
-                : ""),
-          });
-        }
-      })
-      .catch((error) => {
-        setError({
-          variant: error.statusCode == 400 ? "warning" : "error",
-          message: error.message,
-        });
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await hentOppdrag({
+        gjelderId: sokParameter.gjelderId,
+        fagGruppeKode: sokParameter.fagGruppe?.type,
       });
+
+      if (!isEmpty(response)) {
+        setOppdragsListe(response);
+        navigate(TREFFLISTE, { replace: false });
+      } else {
+        setError({
+          variant: "info",
+          message:
+            "Fant ingen oppdrag for " +
+            sokParameter.gjelderId +
+            (sokParameter.fagGruppe
+              ? " med faggruppe " + sokParameter.fagGruppe.type
+              : ""),
+        });
+      }
+    } catch (err: unknown) {
+      const error = err as { statusCode?: number; message: string };
+      setError({
+        variant: error.statusCode === 400 ? "warning" : "error",
+        message: error.message,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
   return (
     <div className={styles["sok"]}>
@@ -57,7 +64,7 @@ export default function Sok() {
         Oppdragsinfo: Søk
       </Heading>
       <div className={styles["sok__box"]}>
-        <SokForm fetchOppdragList={fetchOppdragList} />
+        <SokForm fetchOppdragList={fetchOppdragList} isLoading={isLoading} />
       </div>
       {error && (
         <div className={styles["sok__error"]}>
