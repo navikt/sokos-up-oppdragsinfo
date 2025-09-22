@@ -14,6 +14,9 @@ on:
       - ".github/workflows/playwright.yaml"
       - ".github/workflows/security.yaml"
       - ".github/dependabot.yaml"
+  workflow_dispatch:
+  schedule:
+    - cron: "0 7 * * MON-FRI"
 
 permissions:
   contents: write
@@ -23,6 +26,5 @@ permissions:
 
 jobs:
   dependabot-automerge:
-    if: ${{ github.actor == 'dependabot[bot]' }}
     uses: navikt/mob-gha-workflows/.github/workflows/dependabot-automerge.yaml@main
     secrets: inherit
