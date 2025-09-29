@@ -1,22 +1,9 @@
 name: Dependabot Auto-merge
 
 on:
-  pull_request:
-    branches: [main]
-    paths-ignore:
-      - "**.md"
-      - "LICENCE"
-      - "CODEOWNERS"
-      - ".gitignore"
-      - ".github/workflows/build-pr.yaml"
-      - ".github/workflows/deploy.yaml"
-      - ".github/workflows/manual-deploy.yaml"
-      - ".github/workflows/playwright.yaml"
-      - ".github/workflows/security.yaml"
-      - ".github/dependabot.yaml"
   workflow_dispatch:
   schedule:
-    - cron: "0 7 * * MON-FRI"
+    - cron: "0 8 * * MON-FRI"
 
 permissions:
   contents: write
