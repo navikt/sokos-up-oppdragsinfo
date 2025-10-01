@@ -20,7 +20,7 @@ jobs:
   deploy-dev:
     needs: build
     name: Deploy to dev-gcp
-    uses: navikt/mob-gha-workflows/.github/workflows/nais-app-deploy.yaml@main
+    uses: navikt/mob-gha-workflows/.github/workflows/nais-deploy.yaml@main
     with:
       cluster: dev-gcp
       resource: .nais/naiserator-dev.yaml
