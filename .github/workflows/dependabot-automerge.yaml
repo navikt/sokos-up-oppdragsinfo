@@ -5,13 +5,13 @@ on:
   schedule:
     - cron: "0 8 * * MON-FRI"
 
-permissions:
-  contents: write
-  pull-requests: write
-  checks: read
-  statuses: read
-
 jobs:
   dependabot-automerge:
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: read
+      statuses: read
+    name: Dependabot Auto-merge
     uses: navikt/mob-gha-workflows/.github/workflows/dependabot-automerge.yaml@main
     secrets: inherit

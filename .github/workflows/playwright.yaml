@@ -9,10 +9,10 @@ on:
       - "CODEOWNERS"
       - ".gitignore"
       - ".github/workflows/build-pr.yaml"
+      - ".github/workflows/codeql-trivy-scan.yaml"
       - ".github/workflows/dependabot-automerge.yaml"
       - ".github/workflows/deploy.yaml"
       - ".github/workflows/manual-deploy.yaml"
-      - ".github/workflows/security.yaml"
       - ".github/dependabot.yaml"
 
   pull_request:
@@ -24,13 +24,16 @@ on:
       - "CODEOWNERS"
       - ".gitignore"
       - ".github/workflows/build-pr.yaml"
+      - ".github/workflows/codeql-trivy-scan.yaml"
       - ".github/workflows/dependabot-automerge.yaml"
       - ".github/workflows/deploy.yaml"
       - ".github/workflows/manual-deploy.yaml"
-      - ".github/workflows/security.yaml"
       - ".github/dependabot.yaml"
+
 jobs:
   playwright-test:
+    permissions:
+      contents: read
     name: Playwright test
     uses: navikt/mob-gha-workflows/.github/workflows/playwright.yaml@main
     secrets: inherit
