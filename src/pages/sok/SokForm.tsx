@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { EraserIcon, MagnifyingGlassIcon } from "@navikt/aksel-icons";
 import { Button, TextField, UNSAFE_Combobox } from "@navikt/ds-react";
 import { useFetchHentFaggrupper } from "../../api/apiService";
@@ -26,10 +26,10 @@ const SokForm = ({
     register,
     handleSubmit,
     setValue,
-    watch,
     reset,
     setError,
     clearErrors,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<SokParameter>({
     resolver: zodResolver(SokParameterSchema),
@@ -39,7 +39,7 @@ const SokForm = ({
     },
   });
 
-  const watchedValues = watch();
+  const watchedFaggruppe = useWatch({ control, name: "fagGruppe" });
 
   useEffect(() => {
     setValue("gjelderId", gjelderId || "");
@@ -111,11 +111,11 @@ const SokForm = ({
                   })) ?? []
                 }
                 selectedOptions={
-                  watchedValues.fagGruppe
+                  watchedFaggruppe
                     ? [
                         {
-                          value: watchedValues.fagGruppe.type,
-                          label: formatFaggruppe(watchedValues.fagGruppe),
+                          value: watchedFaggruppe.type,
+                          label: formatFaggruppe(watchedFaggruppe),
                         },
                       ]
                     : []
