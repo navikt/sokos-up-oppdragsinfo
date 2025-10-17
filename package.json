@@ -10,7 +10,8 @@
     "test": "vitest",
     "lint": "eslint",
     "prepare": "husky",
-    "stylelint": "stylelint '**/*.css'"
+    "stylelint": "stylelint '**/*.css'",
+    "knip": "knip"
   },
   "dependencies": {
     "@axe-core/playwright": "^4.10.2",
@@ -49,6 +50,7 @@
     "globals": "^16.4.0",
     "husky": "^9.1.7",
     "jsdom": "^27.0.0",
+    "knip": "^5.66.0",
     "lint-staged": "^16.2.4",
     "msw": "^2.11.5",
     "postcss": "^8.5.6",
