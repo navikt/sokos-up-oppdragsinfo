@@ -7,12 +7,14 @@ import pluginReactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+export default [
+  {
+    ignores: ["dist/", "public/", "server/build/", "playwright-report/"],
+  },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   pluginJsxA11y.flatConfigs.recommended,
-  configPrettier,
   {
     settings: {
       react: {
@@ -22,9 +24,6 @@ export default tseslint.config(
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
     },
-  },
-  {
-    ignores: ["dist/", "public/", "server/build/"],
   },
   {
     plugins: {
@@ -42,4 +41,5 @@ export default tseslint.config(
       "react/react-in-jsx-scope": "off",
     },
   },
-);
+  configPrettier,
+];
