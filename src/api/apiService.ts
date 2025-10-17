@@ -23,7 +23,7 @@ import { axiosFetcher, axiosPostFetcher } from "./apiConfig";
 import { GjelderIdRequest } from "./models/GjelderIdRequest";
 import { OppdragsRequest } from "./models/OppdragsRequest";
 
-export const BASE_URI = {
+const BASE_URI = {
   OPPDRAGSINFO_API: "/oppdrag-api/api/v1/oppdragsinfo",
   INTEGRATION_API: "/oppdrag-api/api/v1/integration",
   KODEVERK_API: "/oppdrag-api/api/v1/kodeverk",
