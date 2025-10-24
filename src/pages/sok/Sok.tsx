@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useStore as useNanostore } from "@nanostores/react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Alert, Heading } from "@navikt/ds-react";
 import { hentOppdrag } from "../../api/apiService";
 import { useStore } from "../../store/AppState";
+import { selectedId } from "../../store/shared";
 import { ErrorMessage } from "../../types/ErrorMessage";
 import { SokParameter } from "../../types/SokParameter";
 import { isEmpty } from "../../util/commonUtil";
@@ -15,6 +17,14 @@ export default function Sok() {
   const [error, setError] = useState<ErrorMessage | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { setOppdragsListe } = useStore();
+  const testId = useNanostore(selectedId);
+
+  useEffect(() => {
+    if (testId) {
+      // eslint-disable-next-line no-console
+      console.log("Mottar id fra attestasjon:", testId);
+    }
+  }, [testId]);
 
   const fetchOppdragList = async (sokParameter: SokParameter) => {
     if (!sokParameter.gjelderId) {
@@ -63,6 +73,11 @@ export default function Sok() {
       <Heading level="1" size="large" spacing align="center">
         Oppdragsinfo: Søk
       </Heading>
+      {testId && (
+        <Alert variant="info" style={{ marginBottom: "1rem" }}>
+          Mottatt ID fra attestasjon: {testId}
+        </Alert>
+      )}
       <div className={styles["sok__box"]}>
         <SokForm fetchOppdragList={fetchOppdragList} isLoading={isLoading} />
       </div>
