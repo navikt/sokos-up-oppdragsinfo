@@ -20,6 +20,7 @@ import { TekstList } from "../types/Tekst";
 import { ValutaList } from "../types/Valuta";
 import { WrappedResponseWithErrorDTO } from "../types/WrappedResponseWithErrorDTO";
 import { axiosFetcher, axiosPostFetcher } from "./apiConfig";
+import { BestilleSkattekortRequest } from "./models/BestilleSkattekortRequest";
 import { GjelderIdRequest } from "./models/GjelderIdRequest";
 import { OppdragsRequest } from "./models/OppdragsRequest";
 
@@ -27,6 +28,7 @@ const BASE_URI = {
   OPPDRAGSINFO_API: "/oppdrag-api/api/v1/oppdragsinfo",
   INTEGRATION_API: "/oppdrag-api/api/v1/integration",
   KODEVERK_API: "/oppdrag-api/api/v1/kodeverk",
+  SKATTEKORT_API: "/skattekort-api/api/v1",
 };
 
 function swrConfig<T>(fetcher: (uri: string) => Promise<T>) {
@@ -243,4 +245,16 @@ export function useFetchGrad(oppdragsId: string, linjeId: string) {
       axiosFetcher<GradList>(BASE_URI.OPPDRAGSINFO_API, url),
     ),
   );
+}
+
+export async function bestillSkattekort(request: BestilleSkattekortRequest) {
+  return await axiosPostFetcher<
+    BestilleSkattekortRequest,
+    { errorMessage?: string }
+  >(BASE_URI.SKATTEKORT_API, "/bestille", request).then((response) => {
+    if (response.errorMessage) {
+      return response.errorMessage;
+    }
+    return "Success";
+  });
 }
