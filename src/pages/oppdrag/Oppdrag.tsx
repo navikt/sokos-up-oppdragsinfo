@@ -2,10 +2,7 @@ import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
-import {
-  bestillSkattekort,
-  useFetchHentOppdragsLinjer,
-} from "../../api/apiService";
+import { useFetchHentOppdragsLinjer } from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
 import { useStore } from "../../store/AppState";
@@ -13,6 +10,7 @@ import commonstyles from "../../styles/common-styles.module.css";
 import { OPPDRAG } from "../../umami/umami";
 import { downloadAsCsv } from "../../util/csvExport";
 import { ROOT } from "../../util/routenames";
+import BestilleSkattekortButton from "./BestilleSkattekortButton";
 import EnhetshistorikkModal from "./EnhetshistorikkModal";
 import OmposteringModal from "./OmposteringModal";
 import styles from "./Oppdrag.module.css";
@@ -87,19 +85,7 @@ export default function Oppdrag() {
               </Suspense>
             </div>
             <div>
-              <Button
-                data-umami-event={OPPDRAG.BESTILL_SKATTEKORT}
-                size={"small"}
-                variant={"secondary-neutral"}
-                onClick={() =>
-                  bestillSkattekort({
-                    gjelderId: gjelderId,
-                    inntektsaar: new Date().getFullYear(),
-                  })
-                }
-              >
-                Bestill skattekort
-              </Button>
+              <BestilleSkattekortButton gjelderId={gjelderId} />
               <Button
                 data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
                 size={"small"}

@@ -111,6 +111,22 @@ export const handlers = [
 
   http.post("/sokos-skattekort/api/v1/skattekort/bestille", async () => {
     console.log("Bestiller skattekort");
+    skattekortBestilt = true;
     return HttpResponse.json({ data: "", errorMessage: "" }, { status: 201 });
   }),
+
+  http.post("/sokos-skattekort/api/v1/skattekort/status", async () => {
+    console.log("Henter skattekortstatus");
+    if (skattekortBestilt) {
+      return HttpResponse.json(
+        { data: { status: "Skattekort bestilt" }, errorMessage: "" },
+        { status: 200 },
+      );
+    }
+    return HttpResponse.json(
+      { data: { status: "Mangler skattekort" }, errorMessage: "" },
+      { status: 200 },
+    );
+  }),
 ];
+let skattekortBestilt = false;

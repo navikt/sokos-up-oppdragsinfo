@@ -18,9 +18,12 @@ import { OvrigList } from "../types/Ovrig";
 import { SkyldnerList } from "../types/Skyldner";
 import { TekstList } from "../types/Tekst";
 import { ValutaList } from "../types/Valuta";
-import { WrappedResponseWithErrorDTO } from "../types/WrappedResponseWithErrorDTO";
+import {
+  WrappedResponseWithErrorDTO,
+  WrappedSkattekortResponseWithErrorDTO,
+} from "../types/WrappedResponseWithErrorDTO";
 import { axiosFetcher, axiosPostFetcher } from "./apiConfig";
-import { BestilleSkattekortRequest } from "./models/BestilleSkattekortRequest";
+import { ForespoerselRequest } from "./models/ForespoerselRequest";
 import { GjelderIdRequest } from "./models/GjelderIdRequest";
 import { OppdragsRequest } from "./models/OppdragsRequest";
 
@@ -28,7 +31,7 @@ const BASE_URI = {
   OPPDRAGSINFO_API: "/oppdrag-api/api/v1/oppdragsinfo",
   INTEGRATION_API: "/oppdrag-api/api/v1/integration",
   KODEVERK_API: "/oppdrag-api/api/v1/kodeverk",
-  SKATTEKORT_API: "/sokos-skattekort/api/v1",
+  SOKOS_SKATTEKORT_API: "/sokos-skattekort/api/v1",
 };
 
 function swrConfig<T>(fetcher: (uri: string) => Promise<T>) {
@@ -247,16 +250,37 @@ export function useFetchGrad(oppdragsId: string, linjeId: string) {
   );
 }
 
-export async function bestillSkattekort(request: BestilleSkattekortRequest) {
-  return await axiosPostFetcher<
-    BestilleSkattekortRequest,
-    { errorMessage?: string }
-  >(BASE_URI.SKATTEKORT_API, "/skattekort/bestille", request).then(
-    (response) => {
-      if (response.errorMessage) {
-        return response.errorMessage;
-      }
-      return "Success";
-    },
-  );
+export async function bestillSkattekort(request: ForespoerselRequest) {
+  return await axiosPostFetcher<ForespoerselRequest, { errorMessage?: string }>(
+    BASE_URI.SOKOS_SKATTEKORT_API,
+    "/skattekort/bestille",
+    request,
+  ).then((response) => {
+    if (response.errorMessage) {
+      return response.errorMessage;
+    }
+    return "Success";
+  });
+}
+export function useFetchSkattekortStatus(request: ForespoerselRequest) {
+  const { data, error, isValidating } =
+    useSWRImmutable<WrappedSkattekortResponseWithErrorDTO>(
+      "/skattekort/status",
+      {
+        ...swrConfig<WrappedSkattekortResponseWithErrorDTO>((url) =>
+          axiosPostFetcher<
+            ForespoerselRequest,
+            WrappedSkattekortResponseWithErrorDTO
+          >(BASE_URI.SOKOS_SKATTEKORT_API, url, request),
+        ),
+        fallbackData: {
+          data: { status: "-" },
+          errorMessage: null,
+        },
+        revalidateOnMount: true,
+        refreshInterval: 5000,
+      },
+    );
+  const isLoading = (!error && !data) || isValidating;
+  return { data, error, isLoading };
 }
