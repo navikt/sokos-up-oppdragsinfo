@@ -28,7 +28,7 @@ const BASE_URI = {
   OPPDRAGSINFO_API: "/oppdrag-api/api/v1/oppdragsinfo",
   INTEGRATION_API: "/oppdrag-api/api/v1/integration",
   KODEVERK_API: "/oppdrag-api/api/v1/kodeverk",
-  SKATTEKORT_API: "/skattekort-api/api/v1",
+  SKATTEKORT_API: "/sokos-skattekort/api/v1",
 };
 
 function swrConfig<T>(fetcher: (uri: string) => Promise<T>) {
@@ -251,10 +251,12 @@ export async function bestillSkattekort(request: BestilleSkattekortRequest) {
   return await axiosPostFetcher<
     BestilleSkattekortRequest,
     { errorMessage?: string }
-  >(BASE_URI.SKATTEKORT_API, "/bestille", request).then((response) => {
-    if (response.errorMessage) {
-      return response.errorMessage;
-    }
-    return "Success";
-  });
+  >(BASE_URI.SKATTEKORT_API, "/skattekort/bestille", request).then(
+    (response) => {
+      if (response.errorMessage) {
+        return response.errorMessage;
+      }
+      return "Success";
+    },
+  );
 }

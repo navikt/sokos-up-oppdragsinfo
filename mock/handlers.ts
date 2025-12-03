@@ -108,4 +108,9 @@ export const handlers = [
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/valutaer", () => {
     return HttpResponse.json(valutaList, { status: 200 });
   }),
+
+  http.post("/sokos-skattekort/api/v1/skattekort/bestille", async () => {
+    console.log("Bestiller skattekort");
+    return HttpResponse.json({ data: "", errorMessage: "" }, { status: 201 });
+  }),
 ];
