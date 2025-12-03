@@ -111,13 +111,21 @@ export const handlers = [
 
   http.post("/sokos-skattekort/api/v1/skattekort/bestille", async () => {
     console.log("Bestiller skattekort");
-    skattekortBestilt = true;
+    skattekortBestilt = new Date();
     return HttpResponse.json({ data: "", errorMessage: "" }, { status: 201 });
   }),
 
   http.post("/sokos-skattekort/api/v1/skattekort/status", async () => {
     console.log("Henter skattekortstatus");
-    if (skattekortBestilt) {
+    if (
+      skattekortBestilt &&
+      new Date().getTime() > skattekortBestilt?.getTime() + 10 * 1000
+    ) {
+      return HttpResponse.json(
+        { data: { status: "Har skattekort" }, errorMessage: "" },
+        { status: 200 },
+      );
+    } else if (skattekortBestilt) {
       return HttpResponse.json(
         { data: { status: "Skattekort bestilt" }, errorMessage: "" },
         { status: 200 },
@@ -129,4 +137,4 @@ export const handlers = [
     );
   }),
 ];
-let skattekortBestilt = false;
+let skattekortBestilt: Date | null = null;

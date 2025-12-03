@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Button, TextField } from "@navikt/ds-react";
 import {
   bestillSkattekort,
@@ -18,10 +19,19 @@ export default function BestilleSkattekortButton(
     forsystem: "OS",
   };
 
-  const { data } = useFetchSkattekortStatus(request);
+  const [shouldRefreshStatus, setShouldRefreshStatus] = useState(false);
+  const { data } = useFetchSkattekortStatus(request, shouldRefreshStatus);
+  useEffect(() => {
+    if (data?.data.status === "Har skattekort") {
+      setShouldRefreshStatus(false);
+    }
+  }, [data]);
 
   function handleClick() {
-    bestillSkattekort(request);
+    setShouldRefreshStatus(true);
+    bestillSkattekort(request).catch((error) => {
+      throw error;
+    });
   }
 
   return (

@@ -262,7 +262,10 @@ export async function bestillSkattekort(request: ForespoerselRequest) {
     return "Success";
   });
 }
-export function useFetchSkattekortStatus(request: ForespoerselRequest) {
+export function useFetchSkattekortStatus(
+  request: ForespoerselRequest,
+  shouldRefresh: boolean,
+) {
   const { data, error, isValidating } =
     useSWRImmutable<WrappedSkattekortResponseWithErrorDTO>(
       "/skattekort/status",
@@ -278,7 +281,7 @@ export function useFetchSkattekortStatus(request: ForespoerselRequest) {
           errorMessage: null,
         },
         revalidateOnMount: true,
-        refreshInterval: 5000,
+        refreshInterval: shouldRefresh ? 1000 : 0,
       },
     );
   const isLoading = (!error && !data) || isValidating;
