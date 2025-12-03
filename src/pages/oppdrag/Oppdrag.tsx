@@ -84,21 +84,19 @@ export default function Oppdrag() {
                 <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
               </Suspense>
             </div>
-            <div>
-              <BestilleSkattekortButton gjelderId={gjelderId} />
-              <Button
-                data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
-                size={"small"}
-                variant={"secondary-neutral"}
-                icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
-                iconPosition={"right"}
-                onClick={() =>
-                  downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
-                }
-              >
-                Til Excel
-              </Button>
-            </div>
+            <BestilleSkattekortButton gjelderId={gjelderId} />
+            <Button
+              data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
+              size={"small"}
+              variant={"secondary-neutral"}
+              icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
+              iconPosition={"right"}
+              onClick={() =>
+                downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
+              }
+            >
+              Til Excel
+            </Button>
           </div>
         </div>
       </div>
