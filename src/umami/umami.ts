@@ -23,6 +23,7 @@ export const OPPDRAG = {
   ENHETSHISTORIKK: "enhetshistorikk åpnet",
   OMPOSTERINGER: "omposteringer åpnet",
   STATUS_HISTORIKK: "statushistorikk åpnet",
+  BESTILL_SKATTEKORT: "bestill skattekort trykket",
 };
 
 export const LINJE = {
