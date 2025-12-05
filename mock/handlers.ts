@@ -117,22 +117,17 @@ export const handlers = [
 
   http.post("/sokos-skattekort/api/v1/skattekort/status", async () => {
     console.log("Henter skattekortstatus");
-    if (
-      skattekortBestilt &&
-      new Date().getTime() > skattekortBestilt?.getTime() + 10 * 1000
-    ) {
-      return HttpResponse.json(
-        { data: { status: "Har skattekort" }, errorMessage: "" },
-        { status: 200 },
-      );
-    } else if (skattekortBestilt) {
-      return HttpResponse.json(
-        { data: { status: "Skattekort bestilt" }, errorMessage: "" },
-        { status: 200 },
-      );
-    }
+    const status = !skattekortBestilt
+      ? "IKKE_FNR"
+      : new Date().getTime() < skattekortBestilt?.getTime() + 2 * 1000
+        ? "IKKE_BESTILT"
+        : new Date().getTime() < skattekortBestilt?.getTime() + 4 * 1000
+          ? "BESTILT"
+          : new Date().getTime() < skattekortBestilt?.getTime() + 6 * 1000
+            ? "VENTER_PAA_UTSENDING"
+            : /* Og hvis det er mer enn et minutt siden man trykket:  */ "SENDT_FORSYSTEM";
     return HttpResponse.json(
-      { data: { status: "Mangler skattekort" }, errorMessage: "" },
+      { data: { status }, errorMessage: "" },
       { status: 200 },
     );
   }),

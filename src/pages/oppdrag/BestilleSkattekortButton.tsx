@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, TextField } from "@navikt/ds-react";
+import { Button } from "@navikt/ds-react";
 import {
   bestillSkattekort,
   useFetchSkattekortStatus,
@@ -8,6 +8,7 @@ import { ForespoerselRequest } from "../../api/models/ForespoerselRequest";
 
 interface BestilleSkattekortButtonProps {
   gjelderId: string;
+  setSkattekortstatus: (status: string) => void;
 }
 
 export default function BestilleSkattekortButton(
@@ -22,10 +23,11 @@ export default function BestilleSkattekortButton(
   const [shouldRefreshStatus, setShouldRefreshStatus] = useState(false);
   const { data } = useFetchSkattekortStatus(request, shouldRefreshStatus);
   useEffect(() => {
-    if (data?.data.status === "Har skattekort") {
+    if (data?.data.status === "SENDT_FORSYSTEM") {
       setShouldRefreshStatus(false);
     }
-  }, [data]);
+    props.setSkattekortstatus(data?.data.status ?? "UKJENT");
+  }, [data, props]);
 
   function handleClick() {
     setShouldRefreshStatus(true);
@@ -43,11 +45,6 @@ export default function BestilleSkattekortButton(
       >
         Bestill skattekort
       </Button>
-      <TextField
-        label={"status"}
-        value={data?.data.status ?? data?.errorMessage ?? "omgwtf"}
-        readOnly
-      />
     </>
   );
 }

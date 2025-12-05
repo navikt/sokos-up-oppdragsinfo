@@ -7,6 +7,7 @@ import styles from "./OppdragEgenskapPanel.module.css";
 
 interface OppdragsEgenskapPanelProps {
   oppdrag: Oppdrag;
+  skattekortStatus?: string;
 }
 
 export default function OppdragEgenskapPanel(
@@ -41,6 +42,13 @@ export default function OppdragEgenskapPanel(
           label={"Fagområde"}
           text={props.oppdrag.navnFagomraade}
         />
+        {props.skattekortStatus && (
+          <LabelText
+            nowrap
+            label={"Skattekort status"}
+            text={props.skattekortStatus!}
+          />
+        )}
       </div>
     </div>
   );
