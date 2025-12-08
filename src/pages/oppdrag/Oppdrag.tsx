@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
@@ -10,6 +10,7 @@ import commonstyles from "../../styles/common-styles.module.css";
 import { OPPDRAG } from "../../umami/umami";
 import { downloadAsCsv } from "../../util/csvExport";
 import { ROOT } from "../../util/routenames";
+import BestilleSkattekortButton from "./BestilleSkattekortButton";
 import EnhetshistorikkModal from "./EnhetshistorikkModal";
 import OmposteringModal from "./OmposteringModal";
 import styles from "./Oppdrag.module.css";
@@ -22,6 +23,7 @@ export default function Oppdrag() {
   const { gjelderId } = useStore.getState();
   const { oppdrag } = useStore();
   const { data } = useFetchHentOppdragsLinjer(oppdrag?.oppdragsId);
+  const [skattekortstatus, setSkattekortstatus] = useState<string>("UKJENT");
 
   useEffect(() => {
     if (!gjelderId || oppdrag === undefined) {
@@ -37,7 +39,12 @@ export default function Oppdrag() {
         </Heading>
         <Breadcrumbs searchLink trefflistelink oppdrag />
         <div className={commonstyles["container__header-info"]}>
-          {gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
+          {gjelderId && oppdrag && (
+            <OppdragEgenskapPanel
+              oppdrag={oppdrag}
+              skattekortStatus={skattekortstatus}
+            />
+          )}
           <div className={styles["button-row"]}>
             <div className={styles["button-row--left"]}>
               <Suspense
@@ -83,18 +90,24 @@ export default function Oppdrag() {
                 <EnhetshistorikkModal oppdragsId={oppdrag!.oppdragsId} />
               </Suspense>
             </div>
-            <Button
-              data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
-              size={"small"}
-              variant={"secondary-neutral"}
-              icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
-              iconPosition={"right"}
-              onClick={() =>
-                downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
-              }
-            >
-              Til Excel
-            </Button>
+            <div className={styles["button-row--right"]}>
+              <BestilleSkattekortButton
+                gjelderId={gjelderId}
+                setSkattekortstatus={setSkattekortstatus}
+              />
+              <Button
+                data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
+                size={"small"}
+                variant={"secondary-neutral"}
+                icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
+                iconPosition={"right"}
+                onClick={() =>
+                  downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
+                }
+              >
+                Til Excel
+              </Button>
+            </div>
           </div>
         </div>
       </div>

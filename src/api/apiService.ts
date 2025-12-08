@@ -20,6 +20,7 @@ import { TekstList } from "../types/Tekst";
 import { ValutaList } from "../types/Valuta";
 import { WrappedResponseWithErrorDTO } from "../types/WrappedResponseWithErrorDTO";
 import { axiosFetcher, axiosPostFetcher } from "./apiConfig";
+import { ForespoerselRequest } from "./models/ForespoerselRequest";
 import { GjelderIdRequest } from "./models/GjelderIdRequest";
 import { OppdragsRequest } from "./models/OppdragsRequest";
 
@@ -27,6 +28,7 @@ const BASE_URI = {
   OPPDRAGSINFO_API: "/oppdrag-api/api/v1/oppdragsinfo",
   INTEGRATION_API: "/oppdrag-api/api/v1/integration",
   KODEVERK_API: "/oppdrag-api/api/v1/kodeverk",
+  SOKOS_SKATTEKORT_API: "/sokos-skattekort/api/v1",
 };
 
 function swrConfig<T>(fetcher: (uri: string) => Promise<T>) {
@@ -243,4 +245,43 @@ export function useFetchGrad(oppdragsId: string, linjeId: string) {
       axiosFetcher<GradList>(BASE_URI.OPPDRAGSINFO_API, url),
     ),
   );
+}
+
+export async function bestillSkattekort(request: ForespoerselRequest) {
+  return await axiosPostFetcher<ForespoerselRequest, { errorMessage?: string }>(
+    BASE_URI.SOKOS_SKATTEKORT_API,
+    "/skattekort/bestille",
+    request,
+  ).then((response) => {
+    if (response.errorMessage) {
+      return response.errorMessage;
+    }
+    return "Success";
+  });
+}
+export function useFetchSkattekortStatus(
+  request: ForespoerselRequest,
+  shouldRefresh: boolean,
+) {
+  const { data, error, isValidating } = useSWRImmutable<{
+    status: string;
+  }>("/skattekort/status", {
+    ...swrConfig<{ status: string }>((url) =>
+      axiosPostFetcher<ForespoerselRequest, { status: string }>(
+        BASE_URI.SOKOS_SKATTEKORT_API,
+        url,
+        request,
+      ),
+    ),
+    fallbackData: {
+      status: "Kunne ikke hente status",
+    },
+    revalidateOnMount: true,
+    refreshInterval: shouldRefresh ? 1000 : 0,
+    shouldRetryOnError: true,
+    errorRetryCount: 3,
+    errorRetryInterval: 3000,
+  });
+  const isLoading = (!error && !data) || isValidating;
+  return { data, error, isLoading };
 }

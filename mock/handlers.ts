@@ -108,4 +108,25 @@ export const handlers = [
   http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/valutaer", () => {
     return HttpResponse.json(valutaList, { status: 200 });
   }),
+
+  http.post("/sokos-skattekort/api/v1/skattekort/bestille", async () => {
+    console.log("Bestiller skattekort");
+    skattekortBestilt = new Date();
+    return HttpResponse.json({ data: "", errorMessage: "" }, { status: 201 });
+  }),
+
+  http.post("/sokos-skattekort/api/v1/skattekort/status", async () => {
+    console.log("Henter skattekortstatus");
+    const status = !skattekortBestilt
+      ? "IKKE_FNR"
+      : new Date().getTime() < skattekortBestilt?.getTime() + 2 * 1000
+        ? "IKKE_BESTILT"
+        : new Date().getTime() < skattekortBestilt?.getTime() + 4 * 1000
+          ? "BESTILT"
+          : new Date().getTime() < skattekortBestilt?.getTime() + 6 * 1000
+            ? "VENTER_PAA_UTSENDING"
+            : /* Og hvis det er mer enn et minutt siden man trykket:  */ "SENDT_FORSYSTEM";
+    return HttpResponse.json({ status }, { status: 200 });
+  }),
 ];
+let skattekortBestilt: Date | null = null;

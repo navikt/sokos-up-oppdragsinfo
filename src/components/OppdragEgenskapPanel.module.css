@@ -8,5 +8,6 @@
 .oppdrag-panel__column {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 0.75rem;
 }
