@@ -18,10 +18,7 @@ import { OvrigList } from "../types/Ovrig";
 import { SkyldnerList } from "../types/Skyldner";
 import { TekstList } from "../types/Tekst";
 import { ValutaList } from "../types/Valuta";
-import {
-  WrappedResponseWithErrorDTO,
-  WrappedSkattekortResponseWithErrorDTO,
-} from "../types/WrappedResponseWithErrorDTO";
+import { WrappedResponseWithErrorDTO } from "../types/WrappedResponseWithErrorDTO";
 import { axiosFetcher, axiosPostFetcher } from "./apiConfig";
 import { ForespoerselRequest } from "./models/ForespoerselRequest";
 import { GjelderIdRequest } from "./models/GjelderIdRequest";
@@ -266,27 +263,25 @@ export function useFetchSkattekortStatus(
   request: ForespoerselRequest,
   shouldRefresh: boolean,
 ) {
-  const { data, error, isValidating } =
-    useSWRImmutable<WrappedSkattekortResponseWithErrorDTO>(
-      "/skattekort/status",
-      {
-        ...swrConfig<WrappedSkattekortResponseWithErrorDTO>((url) =>
-          axiosPostFetcher<
-            ForespoerselRequest,
-            WrappedSkattekortResponseWithErrorDTO
-          >(BASE_URI.SOKOS_SKATTEKORT_API, url, request),
-        ),
-        fallbackData: {
-          data: { status: "Kunne ikke hente status" },
-          errorMessage: null,
-        },
-        revalidateOnMount: true,
-        refreshInterval: shouldRefresh ? 1000 : 0,
-        shouldRetryOnError: true,
-        errorRetryCount: 3,
-        errorRetryInterval: 3000,
-      },
-    );
+  const { data, error, isValidating } = useSWRImmutable<{
+    status: string;
+  }>("/skattekort/status", {
+    ...swrConfig<{ status: string }>((url) =>
+      axiosPostFetcher<ForespoerselRequest, { status: string }>(
+        BASE_URI.SOKOS_SKATTEKORT_API,
+        url,
+        request,
+      ),
+    ),
+    fallbackData: {
+      status: "Kunne ikke hente status",
+    },
+    revalidateOnMount: true,
+    refreshInterval: shouldRefresh ? 1000 : 0,
+    shouldRetryOnError: true,
+    errorRetryCount: 3,
+    errorRetryInterval: 3000,
+  });
   const isLoading = (!error && !data) || isValidating;
   return { data, error, isLoading };
 }

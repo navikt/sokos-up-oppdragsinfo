@@ -126,10 +126,7 @@ export const handlers = [
           : new Date().getTime() < skattekortBestilt?.getTime() + 6 * 1000
             ? "VENTER_PAA_UTSENDING"
             : /* Og hvis det er mer enn et minutt siden man trykket:  */ "SENDT_FORSYSTEM";
-    return HttpResponse.json(
-      { data: { status }, errorMessage: "" },
-      { status: 200 },
-    );
+    return HttpResponse.json({ status }, { status: 200 });
   }),
 ];
 let skattekortBestilt: Date | null = null;
