@@ -42,6 +42,8 @@ export default function BestilleSkattekortButton(
         size={"small"}
         variant={"secondary-neutral"}
         onClick={handleClick}
+        loading={shouldRefreshStatus}
+        disabled={data?.data.status === "SENDT_FORSYSTEM"}
       >
         Bestill skattekort
       </Button>
