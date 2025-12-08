@@ -277,11 +277,14 @@ export function useFetchSkattekortStatus(
           >(BASE_URI.SOKOS_SKATTEKORT_API, url, request),
         ),
         fallbackData: {
-          data: { status: "-" },
+          data: { status: "Kunne ikke hente status" },
           errorMessage: null,
         },
         revalidateOnMount: true,
         refreshInterval: shouldRefresh ? 1000 : 0,
+        shouldRetryOnError: true,
+        errorRetryCount: 3,
+        errorRetryInterval: 3000,
       },
     );
   const isLoading = (!error && !data) || isValidating;
