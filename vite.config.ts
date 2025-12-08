@@ -40,16 +40,6 @@ export default defineConfig(({ mode }) => {
             secure: /^.*-q1$/.test(mode),
           },
         }),
-        ...((mode === "backend" || /^.*-q1$/.test(mode)) && {
-          "/sokos-skattekort/api/v1": {
-            target: /^.*-q1$/.test(mode)
-              ? "https://sokos-skattekort.intern.dev.nav.no"
-              : "http://localhost:8081",
-            rewrite: (path: string) => path.replace(/^\/sokos-skattekort/, ""),
-            changeOrigin: true,
-            secure: /^.*-q1$/.test(mode),
-          },
-        }),
         ...(mode === "mock" && {
           // TODO: sjekke om man fjerne en eller slå disse sammen
           "^/mockServiceWorker\\.js$": {
