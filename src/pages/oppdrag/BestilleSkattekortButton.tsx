@@ -23,10 +23,10 @@ export default function BestilleSkattekortButton(
   const [shouldRefreshStatus, setShouldRefreshStatus] = useState(false);
   const { data } = useFetchSkattekortStatus(request, shouldRefreshStatus);
   useEffect(() => {
-    if (data?.data.status === "SENDT_FORSYSTEM") {
+    if (data?.data?.status === "SENDT_FORSYSTEM") {
       setShouldRefreshStatus(false);
     }
-    props.setSkattekortstatus(data?.data.status ?? "UKJENT");
+    props.setSkattekortstatus(data?.data?.status ?? "UKJENT");
   }, [data, props]);
 
   function handleClick() {
