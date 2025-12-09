@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
 import { useFetchHentOppdragsLinjer } from "../../api/apiService";
+import AlertWithCloseButton from "../../components/AlertWithCloseButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
 import { useStore } from "../../store/AppState";
@@ -30,6 +31,10 @@ export default function Oppdrag() {
       navigate(ROOT, { replace: true });
     }
   }, [gjelderId, oppdrag, navigate]);
+  const [alertMessage, setAlertMessage] = useState<{
+    message: string;
+    variant: "success" | "error" | "warning";
+  } | null>(null);
 
   return (
     <div className={commonstyles["container"]}>
@@ -94,6 +99,7 @@ export default function Oppdrag() {
               <BestilleSkattekortButton
                 gjelderId={gjelderId}
                 setSkattekortstatus={setSkattekortstatus}
+                setAlertMessage={setAlertMessage}
               />
               <Button
                 data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
@@ -111,7 +117,15 @@ export default function Oppdrag() {
           </div>
         </div>
       </div>
-
+      {!!alertMessage && (
+        <AlertWithCloseButton
+          show={!!alertMessage}
+          setShow={() => setAlertMessage(null)}
+          variant={alertMessage.variant}
+        >
+          {alertMessage.message}
+        </AlertWithCloseButton>
+      )}
       {data && (
         <OppdragLinjeTable
           oppdragsId={oppdrag!.oppdragsId}
