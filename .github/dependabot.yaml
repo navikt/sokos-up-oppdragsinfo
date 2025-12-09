@@ -9,10 +9,7 @@ updates:
     directory: "/"
     registries: "*"
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "08:00"
-      timezone: "Europe/Oslo"
+      interval: "daily"
     cooldown:
       default-days: 7
     groups:
