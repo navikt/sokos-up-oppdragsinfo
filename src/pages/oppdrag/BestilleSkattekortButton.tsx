@@ -9,6 +9,12 @@ import { ForespoerselRequest } from "../../api/models/ForespoerselRequest";
 interface BestilleSkattekortButtonProps {
   gjelderId: string;
   setSkattekortstatus: (status: string) => void;
+  setAlertMessage: (
+    message: {
+      message: string;
+      variant: "success" | "error" | "warning";
+    } | null,
+  ) => void;
 }
 
 export default function BestilleSkattekortButton(
@@ -35,7 +41,7 @@ export default function BestilleSkattekortButton(
         // Derfor er det trygt å sette state her uten at vi risikerer en uendelig loop
         // eslint-disable-next-line react-hooks/set-state-in-effect
         setShouldRefreshStatus(true);
-      } else if (data.status === "SENDT_FORSYSTEM") {
+      } else if (["UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(data.status)) {
         setShouldRefreshStatus(false);
       }
     }
@@ -43,9 +49,20 @@ export default function BestilleSkattekortButton(
 
   function handleClick() {
     setShouldRefreshStatus(true);
-    bestillSkattekort(request).catch((error) => {
-      throw error;
-    });
+    bestillSkattekort(request)
+      .then((response) => {
+        if (response === "Success") {
+          props.setAlertMessage({
+            message:
+              "Skattekort bestilles fra Skatteetaten. Det tar normalt et par minutter." +
+              "Du kan lukke dette vinduet eller fortsette å arbeide i mellomtiden.",
+            variant: "success",
+          });
+        }
+      })
+      .catch((error) => {
+        props.setAlertMessage({ message: error.message, variant: "error" });
+      });
   }
 
   return (
@@ -55,7 +72,11 @@ export default function BestilleSkattekortButton(
         variant={"secondary-neutral"}
         onClick={handleClick}
         loading={shouldRefreshStatus}
-        disabled={data?.status === "SENDT_FORSYSTEM"}
+        disabled={
+          !data ||
+          ["UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(data?.status) ||
+          shouldRefreshStatus
+        }
       >
         Bestill skattekort
       </Button>
