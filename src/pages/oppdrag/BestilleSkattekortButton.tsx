@@ -22,11 +22,23 @@ export default function BestilleSkattekortButton(
 
   const [shouldRefreshStatus, setShouldRefreshStatus] = useState(false);
   const { data } = useFetchSkattekortStatus(request, shouldRefreshStatus);
+
   useEffect(() => {
-    if (data?.status === "SENDT_FORSYSTEM") {
-      setShouldRefreshStatus(false);
+    if (data && data.status) {
+      props.setSkattekortstatus(data.status);
+      if (
+        ["IKKE_BESTILT", "BESTILT", "VENTER_PAA_UTSENDING"].includes(
+          data.status,
+        )
+      ) {
+        // Det er først når data kommer tilbake fra kallet at vi evt rerendrer basert på shouldRefreshStatus
+        // Derfor er det trygt å sette state her uten at vi risikerer en uendelig loop
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setShouldRefreshStatus(true);
+      } else if (data.status === "SENDT_FORSYSTEM") {
+        setShouldRefreshStatus(false);
+      }
     }
-    props.setSkattekortstatus(data?.status ?? "UKJENT");
   }, [data, props]);
 
   function handleClick() {

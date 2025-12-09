@@ -119,11 +119,11 @@ export const handlers = [
     console.log("Henter skattekortstatus");
     const status = !skattekortBestilt
       ? "IKKE_FNR"
-      : new Date().getTime() < skattekortBestilt?.getTime() + 2 * 1000
+      : new Date().getTime() < skattekortBestilt?.getTime() + 5 * 1000
         ? "IKKE_BESTILT"
-        : new Date().getTime() < skattekortBestilt?.getTime() + 4 * 1000
+        : new Date().getTime() < skattekortBestilt?.getTime() + 10 * 1000
           ? "BESTILT"
-          : new Date().getTime() < skattekortBestilt?.getTime() + 6 * 1000
+          : new Date().getTime() < skattekortBestilt?.getTime() + 15 * 1000
             ? "VENTER_PAA_UTSENDING"
             : /* Og hvis det er mer enn et minutt siden man trykket:  */ "SENDT_FORSYSTEM";
     return HttpResponse.json({ status }, { status: 200 });
