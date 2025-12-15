@@ -64,7 +64,7 @@
     "vite": "^7.2.7",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-environment": "^1.1.3",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   },
   "msw": {
     "workerDirectory": [
