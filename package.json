@@ -7,6 +7,7 @@
     "dev": "vite --mode mock",
     "dev:backend": "vite --mode backend",
     "build": "tsc && vite build",
+    "playwright": "playwright test",
     "test": "vitest",
     "lint": "eslint",
     "prepare": "husky",
