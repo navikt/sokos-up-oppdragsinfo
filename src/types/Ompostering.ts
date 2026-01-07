@@ -1,7 +1,7 @@
-import { z } from "zod";
-import {
-  OmposteringListSchema,
-  OmposteringSchema,
+import type { z } from "zod";
+import type {
+	OmposteringListSchema,
+	OmposteringSchema,
 } from "./schema/OmposteringSchema";
 
 export type Ompostering = z.infer<typeof OmposteringSchema>;

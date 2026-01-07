@@ -1,4 +1,4 @@
-import { z } from "zod";
-import { ErrorMessageSchema } from "./schema/ErrorMessageSchema";
+import type { z } from "zod";
+import type { ErrorMessageSchema } from "./schema/ErrorMessageSchema";
 
 export type ErrorMessage = z.infer<typeof ErrorMessageSchema>;

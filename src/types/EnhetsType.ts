@@ -1,7 +1,7 @@
-import { z } from "zod";
-import {
-  OppdragsEnhetSchema,
-  OppdragsEnhetTypeSchema,
+import type { z } from "zod";
+import type {
+	OppdragsEnhetSchema,
+	OppdragsEnhetTypeSchema,
 } from "./schema/OppdragsEnhet";
 
 export type EnhetsType = z.infer<typeof OppdragsEnhetTypeSchema>;

@@ -1,43 +1,43 @@
 .sok__form-container {
-  position: relative;
+	position: relative;
 }
 
 .sok__help {
-  position: absolute;
-  right: 0;
-  top: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .sok__form {
-  padding-top: 2rem;
+	padding-top: 2rem;
 }
 
 .sok__input-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 .sok__gjelder {
-  max-width: 160px;
-  width: 100%;
+	max-width: 160px;
+	width: 100%;
 }
 
 .sok__faggruppe {
-  width: 100%;
-  max-width: 420px;
+	width: 100%;
+	max-width: 420px;
 }
 
 .sok__buttons {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: end;
-  gap: 2rem;
-  margin-top: 1.5rem;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: end;
+	gap: 2rem;
+	margin-top: 1.5rem;
 }
 
 @media (width <= 768px) {
-  .sok__faggruppe {
-    max-width: 320px;
-  }
+	.sok__faggruppe {
+		max-width: 320px;
+	}
 }

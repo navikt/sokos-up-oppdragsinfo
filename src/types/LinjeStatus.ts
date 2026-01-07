@@ -1,7 +1,7 @@
-import { z } from "zod";
-import {
-  LinjeStatusListSchema,
-  LinjeStatusSchema,
+import type { z } from "zod";
+import type {
+	LinjeStatusListSchema,
+	LinjeStatusSchema,
 } from "./schema/LinjeStatusSchema";
 
 export type LinjeStatus = z.infer<typeof LinjeStatusSchema>;

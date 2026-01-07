@@ -1,5 +1,8 @@
-import { z } from "zod";
-import { KravhaverListSchema, KravhaverSchema } from "./schema/KravhaverSchema";
+import type { z } from "zod";
+import type {
+	KravhaverListSchema,
+	KravhaverSchema,
+} from "./schema/KravhaverSchema";
 
 export type Kravhaver = z.infer<typeof KravhaverSchema>;
 

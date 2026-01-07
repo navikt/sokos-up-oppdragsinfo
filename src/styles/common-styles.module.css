@@ -1,72 +1,74 @@
 :root {
-  --table-min-width: 1280px;
-  --page-max-width: 1920px;
+	--table-min-width: 1280px;
+	--page-max-width: 1920px;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  margin: 0.75rem auto;
-  gap: 1rem;
-  max-width: var(--page-max-width);
+	display: flex;
+	flex-direction: column;
+	margin: 0.75rem auto;
+	gap: 1rem;
+	max-width: var(--page-max-width);
 }
 
 .container__header {
-  display: flex;
-  flex-direction: column;
-  min-width: 500px;
-  max-width: var(--table-min-width);
-  width: 100%;
-  gap: 1.25rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-width: 500px;
+	max-width: var(--table-min-width);
+	width: 100%;
+	gap: 1.25rem;
 }
 
 .container__header-info {
-  border-radius: 8px;
-  background-color: var(--a-surface-default);
-  padding: 1.5rem;
-  width: 100%;
+	border-radius: 8px;
+	background-color: var(--a-surface-default);
+	padding: 1.5rem;
+	width: 100%;
 }
 
 .table-container {
-  display: flex;
-  min-width: var(--table-min-width);
-  max-width: var(--page-max-width);
-  flex-direction: column;
-  margin-top: 1rem;
-  width: 100%;
+	display: flex;
+	min-width: var(--table-min-width);
+	max-width: var(--page-max-width);
+	flex-direction: column;
+	margin-top: 1rem;
+	width: 100%;
 }
 
 .table {
-  background-color: var(--a-surface-default);
-  border-radius: 0.5rem;
-  width: 100%;
+	background-color: var(--a-surface-default);
+	border-radius: 0.5rem;
+	width: 100%;
 }
 
 .table__pagination {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 1rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: 1rem;
 }
 
 .link {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .link:hover {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .flex--row-gap-sm {
-  display: flex;
-  flex-direction: row;
-  gap: 0.25rem;
+	display: flex;
+	flex-direction: row;
+	gap: 0.25rem;
 }
 
 .text--bold {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .text--nowrap {
-  white-space: nowrap;
+	white-space: nowrap;
 }
