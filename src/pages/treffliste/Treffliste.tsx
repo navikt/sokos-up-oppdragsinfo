@@ -8,7 +8,6 @@ import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import { isEmpty } from "../../util/commonUtil";
 import { ROOT } from "../../util/routenames";
-import styles from "./Treffliste.module.css";
 import TrefflisteTable from "./TrefflisteTable";
 
 export default function Treffliste() {
@@ -29,18 +28,18 @@ export default function Treffliste() {
 	}, [navigate, gjelderId, gjelderNavn, oppdragsListe, setGjelderNavn]);
 
 	return (
-		<div className={commonstyles.container}>
-			<div className={commonstyles.container__header}>
+		<div className={commonstyles.page}>
+			<div className={commonstyles.page__top}>
 				<Heading level="1" size="large" align="center">
 					Oppdragsinfo: Treffliste
 				</Heading>
 				<Breadcrumbs searchLink treffliste />
 
-				<div className={styles.header__info}>
+				<div className={commonstyles["page__top-sokekriterier"]}>
 					<Heading size="small" level="2">
 						Søkekriterier benyttet:
 					</Heading>
-					<div className={styles.header__info__content}>
+					<div className={commonstyles["page__top-sokekriterier__content"]}>
 						<LabelText label={"Gjelder"} text={gjelderId ?? ""} />
 						<LabelText label={"Navn"} text={gjelderNavn ?? ""} />
 						<LabelText

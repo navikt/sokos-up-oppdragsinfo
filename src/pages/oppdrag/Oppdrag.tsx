@@ -37,13 +37,13 @@ export default function Oppdrag() {
 	} | null>(null);
 
 	return (
-		<div className={commonstyles.container}>
-			<div className={commonstyles.container__header}>
+		<div className={commonstyles.page}>
+			<div className={commonstyles.page__top}>
 				<Heading level="1" size="large" align="center">
 					Oppdragsinfo: Oppdrag
 				</Heading>
 				<Breadcrumbs searchLink trefflistelink oppdrag />
-				<div className={commonstyles["container__header-info"]}>
+				<div className={commonstyles["page__top-sokekriterier"]}>
 					{gjelderId && oppdrag && (
 						<OppdragEgenskapPanel
 							oppdrag={oppdrag}

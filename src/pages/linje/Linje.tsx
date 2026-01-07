@@ -33,13 +33,13 @@ export default function Linje() {
 	}, [gjelderId, oppdrag, navigate]);
 
 	return (
-		<div className={commonstyles.container}>
-			<div className={commonstyles.container__header}>
+		<div className={commonstyles.page}>
+			<div className={commonstyles.page__top}>
 				<Heading level="1" size="large" align="center">
 					Oppdragsinfo: Linje
 				</Heading>
 				<Breadcrumbs searchLink trefflistelink oppdraglink linje />
-				<div className={commonstyles["container__header-info"]}>
+				<div className={commonstyles["page__top-sokekriterier"]}>
 					{gjelderId && oppdrag && <OppdragEgenskapPanel oppdrag={oppdrag} />}
 				</div>
 			</div>
