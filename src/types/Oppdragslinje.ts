@@ -1,7 +1,7 @@
-import { z } from "zod";
-import {
-  OppdragsLinjeListSchema,
-  OppdragsLinjeSchema,
+import type { z } from "zod";
+import type {
+	OppdragsLinjeListSchema,
+	OppdragsLinjeSchema,
 } from "./schema/OppdragsLinjeSchema";
 
 export type OppdragsLinje = z.infer<typeof OppdragsLinjeSchema>;

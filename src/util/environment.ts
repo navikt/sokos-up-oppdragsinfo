@@ -4,13 +4,13 @@ const isDevelopment = window.location.href.includes("intern.dev.nav.no");
 type Environment = "production" | "development" | "local";
 
 export function getEnvironment(): Environment {
-  if (isProduction) {
-    return "production";
-  }
+	if (isProduction) {
+		return "production";
+	}
 
-  if (isDevelopment) {
-    return "development";
-  }
+	if (isDevelopment) {
+		return "development";
+	}
 
-  return "local";
+	return "local";
 }

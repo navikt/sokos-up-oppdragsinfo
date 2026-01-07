@@ -1,16 +1,16 @@
 .sok {
-  max-width: 1024px;
-  width: 100%;
-  margin: 0.75rem auto;
+	max-width: 1024px;
+	width: 100%;
+	margin: 0.75rem auto;
 }
 
 .sok__box {
-  padding: 1.5rem;
-  position: relative;
-  border-radius: 0.5rem;
-  background-color: var(--a-surface-alt-1-subtle);
+	padding: 1.5rem;
+	position: relative;
+	border-radius: 0.5rem;
+	background-color: var(--a-surface-alt-1-subtle);
 }
 
 .sok__error {
-  padding-top: 1.25rem;
+	padding-top: 1.25rem;
 }

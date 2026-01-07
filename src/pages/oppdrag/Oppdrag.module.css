@@ -1,19 +1,19 @@
 .button-row {
-  display: flex;
-  flex-direction: row;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	gap: 0.75rem;
+	margin-top: 1rem;
+	justify-content: space-between;
 }
 
 .button-row--left {
-  display: flex;
-  justify-content: flex-start;
-  gap: 1rem;
+	display: flex;
+	justify-content: flex-start;
+	gap: 1rem;
 }
 
 .button-row--right {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
 }

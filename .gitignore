@@ -50,9 +50,6 @@ typings/
 # Optional npm cache directory
 .npm
 
-# Optional eslint cache
-.eslintcache
-
 # Microbundle cache
 .rpt2_cache/
 .rts2_cache_cjs/
@@ -81,6 +78,8 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 dist
+build
+
 
 # Gatsby files
 .cache/
@@ -90,6 +89,9 @@ dist
 
 # vuepress build output
 .vuepress/dist
+
+# MSW generated files
+public/mockServiceWorker.js
 
 # Serverless directories
 .serverless/
@@ -105,11 +107,7 @@ dist
 
 # IntelliJ
 .idea
-
-# Playwright
-playwright-report/
-test-results/
-
-# Other stuff
-**/build/
-.tool-versions
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

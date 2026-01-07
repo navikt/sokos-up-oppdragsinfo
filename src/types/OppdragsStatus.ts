@@ -1,7 +1,7 @@
-import { z } from "zod";
-import {
-  OppdragsStatusListSchema,
-  OppdragsStatusSchema,
+import type { z } from "zod";
+import type {
+	OppdragsStatusListSchema,
+	OppdragsStatusSchema,
 } from "./schema/OppdragsStatusSchema";
 
 export type OppdragsStatus = z.infer<typeof OppdragsStatusSchema>;

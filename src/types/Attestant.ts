@@ -1,5 +1,8 @@
-import { z } from "zod";
-import { AttestantListSchema, AttestantSchema } from "./schema/AttestantSchema";
+import type { z } from "zod";
+import type {
+	AttestantListSchema,
+	AttestantSchema,
+} from "./schema/AttestantSchema";
 
 export type Attestant = z.infer<typeof AttestantSchema>;
 

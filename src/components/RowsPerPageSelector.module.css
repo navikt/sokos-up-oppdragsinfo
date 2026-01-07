@@ -1,14 +1,14 @@
 .rows-per-page-selector {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  min-width: var(--table-min-width);
-  align-items: center;
-  gap: 2rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	min-width: var(--table-min-width);
+	align-items: center;
+	gap: 2rem;
 }
 
 .dropdown-section {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
 }

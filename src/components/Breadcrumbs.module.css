@@ -1,28 +1,28 @@
 .breadcrumbs {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 4rem;
-  width: 100%;
-  border-radius: 0.5rem;
-  background-color: var(--a-surface-alt-1-subtle);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 4rem;
+	width: 100%;
+	border-radius: 0.5rem;
+	background-color: var(--a-surface-alt-1-subtle);
 }
 
 .breadcrumbs a {
-  color: var(--a-text-action);
+	color: var(--a-text-action);
 }
 
 .breadcrumbs__contents {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.3rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.3rem;
 }
 
 .breadcrumbs__left {
-  padding-left: 1.25rem;
+	padding-left: 1.25rem;
 }
 
 .breadcrumbs__right {
-  padding-right: 1.25rem;
+	padding-right: 1.25rem;
 }

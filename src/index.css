@@ -1,29 +1,28 @@
 @import url("@navikt/ds-css");
-@import url("./design-system-overrides.css");
+@import url("./design-system-override.css");
 
 html,
 body {
-  height: 100%;
+	height: 100%;
 }
 
 body {
-  background-color: var(--a-bg-subtle);
+	background-color: var(--a-gray-100);
 }
 
-.page-wrapper {
-  height: auto;
-  min-height: 100%;
-  margin: 5px;
+.page-container {
+	height: auto;
+	min-height: 100%;
+	margin: 5px;
 }
 
-.page-layout {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 3rem;
+.page-container__layout {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 main {
-  width: 100%;
+	width: 100%;
 }

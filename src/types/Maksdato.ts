@@ -1,5 +1,8 @@
-import { z } from "zod";
-import { MaksdatoListSchema, MaksdatoSchema } from "./schema/MaksdatoSchema";
+import type { z } from "zod";
+import type {
+	MaksdatoListSchema,
+	MaksdatoSchema,
+} from "./schema/MaksdatoSchema";
 
 export type Maksdato = z.infer<typeof MaksdatoSchema>;
 
