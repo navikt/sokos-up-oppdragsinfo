@@ -81,9 +81,7 @@ export function useFetchIsSkattepliktig(oppdragsId?: string) {
 	return useSWRImmutable<boolean>(
 		oppdragsId ? `/${oppdragsId}/skattepliktig` : null,
 		swrConfig<boolean>((url) =>
-			axiosFetcher<string>(BASE_URI.OPPDRAGSINFO_API, url).then(
-				(data) => data === "true",
-			),
+			axiosFetcher<boolean>(BASE_URI.OPPDRAGSINFO_API, url),
 		),
 	);
 }

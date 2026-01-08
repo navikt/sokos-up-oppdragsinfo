@@ -63,7 +63,7 @@ export const handlers = [
 	}),
 
 	http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/skattepliktig", () => {
-		return HttpResponse.json("true", { status: 200 });
+		return HttpResponse.json(true, { status: 200 });
 	}),
 
 	http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestanter", () => {
