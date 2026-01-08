@@ -111,3 +111,6 @@ public/mockServiceWorker.js
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Asdf version manager files
+.tool-versions

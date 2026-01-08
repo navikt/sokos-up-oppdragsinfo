@@ -2,7 +2,10 @@ import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
 import { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { useFetchHentOppdragsLinjer } from "../../api/apiService";
+import {
+	useFetchHentOppdragsLinjer,
+	useFetchIsSkattepliktig,
+} from "../../api/apiService";
 import AlertWithCloseButton from "../../components/AlertWithCloseButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
@@ -24,6 +27,9 @@ export default function Oppdrag() {
 	const { gjelderId } = useStore.getState();
 	const { oppdrag } = useStore();
 	const { data } = useFetchHentOppdragsLinjer(oppdrag?.oppdragsId);
+	const { data: isOppdragSkattepliktig } = useFetchIsSkattepliktig(
+		oppdrag?.oppdragsId,
+	);
 	const [skattekortstatus, setSkattekortstatus] = useState<string>("UKJENT");
 
 	useEffect(() => {
@@ -48,6 +54,7 @@ export default function Oppdrag() {
 						<OppdragEgenskapPanel
 							oppdrag={oppdrag}
 							skattekortStatus={skattekortstatus}
+							isSkattepliktig={isOppdragSkattepliktig}
 						/>
 					)}
 					<div className={styles["button-row"]}>
@@ -96,11 +103,13 @@ export default function Oppdrag() {
 							</Suspense>
 						</div>
 						<div className={styles["button-row--right"]}>
-							<BestilleSkattekortButton
-								gjelderId={gjelderId}
-								setSkattekortstatus={setSkattekortstatus}
-								setAlertMessage={setAlertMessage}
-							/>
+							{isOppdragSkattepliktig && (
+								<BestilleSkattekortButton
+									gjelderId={gjelderId}
+									setSkattekortstatus={setSkattekortstatus}
+									setAlertMessage={setAlertMessage}
+								/>
+							)}
 							<Button
 								data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
 								size={"small"}

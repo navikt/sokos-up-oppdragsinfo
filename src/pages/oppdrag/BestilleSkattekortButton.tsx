@@ -72,7 +72,9 @@ export default function BestilleSkattekortButton(
 			loading={shouldRefreshStatus}
 			disabled={
 				!data ||
-				["UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(data?.status) ||
+				["API_ERROR", "UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(
+					data?.status,
+				) ||
 				shouldRefreshStatus
 			}
 		>

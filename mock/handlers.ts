@@ -62,6 +62,10 @@ export const handlers = [
 		return HttpResponse.json(oppdragsStatusList, { status: 200 });
 	}),
 
+	http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/skattepliktig", () => {
+		return HttpResponse.json("true", { status: 200 });
+	}),
+
 	http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestanter", () => {
 		return HttpResponse.json(attestant, { status: 200 });
 	}),

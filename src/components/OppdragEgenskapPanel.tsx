@@ -8,6 +8,7 @@ import styles from "./OppdragEgenskapPanel.module.css";
 interface OppdragsEgenskapPanelProps {
 	oppdrag: Oppdrag;
 	skattekortStatus?: string;
+	isSkattepliktig?: boolean;
 }
 
 export default function OppdragEgenskapPanel(
@@ -40,14 +41,33 @@ export default function OppdragEgenskapPanel(
 					label={"Fagområde"}
 					text={props.oppdrag.navnFagomraade}
 				/>
-				{props.skattekortStatus && (
+				{props.skattekortStatus && props.isSkattepliktig && (
 					<LabelText
 						nowrap
 						label={"Skattekort status"}
-						text={props.skattekortStatus!}
+						text={statusMessage(props.skattekortStatus)}
 					/>
 				)}
 			</div>
 		</div>
 	);
+}
+
+function statusMessage(status?: string) {
+	switch (status) {
+		case "IKKE_FNR":
+			return "Kan bestilles";
+		case "UGYLDIG_FNR":
+			return "Ugyldig fødselsnummer";
+		case "IKKE_BESTILT":
+			return "Venter på bestilling";
+		case "BESTILT":
+			return "Bestilt";
+		case "VENTER_PAA_UTSENDING":
+			return "Venter på utsending";
+		case "SENDT_FORSYSTEM":
+			return "Skattekort OK";
+		default:
+			return "Feil ved henting av skattekortstatus";
+	}
 }
