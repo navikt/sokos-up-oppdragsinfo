@@ -1,6 +1,6 @@
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
-import { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {
 	useFetchHentOppdragsLinjer,
@@ -27,9 +27,8 @@ export default function Oppdrag() {
 	const { gjelderId } = useStore.getState();
 	const { oppdrag } = useStore();
 	const { data } = useFetchHentOppdragsLinjer(oppdrag?.oppdragsId);
-	const { data: isOppdragSkattepliktig } = useFetchIsSkattepliktig(
-		oppdrag?.oppdragsId,
-	);
+	const { data: isOppdragSkattepliktig, error: isOppdragSkattepliktigError } =
+		useFetchIsSkattepliktig(oppdrag?.oppdragsId);
 	const [skattekortstatus, setSkattekortstatus] = useState<string>("UKJENT");
 
 	useEffect(() => {
@@ -103,9 +102,10 @@ export default function Oppdrag() {
 							</Suspense>
 						</div>
 						<div className={styles["button-row--right"]}>
-							{isOppdragSkattepliktig && (
+							{(isOppdragSkattepliktig || isOppdragSkattepliktigError) && (
 								<BestilleSkattekortButton
 									gjelderId={gjelderId}
+									error={isOppdragSkattepliktigError}
 									setSkattekortstatus={setSkattekortstatus}
 									setAlertMessage={setAlertMessage}
 								/>
