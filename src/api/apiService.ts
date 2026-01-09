@@ -77,6 +77,24 @@ export async function hentNavn(request: GjelderIdRequest) {
 	);
 }
 
+export function useFetchIsSkattepliktig(oppdragsId?: string) {
+	const { data, error, isValidating } = useSWRImmutable<boolean>(
+		oppdragsId ? `/${oppdragsId}/skattepliktig` : null,
+		{
+			...swrConfig<boolean>((url) =>
+				axiosFetcher<boolean>(BASE_URI.OPPDRAGSINFO_API, url),
+			),
+			fallbackData: false,
+			revalidateOnMount: true,
+			shouldRetryOnError: true,
+			errorRetryCount: 3,
+			errorRetryInterval: 3000,
+		},
+	);
+	const isLoading = (!error && !data) || isValidating;
+	return { data, error, isLoading };
+}
+
 export function useFetchHentOppdragsLinjer(oppdragsId?: string) {
 	return useSWRImmutable<OppdragsLinjeList>(
 		oppdragsId ? `/${oppdragsId}/oppdragslinjer` : null,
@@ -274,7 +292,7 @@ export function useFetchSkattekortStatus(
 			),
 		),
 		fallbackData: {
-			status: "Kunne ikke hente status",
+			status: "API_ERROR",
 		},
 		revalidateOnMount: true,
 		refreshInterval: shouldRefresh ? 1000 : 0,

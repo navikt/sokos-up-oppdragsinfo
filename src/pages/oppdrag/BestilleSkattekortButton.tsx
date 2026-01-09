@@ -1,5 +1,6 @@
-import { Button } from "@navikt/ds-react";
-import { useEffect, useState } from "react";
+import { ExclamationmarkTriangleFillIcon } from "@navikt/aksel-icons";
+import { Button, Tooltip } from "@navikt/ds-react";
+import React, { useEffect, useState } from "react";
 import {
 	bestillSkattekort,
 	useFetchSkattekortStatus,
@@ -8,6 +9,7 @@ import type { ForespoerselRequest } from "../../api/models/ForespoerselRequest";
 
 interface BestilleSkattekortButtonProps {
 	gjelderId: string;
+	error: Error | null;
 	setSkattekortstatus: (status: string) => void;
 	setAlertMessage: (
 		message: {
@@ -65,18 +67,26 @@ export default function BestilleSkattekortButton(
 	}
 
 	return (
-		<Button
-			size={"small"}
-			variant={"secondary-neutral"}
-			onClick={handleClick}
-			loading={shouldRefreshStatus}
-			disabled={
-				!data ||
-				["UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(data?.status) ||
-				shouldRefreshStatus
-			}
-		>
-			Bestill skattekort
-		</Button>
+		<Tooltip content={props.error ? props.error.message : "Bestill skattekort"}>
+			<span>
+				<Button
+					size={"small"}
+					variant={"secondary-neutral"}
+					onClick={handleClick}
+					loading={shouldRefreshStatus}
+					disabled={
+						!data ||
+						!!props.error ||
+						["API_ERROR", "UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(
+							data?.status,
+						) ||
+						shouldRefreshStatus
+					}
+					icon={!!props.error && <ExclamationmarkTriangleFillIcon />}
+				>
+					Bestill skattekort
+				</Button>
+			</span>
+		</Tooltip>
 	);
 }

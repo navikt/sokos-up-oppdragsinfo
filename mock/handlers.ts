@@ -62,6 +62,10 @@ export const handlers = [
 		return HttpResponse.json(oppdragsStatusList, { status: 200 });
 	}),
 
+	http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/skattepliktig", () => {
+		return HttpResponse.json(true, { status: 200 });
+	}),
+
 	http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/:linjeid/attestanter", () => {
 		return HttpResponse.json(attestant, { status: 200 });
 	}),
@@ -111,15 +115,11 @@ export const handlers = [
 	}),
 
 	http.post("/sokos-skattekort/api/v1/skattekort/bestille", async () => {
-		// biome-ignore lint/suspicious/noConsole: debug code
-		console.log("Bestiller skattekort");
 		skattekortBestilt = new Date();
 		return HttpResponse.json({ data: "", errorMessage: "" }, { status: 201 });
 	}),
 
 	http.post("/sokos-skattekort/api/v1/skattekort/status", async () => {
-		// biome-ignore lint/suspicious/noConsole: debug code
-		console.log("Henter skattekortstatus");
 		const status = !skattekortBestilt
 			? "IKKE_FNR"
 			: Date.now() < skattekortBestilt?.getTime() + 5 * 1000
