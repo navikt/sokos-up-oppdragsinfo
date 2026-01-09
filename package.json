@@ -8,8 +8,10 @@
 		"dev:backend": "vite --mode backend",
 		"build": "tsc && vite build",
 		"playwright": "playwright test",
-		"lint": "biome check --no-errors-on-unmatched",
-		"stylelint": "stylelint '**/*.css'",
+		"biome:check": "biome check --files-ignore-unknown=true",
+		"biome:fix": "biome check --write --no-errors-on-unmatched",
+		"stylelint:check": "stylelint '**/*.css'",
+		"stylelint:fix": "stylelint '**/*.css' --fix",
 		"prepare": "husky",
 		"knip": "knip"
 	},
@@ -92,7 +94,7 @@
 		]
 	},
 	"lint-staged": {
-		"*.{ts,tsx,js,jsx,json}": "biome check --write --no-errors-on-unmatched",
+		"*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": "biome check --write --no-errors-on-unmatched",
 		"*.css": "stylelint --fix"
 	},
 	"engines": {
