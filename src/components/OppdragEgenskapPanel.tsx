@@ -55,7 +55,7 @@ export default function OppdragEgenskapPanel(
 
 function statusMessage(status?: string) {
 	switch (status) {
-		case "IKKE_FNR":
+		case "IKKE_FORESPURT":
 			return "Kan bestilles";
 		case "UGYLDIG_FNR":
 			return "Ugyldig fødselsnummer";
