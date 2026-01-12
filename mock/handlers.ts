@@ -121,14 +121,14 @@ export const handlers = [
 
 	http.post("/sokos-skattekort/api/v1/skattekort/status", async () => {
 		const status = !skattekortBestilt
-			? "IKKE_FNR"
+			? "IKKE_FORESPURT"
 			: Date.now() < skattekortBestilt?.getTime() + 5 * 1000
 				? "IKKE_BESTILT"
 				: Date.now() < skattekortBestilt?.getTime() + 10 * 1000
 					? "BESTILT"
 					: Date.now() < skattekortBestilt?.getTime() + 15 * 1000
 						? "VENTER_PAA_UTSENDING"
-						: /* Og hvis det er mer enn et minutt siden man trykket:  */ "SENDT_FORSYSTEM";
+						: /* Og hvis det er mer enn 15s siden man trykket:  */ "SENDT_FORSYSTEM";
 		return HttpResponse.json({ status }, { status: 200 });
 	}),
 ];
