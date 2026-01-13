@@ -17,13 +17,13 @@
 	"devDependencies": {
 		"@types/cors": "^2.8.19",
 		"@types/express": "^5.0.6",
-		"@types/node": "^24.10.1",
+		"@types/node": "^25.0.7",
 		"nodemon": "^3.1.11",
 		"ts-node": "^10.9.2",
 		"typescript": "^5.9.3"
 	},
 	"engines": {
 		"pnpm": ">=10.16.0",
-		"node": ">=22.21.0"
+		"node": ">=24.12.0"
 	}
 }
