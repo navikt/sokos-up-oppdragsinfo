@@ -18,8 +18,8 @@ importers:
         specifier: ^5.2.2
         version: 5.2.2(react-hook-form@7.71.1(react@19.2.4))
       '@navikt/aksel-icons':
-        specifier: 7.39.0
-        version: 7.39.0
+        specifier: 8.2.0
+        version: 8.2.0
       '@navikt/ds-css':
         specifier: 7.39.0
         version: 7.39.0
@@ -625,6 +625,9 @@ packages:
 
   '@navikt/aksel-icons@7.39.0':
     resolution: {integrity: sha512-M36ZJ1HRYxyonPJmxOBkK4gjEjT1AVNHRLEk3nNioJZhIj2EDGl7Uw/ALjyghfkxzsof5Q/2m7XXIu3DvInxYQ==, tarball: https://npm.pkg.github.com/download/@navikt/aksel-icons/7.39.0/a085e7e78b32ffa64bd7319ab6ac697a59941067}
+
+  '@navikt/aksel-icons@8.2.0':
+    resolution: {integrity: sha512-oDNNNyafke41foUxHC7cDODXz3Lrx9GberqCU0ia5MdZsMWPnHwGd+jIyP7DT9UNTAxMUMpZ/kqq173g8ECyEw==, tarball: https://npm.pkg.github.com/download/@navikt/aksel-icons/8.2.0/815b0ce71ba251f4443c3677106887ea2a70ad3d}
 
   '@navikt/aksel-stylelint@7.39.0':
     resolution: {integrity: sha512-sKQqF21qpZ9VtnL/2wxjvUnbhUFof6yFDB8lMSaorVxwYdiGPyUVOtemulQM6/xt0CZLXQuI/4W8EI+4sR5eLQ==, tarball: https://npm.pkg.github.com/download/@navikt/aksel-stylelint/7.39.0/4ee8940ae9c808e62942c1d2aeff4c35d828bb1b}
@@ -2681,6 +2684,8 @@ snapshots:
     optional: true
 
   '@navikt/aksel-icons@7.39.0': {}
+
+  '@navikt/aksel-icons@8.2.0': {}
 
   '@navikt/aksel-stylelint@7.39.0': {}
 
