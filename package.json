@@ -43,7 +43,7 @@
 		"@vitejs/plugin-react": "^5.1.4",
 		"autoprefixer": "^10.4.24",
 		"husky": "^9.1.7",
-		"jsdom": "^27.4.0",
+		"jsdom": "^28.1.0",
 		"knip": "^5.83.1",
 		"lint-staged": "^16.2.7",
 		"msw": "^2.12.10",
