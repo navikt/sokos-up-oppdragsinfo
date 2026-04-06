@@ -22,7 +22,7 @@
 		"@navikt/aksel-icons": "7.39.0",
 		"@navikt/ds-css": "7.39.0",
 		"@navikt/ds-react": "7.39.0",
-		"axios": "1.13.6",
+		"axios": "1.14.0",
 		"dayjs": "1.11.20",
 		"react": "19.2.4",
 		"react-dom": "19.2.4",
@@ -33,7 +33,7 @@
 		"zustand": "5.0.12"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.4.8",
+		"@biomejs/biome": "2.4.9",
 		"@navikt/aksel-stylelint": "7.39.0",
 		"@playwright/test": "1.58.2",
 		"@rollup/plugin-terser": "1.0.0",
