@@ -5,11 +5,11 @@
 	height: 4rem;
 	width: 100%;
 	border-radius: 0.5rem;
-	background-color: var(--a-surface-alt-1-subtle);
+	background-color: var(--ax-bg-meta-purple-soft);
 }
 
 .breadcrumbs a {
-	color: var(--a-text-action);
+	color: var(--ax-text-accent-subtle);
 }
 
 .breadcrumbs__contents {
