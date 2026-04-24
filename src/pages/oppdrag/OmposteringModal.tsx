@@ -19,10 +19,14 @@ export default function OmposteringModal(props: OppdragsId) {
 
 	return (
 		<div>
-			<Button size="small" variant="secondary-neutral" onClick={handleClick}>
+			<Button
+				data-color="neutral"
+				size="small"
+				variant="secondary"
+				onClick={handleClick}
+			>
 				Omposteringer
 			</Button>
-
 			<Modal ref={ref} header={{ heading: "Omposteringer" }} width={modalWidth}>
 				<Modal.Body>
 					{data && !isEmpty(data) && (

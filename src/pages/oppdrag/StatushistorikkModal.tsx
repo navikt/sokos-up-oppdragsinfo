@@ -20,10 +20,14 @@ export default function StatushistorikkModal(props: OppdragsId) {
 
 	return (
 		<div>
-			<Button size="small" variant="secondary-neutral" onClick={handleClick}>
+			<Button
+				data-color="neutral"
+				size="small"
+				variant="secondary"
+				onClick={handleClick}
+			>
 				Status historikk
 			</Button>
-
 			<Modal ref={ref} header={{ heading: "Status historikk" }}>
 				<Modal.Body>
 					{data && !isEmpty(data) && (

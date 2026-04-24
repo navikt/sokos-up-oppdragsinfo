@@ -70,8 +70,9 @@ export default function BestilleSkattekortButton(
 		<Tooltip content={props.error ? props.error.message : "Bestill skattekort"}>
 			<span>
 				<Button
+					data-color="neutral"
 					size={"small"}
-					variant={"secondary-neutral"}
+					variant={"secondary"}
 					onClick={handleClick}
 					loading={shouldRefreshStatus}
 					disabled={

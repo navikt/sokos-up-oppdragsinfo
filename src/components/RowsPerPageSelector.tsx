@@ -25,15 +25,15 @@ export default function RowsPerPageSelector(props: RowsPerPageSelectorProps) {
 						`, ${currentPage} av ${pageCount} sider`}
 				</p>
 			</div>
-
 			<div className={styles["dropdown-section"]}>
 				<div className={commonstyles["text--nowrap"]}>
 					<p>Vis {rowsPerPage} per side</p>
 				</div>
 				<Dropdown>
 					<Button
+						data-color="neutral"
 						size={"xsmall"}
-						variant={"tertiary-neutral"}
+						variant={"tertiary"}
 						as={Dropdown.Toggle}
 					>
 						<ChevronDownIcon

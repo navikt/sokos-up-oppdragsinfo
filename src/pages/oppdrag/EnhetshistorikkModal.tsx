@@ -17,10 +17,14 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
 
 	return (
 		<div>
-			<Button size="small" variant="secondary-neutral" onClick={handleClick}>
+			<Button
+				data-color="neutral"
+				size="small"
+				variant="secondary"
+				onClick={handleClick}
+			>
 				Enhetshistorikk
 			</Button>
-
 			<Modal ref={ref} header={{ heading: "Enhetshistorikk" }}>
 				<Modal.Body>
 					{data && !isEmpty(data) && (

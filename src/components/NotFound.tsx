@@ -7,7 +7,7 @@ export default function NotFound() {
 	const navigate = useNavigate();
 
 	return (
-		<Box paddingBlock="20 16" data-aksel-template="404-v2">
+		<Box paddingBlock="space-80 space-64" data-aksel-template="404-v2">
 			<div className={styles["error-page"]}>
 				<ChatExclamationmarkIcon
 					title="Chat exclamationmark ikon"
@@ -20,14 +20,16 @@ export default function NotFound() {
 					Denne siden kan være slettet eller flyttet, eller det er en feil i
 					lenken.
 				</BodyShort>
-				<List>
-					<List.Item>Bruk gjerne søket eller menyen</List.Item>
-					<List.Item>
-						<Link to="" onClick={() => navigate(-1)}>
-							Gå tilbake til forrige side
-						</Link>
-					</List.Item>
-				</List>
+				<Box marginBlock="space-16" asChild>
+					<List data-aksel-migrated-v8>
+						<List.Item>Bruk gjerne søket eller menyen</List.Item>
+						<List.Item>
+							<Link to="" onClick={() => navigate(-1)}>
+								Gå tilbake til forrige side
+							</Link>
+						</List.Item>
+					</List>
+				</Box>
 			</div>
 		</Box>
 	);

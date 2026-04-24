@@ -61,10 +61,11 @@ export default function Oppdrag() {
 							<Suspense
 								fallback={
 									<Button
+										data-color="neutral"
 										data-umami-event={OPPDRAG.OMPOSTERINGER}
 										size="small"
 										loading
-										variant="secondary-neutral"
+										variant="secondary"
 									>
 										Omposteringer
 									</Button>
@@ -75,10 +76,11 @@ export default function Oppdrag() {
 							<Suspense
 								fallback={
 									<Button
+										data-color="neutral"
 										data-umami-event={OPPDRAG.STATUS_HISTORIKK}
 										size="small"
 										loading
-										variant="secondary-neutral"
+										variant="secondary"
 									>
 										Status historikk
 									</Button>
@@ -89,10 +91,11 @@ export default function Oppdrag() {
 							<Suspense
 								fallback={
 									<Button
+										data-color="neutral"
 										data-umami-event={OPPDRAG.ENHETSHISTORIKK}
 										size="small"
 										loading
-										variant="secondary-neutral"
+										variant="secondary"
 									>
 										Enhetshistorikk
 									</Button>
@@ -111,9 +114,10 @@ export default function Oppdrag() {
 								/>
 							)}
 							<Button
+								data-color="neutral"
 								data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
 								size={"small"}
-								variant={"secondary-neutral"}
+								variant={"secondary"}
 								icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
 								iconPosition={"right"}
 								onClick={() =>
