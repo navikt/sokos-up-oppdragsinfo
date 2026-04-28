@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  protobufjs: 8.0.1
-
 importers:
 
   .:
@@ -645,6 +642,9 @@ packages:
       '@types/react': ^17.0.30 || ^18 || ^19
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   '@navikt/ds-tokens@7.39.0':
     resolution: {integrity: sha512-gJT0526hc6zDHll436JtsZylJlfmh6SIFIyIwBIWmy2pBoTP/QxB5+cwFXKUau0iaItjmVSb209v5+XSJGYhcw==, tarball: https://npm.pkg.github.com/download/@navikt/ds-tokens/7.39.0/1ae77ff83ab4e63b49d2538e57f4f577f1765092}
@@ -1797,8 +1797,8 @@ packages:
     resolution: {integrity: sha512-pMMHxBOZKFU6HgAZ4eyGnwXF/EvPGGqUr0MnZ5+99485wwW41kW91A4LOGxSHhgugZmSChL5AlElNdwlNgcnLQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  protobufjs@8.0.1:
-    resolution: {integrity: sha512-NWWCCscLjs+cOKF/s/XVNFRW7Yih0fdH+9brffR5NZCy8k42yRdl5KlWKMVXuI1vfCoy4o1z80XR/W/QUb3V3w==}
+  protobufjs@7.5.5:
+    resolution: {integrity: sha512-3wY1AxV+VBNW8Yypfd1yQY9pXnqTAN+KwQxL8iYm3/BjKYMNg4i0owhEe26PWDOMaIrzeeF98Lqd5NGz4omiIg==}
     engines: {node: '>=12.0.0'}
 
   proxy-from-env@2.1.0:
@@ -2711,12 +2711,13 @@ snapshots:
       '@floating-ui/react-dom': 2.1.6(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       '@navikt/aksel-icons': 7.39.0
       '@navikt/ds-tokens': 7.39.0
-      '@types/react': 19.2.14
       clsx: 2.1.1
       date-fns: 4.1.0
       react: 19.2.5
       react-day-picker: 9.7.0(react@19.2.5)
       react-dom: 19.2.5(react@19.2.5)
+    optionalDependencies:
+      '@types/react': 19.2.14
 
   '@navikt/ds-tokens@7.39.0': {}
 
@@ -2763,7 +2764,7 @@ snapshots:
       '@opentelemetry/sdk-logs': 0.213.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-metrics': 2.6.0(@opentelemetry/api@1.9.1)
       '@opentelemetry/sdk-trace-base': 2.6.0(@opentelemetry/api@1.9.1)
-      protobufjs: 8.0.1
+      protobufjs: 7.5.5
 
   '@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.1)':
     dependencies:
@@ -3760,7 +3761,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  protobufjs@8.0.1:
+  protobufjs@7.5.5:
     dependencies:
       '@protobufjs/aspromise': 1.1.2
       '@protobufjs/base64': 1.1.2

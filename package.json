@@ -100,8 +100,6 @@
 		"node": ">=24.13.0"
 	},
 	"pnpm": {
-		"overrides": {
-			"protobufjs": "8.0.1"
-		}
+		"overrides": {}
 	}
 }
