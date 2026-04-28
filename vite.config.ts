@@ -1,9 +1,7 @@
-/// <reference types="vitest" />
-
 import { resolve } from "node:path";
 import terser from "@rollup/plugin-terser";
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig, esmExternalRequirePlugin } from "vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 import EnvironmentPlugin from "vite-plugin-environment";
 
@@ -16,7 +14,11 @@ export default defineConfig(({ mode }) => {
 			rollupOptions: {
 				input: resolve(__dirname, "src/App.tsx"),
 				preserveEntrySignatures: "exports-only",
-				external: ["react", "react-dom"],
+				plugins: [
+					esmExternalRequirePlugin({
+						external: ["react", "react-dom"],
+					}),
+				],
 				output: {
 					entryFileNames: "bundle.js",
 					format: "esm",
