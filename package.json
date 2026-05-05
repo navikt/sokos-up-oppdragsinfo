@@ -21,7 +21,7 @@
 		"@navikt/aksel-icons": "7.40.0",
 		"@navikt/ds-css": "7.40.0",
 		"@navikt/ds-react": "7.40.0",
-		"axios": "1.15.1",
+		"axios": "1.15.2",
 		"dayjs": "1.11.20",
 		"react": "19.2.5",
 		"react-dom": "19.2.5",
