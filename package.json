@@ -18,9 +18,9 @@
 	"dependencies": {
 		"@grafana/faro-web-sdk": "2.3.1",
 		"@hookform/resolvers": "5.2.2",
-		"@navikt/aksel-icons": "7.40.0",
-		"@navikt/ds-css": "7.40.0",
-		"@navikt/ds-react": "7.40.0",
+		"@navikt/aksel-icons": "8.10.3",
+		"@navikt/ds-css": "8.10.3",
+		"@navikt/ds-react": "8.10.3",
 		"axios": "1.15.2",
 		"dayjs": "1.11.20",
 		"react": "19.2.5",
@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@axe-core/playwright": "4.11.2",
 		"@biomejs/biome": "2.4.12",
-		"@navikt/aksel-stylelint": "7.40.0",
+		"@navikt/aksel-stylelint": "8.10.3",
 		"@playwright/test": "1.59.1",
 		"@types/node": "25.6.0",
 		"@types/react": "19.2.14",
