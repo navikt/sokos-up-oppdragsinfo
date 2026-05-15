@@ -1,6 +1,6 @@
 import { ExclamationmarkTriangleFillIcon } from "@navikt/aksel-icons";
 import { Button, Tooltip } from "@navikt/ds-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	bestillSkattekort,
 	useFetchSkattekortStatus,

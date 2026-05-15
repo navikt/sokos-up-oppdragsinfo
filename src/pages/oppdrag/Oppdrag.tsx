@@ -1,6 +1,6 @@
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading } from "@navikt/ds-react";
-import React, { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {
 	useFetchHentOppdragsLinjer,
