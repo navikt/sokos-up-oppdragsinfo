@@ -3,7 +3,7 @@
 # Server-specific overrides live in server/pnpm-workspace.yaml and are NOT inherited.
 
 overrides:
-  protobufjs: 8.0.2
+  protobufjs: 8.2.0
 engineStrict: true
 saveExact: true
 ignoreScripts: true
