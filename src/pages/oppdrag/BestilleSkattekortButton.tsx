@@ -56,7 +56,7 @@ export default function BestilleSkattekortButton(
 					props.setAlertMessage({
 						message:
 							"Skattekort bestilles fra Skatteetaten. Det tar normalt et par minutter." +
-							"Du kan lukke dette vinduet eller fortsette å arbeide i mellomtiden.",
+							" Du kan lukke dette vinduet eller fortsette å arbeide i mellomtiden.",
 						variant: "success",
 					});
 				}
