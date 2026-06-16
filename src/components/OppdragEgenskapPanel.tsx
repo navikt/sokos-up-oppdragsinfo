@@ -65,7 +65,7 @@ function statusMessage(status?: string) {
 			return "Bestilt";
 		case "VENTER_PAA_UTSENDING":
 			return "Venter på utsending";
-		case "SENDT_FORSYSTEM":
+		case "FERDIG_BEHANDLET":
 			return "Skattekort OK";
 		default:
 			return "Feil ved henting av skattekortstatus";
