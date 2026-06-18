@@ -20,7 +20,7 @@ interface BestilleSkattekortButtonProps {
 }
 
 export default function BestilleSkattekortButton(
-	props: BestilleSkattekortButtonProps,
+	props: Readonly<BestilleSkattekortButtonProps>,
 ) {
 	const request: ForespoerselRequest = {
 		personIdent: props.gjelderId,
@@ -32,21 +32,22 @@ export default function BestilleSkattekortButton(
 	const { data } = useFetchSkattekortStatus(request, shouldRefreshStatus);
 
 	useEffect(() => {
-		if (data?.status) {
+		if (data) {
 			props.setSkattekortstatus(data.status);
 			if (
-				["IKKE_BESTILT", "BESTILT", "VENTER_PAA_UTSENDING"].includes(
-					data.status,
-				)
+				![
+					"IKKE_FORESPURT",
+					"IKKE_BESTILT",
+					"BESTILT",
+					"VENTER_PAA_UTSENDING",
+				].includes(data.status)
 			) {
-				// Det er først når data kommer tilbake fra kallet at vi evt rerendrer basert på shouldRefreshStatus
-				// Derfor er det trygt å sette state her uten at vi risikerer en uendelig loop
-				setShouldRefreshStatus(true);
-			} else if (["UGYLDIG_FNR", "FERDIG_BEHANDLET"].includes(data.status)) {
 				setShouldRefreshStatus(false);
 			}
+			return;
 		}
-	}, [data, props]);
+		setShouldRefreshStatus(false);
+	}, [data, props.setSkattekortstatus]);
 
 	function handleClick() {
 		setShouldRefreshStatus(true);
@@ -77,9 +78,12 @@ export default function BestilleSkattekortButton(
 					disabled={
 						!data ||
 						!!props.error ||
-						["API_ERROR", "UGYLDIG_FNR", "FERDIG_BEHANDLET"].includes(
-							data?.status,
-						) ||
+						[
+							"IKKE_FORESPURT",
+							"IKKE_BESTILT",
+							"BESTILT",
+							"VENTER_PAA_UTSENDING",
+						].includes(data?.status) ||
 						shouldRefreshStatus
 					}
 					icon={!!props.error && <ExclamationmarkTriangleFillIcon />}
