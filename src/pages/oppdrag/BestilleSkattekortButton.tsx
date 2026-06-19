@@ -40,7 +40,7 @@ export default function BestilleSkattekortButton(
 					"ABONNERER_IKKE",
 					"IKKE_BESTILT",
 					"BESTILT",
-					"VENTER_PAA_UTSENDING",
+					"VENTER_UTSENDING",
 				].includes(data.status)
 			) {
 				setShouldRefreshStatus(false);
@@ -82,7 +82,7 @@ export default function BestilleSkattekortButton(
 						[
 							"IKKE_BESTILT",
 							"BESTILT",
-							"VENTER_PAA_UTSENDING",
+							"VENTER_UTSENDING",
 							"ABONNERER",
 						].includes(data?.status) ||
 						shouldRefreshStatus

@@ -65,7 +65,7 @@ function statusMessage(status?: string) {
 			return "Venter på bestilling";
 		case "BESTILT":
 			return "Bestilt";
-		case "VENTER_PAA_UTSENDING":
+		case "VENTER_UTSENDING":
 			return "Venter på utsending";
 		case "ABONNERER":
 			return "Skattekort OK";
