@@ -37,6 +37,7 @@ export default function BestilleSkattekortButton(
 			if (
 				![
 					"IKKE_FORESPURT",
+					"ABONNERER_IKKE",
 					"IKKE_BESTILT",
 					"BESTILT",
 					"VENTER_PAA_UTSENDING",
@@ -79,10 +80,10 @@ export default function BestilleSkattekortButton(
 						!data ||
 						!!props.error ||
 						[
-							"IKKE_FORESPURT",
 							"IKKE_BESTILT",
 							"BESTILT",
 							"VENTER_PAA_UTSENDING",
+							"ABONNERER",
 						].includes(data?.status) ||
 						shouldRefreshStatus
 					}

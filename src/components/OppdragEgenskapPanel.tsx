@@ -57,6 +57,8 @@ function statusMessage(status?: string) {
 	switch (status) {
 		case "IKKE_FORESPURT":
 			return "Kan bestilles";
+		case "ABONNERER_IKKE":
+			return "Kan bestilles";
 		case "UGYLDIG_FNR":
 			return "Ugyldig fødselsnummer";
 		case "IKKE_BESTILT":
