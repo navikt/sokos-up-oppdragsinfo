@@ -1,3 +1,4 @@
+import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 import type { AttestantList } from "../types/Attestant";
 import type { FagGruppeList } from "../types/FagGruppe";
@@ -277,11 +278,12 @@ export async function bestillSkattekort(request: ForespoerselRequest) {
 		return "Success";
 	});
 }
+
 export function useFetchSkattekortStatus(
 	request: ForespoerselRequest,
 	shouldRefresh: boolean,
 ) {
-	const { data, error, isValidating } = useSWRImmutable<{
+	const { data, error, isValidating } = useSWR<{
 		status: string;
 	}>("/skattekort/status", {
 		...swrConfig<{ status: string }>((url) =>
@@ -294,11 +296,7 @@ export function useFetchSkattekortStatus(
 		fallbackData: {
 			status: "API_ERROR",
 		},
-		revalidateOnMount: true,
 		refreshInterval: shouldRefresh ? 1000 : 0,
-		shouldRetryOnError: true,
-		errorRetryCount: 3,
-		errorRetryInterval: 3000,
 	});
 	const isLoading = (!error && !data) || isValidating;
 	return { data, error, isLoading };

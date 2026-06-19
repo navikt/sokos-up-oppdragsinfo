@@ -32,7 +32,7 @@ export default function BestilleSkattekortButton(
 	const { data } = useFetchSkattekortStatus(request, shouldRefreshStatus);
 
 	useEffect(() => {
-		if (data) {
+		if (data?.status) {
 			props.setSkattekortstatus(data.status);
 			if (
 				![

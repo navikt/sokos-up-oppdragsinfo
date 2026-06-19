@@ -12,7 +12,7 @@ interface OppdragsEgenskapPanelProps {
 }
 
 export default function OppdragEgenskapPanel(
-	props: OppdragsEgenskapPanelProps,
+	props: Readonly<OppdragsEgenskapPanelProps>,
 ) {
 	const { data: oppdragsEnhet } = useFetchHentOppdragsEnheter(
 		props.oppdrag.oppdragsId,
@@ -65,7 +65,7 @@ function statusMessage(status?: string) {
 			return "Bestilt";
 		case "VENTER_PAA_UTSENDING":
 			return "Venter på utsending";
-		case "FERDIG_BEHANDLET":
+		case "ABONNERER":
 			return "Skattekort OK";
 		default:
 			return "Feil ved henting av skattekortstatus";
