@@ -26,8 +26,8 @@
 		"dayjs": "1.11.21",
 		"react": "19.2.7",
 		"react-dom": "19.2.7",
-		"react-hook-form": "7.77.0",
-		"react-router": "7.16.0",
+		"react-hook-form": "7.78.0",
+		"react-router": "7.17.0",
 		"swr": "2.4.1",
 		"zod": "4.4.3",
 		"zustand": "5.0.14"
@@ -37,15 +37,15 @@
 		"@biomejs/biome": "2.4.16",
 		"@navikt/aksel-stylelint": "7.40.0",
 		"@playwright/test": "1.60.0",
-		"@types/node": "25.9.1",
-		"@types/react": "19.2.16",
+		"@types/node": "25.9.2",
+		"@types/react": "19.2.17",
 		"@types/react-dom": "19.2.3",
 		"@vitejs/plugin-react": "6.0.2",
 		"husky": "9.1.7",
-		"knip": "6.15.0",
+		"knip": "6.16.1",
 		"lint-staged": "17.0.7",
 		"msw": "2.14.6",
-		"stylelint": "17.12.0",
+		"stylelint": "17.13.0",
 		"stylelint-config-standard": "40.0.0",
 		"typescript": "6.0.3",
 		"vite": "8.0.16",
@@ -80,8 +80,8 @@
 		"*.css": "stylelint --fix"
 	},
 	"engines": {
-		"pnpm": ">=11.1.2",
+		"pnpm": ">=11.5.3",
 		"node": ">=24.14.1"
 	},
-	"packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
+	"packageManager": "pnpm@11.5.3+sha512.7ac1c919341c213a34dc0d02afb7143c5c26ac26ee8c4782deea821b8ac64d2134a081fd8941dae6e29bbb48f58dfc2b7fbceeccc07cb2f09d219d342a4969ed"
 }
