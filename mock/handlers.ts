@@ -128,7 +128,7 @@ export const handlers = [
 					? "BESTILT"
 					: Date.now() < skattekortBestilt?.getTime() + 15 * 1000
 						? "VENTER_UTSENDING"
-						: /* Og hvis det er mer enn 15s siden man trykket:  */ "FERDIG_BEHANDLET";
+						: /* Og hvis det er mer enn 15s siden man trykket:  */ "ABONNERER";
 		return HttpResponse.json({ status }, { status: 200 });
 	}),
 ];
