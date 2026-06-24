@@ -12,7 +12,7 @@ interface OppdragsEgenskapPanelProps {
 }
 
 export default function OppdragEgenskapPanel(
-	props: OppdragsEgenskapPanelProps,
+	props: Readonly<OppdragsEgenskapPanelProps>,
 ) {
 	const { data: oppdragsEnhet } = useFetchHentOppdragsEnheter(
 		props.oppdrag.oppdragsId,
@@ -57,15 +57,17 @@ function statusMessage(status?: string) {
 	switch (status) {
 		case "IKKE_FORESPURT":
 			return "Kan bestilles";
+		case "ABONNERER_IKKE":
+			return "Kan bestilles";
 		case "UGYLDIG_FNR":
 			return "Ugyldig fødselsnummer";
 		case "IKKE_BESTILT":
 			return "Venter på bestilling";
 		case "BESTILT":
 			return "Bestilt";
-		case "VENTER_PAA_UTSENDING":
+		case "VENTER_UTSENDING":
 			return "Venter på utsending";
-		case "SENDT_FORSYSTEM":
+		case "ABONNERER":
 			return "Skattekort OK";
 		default:
 			return "Feil ved henting av skattekortstatus";

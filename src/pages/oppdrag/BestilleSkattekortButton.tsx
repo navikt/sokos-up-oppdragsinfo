@@ -19,8 +19,41 @@ interface BestilleSkattekortButtonProps {
 	) => void;
 }
 
+const kanIkkeBestilleSkattekort = (status: string | null) =>
+	// IKKE_FORESPURT - Vanlig for en ny person som sokos-skattekort ikke har sett før, skal kunne bestille
+	// ABONNERER IKKE - Vanlig for folk som har skattekort for året før, da skal man kunne bestille
+	// FEILET_I_BESTILLING, UKJENT - noe feil har skjedd tidligere, da kan man prøve å bestille igjen.
+	//
+	// IKKE_BESTILT, BESTILT, VENTER_UTSENDING - holder på å bestille, ikke mulig å bestille igjen
+	// ABONNERER - Allerede abonnent, OS bør ha skattekortet, og også få det når det skjer endring
+	// UGYLDIG FNR, UGYLDIG_FORSYSTEM, SKJERMET - skal ikke kunne bestille
+	!status ||
+	[
+		"UGYLDIG_FNR",
+		"UGYLDIG_FORSYSTEM",
+		"IKKE_BESTILT",
+		"BESTILT",
+		"VENTER_UTSENDING",
+		"ABONNERER",
+		"SKJERMET",
+	].includes(status);
+
+// Når man trykker bestill, vet vi at status er enten IKKE_FORESPURT, ABONNERER IKKE, FEILET_I_BESTILLING eller UKJENT
+// Da venter vi og ser til den endrer seg.
+// Dersom det er IKKE_BESTILT, BESTILT eller VENTER_UTSENDING vil den snart endre seg, og da skal vi fortsette å sjekke
+const skalSlutteAaRefresheSkattekortstatus = (status: string) =>
+	![
+		"IKKE_FORESPURT",
+		"ABONNERER_IKKE",
+		"FEILET_I_BESTILLING",
+		"UKJENT",
+		"IKKE_BESTILT",
+		"BESTILT",
+		"VENTER_UTSENDING",
+	].includes(status);
+
 export default function BestilleSkattekortButton(
-	props: BestilleSkattekortButtonProps,
+	props: Readonly<BestilleSkattekortButtonProps>,
 ) {
 	const request: ForespoerselRequest = {
 		personIdent: props.gjelderId,
@@ -34,19 +67,13 @@ export default function BestilleSkattekortButton(
 	useEffect(() => {
 		if (data?.status) {
 			props.setSkattekortstatus(data.status);
-			if (
-				["IKKE_BESTILT", "BESTILT", "VENTER_PAA_UTSENDING"].includes(
-					data.status,
-				)
-			) {
-				// Det er først når data kommer tilbake fra kallet at vi evt rerendrer basert på shouldRefreshStatus
-				// Derfor er det trygt å sette state her uten at vi risikerer en uendelig loop
-				setShouldRefreshStatus(true);
-			} else if (["UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(data.status)) {
+			if (skalSlutteAaRefresheSkattekortstatus(data.status)) {
 				setShouldRefreshStatus(false);
 			}
+			return;
 		}
-	}, [data, props]);
+		setShouldRefreshStatus(false);
+	}, [data, props.setSkattekortstatus]);
 
 	function handleClick() {
 		setShouldRefreshStatus(true);
@@ -77,9 +104,7 @@ export default function BestilleSkattekortButton(
 					disabled={
 						!data ||
 						!!props.error ||
-						["API_ERROR", "UGYLDIG_FNR", "SENDT_FORSYSTEM"].includes(
-							data?.status,
-						) ||
+						kanIkkeBestilleSkattekort(data?.status) ||
 						shouldRefreshStatus
 					}
 					icon={!!props.error && <ExclamationmarkTriangleFillIcon />}
