@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from "@navikt/aksel-icons";
-import { Button, Dropdown } from "@navikt/ds-react";
+import { BodyShort, Button, Dropdown } from "@navikt/ds-react";
 import commonstyles from "../styles/common-styles.module.css";
 import styles from "./RowsPerPageSelector.module.css";
 
@@ -17,23 +17,24 @@ export default function RowsPerPageSelector(props: RowsPerPageSelectorProps) {
 	return (
 		<div className={styles["rows-per-page-selector"]}>
 			<div className={commonstyles["text--nowrap"]}>
-				<p>
+				<BodyShort>
 					{`${totalCount} treff`}
 					{totalCount > rowsPerPage &&
 						currentPage &&
 						pageCount &&
 						`, ${currentPage} av ${pageCount} sider`}
-				</p>
+				</BodyShort>
 			</div>
 
 			<div className={styles["dropdown-section"]}>
 				<div className={commonstyles["text--nowrap"]}>
-					<p>Vis {rowsPerPage} per side</p>
+					<BodyShort>Vis {rowsPerPage} per side</BodyShort>
 				</div>
 				<Dropdown>
 					<Button
 						size={"xsmall"}
-						variant={"tertiary-neutral"}
+						variant="tertiary"
+						data-color="neutral"
 						as={Dropdown.Toggle}
 					>
 						<ChevronDownIcon

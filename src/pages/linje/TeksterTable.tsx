@@ -12,8 +12,8 @@ export default function TeksterTable(props: OppdragsIdent) {
 			<Table zebraStripes>
 				<Table.Header>
 					<Table.Row>
-						<Table.HeaderCell scope="col">Linje</Table.HeaderCell>
-						<Table.HeaderCell scope="col">Tekst</Table.HeaderCell>
+						<Table.ColumnHeader>Linje</Table.ColumnHeader>
+						<Table.ColumnHeader>Tekst</Table.ColumnHeader>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>

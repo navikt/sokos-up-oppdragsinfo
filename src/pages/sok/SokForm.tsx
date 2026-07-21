@@ -10,7 +10,7 @@ import type { SokParameter } from "../../types/SokParameter";
 import { SokParameterSchema } from "../../types/schema/SokParameterSchema";
 import { logSearchEvent, SOK } from "../../umami/umami";
 import styles from "./SokForm.module.css";
-import SokHelp from "./SokHelp";
+import SokHelpText from "./SokHelpText";
 
 const SokForm = ({
 	fetchOppdragList,
@@ -84,7 +84,7 @@ const SokForm = ({
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className={styles["sok__form-container"]}>
 				<div className={styles.sok__help}>
-					<SokHelp />
+					<SokHelpText />
 				</div>
 				<div className={styles.sok__form}>
 					<div className={styles["sok__input-fields"]}>
@@ -133,9 +133,7 @@ const SokForm = ({
 						type="submit"
 						loading={isLoading || isSubmitting}
 						iconPosition="right"
-						icon={
-							<MagnifyingGlassIcon title="Ikon som viser et forstørrelsesglass" />
-						}
+						icon={<MagnifyingGlassIcon aria-hidden />}
 					>
 						Søk
 					</Button>
@@ -145,7 +143,7 @@ const SokForm = ({
 						variant="secondary"
 						type="button"
 						iconPosition="right"
-						icon={<EraserIcon title="Nullstill søk" />}
+						icon={<EraserIcon aria-hidden />}
 						onClick={handleReset}
 					>
 						Nullstill søk

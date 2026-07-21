@@ -57,7 +57,12 @@ export default function TrefflisteTable(props: TrefflisteTableProps) {
 				pageCount={pagecount}
 			/>
 			<div className={commonstyles.table}>
-				<Table zebraStripes sort={sort} onSortChange={oppdragSort}>
+				<Table
+					aria-label="Oppdragsliste"
+					zebraStripes
+					sort={sort}
+					onSortChange={oppdragSort}
+				>
 					<Table.Header>
 						<Table.Row>
 							<Table.ColumnHeader sortKey={"fagsystemId"} sortable>

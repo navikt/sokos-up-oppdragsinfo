@@ -1,4 +1,4 @@
-import { Alert, Button, Modal, Table } from "@navikt/ds-react";
+import { Button, LocalAlert, Modal, Table } from "@navikt/ds-react";
 import { useRef, useState } from "react";
 import { useFetchHentOppdragsOmposteringer } from "../../api/apiService";
 import type { Ompostering } from "../../types/Ompostering";
@@ -19,7 +19,12 @@ export default function OmposteringModal(props: OppdragsId) {
 
 	return (
 		<div>
-			<Button size="small" variant="secondary-neutral" onClick={handleClick}>
+			<Button
+				size="small"
+				variant="secondary"
+				data-color="neutral"
+				onClick={handleClick}
+			>
 				Omposteringer
 			</Button>
 
@@ -29,22 +34,18 @@ export default function OmposteringModal(props: OppdragsId) {
 						<Table zebraStripes>
 							<Table.Header>
 								<Table.Row>
-									<Table.HeaderCell key={"id"} scope="col">
-										Gjelder
-									</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Faggruppe</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Løpenummer</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Ompostering</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
-									<Table.HeaderCell scope="col">
-										Feil registrert
-									</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Beregning</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Utført</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
-									<Table.HeaderCell scope="col">
+									<Table.ColumnHeader>Gjelder</Table.ColumnHeader>
+									<Table.ColumnHeader>Faggruppe</Table.ColumnHeader>
+									<Table.ColumnHeader>Løpenummer</Table.ColumnHeader>
+									<Table.ColumnHeader>Ompostering</Table.ColumnHeader>
+									<Table.ColumnHeader>Dato fom</Table.ColumnHeader>
+									<Table.ColumnHeader>Feil registrert</Table.ColumnHeader>
+									<Table.ColumnHeader>Beregning</Table.ColumnHeader>
+									<Table.ColumnHeader>Utført</Table.ColumnHeader>
+									<Table.ColumnHeader>Brukerid</Table.ColumnHeader>
+									<Table.ColumnHeader>
 										Registrert i Oppdragssystemet
-									</Table.HeaderCell>
+									</Table.ColumnHeader>
 								</Table.Row>
 							</Table.Header>
 							<Table.Body>
@@ -73,9 +74,13 @@ export default function OmposteringModal(props: OppdragsId) {
 					)}
 					{!data ||
 						(isEmpty(data) && (
-							<Alert variant="info">
-								Det fins ingen omposteringer for dette oppdraget.
-							</Alert>
+							<LocalAlert status="announcement">
+								<LocalAlert.Header>
+									<LocalAlert.Title as="h3">
+										Det fins ingen omposteringer for dette oppdraget.
+									</LocalAlert.Title>
+								</LocalAlert.Header>
+							</LocalAlert>
 						))}
 				</Modal.Body>
 				<Modal.Footer>

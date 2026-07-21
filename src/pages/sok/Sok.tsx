@@ -1,4 +1,4 @@
-import { Alert, Heading } from "@navikt/ds-react";
+import { Heading, LocalAlert } from "@navikt/ds-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { hentOppdrag } from "../../api/apiService";
@@ -19,7 +19,7 @@ export default function Sok() {
 	const fetchOppdragList = async (sokParameter: SokParameter) => {
 		if (!sokParameter.gjelderId) {
 			setError({
-				variant: "warning",
+				status: "warning",
 				message: "GjelderId må fylles ut",
 			});
 			return;
@@ -39,7 +39,7 @@ export default function Sok() {
 				navigate(TREFFLISTE, { replace: false });
 			} else {
 				setError({
-					variant: "info",
+					status: "announcement",
 					message:
 						"Fant ingen oppdrag for " +
 						sokParameter.gjelderId +
@@ -51,7 +51,7 @@ export default function Sok() {
 		} catch (err: unknown) {
 			const error = err as { statusCode?: number; message: string };
 			setError({
-				variant: error.statusCode === 400 ? "warning" : "error",
+				status: error.statusCode === 400 ? "warning" : "error",
 				message: error.message,
 			});
 		} finally {
@@ -68,9 +68,11 @@ export default function Sok() {
 			</div>
 			{error && (
 				<div className={styles.sok__error}>
-					<Alert variant={error.variant} role="status">
-						{error.message}
-					</Alert>
+					<LocalAlert status={error.status}>
+						<LocalAlert.Header>
+							<LocalAlert.Title as="h3">{error.message}</LocalAlert.Title>
+						</LocalAlert.Header>
+					</LocalAlert>
 				</div>
 			)}
 		</div>

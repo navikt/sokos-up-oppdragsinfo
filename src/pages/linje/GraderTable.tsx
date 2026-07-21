@@ -11,13 +11,11 @@ export default function GraderTable(props: OppdragsIdent) {
 		<Table zebraStripes>
 			<Table.Header>
 				<Table.Row>
-					<Table.HeaderCell scope="col">Linje</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Gradstype</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Grad</Table.HeaderCell>
-					<Table.HeaderCell scope="col">
-						Registrert i Oppdragssystemet
-					</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
+					<Table.ColumnHeader>Linje</Table.ColumnHeader>
+					<Table.ColumnHeader>Gradstype</Table.ColumnHeader>
+					<Table.ColumnHeader>Grad</Table.ColumnHeader>
+					<Table.ColumnHeader>Registrert i Oppdragssystemet</Table.ColumnHeader>
+					<Table.ColumnHeader>Brukerid</Table.ColumnHeader>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>
