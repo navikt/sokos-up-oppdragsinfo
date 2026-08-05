@@ -1,4 +1,4 @@
-import { Alert, Heading } from "@navikt/ds-react";
+import { Box, Heading, LocalAlert } from "@navikt/ds-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { hentOppdrag } from "../../api/apiService";
@@ -19,7 +19,7 @@ export default function Sok() {
 	const fetchOppdragList = async (sokParameter: SokParameter) => {
 		if (!sokParameter.gjelderId) {
 			setError({
-				variant: "warning",
+				status: "warning",
 				message: "GjelderId må fylles ut",
 			});
 			return;
@@ -39,19 +39,14 @@ export default function Sok() {
 				navigate(TREFFLISTE, { replace: false });
 			} else {
 				setError({
-					variant: "info",
-					message:
-						"Fant ingen oppdrag for " +
-						sokParameter.gjelderId +
-						(sokParameter.fagGruppe
-							? ` med faggruppe ${sokParameter.fagGruppe.type}`
-							: ""),
+					status: "announcement",
+					message: "Ingen treff på søket.",
 				});
 			}
 		} catch (err: unknown) {
 			const error = err as { statusCode?: number; message: string };
 			setError({
-				variant: error.statusCode === 400 ? "warning" : "error",
+				status: error.statusCode === 400 ? "warning" : "error",
 				message: error.message,
 			});
 		} finally {
@@ -66,11 +61,20 @@ export default function Sok() {
 			<div className={styles.sok__box}>
 				<SokForm fetchOppdragList={fetchOppdragList} isLoading={isLoading} />
 			</div>
-			{error && (
-				<div className={styles.sok__error}>
-					<Alert variant={error.variant} role="status">
+			{error && error.status === "announcement" && (
+				<Box className={styles.sok__announcement}>
+					<Heading level="2" size="small">
 						{error.message}
-					</Alert>
+					</Heading>
+				</Box>
+			)}
+			{error && error.status !== "announcement" && (
+				<div className={styles.sok__error}>
+					<LocalAlert status={error.status}>
+						<LocalAlert.Header>
+							<LocalAlert.Title as="h3">{error.message}</LocalAlert.Title>
+						</LocalAlert.Header>
+					</LocalAlert>
 				</div>
 			)}
 		</div>

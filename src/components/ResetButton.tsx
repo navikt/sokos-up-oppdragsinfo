@@ -22,7 +22,7 @@ export default function ResetButton() {
 			size="small"
 			variant="tertiary"
 			iconPosition="right"
-			icon={<EraserIcon title="reset søk" fontSize="1.5rem" />}
+			icon={<EraserIcon aria-hidden fontSize="1.5rem" />}
 			onClick={handleReset}
 		>
 			Nytt søk

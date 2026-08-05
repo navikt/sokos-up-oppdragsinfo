@@ -11,13 +11,11 @@ export default function KravhaverTable(props: OppdragsIdent) {
 		<Table zebraStripes>
 			<Table.Header>
 				<Table.Row>
-					<Table.HeaderCell scope="col">Linje</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Kravhaver</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
-					<Table.HeaderCell scope="col">
-						Registrert i Oppdragssystemet
-					</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
+					<Table.ColumnHeader>Linje</Table.ColumnHeader>
+					<Table.ColumnHeader>Kravhaver</Table.ColumnHeader>
+					<Table.ColumnHeader>Dato fom</Table.ColumnHeader>
+					<Table.ColumnHeader>Registrert i Oppdragssystemet</Table.ColumnHeader>
+					<Table.ColumnHeader>Brukerid</Table.ColumnHeader>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>

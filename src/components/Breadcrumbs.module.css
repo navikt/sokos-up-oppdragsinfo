@@ -5,11 +5,11 @@
 	height: 4rem;
 	width: 100%;
 	border-radius: 0.5rem;
-	background-color: var(--a-surface-alt-1-subtle);
+	background-color: var(--ax-bg-meta-purple-moderateA);
 }
 
 .breadcrumbs a {
-	color: var(--a-text-action);
+	color: var(--ax-text-accent-subtle);
 }
 
 .breadcrumbs__contents {
@@ -20,9 +20,9 @@
 }
 
 .breadcrumbs__left {
-	padding-left: 1.25rem;
+	padding-left: var(--ax-space-20);
 }
 
 .breadcrumbs__right {
-	padding-right: 1.25rem;
+	padding-right: var(--ax-space-20);
 }

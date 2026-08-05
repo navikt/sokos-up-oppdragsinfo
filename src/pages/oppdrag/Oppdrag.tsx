@@ -1,12 +1,11 @@
 import { FileCsvIcon } from "@navikt/aksel-icons";
-import { Button, Heading } from "@navikt/ds-react";
+import { Button, Heading, LocalAlert } from "@navikt/ds-react";
 import { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {
 	useFetchHentOppdragsLinjer,
 	useFetchIsSkattepliktig,
 } from "../../api/apiService";
-import AlertWithCloseButton from "../../components/AlertWithCloseButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
 import { useStore } from "../../store/AppState";
@@ -38,7 +37,7 @@ export default function Oppdrag() {
 	}, [gjelderId, oppdrag, navigate]);
 	const [alertMessage, setAlertMessage] = useState<{
 		message: string;
-		variant: "success" | "error" | "warning";
+		status: "success" | "error" | "warning";
 	} | null>(null);
 
 	return (
@@ -64,7 +63,8 @@ export default function Oppdrag() {
 										data-umami-event={OPPDRAG.OMPOSTERINGER}
 										size="small"
 										loading
-										variant="secondary-neutral"
+										variant="secondary"
+										data-color="neutral"
 									>
 										Omposteringer
 									</Button>
@@ -78,7 +78,8 @@ export default function Oppdrag() {
 										data-umami-event={OPPDRAG.STATUS_HISTORIKK}
 										size="small"
 										loading
-										variant="secondary-neutral"
+										variant="secondary"
+										data-color="neutral"
 									>
 										Status historikk
 									</Button>
@@ -92,7 +93,8 @@ export default function Oppdrag() {
 										data-umami-event={OPPDRAG.ENHETSHISTORIKK}
 										size="small"
 										loading
-										variant="secondary-neutral"
+										variant="secondary"
+										data-color="neutral"
 									>
 										Enhetshistorikk
 									</Button>
@@ -113,8 +115,9 @@ export default function Oppdrag() {
 							<Button
 								data-umami-event={OPPDRAG.EKSPORT_TIL_EXCEL}
 								size={"small"}
-								variant={"secondary-neutral"}
-								icon={<FileCsvIcon title="Til Excel" fontSize="1.5rem" />}
+								variant="secondary"
+								data-color="neutral"
+								icon={<FileCsvIcon aria-hidden fontSize="1.5rem" />}
 								iconPosition={"right"}
 								onClick={() =>
 									downloadAsCsv(gjelderId, oppdrag!.navnFagomraade, data ?? [])
@@ -127,13 +130,12 @@ export default function Oppdrag() {
 				</div>
 			</div>
 			{!!alertMessage && (
-				<AlertWithCloseButton
-					show={!!alertMessage}
-					setShow={() => setAlertMessage(null)}
-					variant={alertMessage.variant}
-				>
-					{alertMessage.message}
-				</AlertWithCloseButton>
+				<LocalAlert status={alertMessage.status}>
+					<LocalAlert.Header>
+						<LocalAlert.Title as="h3">{alertMessage.message}</LocalAlert.Title>
+						<LocalAlert.CloseButton onClick={() => setAlertMessage(null)} />
+					</LocalAlert.Header>
+				</LocalAlert>
 			)}
 			{data && (
 				<OppdragLinjeTable

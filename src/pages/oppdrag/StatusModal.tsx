@@ -26,7 +26,12 @@ export default function StatusModal(props: StatusModalProps) {
 
 	return (
 		<div>
-			<Button size="xsmall" variant={"tertiary"} onClick={handleClick}>
+			<Button
+				size="xsmall"
+				variant={"tertiary"}
+				onClick={handleClick}
+				aria-label={`Status: ${props.text}, linje ${props.linjeId}`}
+			>
 				{props.text}
 			</Button>
 
@@ -35,18 +40,12 @@ export default function StatusModal(props: StatusModalProps) {
 					<Table zebraStripes>
 						<Table.Header>
 							<Table.Row>
-								<Table.HeaderCell key={"kodeStatus"} scope="col">
-									Status
-								</Table.HeaderCell>
-								<Table.HeaderCell key={"datoFom"} scope="col">
-									Dato fom
-								</Table.HeaderCell>
-								<Table.HeaderCell key={"tidspktReg"} scope="col">
+								<Table.ColumnHeader>Status</Table.ColumnHeader>
+								<Table.ColumnHeader>Dato fom</Table.ColumnHeader>
+								<Table.ColumnHeader>
 									Registert i Oppdragssystemet
-								</Table.HeaderCell>
-								<Table.HeaderCell key={"brukerid"} scope="col">
-									Brukerid
-								</Table.HeaderCell>
+								</Table.ColumnHeader>
+								<Table.ColumnHeader>Brukerid</Table.ColumnHeader>
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>

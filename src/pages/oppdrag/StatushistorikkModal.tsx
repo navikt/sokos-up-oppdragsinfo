@@ -1,4 +1,4 @@
-import { Alert, Button, Modal, Table } from "@navikt/ds-react";
+import { Button, LocalAlert, Modal, Table } from "@navikt/ds-react";
 import { useRef, useState } from "react";
 import { useFetchHentOppdragsStatushistorikk } from "../../api/apiService";
 import type { OppdragsId } from "../../types/OppdragsId";
@@ -20,7 +20,12 @@ export default function StatushistorikkModal(props: OppdragsId) {
 
 	return (
 		<div>
-			<Button size="small" variant="secondary-neutral" onClick={handleClick}>
+			<Button
+				size="small"
+				variant="secondary"
+				data-color="neutral"
+				onClick={handleClick}
+			>
 				Status historikk
 			</Button>
 
@@ -30,11 +35,11 @@ export default function StatushistorikkModal(props: OppdragsId) {
 						<Table zebraStripes>
 							<Table.Header>
 								<Table.Row>
-									<Table.HeaderCell scope="col">Status</Table.HeaderCell>
-									<Table.HeaderCell scope="col">
+									<Table.ColumnHeader>Status</Table.ColumnHeader>
+									<Table.ColumnHeader>
 										Registrert i Oppdragssystemet
-									</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
+									</Table.ColumnHeader>
+									<Table.ColumnHeader>Brukerid</Table.ColumnHeader>
 								</Table.Row>
 							</Table.Header>
 							<Table.Body>
@@ -52,9 +57,13 @@ export default function StatushistorikkModal(props: OppdragsId) {
 					)}
 					{!data ||
 						(isEmpty(data) && (
-							<Alert variant="info">
-								Det fins ingen statushistorikk for dette oppdraget.
-							</Alert>
+							<LocalAlert status="announcement">
+								<LocalAlert.Header>
+									<LocalAlert.Title as="h3">
+										Det fins ingen statushistorikk for dette oppdraget.
+									</LocalAlert.Title>
+								</LocalAlert.Header>
+							</LocalAlert>
 						))}
 				</Modal.Body>
 				<Modal.Footer>
