@@ -1,4 +1,4 @@
-import { Heading, LocalAlert } from "@navikt/ds-react";
+import { Box, Heading, LocalAlert } from "@navikt/ds-react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { hentOppdrag } from "../../api/apiService";
@@ -40,12 +40,7 @@ export default function Sok() {
 			} else {
 				setError({
 					status: "announcement",
-					message:
-						"Fant ingen oppdrag for " +
-						sokParameter.gjelderId +
-						(sokParameter.fagGruppe
-							? ` med faggruppe ${sokParameter.fagGruppe.type}`
-							: ""),
+					message: "Ingen treff på søket.",
 				});
 			}
 		} catch (err: unknown) {
@@ -66,7 +61,14 @@ export default function Sok() {
 			<div className={styles.sok__box}>
 				<SokForm fetchOppdragList={fetchOppdragList} isLoading={isLoading} />
 			</div>
-			{error && (
+			{error && error.status === "announcement" && (
+				<Box className={styles.sok__announcement}>
+					<Heading level="2" size="small">
+						{error.message}
+					</Heading>
+				</Box>
+			)}
+			{error && error.status !== "announcement" && (
 				<div className={styles.sok__error}>
 					<LocalAlert status={error.status}>
 						<LocalAlert.Header>
