@@ -14,14 +14,16 @@ export default function App() {
 	}, []);
 
 	return (
-		<BrowserRouter basename={BASENAME}>
-			<Routes>
-				<Route path={ROOT} element={<Sok />} />
-				<Route path={TREFFLISTE} element={<Treffliste />} />
-				<Route path={OPPDRAG} element={<Oppdrag />} />
-				<Route path={LINJE} element={<Linje />} />
-				<Route path={"*"} element={<NotFound />} />
-			</Routes>
-		</BrowserRouter>
+		<div className="sokos-up-oppdragsinfo">
+			<BrowserRouter basename={BASENAME}>
+				<Routes>
+					<Route path={ROOT} element={<Sok />} />
+					<Route path={TREFFLISTE} element={<Treffliste />} />
+					<Route path={OPPDRAG} element={<Oppdrag />} />
+					<Route path={LINJE} element={<Linje />} />
+					<Route path={"*"} element={<NotFound />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
 	);
 }
