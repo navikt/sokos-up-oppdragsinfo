@@ -87,6 +87,9 @@ importers:
       msw:
         specifier: 2.15.0
         version: 2.15.0(@types/node@26.1.2)(typescript@7.0.2)
+      postcss-prefix-selector:
+        specifier: 2.1.1
+        version: 2.1.1(postcss@8.5.22)
       stylelint:
         specifier: 17.14.1
         version: 17.14.1(supports-color@10.2.2)(typescript@7.0.2)
@@ -1599,6 +1602,11 @@ packages:
     resolution: {integrity: sha512-Z14dG305dgaLu6foB1TXQagFiW8JfSUIUaUuPaKQ6NtBPKF1P/qXcqfh6c6K/icPqdy37JmjbiBXf6JNg6Sylw==}
     engines: {node: '>=20'}
     hasBin: true
+
+  postcss-prefix-selector@2.1.1:
+    resolution: {integrity: sha512-ZBgf427Et6+XnrnJ9VXtJEKCjJwTvn2wn/qMg+wvvlRhIeFIAxdbrlZZ0CSsWYMJfcyPLBh8ogj5O1kb/Mcx3g==}
+    peerDependencies:
+      postcss: ^8.0.0
 
   postcss-safe-parser@7.0.1:
     resolution: {integrity: sha512-0AioNCJZ2DPYz5ABT6bddIqlhgwhpHZ/l65YAYo0BCIn0xiDpsnTHz0gnoTGk0OXZW0JRs+cDwL8u/teRdz+8A==}
@@ -3122,6 +3130,10 @@ snapshots:
       playwright-core: 1.62.0
     optionalDependencies:
       fsevents: 2.3.2
+
+  postcss-prefix-selector@2.1.1(postcss@8.5.22):
+    dependencies:
+      postcss: 8.5.22
 
   postcss-safe-parser@7.0.1(postcss@8.5.22):
     dependencies:

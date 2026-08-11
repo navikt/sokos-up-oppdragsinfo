@@ -1,5 +1,6 @@
 import { resolve } from "node:path";
 import react from "@vitejs/plugin-react";
+import prefixer from "postcss-prefix-selector";
 import { defineConfig, esmExternalRequirePlugin } from "vite";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
@@ -26,6 +27,14 @@ export default defineConfig(({ mode }) => {
 		css: {
 			modules: {
 				generateScopedName: "[name]__[local]___[hash:base64:5]",
+			},
+			postcss: {
+				plugins: [
+					prefixer({
+						prefix: ":where(.sokos-up-oppdragsinfo)",
+						ignoreFiles: [/module\.css/],
+					}),
+				],
 			},
 		},
 		server: {
