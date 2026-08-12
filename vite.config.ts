@@ -32,7 +32,8 @@ export default defineConfig(({ mode }) => {
 				plugins: [
 					prefixer({
 						prefix: ":where(.sokos-up-oppdragsinfo)",
-						ignoreFiles: [/module\.css/],
+						ignoreFiles: [/module\.css/, /node_modules/],
+						skipGlobalSelectors: true,
 					}),
 				],
 			},

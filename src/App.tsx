@@ -1,3 +1,4 @@
+import "@navikt/ds-css";
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import NotFound from "./components/NotFound";
