@@ -3,3 +3,5 @@ interface Window {
 		track: (event: string, data?: object) => void;
 	};
 }
+
+declare module "@navikt/ds-css";
