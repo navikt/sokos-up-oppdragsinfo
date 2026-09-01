@@ -40,6 +40,16 @@
 	padding-top: 1rem;
 }
 
+.page__top-sokekriterier__footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1rem;
+}
+
+.page__top-alert {
+	width: 100%;
+}
+
 .link {
 	text-decoration: underline;
 }

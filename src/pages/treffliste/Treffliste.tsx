@@ -1,31 +1,79 @@
-import { Heading } from "@navikt/ds-react";
-import { useEffect } from "react";
+import { Alert, Heading, Loader } from "@navikt/ds-react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { hentNavn } from "../../api/apiService";
+import { hentNavn, hentOppdrag } from "../../api/apiService";
+import AlertWithCloseButton from "../../components/AlertWithCloseButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LabelText from "../../components/LabelText";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
+import type { ErrorMessage } from "../../types/ErrorMessage";
 import { isEmpty } from "../../util/commonUtil";
 import { ROOT } from "../../util/routenames";
+import ReloadButton from "./ReloadButton";
 import TrefflisteTable from "./TrefflisteTable";
 
 export default function Treffliste() {
 	const navigate = useNavigate();
-	const { gjelderId, fagGruppe, oppdragsListe, gjelderNavn, setGjelderNavn } =
-		useStore();
+	const {
+		gjelderId,
+		fagGruppe,
+		oppdragsListe,
+		gjelderNavn,
+		setGjelderNavn,
+		setOppdragsListe,
+	} = useStore();
+	const [isReloading, setIsReloading] = useState(true);
+	const [reloadError, setReloadError] = useState<ErrorMessage | null>(null);
 
-	useEffect(() => {
-		if (!gjelderId || oppdragsListe === undefined || isEmpty(oppdragsListe)) {
-			navigate(ROOT, { replace: true });
+	const reloadTreffliste = useCallback(() => {
+		if (!gjelderId) {
+			return;
 		}
 
+		setIsReloading(true);
+		setReloadError(null);
+
+		hentOppdrag({
+			gjelderId,
+			fagGruppeKode: fagGruppe?.type,
+		})
+			.then((response) => {
+				setOppdragsListe(response);
+			})
+			.catch((error) => {
+				// Behold tidligere treffliste i minnet som bevisst fallback hvis
+				// oppdateringen feiler, slik at brukeren fortsatt ser et faktisk
+				// gyldig innhold mens feilen vises i alerten.
+				setReloadError({
+					variant: "error",
+					message:
+						error.message || "Klarte ikke å oppdatere trefflisten. Prøv igjen.",
+				});
+			})
+			.finally(() => {
+				setIsReloading(false);
+			});
+	}, [fagGruppe?.type, gjelderId, setOppdragsListe]);
+
+	useEffect(() => {
+		if (!gjelderId) {
+			navigate(ROOT, { replace: true });
+			return;
+		}
+	}, [gjelderId, navigate]);
+
+	useEffect(() => {
+		reloadTreffliste();
+	}, [reloadTreffliste]);
+
+	useEffect(() => {
 		if (gjelderNavn === "") {
 			hentNavn({ gjelderId }).then((response) => {
 				setGjelderNavn(response.navn);
 			});
 		}
-	}, [navigate, gjelderId, gjelderNavn, oppdragsListe, setGjelderNavn]);
+	}, [gjelderId, gjelderNavn, setGjelderNavn]);
 
 	return (
 		<div className={commonstyles.page}>
@@ -47,12 +95,35 @@ export default function Treffliste() {
 							text={fagGruppe ? `${fagGruppe.navn}(${fagGruppe.type})` : "Alle"}
 						/>
 					</div>
+					<div className={commonstyles["page__top-sokekriterier__footer"]}>
+						<ReloadButton isLoading={isReloading} onClick={reloadTreffliste} />
+					</div>
 				</div>
+				{!!reloadError && (
+					<div className={commonstyles["page__top-alert"]}>
+						<AlertWithCloseButton
+							show={!!reloadError}
+							setShow={() => setReloadError(null)}
+							variant={reloadError.variant}
+						>
+							{reloadError.message}
+						</AlertWithCloseButton>
+					</div>
+				)}
 			</div>
-			{!oppdragsListe ||
-				(!isEmpty(oppdragsListe) && (
-					<TrefflisteTable oppdragsListe={oppdragsListe} />
-				))}
+
+			{isReloading && !oppdragsListe && (
+				<Loader size="2xlarge" title="Laster ..." variant="interaction" />
+			)}
+			{oppdragsListe && !isEmpty(oppdragsListe) && (
+				<TrefflisteTable oppdragsListe={oppdragsListe} />
+			)}
+			{oppdragsListe && isEmpty(oppdragsListe) && !isReloading && (
+				<Alert variant="info" role="status">
+					Fant ingen oppdrag for {gjelderId}
+					{fagGruppe ? ` med faggruppe ${fagGruppe.type}` : ""}
+				</Alert>
+			)}
 		</div>
 	);
 }
