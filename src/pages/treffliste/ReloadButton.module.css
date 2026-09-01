@@ -1,0 +1,19 @@
+.reload {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+}
+
+.reload__status {
+	color: var(--a-text-subtle);
+}
+
+.reload__ikon--success {
+	color: var(--a-icon-success);
+}
+
+.reload__ikon--error {
+	color: var(--a-icon-danger);
+}

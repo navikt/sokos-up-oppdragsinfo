@@ -8,9 +8,9 @@ import LabelText from "../../components/LabelText";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import type { ErrorMessage } from "../../types/ErrorMessage";
-import { isEmpty } from "../../util/commonUtil";
+import { formaterSistOppdatert, isEmpty } from "../../util/commonUtil";
 import { ROOT } from "../../util/routenames";
-import ReloadButton from "./ReloadButton";
+import ReloadButton, { type ReloadStatus } from "./ReloadButton";
 import TrefflisteTable from "./TrefflisteTable";
 
 export default function Treffliste() {
@@ -24,37 +24,55 @@ export default function Treffliste() {
 		setOppdragsListe,
 	} = useStore();
 	const [isReloading, setIsReloading] = useState(true);
+	// Statusikonet gjelder kun manuelle klikk på "Last inn på nytt". Den
+	// automatiske hentingen ved mount/refresh skal ikke gi hake eller kryss.
+	const [reloadStatus, setReloadStatus] = useState<ReloadStatus>("idle");
 	const [reloadError, setReloadError] = useState<ErrorMessage | null>(null);
+	// Settes kun ved vellykket henting, slik at tidspunktet alltid beskriver den
+	// trefflisten som faktisk vises.
+	const [sistOppdatert, setSistOppdatert] = useState<Date | null>(null);
 
-	const reloadTreffliste = useCallback(() => {
-		if (!gjelderId) {
-			return;
-		}
+	const hentTreffliste = useCallback(
+		(erManuell: boolean) => {
+			if (!gjelderId) {
+				return;
+			}
 
-		setIsReloading(true);
-		setReloadError(null);
+			setIsReloading(true);
+			setReloadError(null);
+			setReloadStatus("idle");
 
-		hentOppdrag({
-			gjelderId,
-			fagGruppeKode: fagGruppe?.type,
-		})
-			.then((response) => {
-				setOppdragsListe(response);
+			hentOppdrag({
+				gjelderId,
+				fagGruppeKode: fagGruppe?.type,
 			})
-			.catch((error) => {
-				// Behold tidligere treffliste i minnet som bevisst fallback hvis
-				// oppdateringen feiler, slik at brukeren fortsatt ser et faktisk
-				// gyldig innhold mens feilen vises i alerten.
-				setReloadError({
-					variant: "error",
-					message:
-						error.message || "Klarte ikke å oppdatere trefflisten. Prøv igjen.",
+				.then((response) => {
+					setOppdragsListe(response);
+					setSistOppdatert(new Date());
+					if (erManuell) {
+						setReloadStatus("success");
+					}
+				})
+				.catch((error) => {
+					// Behold tidligere treffliste i minnet som bevisst fallback hvis
+					// oppdateringen feiler, slik at brukeren fortsatt ser et faktisk
+					// gyldig innhold mens feilen vises i alerten.
+					setReloadError({
+						variant: "error",
+						message:
+							error.message ||
+							"Klarte ikke å oppdatere trefflisten. Prøv igjen.",
+					});
+					if (erManuell) {
+						setReloadStatus("error");
+					}
+				})
+				.finally(() => {
+					setIsReloading(false);
 				});
-			})
-			.finally(() => {
-				setIsReloading(false);
-			});
-	}, [fagGruppe?.type, gjelderId, setOppdragsListe]);
+		},
+		[fagGruppe?.type, gjelderId, setOppdragsListe],
+	);
 
 	useEffect(() => {
 		if (!gjelderId) {
@@ -64,8 +82,8 @@ export default function Treffliste() {
 	}, [gjelderId, navigate]);
 
 	useEffect(() => {
-		reloadTreffliste();
-	}, [reloadTreffliste]);
+		hentTreffliste(false);
+	}, [hentTreffliste]);
 
 	useEffect(() => {
 		if (gjelderNavn === "") {
@@ -96,7 +114,16 @@ export default function Treffliste() {
 						/>
 					</div>
 					<div className={commonstyles["page__top-sokekriterier__footer"]}>
-						<ReloadButton isLoading={isReloading} onClick={reloadTreffliste} />
+						<ReloadButton
+							isLoading={isReloading}
+							status={reloadStatus}
+							lastUpdatedText={
+								sistOppdatert
+									? `Sist oppdatert ${formaterSistOppdatert(sistOppdatert)}`
+									: undefined
+							}
+							onClick={() => hentTreffliste(true)}
+						/>
 					</div>
 				</div>
 				{!!reloadError && (
