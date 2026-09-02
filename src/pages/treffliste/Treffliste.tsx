@@ -5,12 +5,13 @@ import { hentNavn, hentOppdrag } from "../../api/apiService";
 import AlertWithCloseButton from "../../components/AlertWithCloseButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LabelText from "../../components/LabelText";
+import ReloadButton, { type ReloadStatus } from "../../components/ReloadButton";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import type { ErrorMessage } from "../../types/ErrorMessage";
+import { TREFFLISTE } from "../../umami/umami";
 import { formaterSistOppdatert, isEmpty } from "../../util/commonUtil";
 import { ROOT } from "../../util/routenames";
-import ReloadButton, { type ReloadStatus } from "./ReloadButton";
 import TrefflisteTable from "./TrefflisteTable";
 
 export default function Treffliste() {
@@ -122,6 +123,7 @@ export default function Treffliste() {
 									? `Sist oppdatert ${formaterSistOppdatert(sistOppdatert)}`
 									: undefined
 							}
+							umamiEvent={TREFFLISTE.RELOAD}
 							onClick={() => hentTreffliste(true)}
 						/>
 					</div>

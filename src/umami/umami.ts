@@ -28,6 +28,7 @@ export const OPPDRAG = {
 	OMPOSTERINGER: "omposteringer åpnet",
 	STATUS_HISTORIKK: "statushistorikk åpnet",
 	BESTILL_SKATTEKORT: "bestill skattekort trykket",
+	RELOAD: "last inn på nytt trykket",
 };
 
 export const LINJE = {

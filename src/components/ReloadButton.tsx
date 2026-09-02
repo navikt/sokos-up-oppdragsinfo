@@ -4,7 +4,7 @@ import {
 	XMarkIcon,
 } from "@navikt/aksel-icons";
 import { BodyShort, Button } from "@navikt/ds-react";
-import { logUserEvent, TREFFLISTE } from "../../umami/umami";
+import { logUserEvent } from "../umami/umami";
 import styles from "./ReloadButton.module.css";
 
 export type ReloadStatus = "idle" | "success" | "error";
@@ -13,15 +13,17 @@ export default function ReloadButton({
 	isLoading,
 	status,
 	lastUpdatedText,
+	umamiEvent,
 	onClick,
 }: {
 	isLoading: boolean;
 	status: ReloadStatus;
 	lastUpdatedText?: string;
+	umamiEvent: string;
 	onClick: () => void;
 }) {
 	function handleClick() {
-		logUserEvent(TREFFLISTE.RELOAD);
+		logUserEvent(umamiEvent);
 		onClick();
 	}
 
