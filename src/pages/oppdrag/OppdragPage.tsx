@@ -104,19 +104,6 @@ export default function OppdragPage() {
 							isSkattepliktig={isOppdragSkattepliktig}
 						/>
 					)}
-					<div className={commonstyles["page__top-sokekriterier__footer"]}>
-						<ReloadButton
-							isLoading={isReloading}
-							status={reloadStatus}
-							lastUpdatedText={
-								sistOppdatert
-									? `Sist oppdatert ${formaterSistOppdatert(sistOppdatert)}`
-									: undefined
-							}
-							umamiEvent={OPPDRAG.RELOAD}
-							onClick={() => hentOppdragsLinjer(true)}
-						/>
-					</div>
 					<div className={styles["button-row"]}>
 						<div className={styles["button-row--left"]}>
 							<Suspense
@@ -184,6 +171,19 @@ export default function OppdragPage() {
 								Til Excel
 							</Button>
 						</div>
+					</div>
+					<div className={commonstyles["page__top-sokekriterier__footer"]}>
+						<ReloadButton
+							isLoading={isReloading}
+							status={reloadStatus}
+							lastUpdatedText={
+								sistOppdatert
+									? `Sist oppdatert ${formaterSistOppdatert(sistOppdatert)}`
+									: undefined
+							}
+							umamiEvent={OPPDRAG.RELOAD}
+							onClick={() => hentOppdragsLinjer(true)}
+						/>
 					</div>
 				</div>
 			</div>

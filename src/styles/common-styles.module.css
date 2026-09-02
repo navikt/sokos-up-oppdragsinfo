@@ -9,7 +9,6 @@
 	margin: 0.75rem auto;
 	gap: 1rem;
 	width: 100%;
-	min-width: fit-content;
 	max-width: var(--page-max-width);
 }
 
@@ -83,7 +82,10 @@
 
 .flex--row-gap-sm {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 0.25rem;
+	min-width: 0;
+	overflow-wrap: break-word;
 }
 
 .text--bold {
@@ -92,4 +94,9 @@
 
 .text--nowrap {
 	white-space: nowrap;
+}
+
+.text--wrap {
+	min-width: 0;
+	overflow-wrap: break-word;
 }
