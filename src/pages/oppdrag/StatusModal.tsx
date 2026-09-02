@@ -13,7 +13,7 @@ interface StatusModalProps {
 export default function StatusModal(props: StatusModalProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const ref = useRef<HTMLDialogElement>(null);
-	const { data } = useFetchHentOppdragsLinjeStatuser(
+	const { data, mutate } = useFetchHentOppdragsLinjeStatuser(
 		props.oppdragsId,
 		props.linjeId,
 		isOpen,
@@ -21,6 +21,11 @@ export default function StatusModal(props: StatusModalProps) {
 
 	const handleClick = () => {
 		setIsOpen(true);
+		// SWR-nøkkelen er uendret mellom åpninger av modalen (samme
+		// oppdragsId/linjeId), så uten en eksplisitt revalidering her vil
+		// modalen fortsette å vise data fra første gang den ble åpnet,
+		// selv om status har endret seg i mellomtiden.
+		mutate();
 		ref.current?.showModal();
 	};
 

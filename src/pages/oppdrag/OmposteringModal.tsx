@@ -8,10 +8,18 @@ import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
 export default function OmposteringModal(props: OppdragsId) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const ref = useRef<HTMLDialogElement>(null);
-	const { data } = useFetchHentOppdragsOmposteringer(props.oppdragsId, isOpen);
+	const { data, mutate } = useFetchHentOppdragsOmposteringer(
+		props.oppdragsId,
+		isOpen,
+	);
 
 	const handleClick = () => {
 		setIsOpen(true);
+		// SWR-nøkkelen er uendret mellom åpninger av modalen (samme
+		// oppdragsId), så uten en eksplisitt revalidering her vil modalen
+		// fortsette å vise data fra første gang den ble åpnet, selv om
+		// omposteringene har endret seg i mellomtiden.
+		mutate();
 		ref.current?.showModal();
 	};
 
