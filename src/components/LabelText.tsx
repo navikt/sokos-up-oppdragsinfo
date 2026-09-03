@@ -10,11 +10,15 @@ export default function LabelText(props: LabelTextProps) {
 	return (
 		<div className={commonstyles["flex--row-gap-sm"]}>
 			<div className={commonstyles["text--bold"]}>{props.label}:</div>
-			{props.nowrap ? (
-				<div className={commonstyles["text--nowrap"]}>{props.text}</div>
-			) : (
-				props.text
-			)}
+			<div
+				className={
+					props.nowrap
+						? commonstyles["text--nowrap"]
+						: commonstyles["text--wrap"]
+				}
+			>
+				{props.text}
+			</div>
 		</div>
 	);
 }

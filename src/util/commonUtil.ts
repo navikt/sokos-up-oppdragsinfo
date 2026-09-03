@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import "dayjs/locale/nb";
 
 function isSymbol(x: unknown): x is symbol {
 	return typeof x === "symbol";
@@ -60,6 +61,12 @@ export function formatDate(value?: string) {
 
 export function formatDateTime(value: string) {
 	return dayjs(value).format("DD.MM.YYYY HH:mm:ss");
+}
+
+// Locale settes per instans (ikke globalt) slik at øvrig datoformatering i
+// appen ikke påvirkes.
+export function formaterSistOppdatert(tidspunkt: Date): string {
+	return dayjs(tidspunkt).locale("nb").format("DD. MMM [kl.] HH.mm");
 }
 
 export interface SortState<T> {

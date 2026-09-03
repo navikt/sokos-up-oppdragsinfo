@@ -48,6 +48,13 @@ export const useStore = create<AppState & AppStateActions>()(
 			{
 				name: "app-state",
 				storage: createJSONStorage(() => sessionStorage),
+				// oppdragsListe skal ikke persisteres: trefflisten hentes alltid på
+				// nytt fra backend ved sidelasting/refresh, slik at man aldri viser
+				// en potensielt utdatert liste fra sessionStorage.
+				partialize: (state) => ({
+					...state,
+					oppdragsListe: undefined,
+				}),
 			},
 		),
 	),
