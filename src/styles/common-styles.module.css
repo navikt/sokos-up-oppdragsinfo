@@ -9,7 +9,6 @@
 	margin: 0.75rem auto;
 	gap: 1rem;
 	width: 100%;
-	min-width: fit-content;
 	max-width: var(--page-max-width);
 }
 
@@ -38,6 +37,16 @@
 	flex-flow: row wrap;
 	gap: 2.5rem;
 	padding-top: 1rem;
+}
+
+.page__top-sokekriterier__footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1rem;
+}
+
+.page__top-alert {
+	width: 100%;
 }
 
 .link {
@@ -73,7 +82,10 @@
 
 .flex--row-gap-sm {
 	display: flex;
+	flex-wrap: wrap;
 	gap: 0.25rem;
+	min-width: 0;
+	overflow-wrap: break-word;
 }
 
 .text--bold {
@@ -82,4 +94,9 @@
 
 .text--nowrap {
 	white-space: nowrap;
+}
+
+.text--wrap {
+	min-width: 0;
+	overflow-wrap: break-word;
 }

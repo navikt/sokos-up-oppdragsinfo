@@ -1,6 +1,6 @@
 .button-row {
 	display: flex;
-	flex-direction: row;
+	flex-flow: row wrap;
 	gap: 0.75rem;
 	margin-top: 1rem;
 	justify-content: space-between;
@@ -8,12 +8,24 @@
 
 .button-row--left {
 	display: flex;
+	flex-flow: row wrap;
 	justify-content: flex-start;
 	gap: 1rem;
 }
 
 .button-row--right {
 	display: flex;
+	flex-flow: row wrap;
 	justify-content: flex-end;
 	gap: 1rem;
+}
+
+/* Uten dette vokser/krymper knappene ulikt seg imellom ettersom de har ulik
+ * tekstlengde (flex-grow/-shrink fordeles proporsjonalt med innholdsbredden
+ * som standard). Med flex: none beholder alle knappene sin naturlige
+ * størrelse, og de flytter seg heller ned på ny linje (via flex-wrap over)
+ * når det ikke er nok plass. */
+.button-row--left > *,
+.button-row--right > * {
+	flex: none;
 }

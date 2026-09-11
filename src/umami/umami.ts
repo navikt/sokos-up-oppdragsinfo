@@ -16,6 +16,10 @@ export const TABLE = {
 	SORTER: "sortert",
 };
 
+export const TREFFLISTE = {
+	RELOAD: "last inn på nytt trykket",
+};
+
 export const OPPDRAG = {
 	ATTESTERT_MODAL_OPENED: "attestertmodal åpnet",
 	STATUS_MODAL_OPENED: "statusmodal åpnet",
@@ -24,6 +28,7 @@ export const OPPDRAG = {
 	OMPOSTERINGER: "omposteringer åpnet",
 	STATUS_HISTORIKK: "statushistorikk åpnet",
 	BESTILL_SKATTEKORT: "bestill skattekort trykket",
+	RELOAD: "last inn på nytt trykket",
 };
 
 export const LINJE = {

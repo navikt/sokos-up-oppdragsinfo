@@ -24,6 +24,15 @@ test.describe("Axe a11y", () => {
 			window.sessionStorage.setItem("app-state", JSON.stringify(appState));
 		}, aTrefflisteAppState);
 
+		await page.route("**/oppdragsinfo/sok", async (route) => {
+			await route.fulfill({
+				json: {
+					data: aTrefflisteAppState.state.oppdragsListe,
+					errorMessage: "",
+				},
+			});
+		});
+
 		await page.goto("/oppdragsinfo/treffliste");
 
 		await expect(
