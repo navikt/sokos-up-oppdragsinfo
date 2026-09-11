@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchSkyldnere } from "../../api/apiService";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
 import type { Skyldner } from "../../types/Skyldner";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function SkyldnereTable(props: OppdragsIdent) {
 	const { data } = useFetchSkyldnere(props.oppdragsId, props.linjeId);

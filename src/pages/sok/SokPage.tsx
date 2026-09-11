@@ -5,7 +5,7 @@ import { hentOppdrag } from "../../api/apiService";
 import { useStore } from "../../store/AppState";
 import type { ErrorMessage } from "../../types/ErrorMessage";
 import type { SokParameter } from "../../types/SokParameter";
-import { isEmpty } from "../../util/commonUtil";
+import { isEmpty } from "../../util/commonUtils";
 import { TREFFLISTE } from "../../util/routenames";
 import SokForm from "./SokForm";
 import styles from "./SokPage.module.css";

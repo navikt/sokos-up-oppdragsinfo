@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchKravhaver } from "../../api/apiService";
 import type { Kravhaver } from "../../types/Kravhaver";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDate, isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtils";
 
 export default function KravhaverTable(props: OppdragsIdent) {
 	const { data } = useFetchKravhaver(props.oppdragsId, props.linjeId);

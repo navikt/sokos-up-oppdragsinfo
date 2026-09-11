@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchMaksdato } from "../../api/apiService";
 import type { Maksdato } from "../../types/Maksdato";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function MaksdatoerTable(props: OppdragsIdent) {
 	const { data } = useFetchMaksdato(props.oppdragsId, props.linjeId);

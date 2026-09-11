@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchKid } from "../../api/apiService";
 import type { Kid } from "../../types/Kid";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function KidTable(props: OppdragsIdent) {
 	const { data } = useFetchKid(props.oppdragsId, props.linjeId);

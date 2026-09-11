@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchOvrig } from "../../api/apiService";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
 import type { Ovrig } from "../../types/Ovrig";
-import { isEmpty } from "../../util/commonUtil";
+import { isEmpty } from "../../util/commonUtils";
 
 export default function OvrigTable(props: OppdragsIdent) {
 	const { data } = useFetchOvrig(props.oppdragsId, props.linjeId);

@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useFetchHentOppdragsEnhethistorikk } from "../../api/apiService";
 import type { Enhet } from "../../types/EnhetsType";
 import type { OppdragsId } from "../../types/OppdragsId";
-import { formatDate, isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtils";
 
 export default function EnhetshistorikkModal(props: OppdragsId) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -13,7 +13,7 @@ import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import type { ErrorMessage } from "../../types/ErrorMessage";
 import { OPPDRAG } from "../../umami/umami";
-import { formaterSistOppdatert } from "../../util/commonUtil";
+import { formaterSistOppdatert } from "../../util/commonUtils";
 import { downloadAsCsv } from "../../util/csvExport";
 import { ROOT } from "../../util/routenames";
 import BestilleSkattekortButton from "./BestilleSkattekortButton";

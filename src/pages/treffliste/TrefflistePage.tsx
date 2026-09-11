@@ -9,12 +9,12 @@ import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import type { ErrorMessage } from "../../types/ErrorMessage";
 import { TREFFLISTE } from "../../umami/umami";
-import { formaterSistOppdatert, isEmpty } from "../../util/commonUtil";
+import { formaterSistOppdatert, isEmpty } from "../../util/commonUtils";
 import { ROOT } from "../../util/routenames";
-import styles from "./Treffliste.module.css";
-import TrefflisteTable from "./TrefflisteTable";
+import styles from "./TrefflistePage.module.css";
+import TreffTabell from "./TreffTabell";
 
-export default function Treffliste() {
+export default function TrefflistePage() {
 	const navigate = useNavigate();
 	const {
 		gjelderId,
@@ -146,7 +146,7 @@ export default function Treffliste() {
 				<Loader size="2xlarge" title="Laster ..." variant="interaction" />
 			)}
 			{oppdragsListe && !isEmpty(oppdragsListe) && (
-				<TrefflisteTable oppdragsListe={oppdragsListe} />
+				<TreffTabell oppdragsListe={oppdragsListe} />
 			)}
 			{oppdragsListe && isEmpty(oppdragsListe) && !isReloading && (
 				<Box className={styles.treffliste__announcement}>

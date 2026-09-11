@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useFetchHentOppdragsStatushistorikk } from "../../api/apiService";
 import type { OppdragsId } from "../../types/OppdragsId";
 import type { OppdragsStatus } from "../../types/OppdragsStatus";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function StatushistorikkModal(props: OppdragsId) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);

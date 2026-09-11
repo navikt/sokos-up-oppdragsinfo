@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useFetchHentOppdragsOmposteringer } from "../../api/apiService";
 import type { Ompostering } from "../../types/Ompostering";
 import type { OppdragsId } from "../../types/OppdragsId";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function OmposteringModal(props: OppdragsId) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);

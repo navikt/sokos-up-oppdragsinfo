@@ -2,7 +2,7 @@ import { Button, Modal, Table } from "@navikt/ds-react";
 import { useRef, useState } from "react";
 import { useFetchHentOppdragsLinjeStatuser } from "../../api/apiService";
 import type { LinjeStatus } from "../../types/LinjeStatus";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 interface StatusModalProps {
 	oppdragsId: string;

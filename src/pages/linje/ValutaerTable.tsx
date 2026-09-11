@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchValuta } from "../../api/apiService";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
 import type { Valuta } from "../../types/Valuta";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function ValutaerTable(props: OppdragsIdent) {
 	const { data } = useFetchValuta(props.oppdragsId, props.linjeId);

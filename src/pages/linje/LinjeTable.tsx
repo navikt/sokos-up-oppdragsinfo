@@ -14,7 +14,7 @@ import {
 	handleSort,
 	hasKey,
 	type SortState,
-} from "../../util/commonUtil";
+} from "../../util/commonUtils";
 
 interface KorrigerteLinjerTableProps {
 	oppdragsLinjeDetaljer: OppdragsLinjeDetaljerDTO;

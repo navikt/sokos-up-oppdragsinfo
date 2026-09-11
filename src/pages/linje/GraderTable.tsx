@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchGrad } from "../../api/apiService";
 import type { Grad } from "../../types/Grad";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function GraderTable(props: OppdragsIdent) {
 	const { data } = useFetchGrad(props.oppdragsId, props.linjeId);

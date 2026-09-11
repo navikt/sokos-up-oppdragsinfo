@@ -2,7 +2,7 @@ import { Button, Modal, Table } from "@navikt/ds-react";
 import { useRef, useState } from "react";
 import { useFetchHentAttestanter } from "../../api/apiService";
 import type { Attestant } from "../../types/Attestant";
-import { formatDate, isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtils";
 
 interface AttestertModalProps {
 	oppdragsId: string;
