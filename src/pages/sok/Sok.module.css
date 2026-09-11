@@ -7,7 +7,7 @@
 .sok__box {
 	padding: var(--ax-space-24);
 	position: relative;
-	border-radius: 0.5rem;
+	border-radius: var(--ax-radius-8);
 	background-color: var(--ax-bg-meta-purple-moderateA);
 }
 

@@ -9,7 +9,6 @@
 	margin: var(--ax-space-12) auto;
 	gap: var(--ax-space-16);
 	width: 100%;
-	min-width: fit-content;
 	max-width: var(--page-max-width);
 }
 
@@ -27,17 +26,27 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	border-radius: 0.75rem;
+	border-radius: var(--ax-radius-8);
 	background-color: var(--ax-bg-accent-soft);
-	padding: var(--ax-space-20);
+	padding: var(--ax-space-16) var(--ax-space-24);
 	box-sizing: border-box;
+	gap: var(--ax-space-16);
 }
 
 .page__top-sokekriterier__content {
 	display: flex;
 	flex-flow: row wrap;
 	gap: var(--ax-space-40);
-	padding-top: var(--ax-space-16);
+}
+
+.page__top-sokekriterier__footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 1rem;
+}
+
+.page__top-alert {
+	width: 100%;
 }
 
 .link {
@@ -73,7 +82,10 @@
 
 .flex--row-gap-sm {
 	display: flex;
+	flex-wrap: wrap;
 	gap: var(--ax-space-4);
+	min-width: 0;
+	overflow-wrap: break-word;
 }
 
 .text--bold {
@@ -82,4 +94,9 @@
 
 .text--nowrap {
 	white-space: nowrap;
+}
+
+.text--wrap {
+	min-width: 0;
+	overflow-wrap: break-word;
 }

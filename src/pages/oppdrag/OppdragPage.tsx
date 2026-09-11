@@ -1,6 +1,6 @@
 import { FileCsvIcon } from "@navikt/aksel-icons";
 import { Button, Heading, LocalAlert } from "@navikt/ds-react";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import {
 	useFetchHentOppdragsLinjer,
@@ -8,9 +8,12 @@ import {
 } from "../../api/apiService";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import OppdragEgenskapPanel from "../../components/OppdragEgenskapPanel";
+import ReloadButton, { type ReloadStatus } from "../../components/ReloadButton";
 import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
+import type { ErrorMessage } from "../../types/ErrorMessage";
 import { OPPDRAG } from "../../umami/umami";
+import { formaterSistOppdatert } from "../../util/commonUtil";
 import { downloadAsCsv } from "../../util/csvExport";
 import { ROOT } from "../../util/routenames";
 import BestilleSkattekortButton from "./BestilleSkattekortButton";
@@ -20,15 +23,60 @@ import styles from "./Oppdrag.module.css";
 import OppdragLinjeTable from "./OppdragTable";
 import StatushistorikkModal from "./StatushistorikkModal";
 
-export default function Oppdrag() {
+export default function OppdragPage() {
 	const navigate = useNavigate();
 
 	const { gjelderId } = useStore.getState();
 	const { oppdrag } = useStore();
-	const { data } = useFetchHentOppdragsLinjer(oppdrag?.oppdragsId);
+	const {
+		data,
+		mutate: mutateOppdragsLinjer,
+		isValidating: isReloading,
+	} = useFetchHentOppdragsLinjer(oppdrag?.oppdragsId);
 	const { data: isOppdragSkattepliktig, error: isOppdragSkattepliktigError } =
 		useFetchIsSkattepliktig(oppdrag?.oppdragsId);
 	const [skattekortstatus, setSkattekortstatus] = useState<string>("UKJENT");
+	// Statusikonet gjelder kun manuelle klikk på "Last inn på nytt". Den
+	// automatiske hentingen ved mount skal ikke gi hake eller kryss.
+	const [reloadStatus, setReloadStatus] = useState<ReloadStatus>("idle");
+	const [reloadError, setReloadError] = useState<ErrorMessage | null>(null);
+	// Settes kun ved vellykket henting, slik at tidspunktet alltid beskriver de
+	// oppdragslinjene som faktisk vises.
+	const [sistOppdatert, setSistOppdatert] = useState<Date | null>(null);
+
+	const hentOppdragsLinjer = useCallback(
+		(erManuell: boolean) => {
+			setReloadError(null);
+			setReloadStatus("idle");
+
+			mutateOppdragsLinjer()
+				.then(() => {
+					setSistOppdatert(new Date());
+					if (erManuell) {
+						setReloadStatus("success");
+					}
+				})
+				.catch((error) => {
+					setReloadError({
+						status: "error",
+						message:
+							error.message ||
+							"Klarte ikke å oppdatere oppdragslinjene. Prøv igjen.",
+					});
+					if (erManuell) {
+						setReloadStatus("error");
+					}
+				});
+		},
+		[mutateOppdragsLinjer],
+	);
+
+	// Oppdragslinjene hentes fra backend hver gang siden monteres, slik at
+	// saksbehandler ikke ser en utdatert attestert-status fra en tidligere
+	// visning av det samme oppdraget.
+	useEffect(() => {
+		hentOppdragsLinjer(false);
+	}, [hentOppdragsLinjer]);
 
 	useEffect(() => {
 		if (!gjelderId || oppdrag === undefined) {
@@ -127,8 +175,31 @@ export default function Oppdrag() {
 							</Button>
 						</div>
 					</div>
+					<div className={commonstyles["page__top-sokekriterier__footer"]}>
+						<ReloadButton
+							isLoading={isReloading}
+							status={reloadStatus}
+							lastUpdatedText={
+								sistOppdatert
+									? `Sist oppdatert ${formaterSistOppdatert(sistOppdatert)}`
+									: undefined
+							}
+							umamiEvent={OPPDRAG.RELOAD}
+							onClick={() => hentOppdragsLinjer(true)}
+						/>
+					</div>
 				</div>
 			</div>
+			{!!reloadError && (
+				<div className={commonstyles["page__top-alert"]}>
+					<LocalAlert status={reloadError.status}>
+						<LocalAlert.Header>
+							<LocalAlert.Title as="h3">{reloadError.message}</LocalAlert.Title>
+							<LocalAlert.CloseButton onClick={() => setReloadError(null)} />
+						</LocalAlert.Header>
+					</LocalAlert>
+				</div>
+			)}
 			{!!alertMessage && (
 				<LocalAlert status={alertMessage.status}>
 					<LocalAlert.Header>

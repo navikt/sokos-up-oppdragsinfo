@@ -13,7 +13,7 @@ interface AttestertModalProps {
 export default function AttestertModal(props: AttestertModalProps) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const ref = useRef<HTMLDialogElement>(null);
-	const { data } = useFetchHentAttestanter(
+	const { data, mutate } = useFetchHentAttestanter(
 		props.oppdragsId,
 		props.linjeId,
 		isOpen,
@@ -21,6 +21,11 @@ export default function AttestertModal(props: AttestertModalProps) {
 
 	const handleClick = () => {
 		setIsOpen(true);
+		// SWR-nøkkelen er uendret mellom åpninger av modalen (samme
+		// oppdragsId/linjeId), så uten en eksplisitt revalidering her vil
+		// modalen fortsette å vise data fra første gang den ble åpnet,
+		// selv om attestering har skjedd i mellomtiden.
+		mutate();
 		ref.current?.showModal();
 	};
 

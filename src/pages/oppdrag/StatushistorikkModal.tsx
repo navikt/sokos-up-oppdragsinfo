@@ -8,13 +8,18 @@ import { formatDateTime, isEmpty } from "../../util/commonUtil";
 export default function StatushistorikkModal(props: OppdragsId) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const ref = useRef<HTMLDialogElement>(null);
-	const { data } = useFetchHentOppdragsStatushistorikk(
+	const { data, mutate } = useFetchHentOppdragsStatushistorikk(
 		props.oppdragsId,
 		isOpen,
 	);
 
 	const handleClick = () => {
 		setIsOpen(true);
+		// SWR-nøkkelen er uendret mellom åpninger av modalen (samme
+		// oppdragsId), så uten en eksplisitt revalidering her vil modalen
+		// fortsette å vise data fra første gang den ble åpnet, selv om
+		// statushistorikken har endret seg i mellomtiden.
+		mutate();
 		ref.current?.showModal();
 	};
 

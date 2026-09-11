@@ -2,9 +2,9 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 4rem;
+	height: var(--ax-space-64);
 	width: 100%;
-	border-radius: 0.5rem;
+	border-radius: var(--ax-radius-8);
 	background-color: var(--ax-bg-meta-purple-moderateA);
 }
 
@@ -16,7 +16,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 0.3rem;
+	gap: var(--ax-space-4);
 }
 
 .breadcrumbs__left {
