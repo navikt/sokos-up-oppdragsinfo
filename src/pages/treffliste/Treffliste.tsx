@@ -1,4 +1,4 @@
-import { Alert, Heading, Loader, LocalAlert } from "@navikt/ds-react";
+import { Box, Heading, Loader, LocalAlert } from "@navikt/ds-react";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { hentNavn, hentOppdrag } from "../../api/apiService";
@@ -11,6 +11,7 @@ import type { ErrorMessage } from "../../types/ErrorMessage";
 import { TREFFLISTE } from "../../umami/umami";
 import { formaterSistOppdatert, isEmpty } from "../../util/commonUtil";
 import { ROOT } from "../../util/routenames";
+import styles from "./Treffliste.module.css";
 import TrefflisteTable from "./TrefflisteTable";
 
 export default function Treffliste() {
@@ -148,10 +149,12 @@ export default function Treffliste() {
 				<TrefflisteTable oppdragsListe={oppdragsListe} />
 			)}
 			{oppdragsListe && isEmpty(oppdragsListe) && !isReloading && (
-				<Alert variant="info" role="status">
-					Fant ingen oppdrag for {gjelderId}
-					{fagGruppe ? ` med faggruppe ${fagGruppe.type}` : ""}
-				</Alert>
+				<Box className={styles.treffliste__announcement}>
+					<Heading level="2" size="small">
+						Fant ingen oppdrag for {gjelderId}
+						{fagGruppe ? ` med faggruppe ${fagGruppe.type}` : ""}
+					</Heading>
+				</Box>
 			)}
 		</div>
 	);

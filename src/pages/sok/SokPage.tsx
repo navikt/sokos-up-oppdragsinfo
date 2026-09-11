@@ -7,10 +7,10 @@ import type { ErrorMessage } from "../../types/ErrorMessage";
 import type { SokParameter } from "../../types/SokParameter";
 import { isEmpty } from "../../util/commonUtil";
 import { TREFFLISTE } from "../../util/routenames";
-import styles from "./Sok.module.css";
 import SokForm from "./SokForm";
+import styles from "./SokPage.module.css";
 
-export default function Sok() {
+export default function SokPage() {
 	const navigate = useNavigate();
 	const [error, setError] = useState<ErrorMessage | null>(null);
 	const [isLoading, setIsLoading] = useState(false);

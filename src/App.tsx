@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import NotFound from "./components/NotFound";
 import Linje from "./pages/linje/Linje";
 import OppdragPage from "./pages/oppdrag/OppdragPage";
-import Sok from "./pages/sok/Sok";
+import SokPage from "./pages/sok/SokPage";
 import Treffliste from "./pages/treffliste/Treffliste";
 import { initGrafanaFaro } from "./util/grafanaFaro";
 import { BASENAME, LINJE, OPPDRAG, ROOT, TREFFLISTE } from "./util/routenames";
@@ -16,7 +16,7 @@ export default function App() {
 	return (
 		<BrowserRouter basename={BASENAME}>
 			<Routes>
-				<Route path={ROOT} element={<Sok />} />
+				<Route path={ROOT} element={<SokPage />} />
 				<Route path={TREFFLISTE} element={<Treffliste />} />
 				<Route path={OPPDRAG} element={<OppdragPage />} />
 				<Route path={LINJE} element={<Linje />} />
