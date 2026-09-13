@@ -20,7 +20,7 @@ import type { SkyldnerList } from "../types/Skyldner";
 import type { TekstList } from "../types/Tekst";
 import type { ValutaList } from "../types/Valuta";
 import type { WrappedResponseWithErrorDTO } from "../types/WrappedResponseWithErrorDTO";
-import { axiosFetcher, axiosPostFetcher } from "./apiConfig";
+import { axiosFetcher, axiosPostFetcher } from "./config/apiConfig";
 import type { ForespoerselRequest } from "./models/ForespoerselRequest";
 import type { GjelderIdRequest } from "./models/GjelderIdRequest";
 import type { OppdragsRequest } from "./models/OppdragsRequest";
@@ -216,9 +216,12 @@ export function useFetchValuta(oppdragsId: string, linjeId: string) {
 }
 
 export function useFetchKid(oppdragsId: string, linjeId: string) {
-	return useSWRImmutable<KidList>(`/${oppdragsId}/${linjeId}/kid`, {
-		...swrConfig,
-	});
+	return useSWRImmutable<KidList>(
+		`/${oppdragsId}/${linjeId}/kid`,
+		swrConfig<KidList>((url) =>
+			axiosFetcher<KidList>(BASE_URI.OPPDRAGSINFO_API, url),
+		),
+	);
 }
 
 export function useFetchTekster(oppdragsId: string, linjeId: string) {

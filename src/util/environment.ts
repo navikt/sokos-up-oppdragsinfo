@@ -1,5 +1,9 @@
-const isProduction = window.location.href.includes("intern.nav.no");
-const isDevelopment = window.location.href.includes("intern.dev.nav.no");
+const isProduction = !!window.location.hostname.match(
+	/(intern|ansatt)\.nav\.no/,
+);
+const isDevelopment = !!window.location.hostname.match(
+	/(intern|ansatt)\.dev\.nav\.no/,
+);
 
 type Environment = "production" | "development" | "local";
 
