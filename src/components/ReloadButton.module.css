@@ -2,18 +2,18 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	gap: 0.75rem;
+	gap: var(--ax-space-12);
 	flex-wrap: wrap;
 }
 
 .reload__status {
-	color: var(--a-text-subtle);
+	color: var(--ax-text-neutral-subtle);
 }
 
 .reload__ikon--success {
-	color: var(--a-icon-success);
+	color: var(--ax-text-success);
 }
 
 .reload__ikon--error {
-	color: var(--a-icon-danger);
+	color: var(--ax-text-danger);
 }

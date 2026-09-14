@@ -1,7 +1,7 @@
 import LabelText from "../../components/LabelText";
 import commonstyles from "../../styles/common-styles.module.css";
 import type { Enhet, EnhetsType } from "../../types/EnhetsType";
-import { formatDate } from "../../util/commonUtil";
+import { formatDate } from "../../util/commonUtils";
 
 const enhetstypetekst: Record<EnhetsType, string> = {
 	BEH: "Ansvarssted",

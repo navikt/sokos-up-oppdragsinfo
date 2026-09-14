@@ -12,14 +12,14 @@ import {
 	handleSort,
 	hasKey,
 	type SortState,
-} from "../../util/commonUtil";
+} from "../../util/commonUtils";
 import { OPPDRAG } from "../../util/routenames";
 
-type TrefflisteTableProps = {
+type TreffTabellProps = {
 	oppdragsListe: OppdragsList;
 };
 
-export default function TrefflisteTable(props: TrefflisteTableProps) {
+export default function TreffTabell(props: TreffTabellProps) {
 	const [sort, setSort] = useState<SortState<Oppdrag> | undefined>();
 	const [page, setPage] = useState(1);
 	const [rowsPerPage, setRowsPerPage] = useState<number>(25);
@@ -57,7 +57,12 @@ export default function TrefflisteTable(props: TrefflisteTableProps) {
 				pageCount={pagecount}
 			/>
 			<div className={commonstyles.table}>
-				<Table zebraStripes sort={sort} onSortChange={oppdragSort}>
+				<Table
+					aria-label="Oppdragsliste"
+					zebraStripes
+					sort={sort}
+					onSortChange={oppdragSort}
+				>
 					<Table.Header>
 						<Table.Row>
 							<Table.ColumnHeader sortKey={"fagsystemId"} sortable>

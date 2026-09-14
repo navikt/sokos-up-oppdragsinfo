@@ -11,18 +11,16 @@ interface LinjeDetaljerAccordionProps {
 export default function LinjeDetaljerAccordion(
 	props: LinjeDetaljerAccordionProps,
 ) {
+	if (!props.enabled) return null;
+
 	return (
 		<Accordion.Item
 			onOpenChange={(open) => {
 				logUserEvent(LINJE.ACCORDION_TOGGLED, { accordion: props.title, open });
 			}}
 		>
-			{props.enabled && (
-				<>
-					<Accordion.Header>{props.title}</Accordion.Header>
-					<Accordion.Content>{props.children}</Accordion.Content>
-				</>
-			)}
+			<Accordion.Header>{props.title}</Accordion.Header>
+			<Accordion.Content>{props.children}</Accordion.Content>
 		</Accordion.Item>
 	);
 }
