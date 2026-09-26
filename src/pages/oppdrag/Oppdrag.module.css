@@ -1,8 +1,8 @@
 .button-row {
 	display: flex;
 	flex-flow: row wrap;
-	gap: 0.75rem;
-	margin-top: 1rem;
+	gap: var(--ax-space-12);
+	margin-top: var(--ax-space-16);
 	justify-content: space-between;
 }
 
@@ -10,14 +10,14 @@
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-start;
-	gap: 1rem;
+	gap: var(--ax-space-16);
 }
 
 .button-row--right {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: flex-end;
-	gap: 1rem;
+	gap: var(--ax-space-16);
 }
 
 /* Uten dette vokser/krymper knappene ulikt seg imellom ettersom de har ulik

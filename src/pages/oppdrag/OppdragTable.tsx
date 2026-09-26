@@ -17,7 +17,7 @@ import {
 	handleSort,
 	hasKey,
 	type SortState,
-} from "../../util/commonUtil";
+} from "../../util/commonUtils";
 import { LINJE } from "../../util/routenames";
 import AttestertModal from "./AttestertModal";
 import StatusModal from "./StatusModal";
@@ -65,7 +65,12 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
 				pageCount={pagecount}
 			/>
 			<div className={commonstyles.table}>
-				<Table zebraStripes sort={sort} onSortChange={linjeSort}>
+				<Table
+					aria-label="Oppdragslinjer"
+					zebraStripes
+					sort={sort}
+					onSortChange={linjeSort}
+				>
 					<Table.Header>
 						<Table.Row>
 							<Table.ColumnHeader sortKey={"linjeId"} sortable>
@@ -93,9 +98,9 @@ export default function OppdragLinjeTable(props: OppdragLinjeTableProps) {
 							<Table.ColumnHeader sortKey={"datoFom"} sortable>
 								Status fom
 							</Table.ColumnHeader>
-							<Table.HeaderCell scope="col">Linje ref</Table.HeaderCell>
-							<Table.HeaderCell scope="col">Attestert</Table.HeaderCell>
-							<Table.HeaderCell scope="col" />
+							<Table.ColumnHeader>Linje ref</Table.ColumnHeader>
+							<Table.ColumnHeader>Attestert</Table.ColumnHeader>
+							<Table.ColumnHeader />
 						</Table.Row>
 					</Table.Header>
 					<Table.Body>

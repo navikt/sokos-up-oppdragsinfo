@@ -1,0 +1,6 @@
+.sok__help-text {
+	position: absolute;
+	right: var(--ax-space-20);
+	top: var(--ax-space-20);
+	z-index: 5;
+}

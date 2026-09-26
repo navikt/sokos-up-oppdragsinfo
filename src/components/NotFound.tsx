@@ -7,7 +7,7 @@ export default function NotFound() {
 	const navigate = useNavigate();
 
 	return (
-		<Box paddingBlock="20 16" data-aksel-template="404-v2">
+		<Box paddingBlock="space-20 space-16" data-aksel-template="404-v2">
 			<div className={styles["error-page"]}>
 				<ChatExclamationmarkIcon
 					title="Chat exclamationmark ikon"

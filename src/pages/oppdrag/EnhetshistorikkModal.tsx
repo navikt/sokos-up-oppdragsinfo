@@ -1,9 +1,9 @@
-import { Alert, Button, Modal, Table } from "@navikt/ds-react";
+import { Button, LocalAlert, Modal, Table } from "@navikt/ds-react";
 import { useRef, useState } from "react";
 import { useFetchHentOppdragsEnhethistorikk } from "../../api/apiService";
 import type { Enhet } from "../../types/EnhetsType";
 import type { OppdragsId } from "../../types/OppdragsId";
-import { formatDate, isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtils";
 
 export default function EnhetshistorikkModal(props: OppdragsId) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -25,7 +25,12 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
 
 	return (
 		<div>
-			<Button size="small" variant="secondary-neutral" onClick={handleClick}>
+			<Button
+				size="small"
+				variant="secondary"
+				data-color="neutral"
+				onClick={handleClick}
+			>
 				Enhetshistorikk
 			</Button>
 
@@ -35,9 +40,9 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
 						<Table zebraStripes>
 							<Table.Header>
 								<Table.Row>
-									<Table.HeaderCell scope="col">Type</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
-									<Table.HeaderCell scope="col">Enhet</Table.HeaderCell>
+									<Table.ColumnHeader>Type</Table.ColumnHeader>
+									<Table.ColumnHeader>Dato fom</Table.ColumnHeader>
+									<Table.ColumnHeader>Enhet</Table.ColumnHeader>
 								</Table.Row>
 							</Table.Header>
 							<Table.Body>
@@ -53,9 +58,13 @@ export default function EnhetshistorikkModal(props: OppdragsId) {
 					)}
 					{!data ||
 						(isEmpty(data) && (
-							<Alert variant="info">
-								Det fins ingen enhetshistorikk for dette oppdraget.
-							</Alert>
+							<LocalAlert status="announcement">
+								<LocalAlert.Header>
+									<LocalAlert.Title as="h3">
+										Det fins ingen enhetshistorikk for dette oppdraget.
+									</LocalAlert.Title>
+								</LocalAlert.Header>
+							</LocalAlert>
 						))}
 				</Modal.Body>
 				<Modal.Footer>

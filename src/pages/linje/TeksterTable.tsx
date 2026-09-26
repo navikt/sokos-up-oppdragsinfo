@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchTekster } from "../../api/apiService";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
 import type { Tekst } from "../../types/Tekst";
-import { isEmpty } from "../../util/commonUtil";
+import { isEmpty } from "../../util/commonUtils";
 
 export default function TeksterTable(props: OppdragsIdent) {
 	const { data } = useFetchTekster(props.oppdragsId, props.linjeId);
@@ -12,8 +12,8 @@ export default function TeksterTable(props: OppdragsIdent) {
 			<Table zebraStripes>
 				<Table.Header>
 					<Table.Row>
-						<Table.HeaderCell scope="col">Linje</Table.HeaderCell>
-						<Table.HeaderCell scope="col">Tekst</Table.HeaderCell>
+						<Table.ColumnHeader>Linje</Table.ColumnHeader>
+						<Table.ColumnHeader>Tekst</Table.ColumnHeader>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>

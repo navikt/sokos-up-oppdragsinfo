@@ -14,7 +14,7 @@ interface BestilleSkattekortButtonProps {
 	setAlertMessage: (
 		message: {
 			message: string;
-			variant: "success" | "error" | "warning";
+			status: "success" | "error" | "warning";
 		} | null,
 	) => void;
 }
@@ -84,12 +84,12 @@ export default function BestilleSkattekortButton(
 						message:
 							"Skattekort bestilles fra Skatteetaten. Det tar normalt et par minutter." +
 							" Du kan lukke dette vinduet eller fortsette å arbeide i mellomtiden.",
-						variant: "success",
+						status: "success",
 					});
 				}
 			})
 			.catch((error) => {
-				props.setAlertMessage({ message: error.message, variant: "error" });
+				props.setAlertMessage({ message: error.message, status: "error" });
 			});
 	}
 
@@ -98,7 +98,8 @@ export default function BestilleSkattekortButton(
 			<span>
 				<Button
 					size={"small"}
-					variant={"secondary-neutral"}
+					variant="secondary"
+					data-color="neutral"
 					onClick={handleClick}
 					loading={shouldRefreshStatus}
 					disabled={
@@ -107,7 +108,11 @@ export default function BestilleSkattekortButton(
 						kanIkkeBestilleSkattekort(data?.status) ||
 						shouldRefreshStatus
 					}
-					icon={!!props.error && <ExclamationmarkTriangleFillIcon />}
+					icon={
+						!!props.error && (
+							<ExclamationmarkTriangleFillIcon title="Feil ved henting av skattepliktig-status" />
+						)
+					}
 				>
 					Bestill skattekort
 				</Button>

@@ -12,9 +12,9 @@ test.describe("Axe a11y", () => {
 		});
 
 		await page.goto("/oppdragsinfo");
+		await expect(page.getByRole("heading", { name: "Søk" })).toBeVisible();
 		const accessibilityScanResults = await new AxeBuilder({ page }).analyze();
 
-		await expect(page.getByRole("heading", { name: "Søk" })).toBeVisible();
 		expect(accessibilityScanResults.violations).toEqual([]);
 	});
 	test(`/oppdragsinfo/treffliste should not have any automatically detectable accessibility issues`, async ({
