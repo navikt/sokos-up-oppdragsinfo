@@ -1,18 +1,12 @@
-import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 import NotFound from "./components/NotFound";
 import Linje from "./pages/linje/Linje";
 import OppdragPage from "./pages/oppdrag/OppdragPage";
 import SokPage from "./pages/sok/SokPage";
 import TrefflistePage from "./pages/treffliste/TrefflistePage";
-import { initGrafanaFaro } from "./util/grafanaFaro";
 import { BASENAME, LINJE, OPPDRAG, ROOT, TREFFLISTE } from "./util/routenames";
 
 export default function App() {
-	useEffect(() => {
-		initGrafanaFaro();
-	}, []);
-
 	return (
 		<BrowserRouter basename={BASENAME}>
 			<Routes>
