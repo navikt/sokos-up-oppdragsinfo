@@ -1,8 +1,7 @@
-import { Alert, Heading, Loader } from "@navikt/ds-react";
+import { Box, Heading, Loader, LocalAlert } from "@navikt/ds-react";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { hentNavn, hentOppdrag } from "../../api/apiService";
-import AlertWithCloseButton from "../../components/AlertWithCloseButton";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import LabelText from "../../components/LabelText";
 import ReloadButton, { type ReloadStatus } from "../../components/ReloadButton";
@@ -10,11 +9,12 @@ import { useStore } from "../../store/AppState";
 import commonstyles from "../../styles/common-styles.module.css";
 import type { ErrorMessage } from "../../types/ErrorMessage";
 import { TREFFLISTE } from "../../umami/umami";
-import { formaterSistOppdatert, isEmpty } from "../../util/commonUtil";
+import { formaterSistOppdatert, isEmpty } from "../../util/commonUtils";
 import { ROOT } from "../../util/routenames";
-import TrefflisteTable from "./TrefflisteTable";
+import styles from "./TrefflistePage.module.css";
+import TreffTabell from "./TreffTabell";
 
-export default function Treffliste() {
+export default function TrefflistePage() {
 	const navigate = useNavigate();
 	const {
 		gjelderId,
@@ -59,7 +59,7 @@ export default function Treffliste() {
 					// oppdateringen feiler, slik at brukeren fortsatt ser et faktisk
 					// gyldig innhold mens feilen vises i alerten.
 					setReloadError({
-						variant: "error",
+						status: "error",
 						message:
 							error.message ||
 							"Klarte ikke å oppdatere trefflisten. Prøv igjen.",
@@ -130,13 +130,14 @@ export default function Treffliste() {
 				</div>
 				{!!reloadError && (
 					<div className={commonstyles["page__top-alert"]}>
-						<AlertWithCloseButton
-							show={!!reloadError}
-							setShow={() => setReloadError(null)}
-							variant={reloadError.variant}
-						>
-							{reloadError.message}
-						</AlertWithCloseButton>
+						<LocalAlert status={reloadError.status}>
+							<LocalAlert.Header>
+								<LocalAlert.Title as="h3">
+									{reloadError.message}
+								</LocalAlert.Title>
+								<LocalAlert.CloseButton onClick={() => setReloadError(null)} />
+							</LocalAlert.Header>
+						</LocalAlert>
 					</div>
 				)}
 			</div>
@@ -145,13 +146,15 @@ export default function Treffliste() {
 				<Loader size="2xlarge" title="Laster ..." variant="interaction" />
 			)}
 			{oppdragsListe && !isEmpty(oppdragsListe) && (
-				<TrefflisteTable oppdragsListe={oppdragsListe} />
+				<TreffTabell oppdragsListe={oppdragsListe} />
 			)}
 			{oppdragsListe && isEmpty(oppdragsListe) && !isReloading && (
-				<Alert variant="info" role="status">
-					Fant ingen oppdrag for {gjelderId}
-					{fagGruppe ? ` med faggruppe ${fagGruppe.type}` : ""}
-				</Alert>
+				<Box className={styles.treffliste__announcement}>
+					<Heading level="2" size="small">
+						Fant ingen oppdrag for {gjelderId}
+						{fagGruppe ? ` med faggruppe ${fagGruppe.type}` : ""}
+					</Heading>
+				</Box>
 			)}
 		</div>
 	);

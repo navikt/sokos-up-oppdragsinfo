@@ -2,7 +2,7 @@ import { Button, Modal, Table } from "@navikt/ds-react";
 import { useRef, useState } from "react";
 import { useFetchHentAttestanter } from "../../api/apiService";
 import type { Attestant } from "../../types/Attestant";
-import { formatDate, isEmpty } from "../../util/commonUtil";
+import { formatDate, isEmpty } from "../../util/commonUtils";
 
 interface AttestertModalProps {
 	oppdragsId: string;
@@ -31,7 +31,12 @@ export default function AttestertModal(props: AttestertModalProps) {
 
 	return (
 		<div>
-			<Button variant={"tertiary"} size="xsmall" onClick={handleClick}>
+			<Button
+				variant={"tertiary"}
+				size="xsmall"
+				onClick={handleClick}
+				aria-label={`Attestert: ${props.text}, linje ${props.linjeId}`}
+			>
 				{props.text}
 			</Button>
 
@@ -40,12 +45,8 @@ export default function AttestertModal(props: AttestertModalProps) {
 					<Table zebraStripes>
 						<Table.Header>
 							<Table.Row>
-								<Table.HeaderCell key={"attestantId"} scope="col">
-									Attestert av
-								</Table.HeaderCell>
-								<Table.HeaderCell key={"ugyldigFom"} scope="col">
-									Gyldig tom
-								</Table.HeaderCell>
+								<Table.ColumnHeader>Attestert av</Table.ColumnHeader>
+								<Table.ColumnHeader>Gyldig tom</Table.ColumnHeader>
 							</Table.Row>
 						</Table.Header>
 						<Table.Body>

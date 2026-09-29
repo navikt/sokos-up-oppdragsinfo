@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchKid } from "../../api/apiService";
 import type { Kid } from "../../types/Kid";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function KidTable(props: OppdragsIdent) {
 	const { data } = useFetchKid(props.oppdragsId, props.linjeId);
@@ -11,13 +11,11 @@ export default function KidTable(props: OppdragsIdent) {
 		<Table zebraStripes>
 			<Table.Header>
 				<Table.Row>
-					<Table.HeaderCell scope="col">Linje</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Kid</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
-					<Table.HeaderCell scope="col">
-						Registrert i Oppdragssystemet
-					</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
+					<Table.ColumnHeader>Linje</Table.ColumnHeader>
+					<Table.ColumnHeader>Kid</Table.ColumnHeader>
+					<Table.ColumnHeader>Dato fom</Table.ColumnHeader>
+					<Table.ColumnHeader>Registrert i Oppdragssystemet</Table.ColumnHeader>
+					<Table.ColumnHeader>Brukerid</Table.ColumnHeader>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>

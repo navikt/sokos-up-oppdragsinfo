@@ -2,7 +2,7 @@ import { Table } from "@navikt/ds-react";
 import { useFetchValuta } from "../../api/apiService";
 import type { OppdragsIdent } from "../../types/OppdragsIdent";
 import type { Valuta } from "../../types/Valuta";
-import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtil";
+import { formatDate, formatDateTime, isEmpty } from "../../util/commonUtils";
 
 export default function ValutaerTable(props: OppdragsIdent) {
 	const { data } = useFetchValuta(props.oppdragsId, props.linjeId);
@@ -11,16 +11,14 @@ export default function ValutaerTable(props: OppdragsIdent) {
 		<Table zebraStripes>
 			<Table.Header>
 				<Table.Row>
-					<Table.HeaderCell scope="col">Linje</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Type</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Dato fom</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Nøkkel id</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Valuta</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Feil registrert</Table.HeaderCell>
-					<Table.HeaderCell scope="col">
-						Registrert i Oppdragssystemet
-					</Table.HeaderCell>
-					<Table.HeaderCell scope="col">Brukerid</Table.HeaderCell>
+					<Table.ColumnHeader>Linje</Table.ColumnHeader>
+					<Table.ColumnHeader>Type</Table.ColumnHeader>
+					<Table.ColumnHeader>Dato fom</Table.ColumnHeader>
+					<Table.ColumnHeader>Nøkkel id</Table.ColumnHeader>
+					<Table.ColumnHeader>Valuta</Table.ColumnHeader>
+					<Table.ColumnHeader>Feil registrert</Table.ColumnHeader>
+					<Table.ColumnHeader>Registrert i Oppdragssystemet</Table.ColumnHeader>
+					<Table.ColumnHeader>Brukerid</Table.ColumnHeader>
 				</Table.Row>
 			</Table.Header>
 			<Table.Body>

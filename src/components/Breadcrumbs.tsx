@@ -29,13 +29,13 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
 					)}
 					{props.treffliste && (
 						<>
-							<ChevronRightDoubleIcon focusable={"false"} title="Pil høyre" />
+							<ChevronRightDoubleIcon aria-hidden />
 							<BodyShort size="large">Treffliste</BodyShort>
 						</>
 					)}
 					{props.trefflistelink && (
 						<>
-							<ChevronRightDoubleIcon focusable={"false"} title="Pil høyre" />
+							<ChevronRightDoubleIcon aria-hidden />
 							<BodyShort size="large">
 								<Link to={TREFFLISTE} replace className={commonstyles.link}>
 									Treffliste
@@ -45,13 +45,13 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
 					)}
 					{props.oppdrag && (
 						<>
-							<ChevronRightDoubleIcon title="Chevron ikon" />
+							<ChevronRightDoubleIcon aria-hidden />
 							<BodyShort size="large">Oppdrag</BodyShort>
 						</>
 					)}
 					{props.oppdraglink && (
 						<>
-							<ChevronRightDoubleIcon title="Pil høyre" />
+							<ChevronRightDoubleIcon aria-hidden />
 							<BodyShort size="large">
 								<Link to={OPPDRAG} replace className={commonstyles.link}>
 									Oppdrag
@@ -61,7 +61,7 @@ export default function Breadcrumbs(props: BreadcrumbsProps) {
 					)}
 					{props.linje && (
 						<>
-							<ChevronRightDoubleIcon title="Pil høyre" />
+							<ChevronRightDoubleIcon aria-hidden />
 							<BodyShort size="large">Linje</BodyShort>
 						</>
 					)}

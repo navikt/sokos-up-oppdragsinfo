@@ -14,7 +14,7 @@ import {
 	handleSort,
 	hasKey,
 	type SortState,
-} from "../../util/commonUtil";
+} from "../../util/commonUtils";
 
 interface KorrigerteLinjerTableProps {
 	oppdragsLinjeDetaljer: OppdragsLinjeDetaljerDTO;
@@ -57,7 +57,12 @@ export default function KorrigerteLinjerTable(
 				pageCount={pagecount}
 			/>
 			<div className={commonstyles.table}>
-				<Table zebraStripes sort={sort} onSortChange={linjeSort}>
+				<Table
+					aria-label="Korrigerte linjer"
+					zebraStripes
+					sort={sort}
+					onSortChange={linjeSort}
+				>
 					<Table.Header>
 						<Table.Row>
 							<Table.ColumnHeader sortKey={"linjeId"} sortable>

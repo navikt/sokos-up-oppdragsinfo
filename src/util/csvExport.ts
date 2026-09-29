@@ -1,5 +1,5 @@
 import type { OppdragsLinje } from "../types/Oppdragslinje";
-import { formatDate, formatDateTime } from "./commonUtil";
+import { formatDate, formatDateTime } from "./commonUtils";
 
 function createCsv(oppdragslinjer: Array<OppdragsLinje>) {
 	const csvHeaders = [

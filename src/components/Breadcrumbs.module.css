@@ -2,27 +2,27 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 4rem;
+	height: var(--ax-space-64);
 	width: 100%;
-	border-radius: 0.5rem;
-	background-color: var(--a-surface-alt-1-subtle);
+	border-radius: var(--ax-radius-8);
+	background-color: var(--ax-bg-meta-purple-moderateA);
 }
 
 .breadcrumbs a {
-	color: var(--a-text-action);
+	color: var(--ax-text-accent-subtle);
 }
 
 .breadcrumbs__contents {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 0.3rem;
+	gap: var(--ax-space-4);
 }
 
 .breadcrumbs__left {
-	padding-left: 1.25rem;
+	padding-left: var(--ax-space-20);
 }
 
 .breadcrumbs__right {
-	padding-right: 1.25rem;
+	padding-right: var(--ax-space-20);
 }

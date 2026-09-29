@@ -36,10 +36,7 @@ export const handlers = [
 		const sokeParameter = await request.json();
 		// biome-ignore lint/suspicious/noConsole: debug code
 		console.log("Hent parameter navn:", sokeParameter);
-		return HttpResponse.json(
-			{ data: oppdragsList, errorMessage: "" },
-			{ status: 200 },
-		);
+		return HttpResponse.json({ data: [], errorMessage: "" }, { status: 200 });
 	}),
 
 	http.get("/oppdrag-api/api/v1/oppdragsinfo/:id/oppdragsLinjer", () => {

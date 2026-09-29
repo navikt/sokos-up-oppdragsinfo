@@ -4,11 +4,11 @@
 	justify-content: space-between;
 	min-width: var(--table-min-width);
 	align-items: center;
-	gap: 2rem;
+	gap: var(--ax-space-32);
 }
 
 .dropdown-section {
 	display: flex;
 	align-items: center;
-	gap: 0.25rem;
+	gap: var(--ax-space-4);
 }
