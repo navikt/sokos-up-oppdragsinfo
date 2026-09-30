@@ -17,9 +17,6 @@ spec:
   readiness:
     path: /sokos-up-oppdragsinfo/internal/isReady
     initialDelay: 10
-  prometheus:
-    enabled: true
-    path: /sokos-up-oppdragsinfo/internal/metrics
   replicas:
     min: 2
     max: 4
